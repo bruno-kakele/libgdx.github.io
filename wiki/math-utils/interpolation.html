@@ -1,0 +1,680 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Interpolation - libGDX</title>
+
+  <meta name="description" content="Interpolation Commonly known as tweening, interpolation is useful for generating values between two discrete end points using various curve functions. Often used with key-framed animation, interpolation allows an animator to...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Interpolation">
+<meta property="og:url" content="https://libgdx.com/wiki/math-utils/interpolation">
+
+
+  <meta property="og:description" content="Interpolation Commonly known as tweening, interpolation is useful for generating values between two discrete end points using various curve functions. Often used with key-framed animation, interpolation allows an animator to...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/math-utils/interpolation">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Interpolation
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/math-utils/interpolation.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/math-utils/interpolation.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <h1 id="interpolation">Interpolation</h1>
+
+<p>Commonly known as <em>tweening</em>, <a href="https://en.wikipedia.org/wiki/Interpolation">interpolation</a> is useful for generating values between two discrete end points using various curve functions. Often used with key-framed animation, interpolation allows an animator to specify a sparse collection of explicit frames for an animation and then generate a smooth transition between these frames computationally. The simplest form of interpolation is linear interpolation such as that available directly in the <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/math/Vector2.html">Vector2</a> <a href="https://github.com/libgdx/libgdx/tree/master/gdx/src/com/badlogic/gdx/math/Vector2.java">(code)</a> and <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/math/Vector3.html">Vector3</a> <a href="https://github.com/libgdx/libgdx/tree/master/gdx/src/com/badlogic/gdx/math/Vector3.java">(code)</a> classes. The <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/math/Interpolation.html">Interpolation</a> <a href="https://github.com/libgdx/libgdx/tree/master/gdx/src/com/badlogic/gdx/math/Interpolation.java">(code)</a> class provides more interesting results by using non-linear curve functions to interpolate values.</p>
+
+<h2 id="types-of-interpolation">Types of Interpolation</h2>
+
+<p>These are the basic built-in types of interpolation:</p>
+
+<ul>
+  <li>Bounce</li>
+  <li>Circle</li>
+  <li>Elastic</li>
+  <li>Exponential</li>
+  <li>Fade</li>
+  <li>Power</li>
+  <li>Sine</li>
+  <li>Swing</li>
+</ul>
+
+<h2 id="code-example">Code Example</h2>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Written in Kotlin</span>
+
+<span class="kd">val</span> <span class="py">easAlpha</span><span class="p">:</span><span class="nc">Interpolation</span> <span class="p">=</span> <span class="nc">Interpolation</span><span class="p">.</span><span class="n">fade</span>
+<span class="kd">val</span> <span class="py">lifeTime</span><span class="p">:</span><span class="nc">Int</span> <span class="p">=</span> <span class="mi">2</span>
+<span class="kd">var</span> <span class="py">elapsed</span><span class="p">:</span><span class="nc">Float</span> <span class="p">=</span> <span class="mf">0f</span>
+<span class="o">..</span>
+<span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span><span class="nc">Float</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">elapsed</span> <span class="p">+=</span> <span class="n">delta</span>
+
+    <span class="kd">val</span> <span class="py">progress</span> <span class="p">=</span> <span class="nc">Math</span><span class="p">.</span><span class="nf">min</span><span class="p">(</span><span class="mf">1f</span><span class="p">,</span> <span class="n">elapsed</span><span class="p">/</span><span class="n">lifeTime</span><span class="p">)</span>   <span class="c1">// 0 -&gt; 1 </span>
+    <span class="kd">val</span> <span class="py">alpha</span> <span class="p">=</span> <span class="n">easAlpha</span><span class="p">.</span><span class="nf">apply</span><span class="p">(</span><span class="n">progress</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>Most types offer three varieties which bias towards one or the other or both ends of the curve creating an easing in or out of the animation.</p>
+
+<p>See <a href="https://github.com/libgdx/libgdx/blob/master/tests/gdx-tests/src/com/badlogic/gdx/tests/InterpolationTest.java">InterpolationTest</a> for a visual display of each interpolation.</p>
+
+<h2 id="visual-display-of-interpolations">Visual display of interpolations</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>bounce</th>
+      <th>bounceIn</th>
+      <th>bounceOut</th>
+      <th>circle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75204377-8e3d2600-5725-11ea-8caa-a8cc94ea737e.png" alt="bounce" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75204516-f5f37100-5725-11ea-8889-cff2abf0d6c9.png" alt="bouncein" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75204546-060b5080-5726-11ea-83a8-b02b9c740884.png" alt="bounceout" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75204564-115e7c00-5726-11ea-99e0-bbb26b9dbd20.png" alt="circle" /></td>
+    </tr>
+    <tr>
+      <td>circleIn</td>
+      <td>circleOut</td>
+      <td>elastic</td>
+      <td>elasticIn</td>
+    </tr>
+    <tr>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75204649-4539a180-5726-11ea-86b8-dca6f9cb6651.png" alt="circlein" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75204659-4f5ba000-5726-11ea-8fe9-b99c768c8ba7.png" alt="circleout" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75204669-5aaecb80-5726-11ea-8023-28547317fba1.png" alt="elastic" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75204689-669a8d80-5726-11ea-89e1-35a93c260cee.png" alt="elasticin" /></td>
+    </tr>
+    <tr>
+      <td>elasticOut</td>
+      <td>exp5</td>
+      <td>exp5In</td>
+      <td>exp5Out</td>
+    </tr>
+    <tr>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75204735-8e89f100-5726-11ea-8b74-fa0e6d795ce0.png" alt="elasticout" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75204749-99448600-5726-11ea-93ea-04cf230108a3.png" alt="exp5" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75204765-a792a200-5726-11ea-9e74-dde07e0370a3.png" alt="exp5in" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75204776-b0837380-5726-11ea-8451-62f0c6b9e43f.png" alt="exp5out" /></td>
+    </tr>
+    <tr>
+      <td>exp10</td>
+      <td>exp10In</td>
+      <td>exp10Out</td>
+      <td>fade</td>
+    </tr>
+    <tr>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75204796-c002bc80-5726-11ea-918e-5fa0ed35f0c5.png" alt="exp10" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75204812-c98c2480-5726-11ea-881d-8a20fee68b55.png" alt="exp10in" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75204846-e9234d00-5726-11ea-83d9-8fbc0be4b5e1.png" alt="exp10out" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75204914-1a038200-5727-11ea-85cb-f2f3ecee5d79.png" alt="fade" /></td>
+    </tr>
+    <tr>
+      <td>fastSlow</td>
+      <td>linear</td>
+      <td>pow2</td>
+      <td>pow2In</td>
+    </tr>
+    <tr>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75205068-a0b85f00-5727-11ea-8054-f873f2252ff2.png" alt="fastSlow" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75205099-b75eb600-5727-11ea-9478-af1d96df9b25.png" alt="linear" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75205109-c2194b00-5727-11ea-99e9-614c2f613331.png" alt="pow2" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75205130-cd6c7680-5727-11ea-9a67-1a456f3e3bb9.png" alt="pow2in" /></td>
+    </tr>
+    <tr>
+      <td>pow2InInverse</td>
+      <td>pow2Out</td>
+      <td>pow2OutInverse</td>
+      <td>pow3</td>
+    </tr>
+    <tr>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75205146-dc532900-5727-11ea-992f-eeef9ecd1508.png" alt="pow2InInverse" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75205353-69967d80-5728-11ea-8011-e158a0e95582.png" alt="pow2Out" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75205639-2b4d8e00-5729-11ea-98df-31e0e81e9e61.png" alt="pow2OutInverse" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75205657-36082300-5729-11ea-8636-683fa98d1988.png" alt="pow3" /></td>
+    </tr>
+    <tr>
+      <td>pow3In</td>
+      <td>pow3InInverse</td>
+      <td>pow3Out</td>
+      <td>pow3OutInverse</td>
+    </tr>
+    <tr>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75205686-47512f80-5729-11ea-91de-a044860fb78a.png" alt="pow3in" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75205850-bb8bd300-5729-11ea-8710-8b5447268b34.png" alt="pow3InInverse" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75205867-cb0b1c00-5729-11ea-912b-563dab0e7d91.png" alt="pow3Out" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75205878-d6f6de00-5729-11ea-8d24-95788c375db2.png" alt="pow3OutInverse" /></td>
+    </tr>
+    <tr>
+      <td>pow4</td>
+      <td>pow4In</td>
+      <td>pow4Out</td>
+      <td>pow5</td>
+    </tr>
+    <tr>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75206040-52f12600-572a-11ea-8621-7763df2868e5.png" alt="pow4" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75206050-58e70700-572a-11ea-890a-6afa6f25b554.png" alt="pow4In" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75206058-5f757e80-572a-11ea-86b9-763d19272870.png" alt="pow4Out" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75206063-64d2c900-572a-11ea-8a38-db8ee3484682.png" alt="pow5" /></td>
+    </tr>
+    <tr>
+      <td>pow5In</td>
+      <td>pow5Out</td>
+      <td>sine</td>
+      <td>sineIn</td>
+    </tr>
+    <tr>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75206202-b7ac8080-572a-11ea-9e45-394bc794f3b1.png" alt="pow5In" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75206218-c1ce7f00-572a-11ea-9219-27ad23e83d34.png" alt="pow5Out" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75206226-c85cf680-572a-11ea-8a9c-ce9dcde85a29.png" alt="sine" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75206237-cdba4100-572a-11ea-824e-e675c2b8a882.png" alt="sineIn" /></td>
+    </tr>
+    <tr>
+      <td>sineOut</td>
+      <td>slowFast</td>
+      <td>smooth</td>
+      <td>smooth2</td>
+    </tr>
+    <tr>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75206272-e4609800-572a-11ea-926f-9ccbf6f154d2.png" alt="sineOut" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75206283-eaef0f80-572a-11ea-964f-09176844502f.png" alt="slowFast" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75206295-f17d8700-572a-11ea-9154-d194a7c62d15.png" alt="smooth" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75206325-04905700-572b-11ea-9121-2cb790d5f876.png" alt="smooth2" /></td>
+    </tr>
+    <tr>
+      <td>smoother</td>
+      <td>swing</td>
+      <td>swingIn</td>
+      <td>swingOut</td>
+    </tr>
+    <tr>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75206469-5a64ff00-572b-11ea-81c5-c56a26b82cdb.png" alt="smoother" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75206478-618c0d00-572b-11ea-93ff-f96a7e70665b.png" alt="swing" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75206491-68b31b00-572b-11ea-8335-88eb8fcc675b.png" alt="swingIn" /></td>
+      <td><img src="https://user-images.githubusercontent.com/12948924/75206505-7072bf80-572b-11ea-97e7-3335d2ae3888.png" alt="swingOut" /></td>
+    </tr>
+  </tbody>
+</table>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

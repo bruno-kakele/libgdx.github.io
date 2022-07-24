@@ -1,0 +1,622 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Shaders - libGDX</title>
+
+  <meta name="description" content="If you want to work with OpenGL ES 2.0, you should know some shader basics. libGDX comes with a standard shader that will take care of rendering things via SpriteBatch....">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Shaders">
+<meta property="og:url" content="https://libgdx.com/wiki/graphics/opengl-utils/shaders">
+
+
+  <meta property="og:description" content="If you want to work with OpenGL ES 2.0, you should know some shader basics. libGDX comes with a standard shader that will take care of rendering things via SpriteBatch....">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/graphics/opengl-utils/shaders">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Shaders
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/graphics/opengl-utils/shaders.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/graphics/opengl-utils/shaders.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <p>If you want to work with OpenGL ES 2.0, you should know some shader basics. libGDX comes with a standard shader that will take care of rendering things via <code class="language-plaintext highlighter-rouge">SpriteBatch</code>. However, if you’d like to render a <code class="language-plaintext highlighter-rouge">Mesh</code> in OpenGL ES 2.0 you will have to supply a valid shader yourself. Basically, in OpenGL ES 2.0, everything is rendered with shaders. That’s why it’s called a programmable pipeline.</p>
+
+<p>The thought of dabbling around in shaders might scare some people away from using ES 2.0, but it’s well worth reading up on it as shaders allow you to do some pretty incredible things. And understanding the basics is actually quite straightforward.</p>
+
+<h2 id="what-are-shaders">What are shaders?</h2>
+
+<p>Shaders in OpenGL are little programs written in a C-like language called <strong>GLSL</strong> (OpenGL Shading Language) that runs on the GPU and processes the data necessary to render things. A shader can simply be viewed as a processing stage on the GPU. It receives a set of inputs which you can do a set of operations on and finally sends them back out. Think of this like function parameters and return values.</p>
+
+<p>Typically, when rendering something in OpenGL ES 2.0 the data will be sent through the <strong>vertex</strong> shader first and then through the <strong>fragment</strong> shader.</p>
+
+<h2 id="vertex-shaders">Vertex shaders</h2>
+
+<p>As the name implies, vertex shaders are responsible for performing operations on vertices. More specifically, each execution of the program operates on exactly <em>one</em> vertex. This is an important concept to understand. Everything you do in the vertex shader happens only on exactly <em>one</em> vertex.</p>
+
+<p>Here’s a simple vertex shader:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">attribute</span> <span class="n">vec4</span> <span class="n">a_position</span><span class="p">;</span>
+
+<span class="n">uniform</span> <span class="n">mat4</span> <span class="n">u_projectionViewMatrix</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">gl_Position</span> <span class="o">=</span>  <span class="n">u_projectionViewMatrix</span> <span class="o">*</span> <span class="n">a_position</span><span class="p">;</span>
+<span class="p">}</span> 
+</code></pre></div></div>
+
+<p>That doesn’t look too bad, now does it? First, you have a vertex attribute called <code class="language-plaintext highlighter-rouge">a_position</code>. This attribute is a <code class="language-plaintext highlighter-rouge">vec4</code> which means it’s a vector with 4 dimensions. In this sample, it holds the position information of the vertex.</p>
+
+<p>Next, you have the <code class="language-plaintext highlighter-rouge">u_projectionViewMatrix</code>. This is a 4x4 matrix that holds the view and projection transform data. If those terms sound fuzzy to you I’d recommend <a href="https://web.archive.org/web/20210330141121/http://blog.db-in.com/cameras-on-opengl-es-2-x/">reading up on those topics here</a>. It’s incredibly useful to understand it.</p>
+
+<p>Inside the main method, we execute the operations on the vertex. In this case, all the shader does is multiply the vertex position with the matrix and assigns it to <code class="language-plaintext highlighter-rouge">gl_Position</code>. <code class="language-plaintext highlighter-rouge">gl_Position</code> is a predefined keyword by OpenGL and can’t be used for anything else but passing through the processed vertex.</p>
+
+<h2 id="fragment-shaders">Fragment shaders</h2>
+<p>A fragment shader functions in a very similar way to a vertex shader. But instead of processing it on a vertex it processes it once for each fragment. For simplicity’s sake think of a fragment as one pixel. Now, you might notice that this is a very significant difference.</p>
+
+<p>Let’s say a triangle covers an area of 300 pixels. The vertex shader for this triangle would be executed 3 times. The fragment shader though would be executed 300 times. So when writing shaders, keep this in mind. Everything done in the fragment shader will be exponentially more expensive!</p>
+
+<p>Here’s a very basic fragment shader:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">gl_FragColor</span> <span class="o">=</span> <span class="n">vec4</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This fragment shader will simply render every fragment with solid red. gl_FragColor is another pre-defined keyword. It’s used to output the final color for the fragment. Notice how we use <code class="language-plaintext highlighter-rouge">vec4(x, y, z, w)</code> to define a vector inside the shader. In this case, the vector is used to define the color of the fragment.</p>
+
+<h2 id="a-simple-shaderprogram">A simple ShaderProgram</h2>
+
+<p>Now that we have a basic understanding of what shaders do and how they work, let’s create one in libGDX. This is done with the <code class="language-plaintext highlighter-rouge">ShaderProgram</code> class. A <code class="language-plaintext highlighter-rouge">ShaderProgram</code> is made up of a vertex shader and a fragment shader. You can either load from a file or just pass in a string and keep the shader code inside your Java files.</p>
+
+<p>This is the shader setup we’ll be working with:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">vertexShader</span> <span class="o">=</span> <span class="s">"attribute vec4 a_position;\n"</span> <span class="o">+</span>
+                      <span class="s">"attribute vec4 a_color;\n"</span> <span class="o">+</span>
+                      <span class="s">"attribute vec2 a_texCoord0;\n"</span> <span class="o">+</span>
+                      <span class="s">"uniform mat4 u_projTrans;\n"</span> <span class="o">+</span>
+                      <span class="s">"varying vec4 v_color;\n"</span> <span class="o">+</span>
+                      <span class="s">"varying vec2 v_texCoords;\n"</span> <span class="o">+</span>
+                      <span class="s">"void main() {\n"</span> <span class="o">+</span>
+                          <span class="s">"v_color = vec4(1, 1, 1, 1);\n"</span> <span class="o">+</span>
+                          <span class="s">"v_texCoords = a_texCoord0;\n"</span> <span class="o">+</span>
+                          <span class="s">"gl_Position =  u_projTrans * a_position;\n"</span> <span class="o">+</span>
+                      <span class="s">"}"</span><span class="o">;</span>
+<span class="nc">String</span> <span class="n">fragmentShader</span> <span class="o">=</span> <span class="s">"#ifdef GL_ES\n"</span> <span class="o">+</span>
+                        <span class="s">"precision mediump float;\n"</span> <span class="o">+</span>
+                        <span class="s">"#endif\n"</span> <span class="o">+</span>
+                        <span class="s">"varying vec4 v_color;\n"</span> <span class="o">+</span>
+                        <span class="s">"varying vec2 v_texCoords;\n"</span> <span class="o">+</span>
+                        <span class="s">"uniform sampler2D u_texture;\n"</span> <span class="o">+</span>
+                        <span class="s">"void main() {\n"</span> <span class="o">+</span>
+                            <span class="s">"gl_FragColor = v_color * texture2D(u_texture, v_texCoords);\n"</span> <span class="o">+</span>
+                        <span class="s">"}"</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p>This is fairly standard setup for a shader that uses a position attribute, a color attribute and a texture coordinate attribute. Notice the 2 <code class="language-plaintext highlighter-rouge">varying</code>. They are outputs that we pass through to the fragment shader.</p>
+
+<p>In the fragment shader, we have a <code class="language-plaintext highlighter-rouge">sampler2D</code>; this is a special uniform used for textures. As you can see in the main function, we multiply the vertex color with the color from the texture lookup to produce the final output color.</p>
+
+<p>Here is a list of attributes that are in libGDX’s own library for those who wish to easily attach shaders to <code class="language-plaintext highlighter-rouge">SpriteBatch</code>es and other parts of libGDX:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">a_position</code></li>
+  <li><code class="language-plaintext highlighter-rouge">a_normal</code></li>
+  <li><code class="language-plaintext highlighter-rouge">a_color</code></li>
+  <li><code class="language-plaintext highlighter-rouge">a_texCoord</code>, requires a number at the end, i.e. <code class="language-plaintext highlighter-rouge">a_texCoord0</code>, <code class="language-plaintext highlighter-rouge">a_texCoord1</code>, etc.</li>
+  <li><code class="language-plaintext highlighter-rouge">a_tangent</code></li>
+  <li><code class="language-plaintext highlighter-rouge">a_binormal</code></li>
+</ul>
+
+<p>To create the <code class="language-plaintext highlighter-rouge">ShaderProgram</code> we do the following:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ShaderProgram</span> <span class="n">shader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ShaderProgram</span><span class="o">(</span><span class="n">vertexShader</span><span class="o">,</span> <span class="n">fragmentShader</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>You can ensure that the shader compiled properly via <code class="language-plaintext highlighter-rouge">shader.isCompiled()</code>. A compile log can be spit out using <code class="language-plaintext highlighter-rouge">shader.getLog()</code>.</p>
+
+<p>We also create a matching mesh and load the texture:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mesh</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Mesh</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="nc">VertexAttribute</span><span class="o">.</span><span class="na">Position</span><span class="o">(),</span> <span class="nc">VertexAttribute</span><span class="o">.</span><span class="na">ColorUnpacked</span><span class="o">(),</span> <span class="nc">VertexAttribute</span><span class="o">.</span><span class="na">TexCoords</span><span class="o">(</span><span class="mi">0</span><span class="o">));</span>
+<span class="n">mesh</span><span class="o">.</span><span class="na">setVertices</span><span class="o">(</span><span class="k">new</span> <span class="kt">float</span><span class="o">[]</span> <span class="o">{</span>
+    <span class="o">-</span><span class="mf">0.5f</span><span class="o">,</span> <span class="o">-</span><span class="mf">0.5f</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span>
+    <span class="mf">0.5f</span><span class="o">,</span> <span class="o">-</span><span class="mf">0.5f</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span>
+    <span class="mf">0.5f</span><span class="o">,</span> <span class="mf">0.5f</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span>
+    <span class="o">-</span><span class="mf">0.5f</span><span class="o">,</span> <span class="mf">0.5f</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span>
+<span class="o">});</span>
+<span class="n">mesh</span><span class="o">.</span><span class="na">setIndices</span><span class="o">(</span><span class="k">new</span> <span class="kt">short</span><span class="o">[]</span> <span class="o">{</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">0</span><span class="o">});</span>
+<span class="n">texture</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Texture</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"bobrgb888-32x32.png"</span><span class="o">));</span>
+</code></pre></div></div>
+
+<p>In the render method we then simply call <code class="language-plaintext highlighter-rouge">shader.bind()</code> and pass the uniforms in and then render the mesh with the shader:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">texture</span><span class="o">.</span><span class="na">bind</span><span class="o">();</span>
+<span class="n">shader</span><span class="o">.</span><span class="na">bind</span><span class="o">();</span>
+<span class="n">shader</span><span class="o">.</span><span class="na">setUniformMatrix</span><span class="o">(</span><span class="s">"u_projTrans"</span><span class="o">,</span> <span class="n">matrix</span><span class="o">);</span>
+<span class="n">shader</span><span class="o">.</span><span class="na">setUniformi</span><span class="o">(</span><span class="s">"u_texture"</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+<span class="n">mesh</span><span class="o">.</span><span class="na">render</span><span class="o">(</span><span class="n">shader</span><span class="o">,</span> <span class="no">GL20</span><span class="o">.</span><span class="na">GL_TRIANGLES</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>And that’s it!</p>
+
+<p>The good thing about shaders in OpenGL ES 2.0 is that you have a huge library of shaders available to you. Pretty much anything that’s done in WebGL can be easily ported over to run on mobiles. Go and experiment!</p>
+
+<p>A simple demo of a shockwave effect shader with libGDX is available on <a href="https://libgdxinfo.wordpress.com/shaders/">LibGDX.info</a></p>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

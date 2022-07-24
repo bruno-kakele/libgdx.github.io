@@ -1,0 +1,652 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Internationalization and Localization - libGDX</title>
+
+  <meta name="description" content="Overview Technically speaking, internationalization is the process of designing a software so that it can potentially be adapted to various languages and regions without engineering changes. Localization is the process...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Internationalization and Localization">
+<meta property="og:url" content="https://libgdx.com/wiki/internationalization-and-localization">
+
+
+  <meta property="og:description" content="Overview Technically speaking, internationalization is the process of designing a software so that it can potentially be adapted to various languages and regions without engineering changes. Localization is the process...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/internationalization-and-localization">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Internationalization and Localization
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/internationalization-and-localization.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/internationalization-and-localization.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <h2 id="overview">Overview</h2>
+
+<p>Technically speaking, <em>internationalization</em> is the process of designing a software so that it can potentially be adapted to various languages and regions without engineering changes.
+ <em>Localization</em> is the process of adapting internationalized software for a specific region or language by adding locale-specific components and translating text.
+Due to the length of the terms, both internationalization and localization are frequently abbreviated to i18n and l10n respectively, where 18 and 10 stand for the number of letters between the initial and the final letters of the respective words.</p>
+
+<p>In LibGDX, the <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/utils/I18NBundle.html"><code class="language-plaintext highlighter-rouge">I18NBundle</code> class</a> is used to store and fetch strings that are locale sensitive. A bundle allows you to easily provide different translations for your application.</p>
+
+<h2 id="creating-properties-files">Creating Properties Files</h2>
+
+<p>Each bundle is a set of properties files that share the same base name, <code class="language-plaintext highlighter-rouge">MyBundle</code> in the following example. The characters following the base name indicate the <em>language code</em>, <em>country code</em>, and <em>variant</em> of a Locale, for example:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">MyBundle.properties</code></li>
+  <li><code class="language-plaintext highlighter-rouge">MyBundle_de.properties</code></li>
+  <li><code class="language-plaintext highlighter-rouge">MyBundle_en_GB.properties</code></li>
+  <li><code class="language-plaintext highlighter-rouge">MyBundle_fr_CA_VAR1.properties</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">MyBundle_en_GB</code>, for example, matches the Locale specified by the language code for English (<code class="language-plaintext highlighter-rouge">en</code>) and the country code for Great Britain (<code class="language-plaintext highlighter-rouge">GB</code>).</p>
+
+<p>You should always create a <em>default properties file</em>, without any language code, country code or variant. In our example the contents of <code class="language-plaintext highlighter-rouge">MyBundle.properties</code> are as follows:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>game=My Super Cool Game
+newMission={0}, you have a new mission. Reach level {1}.
+coveredPath=You covered {0,number}% of the path
+highScoreTime=High score achieved on {0,date} at {0,time}
+</code></pre></div></div>
+
+<p>To support an additional Locale, your localizers will create an <em>additional properties file</em> that contains the translated values. No changes to your source code are required, because your program references the keys, not the values.</p>
+
+<p>For example, to add support for the Italian language, your localizers would translate the values in <code class="language-plaintext highlighter-rouge">MyBundle.properties</code> and place them in a file named <code class="language-plaintext highlighter-rouge">MyBundle_it.properties</code>. The contents of <code class="language-plaintext highlighter-rouge">MyBundle_it.properties</code> are as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>newMission={0}, hai una nuova missione. Raggiungi il livello {1}.
+coveredPath=Hai coperto il {0,number}% del percorso
+highScoreTime=High score ottenuto il {0,date} alle ore {0,time}
+</code></pre></div></div>
+<p>Notice that the key named <code class="language-plaintext highlighter-rouge">game</code> is missing from the Italian properties file since we want the game’s name to remain unchanged regardless of the locale. If a key is not found, the key will be looked up in decreasingly specific properties files until found; for instance, if a key is not found in <code class="language-plaintext highlighter-rouge">MyBundle_en_GB.properties</code>, it will be looked up in <code class="language-plaintext highlighter-rouge">MyBundle_en.properties</code>, and if not found there either, in the default <code class="language-plaintext highlighter-rouge">MyBundle.properties</code>.</p>
+
+<h2 id="creating-a-bundle">Creating a Bundle</h2>
+
+<p>An instance of the <code class="language-plaintext highlighter-rouge">I18NBundle</code> class manages the named strings for a locale after loading into memory the appropriate properties files.
+Invoke the factory method <code class="language-plaintext highlighter-rouge">createBundle</code> to get a new instance of the desired bundle:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FileHandle</span> <span class="n">baseFileHandle</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"i18n/MyBundle"</span><span class="o">);</span>
+<span class="nc">Locale</span> <span class="n">locale</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Locale</span><span class="o">(</span><span class="s">"fr"</span><span class="o">,</span> <span class="s">"CA"</span><span class="o">,</span> <span class="s">"VAR1"</span><span class="o">);</span>
+<span class="nc">I18NBundle</span> <span class="n">myBundle</span> <span class="o">=</span> <span class="nc">I18NBundle</span><span class="o">.</span><span class="na">createBundle</span><span class="o">(</span><span class="n">baseFileHandle</span><span class="o">,</span> <span class="n">locale</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>The path “i18n/MyBundle”, in this case, refers to files whose names begin with <em>MyBundle</em> that are located in the <em>i18n</em> folder, more precisely in “assets/i18n”. You do not need to create the <em>MyBundle</em> subfolder as well.</p>
+
+<p>Or, if you’re using <a href="/wiki/managing-your-assets"><code class="language-plaintext highlighter-rouge">AssetManager</code></a>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>assetManager.load("i18n/MyBundle", I18NBundle.class);
+// ... after loading ...
+I18NBundle myBundle = assetManager.get("i18n/MyBundle", I18NBundle.class);
+</code></pre></div></div>
+<p>If you don’t specify any locale when you invoke <code class="language-plaintext highlighter-rouge">createBundle</code> then the default locale is used. This is usually what you want.</p>
+
+<p>Note that you have to leave out the <code class="language-plaintext highlighter-rouge">.properties</code> file extension in both cases. If a property file for the specified Locale does not exist, <code class="language-plaintext highlighter-rouge">createBundle</code> tries to find the closest match. For example, if you requested the locale <code class="language-plaintext highlighter-rouge">fr_CA_VAR1</code> and the default Locale is <code class="language-plaintext highlighter-rouge">en_US</code>, <code class="language-plaintext highlighter-rouge">createBundle</code> will look for files in the following order:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">MyBundle_fr_CA_VAR1.properties</code></li>
+  <li><code class="language-plaintext highlighter-rouge">MyBundle_fr_CA.properties</code></li>
+  <li><code class="language-plaintext highlighter-rouge">MyBundle_fr.properties</code></li>
+  <li><code class="language-plaintext highlighter-rouge">MyBundle_en_US.properties</code></li>
+  <li><code class="language-plaintext highlighter-rouge">MyBundle_en.properties</code></li>
+  <li><code class="language-plaintext highlighter-rouge">MyBundle.properties</code></li>
+</ul>
+
+<p>Note that <code class="language-plaintext highlighter-rouge">createBundle</code> looks for files based on the default Locale before it selects the base file <code class="language-plaintext highlighter-rouge">MyBundle.properties</code>. If <code class="language-plaintext highlighter-rouge">createBundle</code> fails to find a match it throws a <code class="language-plaintext highlighter-rouge">MissingResourceException</code>. To avoid throwing this exception, you should always provide a base file with no suffixes.</p>
+
+<h2 id="fetching-localized-strings">Fetching Localized Strings</h2>
+
+<p>To retrieve a translated value from the bundle, invoke the <code class="language-plaintext highlighter-rouge">get</code> method as follows:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">value</span> <span class="o">=</span> <span class="n">myBundle</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
+</code></pre></div></div>
+<p>The string returned by the <code class="language-plaintext highlighter-rouge">get</code> method corresponds to the specified key. The string is in the proper language, provided that a properties file exists for the specified locale. If no string for the given key can be found by the <code class="language-plaintext highlighter-rouge">get</code> method (or its parametric form <code class="language-plaintext highlighter-rouge">format</code>) a <code class="language-plaintext highlighter-rouge">MissingResourceException</code> is thrown.</p>
+
+<p>Translated strings can contain formatting parameters. To substitute values for those, invoke the <code class="language-plaintext highlighter-rouge">format</code> method as follows:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">value</span> <span class="o">=</span> <span class="n">myBundle</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">arg1</span><span class="o">,</span> <span class="n">arg2</span><span class="o">,</span> <span class="o">...);</span>
+</code></pre></div></div>
+
+<p>For example, to retrieve the strings from the properties files above your code might look like this:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">game</span> <span class="o">=</span> <span class="n">myBundle</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"game"</span><span class="o">);</span>
+<span class="nc">String</span> <span class="n">mission</span> <span class="o">=</span> <span class="n">myBundle</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"newMission"</span><span class="o">,</span> <span class="n">player</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="n">nextLevel</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+<span class="nc">String</span> <span class="n">coveredPath</span> <span class="o">=</span> <span class="n">myBundle</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"coveredPath"</span><span class="o">,</span> <span class="n">path</span><span class="o">.</span><span class="na">getPerc</span><span class="o">());</span>
+<span class="nc">String</span> <span class="n">highScoreTime</span> <span class="o">=</span> <span class="n">myBundle</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"highScoreTime"</span><span class="o">,</span> <span class="n">highScore</span><span class="o">.</span><span class="na">getDate</span><span class="o">());</span>
+</code></pre></div></div>
+
+<p>When a string has no arguments, you might think that the methods <code class="language-plaintext highlighter-rouge">get</code> and <code class="language-plaintext highlighter-rouge">format</code> are equivalent. This is not entirely true. The <code class="language-plaintext highlighter-rouge">get</code> method returns the string exactly as it was specified in the properties file, while the <code class="language-plaintext highlighter-rouge">format</code> method might make replacements for escaping even if no arguments are present. As a result, <code class="language-plaintext highlighter-rouge">get</code> is slightly faster, but unless you are certain that none of your translations contain any escaping it’s best to always use <code class="language-plaintext highlighter-rouge">format</code>.</p>
+
+<h2 id="message-format">Message Format</h2>
+
+<p>As we have seen, the strings in a properties file can contain parameters. These strings are commonly called patterns and follow the syntax specified by the <code class="language-plaintext highlighter-rouge">java.text.MessageFormat</code> API. In short, a pattern can contain zero or more formats of the form <code class="language-plaintext highlighter-rouge">{index, type, style}</code> where the type and the style are optional. Refer to the <a href="https://docs.oracle.com/javase/7/docs/api/java/text/MessageFormat.html">official JavaDoc of the <code class="language-plaintext highlighter-rouge">MessageFormat</code> class</a> to learn all its features.</p>
+
+<p><strong>Important</strong>: There is one change that libGDX makes to <code class="language-plaintext highlighter-rouge">MessageFormat</code>’s syntax, because the default escaping rules have proved to be somewhat confusing to localizers. If you want to use a literal <code class="language-plaintext highlighter-rouge">{</code> in your string, normally you would need to escape it using single quotes (<code class="language-plaintext highlighter-rouge">'</code>). In libGDX however, you just double it; for example, <code class="language-plaintext highlighter-rouge">{{0}</code> is interpreted as the literal string <code class="language-plaintext highlighter-rouge">{0}</code>, without any format elements. As a result, single quotes never need to be escaped!</p>
+
+<p>Note that formats are localizable. This means that typed data like numbers, dates and times will be automatically expressed in the typical form of the specific locale. For example, the float number <code class="language-plaintext highlighter-rouge">3.14</code> becomes <code class="language-plaintext highlighter-rouge">3,14</code> for the Italian locale; notice the comma in place of the decimal point. (If you’re using GWT, there are <a href="#gwt-limitations-and-compatibility">some limitations</a> to this.)</p>
+
+<p>Unlike <code class="language-plaintext highlighter-rouge">java.util.Properties</code>, the default encoding is <code class="language-plaintext highlighter-rouge">UTF-8</code>. If, for whatever reason, you don’t want to use UTF-8 encoding, invoke one of the overloaded forms of the <code class="language-plaintext highlighter-rouge">createBundle</code> method that allows you to specify the desired encoding.</p>
+
+<h2 id="plural-forms">Plural Forms</h2>
+
+<p>Plural forms are supported through the standard <code class="language-plaintext highlighter-rouge">choice</code> format provided by <code class="language-plaintext highlighter-rouge">MessageFormat</code>.
+See the <a href="https://docs.oracle.com/javase/7/docs/api/java/text/ChoiceFormat.html">official documentation of the class <code class="language-plaintext highlighter-rouge">java.text.ChoiceFormat</code></a>.
+I’m going to show you just an example. Let’s consider the following property:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>collectedCoins=You collected {0,choice,0#no coins|1#one coin|1&lt;{0,number,integer} coins|100&lt;hundreds of coins} along the path.
+</code></pre></div></div>
+<p>You can retrieve the localized string as usual:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">myBundle</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"collectedCoins"</span><span class="o">,</span> <span class="mi">0</span><span class="o">));</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">myBundle</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"collectedCoins"</span><span class="o">,</span> <span class="mi">1</span><span class="o">));</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">myBundle</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"collectedCoins"</span><span class="o">,</span> <span class="mi">32</span><span class="o">));</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">myBundle</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"collectedCoins"</span><span class="o">,</span> <span class="mi">117</span><span class="o">));</span>
+</code></pre></div></div>
+<p>And the output result would be like the following:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You collected no coins along the path.
+You collected one coin along the path.
+You collected 32 coins along the path.
+You collected hundreds of coins along the path.
+</code></pre></div></div>
+
+<p>It’s worth noting that the choice format can properly handle nested formats as we did with <code class="language-plaintext highlighter-rouge">{0,number,integer}</code> inside <code class="language-plaintext highlighter-rouge">{0,choice,...}</code>.</p>
+
+<h2 id="gwt-limitations-and-compatibility">GWT Limitations and Compatibility</h2>
+
+<p>As said before, the I18N system provided by libGDX is cross-platform. However there are some limitations when it comes to the GWT back-end.
+In particular:</p>
+<ul>
+  <li><strong>Simple format:</strong> The format syntax of <code class="language-plaintext highlighter-rouge">java.text.MessageFormat</code> is not fully supported. You’ll have to stick to a simplified syntax where formats are made only by their index, i.e. <code class="language-plaintext highlighter-rouge">{index}</code>.
+Format’s type and style are not supported and cannot be used; otherwise an <code class="language-plaintext highlighter-rouge">IllegalArgumentException</code> is thrown.</li>
+  <li><strong>Non localizable arguments:</strong> Formats are never localized, meaning that the arguments passed to the <code class="language-plaintext highlighter-rouge">format</code> method are converted to a string with the <code class="language-plaintext highlighter-rouge">toString</code> method, so without taking into account the bundle’s locale.</li>
+</ul>
+
+<p>If your application can run on both GWT and non-GWT back-ends, you should call <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/utils/I18NBundle.html#setSimpleFormatter%28boolean%29">I18NBundle.setSimpleFormat(true)</a> when the application starts. This way all subsequent invocations of the factory method <code class="language-plaintext highlighter-rouge">createBundle</code> will create bundles having the same behavior on all back-ends.
+If you don’t do this, you’ll get the localized string <code class="language-plaintext highlighter-rouge">3,14</code> for the Italian locale on a non-GWT back-end (notice the comma and the rounding) and the non-localized string <code class="language-plaintext highlighter-rouge">3.1415927</code> for the same locale on the GWT back-end.
+On the contrary, if <code class="language-plaintext highlighter-rouge">simpleFormat</code> is set to <code class="language-plaintext highlighter-rouge">true</code> you’ll get the non-localized string <code class="language-plaintext highlighter-rouge">3.1415927</code> for any locale on any back-end.</p>
+
+<h2 id="multiple-bundles">Multiple Bundles</h2>
+
+<p>Of course you can use multiple bundles in your application. For example, you might want to use a different bundle for each level of your game. Using multiple bundles offers some advantages:</p>
+<ul>
+  <li>Your code is easier to read and to maintain.</li>
+  <li>You’ll avoid huge bundles, which may take somewhat long to load into memory.</li>
+  <li>You can reduce memory usage by loading each bundle only when needed.</li>
+</ul>
+
+<h2 id="ios">iOS</h2>
+<p>For iOS, you need to specify the supported language in the <code class="language-plaintext highlighter-rouge">Info.plist.xml</code> file. Add the following for supporting English, Spanish and German:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;key&gt;CFBundleLocalizations&lt;/key&gt;
+&lt;array&gt;
+    &lt;string&gt;en&lt;/string&gt;
+    &lt;string&gt;es&lt;/string&gt;
+    &lt;string&gt;de&lt;/string&gt;
+&lt;/array&gt;
+</code></pre></div></div>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

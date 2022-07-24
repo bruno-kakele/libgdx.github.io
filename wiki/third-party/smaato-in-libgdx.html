@@ -1,0 +1,898 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Smaato in libGDX - libGDX</title>
+
+  <meta name="description" content="Summary Introduction Configuration Recap Banner Interstitial Rewarded Test Ads Introduction This article will show you how to add Smaato ads to your libGDX Android projects. You will be able to...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Smaato in libGDX">
+<meta property="og:url" content="https://libgdx.com/wiki/third-party/smaato-in-libgdx">
+
+
+  <meta property="og:description" content="Summary Introduction Configuration Recap Banner Interstitial Rewarded Test Ads Introduction This article will show you how to add Smaato ads to your libGDX Android projects. You will be able to...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/third-party/smaato-in-libgdx">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Smaato in libGDX
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/third-party/smaato-in-libgdx.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/third-party/smaato-in-libgdx.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <h1 id="summary">Summary</h1>
+
+<ul>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#configuration">Configuration</a></li>
+  <li><a href="#recap">Recap</a></li>
+  <li><a href="#banner">Banner</a></li>
+  <li><a href="#interstitial">Interstitial</a></li>
+  <li><a href="#rewarded">Rewarded</a></li>
+  <li><a href="#test-ads">Test Ads</a></li>
+</ul>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>This article will show you how to add Smaato ads to your libGDX Android projects. You will be able to monetize your games with Banner, Interstitial and Rewarded Ads. This tutorial implies that you are already familiar with libGDX basics and how Android Views are handled. But there will be a short recap.</p>
+
+<p>Just for a reference, the latest documentation is available on Smaato official <a href="https://developers.smaato.com/publishers/nextgen-sdk-android-integration">website</a>.</p>
+
+<p>You will need:</p>
+<ol>
+  <li>A libGDX Android Game Project</li>
+  <li>Your <a href="https://spx.smaato.com">Smaato</a> account</li>
+</ol>
+
+<h1 id="configuration">Configuration</h1>
+<p>Add the following repository setup to your project’s main <code class="language-plaintext highlighter-rouge">build.gradle</code> file:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">buildscript</span> <span class="o">{</span>
+    <span class="n">repositories</span> <span class="o">{</span>
+        <span class="n">mavenCentral</span><span class="o">()</span>
+        <span class="n">google</span><span class="o">()</span>
+        <span class="n">jcenter</span><span class="o">()</span>
+        <span class="n">maven</span> <span class="o">{</span> <span class="n">url</span> <span class="s">"https://s3.amazonaws.com/smaato-sdk-releases/"</span> <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="o">...</span>
+<span class="n">allprojects</span> <span class="o">{</span>
+    <span class="n">repositories</span> <span class="o">{</span>
+        <span class="n">google</span><span class="o">()</span>
+        <span class="n">jcenter</span><span class="o">()</span>
+        <span class="n">maven</span> <span class="o">{</span>
+            <span class="n">url</span> <span class="s">"https://s3.amazonaws.com/smaato-sdk-releases/"</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Set the compile options to Java 8 and minSdkVersion to at least version 16, in android module <code class="language-plaintext highlighter-rouge">build.gradle</code> file:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">android</span> <span class="o">{</span>
+    <span class="n">defaultConfig</span> <span class="o">{</span>
+        <span class="n">minSdkVersion</span> <span class="mi">16</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
+    <span class="n">compileOptions</span> <span class="o">{</span>
+        <span class="n">sourceCompatibility</span> <span class="nc">JavaVersion</span><span class="o">.</span><span class="na">VERSION_1_8</span>
+        <span class="n">targetCompatibility</span> <span class="nc">JavaVersion</span><span class="o">.</span><span class="na">VERSION_1_8</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Add required dependencies to your application module <code class="language-plaintext highlighter-rouge">build.gradle</code> file under project(“:android”) –&gt; dependencies.</p>
+
+<p><code class="language-plaintext highlighter-rouge">implementation 'com.smaato.android.sdk:smaato-sdk:21.5.3</code></p>
+
+<p>If you’re using Proguard in your project, please add the following lines to your Proguard config file:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">-</span><span class="n">keep</span> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">com</span><span class="o">.</span><span class="na">smaato</span><span class="o">.</span><span class="na">sdk</span><span class="o">.**</span> <span class="o">{</span> <span class="o">*;</span> <span class="o">}</span>
+<span class="o">-</span><span class="n">keep</span> <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">com</span><span class="o">.</span><span class="na">smaato</span><span class="o">.</span><span class="na">sdk</span><span class="o">.**</span> <span class="o">{</span> <span class="o">*;</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p>Add the following permissions to application AndroidManifest.xml file:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.INTERNET"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.ACCESS_NETWORK_STATE"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.ACCESS_COARSE_LOCATION"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>If your application targets Android 5.0 (API level 21) or higher, then you need to add the following line to your application AndroidManifest.xml file:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;uses-feature</span> <span class="na">android:name=</span><span class="s">"android.hardware.location.network"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>The latest version of Smaato NextGenSDK has been validated against <code class="language-plaintext highlighter-rouge">com.android.tools.build:gradle:3.5.4</code> and gradle-wrapper <code class="language-plaintext highlighter-rouge">gradle-5.6.3-bin</code></p>
+
+<p>Main build.gradle:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">buildscript</span> <span class="o">{</span>
+    <span class="o">...</span>
+    <span class="n">dependencies</span> <span class="o">{</span>
+        <span class="n">classpath</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">android</span><span class="o">.</span><span class="na">tools</span><span class="o">.</span><span class="na">build</span><span class="o">:</span><span class="nl">gradle:</span><span class="mf">3.5</span><span class="o">.</span><span class="mi">4</span><span class="err">'</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The gradle-wrapper.properties:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>distributionUrl=https\://services.gradle.org/distributions/gradle-5.6.3-bin.zip
+distributionBase=GRADLE_USER_HOME
+distributionPath=wrapper/dists
+zipStorePath=wrapper/dists
+zipStoreBase=GRADLE_USER_HOME
+</code></pre></div></div>
+
+<h1 id="recap">Recap</h1>
+<p>LibGDX Android game is created as a <a href="https://developer.android.com/reference/android/view/View">View</a>. In order to add ads that are constantly displayed (like Banners) another view holding that should be used. In other words, a Relative Layout having both views should be created.
+You can see that in the following code snippet:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AndroidLauncher</span> <span class="kd">extends</span> <span class="nc">AndroidApplication</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="nc">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+
+        <span class="nc">RelativeLayout</span> <span class="n">layout</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RelativeLayout</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+        <span class="n">layout</span><span class="o">.</span><span class="na">setLayoutParams</span><span class="o">(</span><span class="k">new</span> <span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">(</span><span class="no">MATCH_PARENT</span><span class="o">,</span> <span class="no">MATCH_PARENT</span><span class="o">));</span>
+        <span class="n">layout</span><span class="o">.</span><span class="na">addView</span><span class="o">(</span><span class="n">createGameView</span><span class="o">());</span>
+        <span class="n">createAdView</span><span class="o">(</span><span class="n">layout</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">layout</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="nc">View</span> <span class="nf">createGameView</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">View</span> <span class="n">gameView</span> <span class="o">=</span> <span class="n">initializeForView</span><span class="o">(</span><span class="k">new</span> <span class="nc">MyGame</span><span class="o">(</span><span class="k">this</span><span class="o">),</span> <span class="k">new</span> <span class="nc">AndroidApplicationConfiguration</span><span class="o">());</span>
+        <span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">LayoutParams</span> <span class="n">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">(</span><span class="no">MATCH_PARENT</span><span class="o">,</span> <span class="no">WRAP_CONTENT</span><span class="o">);</span>
+        <span class="n">params</span><span class="o">.</span><span class="na">addRule</span><span class="o">(</span><span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">ALIGN_PARENT_TOP</span><span class="o">,</span> <span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">TRUE</span><span class="o">);</span>
+        <span class="n">params</span><span class="o">.</span><span class="na">addRule</span><span class="o">(</span><span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">CENTER_HORIZONTAL</span><span class="o">,</span> <span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">TRUE</span><span class="o">);</span>
+        <span class="n">gameView</span><span class="o">.</span><span class="na">setLayoutParams</span><span class="o">(</span><span class="n">params</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">gameView</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>The only missing piece here is the <code class="language-plaintext highlighter-rouge">createAdView</code> method that will be created in the next section.</p>
+
+<h1 id="banner">Banner</h1>
+<p>In order to add Banner ads we will use <code class="language-plaintext highlighter-rouge">com.smaato.sdk.banner.widget.BannerView</code>. As mentioned previously, the Banner view will reside in the same Relative Layout as the Game view.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AndroidLauncher</span> <span class="kd">extends</span> <span class="nc">AndroidApplication</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">PUBLISHER_ID</span> <span class="o">=</span> <span class="s">"1100042525"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">BANNER_AD_SPACE_ID</span> <span class="o">=</span> <span class="s">"130635694"</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nc">BannerView</span> <span class="n">smaatoBanner</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="nc">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+
+        <span class="nc">RelativeLayout</span> <span class="n">layout</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RelativeLayout</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+        <span class="n">layout</span><span class="o">.</span><span class="na">setLayoutParams</span><span class="o">(</span><span class="k">new</span> <span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">(</span><span class="no">MATCH_PARENT</span><span class="o">,</span> <span class="no">MATCH_PARENT</span><span class="o">));</span>
+        <span class="n">layout</span><span class="o">.</span><span class="na">addView</span><span class="o">(</span><span class="n">createGameView</span><span class="o">());</span>
+        <span class="n">createAdView</span><span class="o">(</span><span class="n">layout</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">layout</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">createAdView</span><span class="o">(</span><span class="nc">RelativeLayout</span> <span class="n">layout</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">SmaatoSdk</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="n">getApplication</span><span class="o">(),</span> <span class="no">PUBLISHER_ID</span><span class="o">);</span>
+        <span class="n">createSmaatoBanner</span><span class="o">();</span>
+        <span class="n">layout</span><span class="o">.</span><span class="na">addView</span><span class="o">(</span><span class="n">smaatoBanner</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">createSmaatoBanner</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">smaatoBanner</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BannerView</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+
+        <span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">LayoutParams</span> <span class="n">params</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">(</span><span class="no">MATCH_PARENT</span><span class="o">,</span> <span class="no">WRAP_CONTENT</span><span class="o">);</span>
+        <span class="n">params</span><span class="o">.</span><span class="na">addRule</span><span class="o">(</span><span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">ALIGN_PARENT_BOTTOM</span><span class="o">,</span> <span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">TRUE</span><span class="o">);</span>
+        <span class="n">params</span><span class="o">.</span><span class="na">addRule</span><span class="o">(</span><span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">CENTER_HORIZONTAL</span><span class="o">,</span> <span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">TRUE</span><span class="o">);</span>
+        <span class="n">smaatoBanner</span><span class="o">.</span><span class="na">setLayoutParams</span><span class="o">(</span><span class="n">params</span><span class="o">);</span>
+        <span class="n">smaatoBanner</span><span class="o">.</span><span class="na">setBackgroundColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">TRANSPARENT</span><span class="o">);</span>
+        <span class="n">smaatoBanner</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="nc">View</span><span class="o">.</span><span class="na">INVISIBLE</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onDestroy</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">smaatoBanner</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="n">smaatoBanner</span><span class="o">.</span><span class="na">destroy</span><span class="o">();</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onDestroy</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">showBannerAds</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">runOnUiThread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="n">smaatoBanner</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="nc">View</span><span class="o">.</span><span class="na">VISIBLE</span><span class="o">);</span>
+            <span class="n">smaatoBanner</span><span class="o">.</span><span class="na">setEnabled</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+            <span class="n">smaatoBanner</span><span class="o">.</span><span class="na">loadAd</span><span class="o">(</span><span class="no">BANNER_AD_SPACE_ID</span><span class="o">,</span> <span class="nc">BannerAdSize</span><span class="o">.</span><span class="na">XX_LARGE_320x50</span><span class="o">);</span>
+        <span class="o">});</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">hideBannerAds</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">runOnUiThread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="n">smaatoBanner</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="nc">View</span><span class="o">.</span><span class="na">GONE</span><span class="o">);</span>
+            <span class="n">smaatoBanner</span><span class="o">.</span><span class="na">setEnabled</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+        <span class="o">});</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Let me walk you through this code snippet:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">BannerView smaatoBanner</code> is kept as an instance variable, so an ad can be shown and hidden depending on the game lifecycle</li>
+  <li><code class="language-plaintext highlighter-rouge">BannerView</code> should be always destroyed in order to release resources properly</li>
+  <li>The banner will be placed according to <code class="language-plaintext highlighter-rouge">RelativeLayout.LayoutParams</code> rules</li>
+  <li><code class="language-plaintext highlighter-rouge">showBannerAds</code>/<code class="language-plaintext highlighter-rouge">hideBannerAds</code> are supposed to be called as per the game lifecycle</li>
+  <li><code class="language-plaintext highlighter-rouge">PUBLISHER_ID</code> and <code class="language-plaintext highlighter-rouge">BANNER_AD_SPACE_ID</code> can be used during testing. Please, refer to <a href="#test-ads">Test Ads</a> section for all available test ads configurations.</li>
+</ul>
+
+<h1 id="interstitial">Interstitial</h1>
+<p>Unlike Banners, Interstitial ads are not constantly displayed on the screen. Such ads should be only shown at natural transition points in the flow of an app, like finishing/failing of a level or switching between the screens. Hence there is no need to have an additional view for Interstitial ads as they will typically occupy the whole screen and will be destroyed upon closing.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AndroidLauncher</span> <span class="kd">extends</span> <span class="nc">AndroidApplication</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">PUBLISHER_ID</span> <span class="o">=</span> <span class="s">"1100042525"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">INTERSTITIAL_AD_SPACE_ID</span> <span class="o">=</span> <span class="s">"130626426"</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nc">InterstitialAd</span> <span class="n">smaatoInterstitial</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="nc">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+
+        <span class="nc">RelativeLayout</span> <span class="n">layout</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RelativeLayout</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+        <span class="n">layout</span><span class="o">.</span><span class="na">setLayoutParams</span><span class="o">(</span><span class="k">new</span> <span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">(</span><span class="no">MATCH_PARENT</span><span class="o">,</span> <span class="no">MATCH_PARENT</span><span class="o">));</span>
+        <span class="n">layout</span><span class="o">.</span><span class="na">addView</span><span class="o">(</span><span class="n">createGameView</span><span class="o">());</span>
+        <span class="n">createAd</span><span class="o">();</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">layout</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">createAd</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">SmaatoSdk</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="n">getApplication</span><span class="o">(),</span> <span class="no">PUBLISHER_ID</span><span class="o">);</span>
+        <span class="n">requestSmaatoInterstitialAd</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">showInterstitial</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">runOnUiThread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">smaatoInterstitial</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">requestSmaatoInterstitialAd</span><span class="o">();</span>
+                <span class="k">return</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="n">smaatoInterstitial</span><span class="o">.</span><span class="na">showAd</span><span class="o">(</span><span class="nc">AndroidLauncher</span><span class="o">.</span><span class="na">this</span><span class="o">);</span>
+            <span class="n">requestSmaatoInterstitialAd</span><span class="o">();</span>
+        <span class="o">});</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">requestSmaatoInterstitialAd</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">Interstitial</span><span class="o">.</span><span class="na">loadAd</span><span class="o">(</span><span class="no">INTERSTITIAL_AD_SPACE_ID</span><span class="o">,</span> <span class="k">new</span> <span class="nc">EventListener</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAdLoaded</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">InterstitialAd</span> <span class="n">interstitialAd</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">smaatoInterstitial</span> <span class="o">=</span> <span class="n">interstitialAd</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAdFailedToLoad</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">InterstitialRequestError</span> <span class="n">interstitialRequestError</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">log</span><span class="o">(</span><span class="nc">AndroidLauncher</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="s">"Smaato Interstitial failed to load; error: "</span> <span class="o">+</span> <span class="n">interstitialRequestError</span><span class="o">.</span><span class="na">getInterstitialError</span><span class="o">());</span>
+            <span class="o">}</span>
+
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAdError</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">InterstitialAd</span> <span class="n">interstitialAd</span><span class="o">,</span> <span class="nd">@NonNull</span> <span class="nc">InterstitialError</span> <span class="n">interstitialError</span><span class="o">)</span> <span class="o">{</span>
+            <span class="o">}</span>
+
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAdOpened</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">InterstitialAd</span> <span class="n">interstitialAd</span><span class="o">)</span> <span class="o">{</span>
+            <span class="o">}</span>
+
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAdClosed</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">InterstitialAd</span> <span class="n">interstitialAd</span><span class="o">)</span> <span class="o">{</span>
+            <span class="o">}</span>
+
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAdClicked</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">InterstitialAd</span> <span class="n">interstitialAd</span><span class="o">)</span> <span class="o">{</span>
+            <span class="o">}</span>
+
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAdImpression</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">InterstitialAd</span> <span class="n">interstitialAd</span><span class="o">)</span> <span class="o">{</span>
+            <span class="o">}</span>
+
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAdTTLExpired</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">InterstitialAd</span> <span class="n">interstitialAd</span><span class="o">)</span> <span class="o">{</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Let me walk you through this code snippet:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">InterstitialAd smaatoInterstitial</code> is kept as an instance variable, so an ad can be shown depending on the game lifecycle</li>
+  <li>It is recommended to call <code class="language-plaintext highlighter-rouge">requestSmaatoInterstitialAd</code> on a game load, in order to have an ad preloaded from the start</li>
+  <li>There are multiple useful callbacks of <code class="language-plaintext highlighter-rouge">Interstitial.loadAd</code> that can be used depending on your use case</li>
+  <li><code class="language-plaintext highlighter-rouge">showInterstitial</code> is supposed to be called as per the game lifecycle</li>
+</ul>
+
+<h1 id="rewarded">Rewarded</h1>
+<p>Rewarded ads are visually similar to Interstitial ads as they typically occupy the whole screen.
+But workflow-wise they are completely different - such ads encourage users to interact with the ad content in exchange for in-app rewards, like extra lives, free coins or energy.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AndroidLauncher</span> <span class="kd">extends</span> <span class="nc">AndroidApplication</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">PUBLISHER_ID</span> <span class="o">=</span> <span class="s">"1100042525"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">REWARDED_INTERSTITIAL_AD_SPACE_ID</span> <span class="o">=</span> <span class="s">"130626428"</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nc">RewardedInterstitialAd</span> <span class="n">smaatoRewardedInterstitial</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="nc">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+
+        <span class="nc">RelativeLayout</span> <span class="n">layout</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RelativeLayout</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+        <span class="n">layout</span><span class="o">.</span><span class="na">setLayoutParams</span><span class="o">(</span><span class="k">new</span> <span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">(</span><span class="no">MATCH_PARENT</span><span class="o">,</span> <span class="no">MATCH_PARENT</span><span class="o">));</span>
+        <span class="n">layout</span><span class="o">.</span><span class="na">addView</span><span class="o">(</span><span class="n">createGameView</span><span class="o">());</span>
+        <span class="n">createAd</span><span class="o">();</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">layout</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">createAd</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">SmaatoSdk</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="n">getApplication</span><span class="o">(),</span> <span class="no">PUBLISHER_ID</span><span class="o">);</span>
+        <span class="n">requestSmaatoRewardedInterstitialAd</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">showRewarded</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">runOnUiThread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">smaatoRewardedInterstitial</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">requestSmaatoRewardedInterstitialAd</span><span class="o">();</span>
+                <span class="k">return</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="n">smaatoRewardedInterstitial</span><span class="o">.</span><span class="na">showAd</span><span class="o">();</span>
+            <span class="n">requestSmaatoRewardedInterstitialAd</span><span class="o">();</span>
+        <span class="o">});</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">requestSmaatoRewardedInterstitialAd</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">RewardedInterstitial</span><span class="o">.</span><span class="na">loadAd</span><span class="o">(</span><span class="no">REWARDED_INTERSTITIAL_AD_SPACE_ID</span><span class="o">,</span> <span class="k">new</span> <span class="nc">EventListener</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAdLoaded</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">RewardedInterstitialAd</span> <span class="n">rewardedInterstitialAd</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">smaatoRewardedInterstitial</span> <span class="o">=</span> <span class="n">rewardedInterstitialAd</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAdFailedToLoad</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">RewardedRequestError</span> <span class="n">rewardedRequestError</span><span class="o">)</span> <span class="o">{</span>
+            <span class="o">}</span>
+
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAdError</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">RewardedInterstitialAd</span> <span class="n">rewardedInterstitialAd</span><span class="o">,</span> <span class="nd">@NonNull</span> <span class="nc">RewardedError</span> <span class="n">rewardedError</span><span class="o">)</span> <span class="o">{</span>
+            <span class="o">}</span>
+
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAdClosed</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">RewardedInterstitialAd</span> <span class="n">rewardedInterstitialAd</span><span class="o">)</span> <span class="o">{</span>
+            <span class="o">}</span>
+
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAdClicked</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">RewardedInterstitialAd</span> <span class="n">rewardedInterstitialAd</span><span class="o">)</span> <span class="o">{</span>
+            <span class="o">}</span>
+
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAdStarted</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">RewardedInterstitialAd</span> <span class="n">rewardedInterstitialAd</span><span class="o">)</span> <span class="o">{</span>
+            <span class="o">}</span>
+
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAdReward</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">RewardedInterstitialAd</span> <span class="n">rewardedInterstitialAd</span><span class="o">)</span> <span class="o">{</span>
+            <span class="o">}</span>
+
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAdTTLExpired</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">RewardedInterstitialAd</span> <span class="n">rewardedInterstitialAd</span><span class="o">)</span> <span class="o">{</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>One more time, let me walk you through this code snippet:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">RewardedInterstitialAd smaatoRewardedInterstitial</code> is kept as an instance variable, so an ad can be shown whenever a user initiates a rewarded ad flow in your game</li>
+  <li>It is recommended to call <code class="language-plaintext highlighter-rouge">requestSmaatoRewardedInterstitialAd</code> on a game load, in order to have an ad preloaded from the start</li>
+  <li>There are multiple useful callbacks of <code class="language-plaintext highlighter-rouge">RewardedInterstitial.loadAd</code> that you can be used depending on your use case</li>
+  <li><code class="language-plaintext highlighter-rouge">showRewarded</code> is supposed to be called whenever a user initiates a rewarded ad flow in your game</li>
+</ul>
+
+<h1 id="test-ads">Test Ads</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Adspace ID</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>130626424</td>
+      <td>Rich Media</td>
+    </tr>
+    <tr>
+      <td>130635694</td>
+      <td>Static Image</td>
+    </tr>
+    <tr>
+      <td>130635706</td>
+      <td>MRAID</td>
+    </tr>
+    <tr>
+      <td>130626426</td>
+      <td>Rich Media / Video</td>
+    </tr>
+    <tr>
+      <td>130626427</td>
+      <td>Video</td>
+    </tr>
+    <tr>
+      <td>130626428</td>
+      <td>Rewarded</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Please, use Publisher Id 1100042525 with each of those adspaces.</p>
+
+<p>Don’t forget to change the values to the production ones before the release!</p>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

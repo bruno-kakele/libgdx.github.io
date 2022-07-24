@@ -1,0 +1,709 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Spritebatch, Textureregions, and Sprites - libGDX</title>
+
+  <meta name="description" content="This page gives a brief overview of how images are drawn using OpenGL and how libGDX simplifies and optimizes the task through the SpriteBatch class. Drawing images An image that...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Spritebatch, Textureregions, and Sprites">
+<meta property="og:url" content="https://libgdx.com/wiki/graphics/2d/spritebatch-textureregions-and-sprites">
+
+
+  <meta property="og:description" content="This page gives a brief overview of how images are drawn using OpenGL and how libGDX simplifies and optimizes the task through the SpriteBatch class. Drawing images An image that...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/graphics/2d/spritebatch-textureregions-and-sprites">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Spritebatch, Textureregions, and Sprites
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/graphics/2d/spritebatch-textureregions-and-sprites.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/graphics/2d/spritebatch-textureregions-and-sprites.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <p>This page gives a brief overview of how images are drawn using OpenGL and how libGDX simplifies and optimizes the task through the <code class="language-plaintext highlighter-rouge">SpriteBatch</code> class.</p>
+
+<h2 id="drawing-images">Drawing images</h2>
+
+<p>An image that has been decoded from its original format (e.g., PNG) and uploaded to the GPU is called a texture. To draw a texture, geometry is described and the texture is applied by specifying where each vertex in the geometry corresponds on the texture. For example, the geometry could be a rectangle and the texture could be applied so that each corner of the rectangle corresponds to a corner of the texture. A rectangle that is a subset of a texture is called a texture region.</p>
+
+<p>To do the actual drawing, first the texture is bound (i.e., made the current texture), then the geometry is given to OpenGL to draw. The size and position on the screen that the texture is drawn is determined by both the geometry and how the <a href="https://web.archive.org/web/20200427232345/https://www.badlogicgames.com/wordpress/?p=1550">OpenGL viewport</a> is configured. Many 2D games configure the viewport to match the screen resolution. This means that the geometry is specified in pixels, which makes it easy to draw textures in the appropriate size and position on the screen.</p>
+
+<p>It is very common to draw a texture mapped to rectangular geometry. It is also very common to draw the same texture or various regions of that texture many times. It would be inefficient to send each rectangle one at a time to the GPU to be drawn. Instead, many rectangles for the same texture can be described and sent to the GPU all at once. This is what the <code class="language-plaintext highlighter-rouge">SpriteBatch</code> class does.</p>
+
+<p><code class="language-plaintext highlighter-rouge">SpriteBatch</code> is given a texture and coordinates for each rectangle to be drawn. It collects the geometry without submitting it to the GPU. If it is given a texture different than the last texture, then it binds the last texture, submits the collected geometry to be drawn, and begins collecting geometry for the new texture.</p>
+
+<p>Changing textures every few rectangles that are drawn prevents <code class="language-plaintext highlighter-rouge">SpriteBatch</code> from batching much geometry. Also, binding a texture is a somewhat expensive operation. For these reasons, it is common to store many smaller images in a larger image and then draw regions of the larger image to both maximize geometry batching and avoid texture changes. See <a href="/wiki/tools/texture-packer">TexturePacker</a> for more information.</p>
+
+<h2 id="spritebatch">SpriteBatch</h2>
+
+<p>Using <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/g2d/SpriteBatch.html"><code class="language-plaintext highlighter-rouge">SpriteBatch</code></a> <a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/graphics/g2d/SpriteBatch.java">(source)</a> in an application looks like this:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Game</span> <span class="kd">implements</span> <span class="nc">ApplicationAdapter</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">SpriteBatch</span> <span class="n">batch</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">create</span> <span class="o">()</span> <span class="o">{</span>
+		<span class="n">batch</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SpriteBatch</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">render</span> <span class="o">()</span> <span class="o">{</span>
+		<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glClear</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_COLOR_BUFFER_BIT</span><span class="o">);</span> <span class="c1">// This cryptic line clears the screen.</span>
+		<span class="n">batch</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+		<span class="c1">// Drawing goes here!</span>
+		<span class="n">batch</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>All <code class="language-plaintext highlighter-rouge">SpriteBatch</code> drawing calls must be made between the <code class="language-plaintext highlighter-rouge">begin</code> and <code class="language-plaintext highlighter-rouge">end</code> methods. Non-<code class="language-plaintext highlighter-rouge">SpriteBatch</code> drawing cannot occur between <code class="language-plaintext highlighter-rouge">begin</code> and <code class="language-plaintext highlighter-rouge">end</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">SpriteBatch</code> assumes the active texture unit is 0. When using custom shaders and binding textures yourself, you can reset this with the following code:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glActiveTexture</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_TEXTURE0</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h2 id="texture">Texture</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">Texture</code> class decodes an image file and loads it into GPU memory. The image file should be placed in the “assets” folder. The image’s dimensions should be powers of two (16x16, 64x256, etc) for compatibility and performance reasons.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">Texture</span> <span class="n">texture</span><span class="o">;</span>
+<span class="o">...</span>
+<span class="n">texture</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Texture</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"image.png"</span><span class="o">));</span>
+<span class="o">...</span>
+<span class="n">batch</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+<span class="n">batch</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">texture</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
+<span class="n">batch</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>Here a texture is created and passed to a <code class="language-plaintext highlighter-rouge">SpriteBatch</code> to be drawn. The texture will be drawn in a rectangle positioned at 10,10 with a width and height equal to the size of the texture. <code class="language-plaintext highlighter-rouge">SpriteBatch</code> has many methods for drawing a texture:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"><em>Method signature</em></th>
+      <th style="text-align: center"><em>Description</em></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">draw(Texture texture, float x, float y)</code></td>
+      <td style="text-align: center">Draws the texture using the texture’s width and height</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">draw(Texture texture, float x, float y,</code><br /><code class="language-plaintext highlighter-rouge">int srcX, int srcY, int srcWidth, int srcHeight)</code></td>
+      <td style="text-align: center">Draws a portion of the texture.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">draw(Texture texture, float x, float y,</code><br /><code class="language-plaintext highlighter-rouge">float width, float height, int srcX, int srcY,</code><br /><code class="language-plaintext highlighter-rouge">int srcWidth, int srcHeight, boolean flipX, boolean flipY)</code></td>
+      <td style="text-align: center">Draws a portion of a texture, stretched to the <code class="language-plaintext highlighter-rouge">width</code> and <code class="language-plaintext highlighter-rouge">height</code>, and optionally flipped.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">draw(Texture texture, float x, float y,</code><br /><code class="language-plaintext highlighter-rouge">float originX, float originY, float width, float height,</code><br /><code class="language-plaintext highlighter-rouge">float scaleX, float scaleY, float rotation,</code><br /><code class="language-plaintext highlighter-rouge">int srcX, int srcY, int srcWidth, int srcHeight,</code><br /><code class="language-plaintext highlighter-rouge">boolean flipX, boolean flipY)</code></td>
+      <td style="text-align: center">This monster method draws a portion of a texture, stretched to the <code class="language-plaintext highlighter-rouge">width</code> and <code class="language-plaintext highlighter-rouge">height</code>, scaled and rotated around an origin, and optionally flipped.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">draw(Texture texture, float x, float y,</code><br /><code class="language-plaintext highlighter-rouge">float width, float height, float u,</code><br /><code class="language-plaintext highlighter-rouge">float v, float u2, float v2)</code></td>
+      <td style="text-align: center">This draws a portion of a texture, stretched to the <code class="language-plaintext highlighter-rouge">width</code> and <code class="language-plaintext highlighter-rouge">height</code>. This is a somewhat advanced method as it uses texture coordinates from 0-1 rather than pixel coordinates.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">draw(Texture texture, float[] spriteVertices, int offset, int length)</code></td>
+      <td style="text-align: center">This is an advanced method for passing in the raw geometry, texture coordinates, and color information. This can be used to draw any quadrilateral, not just rectangles.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="textureregion">TextureRegion</h2>
+
+<p>The <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/g2d/TextureRegion.html"><code class="language-plaintext highlighter-rouge">TextureRegion</code> class</a> <a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/graphics/g2d/TextureRegion.java">(source)</a> describes a rectangle inside a texture and is useful for drawing only a portion of the texture.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">TextureRegion</span> <span class="n">region</span><span class="o">;</span>
+<span class="o">...</span>
+<span class="n">texture</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Texture</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"image.png"</span><span class="o">));</span>
+<span class="n">region</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TextureRegion</span><span class="o">(</span><span class="n">texture</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">50</span><span class="o">,</span> <span class="mi">50</span><span class="o">);</span>
+<span class="o">...</span>
+<span class="n">batch</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+<span class="n">batch</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">region</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
+<span class="n">batch</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>Here the <code class="language-plaintext highlighter-rouge">20, 20, 50, 50</code> describes the portion of the texture, which is then drawn at 10,10. The same can be achieved by passing the <code class="language-plaintext highlighter-rouge">Texture</code> and other parameters to <code class="language-plaintext highlighter-rouge">SpriteBatch</code>, but <code class="language-plaintext highlighter-rouge">TextureRegion</code> makes it convenient to have a single object that describes both.</p>
+
+<p><code class="language-plaintext highlighter-rouge">SpriteBatch</code> has many methods for drawing a texture region:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"><em>Method signature</em></th>
+      <th style="text-align: center"><em>Description</em></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">draw(TextureRegion region, float x, float y)</code></td>
+      <td style="text-align: center">Draws the region using the width and height of the region.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">draw(TextureRegion region, float x, float y,</code><br /><code class="language-plaintext highlighter-rouge">float width, float height)</code></td>
+      <td style="text-align: center">Draws the region, stretched to the <code class="language-plaintext highlighter-rouge">width</code> and <code class="language-plaintext highlighter-rouge">height</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">draw(TextureRegion region, float x, float y,</code><br /><code class="language-plaintext highlighter-rouge">float originX, float originY, float width, float height,</code><br /><code class="language-plaintext highlighter-rouge">float scaleX, float scaleY, float rotation)</code></td>
+      <td style="text-align: center">Draws the region, stretched to the <code class="language-plaintext highlighter-rouge">width</code> and <code class="language-plaintext highlighter-rouge">height</code>, and scaled and rotated around an origin.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="sprite">Sprite</h2>
+
+<p>The <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/g2d/Sprite.html"><code class="language-plaintext highlighter-rouge">Sprite</code> class</a> <a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/graphics/g2d/Sprite.java">(source)</a> describes both a texture region, the geometry where it will be drawn, and the color it will be drawn.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">Sprite</span> <span class="n">sprite</span><span class="o">;</span>
+<span class="o">...</span>
+<span class="n">texture</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Texture</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"image.png"</span><span class="o">));</span>
+<span class="n">sprite</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Sprite</span><span class="o">(</span><span class="n">texture</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">50</span><span class="o">,</span> <span class="mi">50</span><span class="o">);</span>
+<span class="n">sprite</span><span class="o">.</span><span class="na">setPosition</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
+<span class="n">sprite</span><span class="o">.</span><span class="na">setRotation</span><span class="o">(</span><span class="mi">45</span><span class="o">);</span>
+<span class="o">...</span>
+<span class="n">batch</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+<span class="n">sprite</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">batch</span><span class="o">);</span>
+<span class="n">batch</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>Here the <code class="language-plaintext highlighter-rouge">20, 20, 50, 50</code> describes the portion of the texture, which is rotated 45 degrees and then drawn at 10,10. The same can be achieved by passing the <code class="language-plaintext highlighter-rouge">Texture</code> or a <code class="language-plaintext highlighter-rouge">TextureRegion</code> and other parameters to <code class="language-plaintext highlighter-rouge">SpriteBatch</code>, but <code class="language-plaintext highlighter-rouge">Sprite</code> makes it convenient to have a single object that describes everything. Also, because <code class="language-plaintext highlighter-rouge">Sprite</code> stores the geometry and only recomputes it when necessary, it is slightly more efficient if the scale, rotation, or other properties are unchanged between frames.</p>
+
+<p>Note that <code class="language-plaintext highlighter-rouge">Sprite</code> mixes model information (position, rotation, etc) with view information (the texture being drawn). This makes <code class="language-plaintext highlighter-rouge">Sprite</code> inappropriate when applying a design pattern that wishes to strictly separate the model from the view. In that case, using <code class="language-plaintext highlighter-rouge">Texture</code> or <code class="language-plaintext highlighter-rouge">TextureRegion</code> may make more sense.</p>
+
+<p>Also note that there is no Sprite constructor that is related to the position of the Sprite. calling <code class="language-plaintext highlighter-rouge">Sprite(Texture, int, int, int, int)</code> does <strong><em>not</em></strong> edit the position. It is necessary to call <code class="language-plaintext highlighter-rouge">Sprite#setPosition(float,float)</code> or else the sprite will be drawn at the default position of 0,0.</p>
+
+<h2 id="tinting">Tinting</h2>
+
+<p>When a texture is drawn, it can be tinted a color:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">Texture</span> <span class="n">texture</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">TextureRegion</span> <span class="n">region</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">Sprite</span> <span class="n">sprite</span><span class="o">;</span>
+<span class="o">...</span>
+<span class="n">texture</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Texture</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"image.png"</span><span class="o">));</span>
+<span class="n">region</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TextureRegion</span><span class="o">(</span><span class="n">texture</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">50</span><span class="o">,</span> <span class="mi">50</span><span class="o">);</span>
+<span class="n">sprite</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Sprite</span><span class="o">(</span><span class="n">texture</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">50</span><span class="o">,</span> <span class="mi">50</span><span class="o">);</span>
+<span class="n">sprite</span><span class="o">.</span><span class="na">setPosition</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
+<span class="n">sprite</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+<span class="o">...</span>
+<span class="n">batch</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+<span class="n">batch</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+<span class="n">batch</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">texture</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
+<span class="n">batch</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+<span class="n">batch</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">region</span><span class="o">,</span> <span class="mi">50</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
+<span class="n">sprite</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">batch</span><span class="o">);</span>
+<span class="n">batch</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>This shows how to draw a texture, region, and sprite with a tint color. The color values here are described using RGBA values between 1 and 0. Alpha is ignored if blending is disabled.</p>
+
+<h2 id="blending">Blending</h2>
+
+<p>Blending is enabled by default. This means that when a texture is drawn, translucent portions of the texture are merged with pixels already on the screen at that location.</p>
+
+<p>When blending is disabled, anything already on the screen at that location is replaced by the texture. This is more efficient, so blending should always be disabled unless it is needed. E.g., when drawing a large background image over the whole screen, a performance boost can be gained by first disabling blending:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glClear</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_COLOR_BUFFER_BIT</span><span class="o">);</span> <span class="c1">// This cryptic line clears the screen.</span>
+<span class="n">batch</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+<span class="n">batch</span><span class="o">.</span><span class="na">disableBlending</span><span class="o">();</span>
+<span class="n">backgroundSprite</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">batch</span><span class="o">);</span>
+<span class="n">batch</span><span class="o">.</span><span class="na">enableBlending</span><span class="o">();</span>
+<span class="c1">// Other drawing here.</span>
+<span class="n">batch</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p><em>Note: Be sure to clear the screen each frame. If this is not done, a texture with alpha can be drawn on top of itself hundreds of times, making it appear opaque. Also, some GPU architectures perform better when the screen is cleared each frame, even if opaque images are being drawn over the entire screen.</em></p>
+
+<h2 id="viewport">Viewport</h2>
+
+<p><code class="language-plaintext highlighter-rouge">SpriteBatch</code> manages its own projection and transformation matrixes. When a <code class="language-plaintext highlighter-rouge">SpriteBatch</code> is created, it uses the current application size to setup an orthographic projection using a y-up coordinate system. When <code class="language-plaintext highlighter-rouge">begin</code> is called, it sets up the <a href="/wiki/graphics/viewports">viewport</a>.</p>
+
+<h2 id="performance-tuning">Performance tuning</h2>
+
+<p><code class="language-plaintext highlighter-rouge">SpriteBatch</code> has a constructor that sets the maximum number of sprites that can be buffered before sending to the GPU. If this is too low, it will cause extra calls to the GPU. If this is too high, the <code class="language-plaintext highlighter-rouge">SpriteBatch</code> will be using more memory than is necessary.</p>
+
+<p><code class="language-plaintext highlighter-rouge">SpriteBatch</code> has a public int field named <code class="language-plaintext highlighter-rouge">maxSpritesInBatch</code>. This indicates the highest number of sprites that were sent to the GPU at once over the lifetime of the <code class="language-plaintext highlighter-rouge">SpriteBatch</code>. Setting a very large <code class="language-plaintext highlighter-rouge">SpriteBatch</code> size and then checking this field can help determine the optimum <code class="language-plaintext highlighter-rouge">SpriteBatch</code> size. It should be sized equal to or slightly more than <code class="language-plaintext highlighter-rouge">maxSpritesInBatch</code>. This field may be set to zero to reset it at any time.</p>
+
+<p><code class="language-plaintext highlighter-rouge">SpriteBatch</code> has a public int field named <code class="language-plaintext highlighter-rouge">renderCalls</code>. After <code class="language-plaintext highlighter-rouge">end</code> is called, this field indicates how many times a batch of geometry was sent to the GPU between the last calls to <code class="language-plaintext highlighter-rouge">begin</code> and <code class="language-plaintext highlighter-rouge">end</code>. This occurs when a different texture must be bound, or when the <code class="language-plaintext highlighter-rouge">SpriteBatch</code> has cached enough sprites to be full. If the <code class="language-plaintext highlighter-rouge">SpriteBatch</code> is sized appropriately and <code class="language-plaintext highlighter-rouge">renderCalls</code> is large (more than maybe 15-20), it indicates that many texture binds are occurring.</p>
+
+<p><code class="language-plaintext highlighter-rouge">SpriteBatch</code> has an additional constructor that takes a size and a number of buffers. This is an advanced feature that causes vertex buffer objects (VBOs) to be used rather than the usual vertex arrays (VAs). A list of buffers is kept, and each render call uses the next buffer in the list (wrapping around). When <code class="language-plaintext highlighter-rouge">maxSpritesInBatch</code> is low and <code class="language-plaintext highlighter-rouge">renderCalls</code> is large, this may provide a small performance boost.</p>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

@@ -1,0 +1,1027 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Dependency management with Gradle - libGDX</title>
+
+  <meta name="description" content="Contents Useful Links Guide to build.gradle libGDX Dependencies Available libGDX extensions External Dependencies Adding Repositories Mavenizing Local Dependencies File Dependencies Android pitfall Declaring Dependencies with HTML libGDX Extension Inherits Dependency...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Dependency management with Gradle">
+<meta property="og:url" content="https://libgdx.com/wiki/articles/dependency-management-with-gradle">
+
+
+  <meta property="og:description" content="Contents Useful Links Guide to build.gradle libGDX Dependencies Available libGDX extensions External Dependencies Adding Repositories Mavenizing Local Dependencies File Dependencies Android pitfall Declaring Dependencies with HTML libGDX Extension Inherits Dependency...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/articles/dependency-management-with-gradle">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Dependency management with Gradle
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/articles/dependency-management-with-gradle.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/articles/dependency-management-with-gradle.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <h2 id="contents">Contents</h2>
+
+<ul>
+  <li><a href="#useful-links"><strong>Useful Links</strong></a></li>
+  <li><a href="#guide-to-buildgradle"><strong>Guide to build.gradle</strong></a></li>
+  <li><a href="#libgdx-dependencies"><strong>libGDX Dependencies</strong></a></li>
+  <li><a href="#libgdx-extensions">Available libGDX extensions</a></li>
+  <li><a href="#external-dependencies"><strong>External Dependencies</strong></a></li>
+  <li><a href="#adding-external-repositories">Adding Repositories</a></li>
+  <li><a href="#mavenizing-local-dependencies">Mavenizing Local Dependencies</a></li>
+  <li><a href="#file-dependencies">File Dependencies</a>
+    <ul>
+      <li><a href="#android-pitfall">Android pitfall</a></li>
+    </ul>
+  </li>
+  <li><a href="#gwt-inheritance"><strong>Declaring Dependencies with HTML</strong></a></li>
+  <li><a href="#libgdx-extension-inherits">libGDX Extension Inherits</a></li>
+  <li><a href="#dependency-management-for-libraries"><strong>Dependency Management for Libraries</strong></a></li>
+</ul>
+
+<h3 id="useful-links">Useful links</h3>
+<p>Dependency management with Gradle is easy to understand, and has many different approaches. If you are familiar with Maven or Ivy, Gradle is fully compatible with both approaches, as well as being able to support custom approaches. If you aren’t familiar with Gradle, there are great resources on their site to learn, it is recommended you give them a read to get comfortable with Gradle.</p>
+<ul>
+  <li><a href="https://docs.gradle.org/current/userguide/userguide.html">Gradle’s User Guide</a></li>
+  <li><a href="https://docs.gradle.org/current/userguide/dependency_management.html">Gradle’s Dependency Management Guide</a></li>
+  <li><a href="https://docs.gradle.org/current/userguide/dependency_management.html#declaring-dependencies">Declare your dependencies</a></li>
+</ul>
+
+<h3 id="guide-to-buildgradle">Guide to build.gradle</h3>
+<p>Gradle projects are managed by <code class="language-plaintext highlighter-rouge">build.gradle</code> files in their root directory. If you have used the gdx-setup.jar to build your libGDX project you will notice the structure: <a href="/wiki/start/project-generation#project-layout">Structure Example</a></p>
+
+<p>The root directory, and each sub directory contains a <code class="language-plaintext highlighter-rouge">build.gradle</code> file, for clarity we will define the dependencies in the root directory’s <code class="language-plaintext highlighter-rouge">build.gradle</code> file. (Note it can be done in each of the <code class="language-plaintext highlighter-rouge">build.gradle</code> scripts in the sub directories, it is just cleaner and easier to follow when it is handled all in one place)</p>
+
+<p>Here is a small section of the <em>default</em> buildscript that is generated from the setup:</p>
+
+<p><em>Full script you will see will differ slightly depending on what other modules you have</em></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//Configuration for the script itself (aka, listing the dependencies of the script that lists dependencies - InSCRIPTion!)</span>
+<span class="n">buildscript</span> <span class="o">{</span>
+    <span class="c1">//Defines the repositories required by this script, e.g. hosting the android plugin</span>
+    <span class="n">repositories</span> <span class="o">{</span>
+        <span class="c1">//local maven repository (advanced use)</span>
+        <span class="n">mavenLocal</span><span class="o">()</span>
+        <span class="c1">//maven central repository, needed for the android plugin</span>
+        <span class="n">mavenCentral</span><span class="o">()</span>
+        <span class="c1">//snapshot repository (in case this script depends on snapshot/prerelease artifacts)</span>
+        <span class="n">maven</span> <span class="o">{</span> <span class="n">url</span> <span class="s2">"https://oss.sonatype.org/content/repositories/snapshots/"</span> <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="c1">//Defines the artifacts this script depends on, e.g. the android plugin</span>
+    <span class="n">dependencies</span> <span class="o">{</span>
+        <span class="c1">//Adds the android gradle plugin as a dependency of this buildscript</span>
+        <span class="n">classpath</span> <span class="s1">'com.android.tools.build:gradle:1.5.0'</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">//Configuration common to all projects (:core, :desktop and :android in this example)</span>
+<span class="n">allprojects</span> <span class="o">{</span>
+    <span class="c1">//Defines gradle plugins used by all projects.</span>
+    <span class="c1">//A plugin extends gradle with additional tasks, configurations, etc., with defaults set according to conventions.</span>
+    <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">"eclipse"</span>
+    <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">"idea"</span>
+
+    <span class="c1">//Version of your game</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">"1.0"</span>
+    <span class="c1">//Defines 'extra' (custom) properties for all projects</span>
+    <span class="n">ext</span> <span class="o">{</span>
+        <span class="n">appName</span> <span class="o">=</span> <span class="s2">"the-name-of-your-game"</span>
+        <span class="c1">//Versions of the libGDX dependencies (used further below on those 'compile' lines)</span>
+        <span class="n">gdxVersion</span> <span class="o">=</span> <span class="s2">"1.9.3"</span>
+        <span class="n">roboVMVersion</span> <span class="o">=</span> <span class="s1">'2.1.0'</span>
+        <span class="n">box2DLightsVersion</span> <span class="o">=</span> <span class="s1">'1.4'</span>
+        <span class="n">ashleyVersion</span> <span class="o">=</span> <span class="s1">'1.7.0'</span>
+        <span class="n">aiVersion</span> <span class="o">=</span> <span class="s1">'1.8.0'</span>
+    <span class="o">}</span>
+
+    <span class="c1">//Defines all repositories needed for all projects</span>
+    <span class="n">repositories</span> <span class="o">{</span>
+        <span class="n">mavenLocal</span><span class="o">()</span>
+        <span class="n">mavenCentral</span><span class="o">()</span>
+        <span class="n">maven</span> <span class="o">{</span> <span class="n">url</span> <span class="s2">"https://oss.sonatype.org/content/repositories/snapshots/"</span> <span class="o">}</span>
+        <span class="n">maven</span> <span class="o">{</span> <span class="n">url</span> <span class="s2">"https://oss.sonatype.org/content/repositories/releases/"</span> <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">//Configuration for the :desktop project</span>
+<span class="n">project</span><span class="o">(</span><span class="s2">":desktop"</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//Uses the java plugin (provides compiling, execution, etc.).</span>
+    <span class="c1">//That one is bundled with gradle, so we didn’t have to define it in the buildscript section.</span>
+    <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">"java"</span>
+
+    <span class="c1">//Defines dependencies for the :desktop project</span>
+    <span class="n">dependencies</span> <span class="o">{</span>
+        <span class="c1">//Adds dependency on the :core project as well as the gdx lwjgl backend and native dependencies</span>
+        <span class="n">implementation</span> <span class="nf">project</span><span class="o">(</span><span class="s2">":core"</span><span class="o">)</span>
+        <span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"</span>
+        <span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">//Configuration for the :android project</span>
+<span class="n">project</span><span class="o">(</span><span class="s2">":android"</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//Uses the android gradle plugin (provides compiling, copying on device, etc.)</span>
+    <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">"android"</span>
+
+    <span class="n">configurations</span> <span class="o">{</span> <span class="n">natives</span> <span class="o">}</span>
+
+    <span class="c1">//Defines dependencies for the :android project</span>
+    <span class="n">dependencies</span> <span class="o">{</span>
+        <span class="c1">//Adds dependencies on the :core project as well as the android backends and all platform natives.</span>
+        <span class="c1">//Note the 'natives' classifier in this project.</span>
+        <span class="n">implementation</span> <span class="nf">project</span><span class="o">(</span><span class="s2">":core"</span><span class="o">)</span>
+        <span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"</span>                
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"</span>
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-arm64-v8a"</span>
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"</span>
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86_64"</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">//Configuration for the :core project</span>
+<span class="n">project</span><span class="o">(</span><span class="s2">":core"</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//Uses the java gradle plugin</span>
+    <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">"java"</span>
+
+    <span class="n">dependencies</span> <span class="o">{</span>
+        <span class="c1">//Defines dependencies for the :core project, in this example the gdx dependency</span>
+        <span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx:$gdxVersion"</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<h3 id="libgdx-dependencies">libGDX Dependencies</h3>
+<p>Dependencies are configured in the <strong>root</strong> <code class="language-plaintext highlighter-rouge">build.gradle</code> file as shown in the build.gradle guide above.
+In order to add an external dependency to a project, you must declare the dependency correctly under the correct part of the build.script.</p>
+
+<p>(Some) libGDX extensions are mavenized and pushed to the maven repo, which means we can very easily pull them into our projects from the <code class="language-plaintext highlighter-rouge">build.gradle</code> file. You can see in the list <a href="#libgdx-extensions">below</a> of the format that these dependencies take.
+If you are familiar with maven, notice the format:</p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">compile</span> <span class="s1">'&lt;groupId&gt;:&lt;artifactId&gt;:&lt;version&gt;:&lt;classifier&gt;'</span>
+</code></pre></div></div>
+
+<p>Let’s take a quick example to see how this works with the root <code class="language-plaintext highlighter-rouge">build.gradle</code> file.</p>
+
+<p>As mentioned earlier, you do not need to  modify the individual <code class="language-plaintext highlighter-rouge">build.gradle</code> files in each of the different platform-specific folders (e.g., -desktop, -ios, -core). You only need to modify the root <code class="language-plaintext highlighter-rouge">build.gradle</code> file.</p>
+
+<p><a href="#freetypefont-gradle">Here</a> we see the dependencies for the FreeType Extension, say we want our Android project to have this dependency. We locate our <code class="language-plaintext highlighter-rouge">project(":android")</code> stub in the root directory’s <code class="language-plaintext highlighter-rouge">build.gradle</code>:</p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">project</span><span class="o">(</span><span class="s2">":android"</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">"android"</span>
+
+    <span class="n">configurations</span> <span class="o">{</span> <span class="n">natives</span> <span class="o">}</span>
+
+    <span class="n">dependencies</span> <span class="o">{</span>
+        <span class="n">implementation</span> <span class="nf">project</span><span class="o">(</span><span class="s2">":core"</span><span class="o">)</span>
+        <span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"</span>        
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"</span>
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-arm64-v8a"</span>
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"</span>
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86_64"</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>We know our FreeType extension has declarations:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype:$gdxVersion"</span>
+<span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi-v7a"</span>
+<span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-arm64-v8a"</span>
+<span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86"</span>
+<span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86_64"</span>
+</code></pre></div></div>
+
+<p><strong>So all we need to do is whack it in the dependencies stub</strong></p>
+
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">project</span><span class="o">(</span><span class="s2">":android"</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">"android"</span>
+
+    <span class="n">configurations</span> <span class="o">{</span> <span class="n">natives</span> <span class="o">}</span>
+
+    <span class="n">dependencies</span> <span class="o">{</span>
+        <span class="n">implementation</span> <span class="nf">project</span><span class="o">(</span><span class="s2">":core"</span><span class="o">)</span>
+        <span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"</span>        
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"</span>
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-arm64-v8a"</span>
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"</span>
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86_64"</span>
+
+        <span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype:$gdxVersion"</span>        
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi-v7a"</span>
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-arm64-v8a"</span>
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86"</span>
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86_64"</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>And we are done, our android project now has the freetype dependency.
+After this you will need to refresh your dependencies. Easy eh.</p>
+
+<h4 id="libgdx-extensions">libGDX Extensions</h4>
+<p>Mavenized libGDX extensions ready to import from the <code class="language-plaintext highlighter-rouge">build.gradle</code> script include:</p>
+<ul>
+  <li><a href="#box2d-gradle">Box2D</a></li>
+  <li><a href="#bullet-gradle">Bullet</a></li>
+  <li><a href="#freetypefont-gradle">FreeTypeFont</a></li>
+  <li><a href="#controllers-gradle">Controllers</a></li>
+  <li><a href="#tools-gradle">Tools</a></li>
+  <li><a href="#box2dlights-gradle">Box2DLights</a></li>
+  <li><a href="#ashley-gradle">Ashley</a></li>
+  <li><a href="#ai-gradle">AI</a></li>
+</ul>
+
+<h4 id="box2d-gradle">Box2D Gradle</h4>
+<p><strong>Core Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-box2d:$gdxVersion"</span>
+</code></pre></div></div>
+<p><strong>Desktop Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"</span>
+</code></pre></div></div>
+<p><strong>Android Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-box2d:$gdxVersion"</span>
+<span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-armeabi-v7a"</span>
+<span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-arm64-v8a"</span>
+<span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86"</span>
+<span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86_64"</span>
+</code></pre></div></div>
+<p><strong>iOS Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-ios"</span>
+</code></pre></div></div>
+<p><strong>HTML Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-box2d:$gdxVersion:sources"</span>
+<span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-box2d-gwt:$gdxVersion:sources"</span>
+</code></pre></div></div>
+<p>and in <code class="language-plaintext highlighter-rouge">./html/src/yourgamedomain/GdxDefinition*.gwt.xml</code> add <code class="language-plaintext highlighter-rouge">&lt;inherits name="com.badlogic.gdx.physics.box2d.box2d-gwt"/&gt;</code></p>
+
+<hr />
+
+<h4 id="bullet-gradle">Bullet Gradle</h4>
+<p><strong>Core Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-bullet:$gdxVersion"</span>
+</code></pre></div></div>
+<p><strong>Desktop Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-bullet-platform:$gdxVersion:natives-desktop"</span>
+</code></pre></div></div>
+<p><strong>Android Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-bullet:$gdxVersion"</span>
+<span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-bullet-platform:$gdxVersion:natives-armeabi-v7a"</span>
+<span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-bullet-platform:$gdxVersion:natives-arm64-v8a"</span>
+<span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-bullet-platform:$gdxVersion:natives-x86"</span>
+<span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-bullet-platform:$gdxVersion:natives-x86_64"</span>
+</code></pre></div></div>
+<p><strong>iOS Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-bullet-platform:$gdxVersion:natives-ios"</span>
+</code></pre></div></div>
+<p><strong>HTML Dependency:</strong>
+Not compatible!</p>
+
+<hr />
+
+<h4 id="freetypefont-gradle">FreeTypeFont Gradle</h4>
+<p><strong>Core Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype:$gdxVersion"</span>
+</code></pre></div></div>
+<p><strong>Desktop Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"</span>
+</code></pre></div></div>
+<p><strong>Android Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype:$gdxVersion"</span>
+<span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi-v7a"</span>
+<span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-arm64-v8a"</span>
+<span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86"</span>
+<span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86_64"</span>
+</code></pre></div></div>
+<p><strong>iOS Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-ios"</span>
+</code></pre></div></div>
+<p><strong>iOS-MOE Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-ios"</span>
+</code></pre></div></div>
+<p><strong>HTML Dependency:</strong>
+Not compatible!</p>
+
+<hr />
+
+<h4 id="controllers-gradle">Controllers Gradle</h4>
+<p><strong>Core Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-controllers:$gdxVersion"</span>
+</code></pre></div></div>
+<p><strong>Desktop Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-controllers-desktop:$gdxVersion"</span>
+<span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-controllers-platform:$gdxVersion:natives-desktop"</span>
+</code></pre></div></div>
+<p><strong>Android Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-controllers:$gdxVersion"</span>
+<span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-controllers-android:$gdxVersion"</span>
+</code></pre></div></div>
+<p><strong>iOS Dependency:</strong>
+Not supported, but you can still compile and run your iOS app. Controllers just won’t be available</p>
+
+<p><strong>HTML Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-controllers:$gdxVersion:sources"</span>
+<span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-controllers-gwt:$gdxVersion"</span>
+<span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-controllers-gwt:$gdxVersion:sources"</span>
+</code></pre></div></div>
+<p>and in <code class="language-plaintext highlighter-rouge">./html/src/yourgamedomain/GdxDefinition*.gwt.xml</code> add <code class="language-plaintext highlighter-rouge">&lt;inherits name="com.badlogic.gdx.controllers.controllers-gwt"/&gt;</code></p>
+
+<hr />
+
+<h4 id="tools-gradle">Tools Gradle</h4>
+<p><strong>Core Dependency:</strong>
+Don’t put me in core!</p>
+
+<p><strong>Desktop Dependency (LWJGL2 only):</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-tools:$gdxVersion"</span>
+</code></pre></div></div>
+<p><strong>Android Dependency:</strong>
+Not compatible!</p>
+
+<p><strong>iOS Dependency:</strong>
+Not compatible!</p>
+
+<p><strong>HTML Dependency:</strong>
+Not compatible!</p>
+
+<hr />
+
+<h4 id="box2dlights-gradle">Box2DLights Gradle</h4>
+<ul>
+  <li><strong>Note:</strong> this extension also requires the <a href="#box2d-gradle">Box2D</a> extension</li>
+</ul>
+
+<p><strong>Core Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"</span>
+</code></pre></div></div>
+<p><strong>Android Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"</span>
+</code></pre></div></div>
+<p><strong>HTML Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion:sources"</span>
+</code></pre></div></div>
+<p>and in <code class="language-plaintext highlighter-rouge">./html/src/yourgamedomain/GdxDefinition*.gwt.xml</code> add <code class="language-plaintext highlighter-rouge">&lt;inherits name="Box2DLights"/&gt;</code></p>
+
+<hr />
+
+<h4 id="ashley-gradle">Ashley Gradle</h4>
+
+<ul>
+  <li><strong>Note:</strong> This extension release cycle is not dependent on the main libGDX library, and so it is not unusual to have a new version published between two libGDX releases. If you want to pull in a new (or different) version, check <a href="https://repo1.maven.org/maven2/com/badlogicgames/ashley/ashley/">https://repo1.maven.org/maven2/com/badlogicgames/ashley/ashley/</a> and change the <code class="language-plaintext highlighter-rouge">ashleyVersion</code> value in the <code class="language-plaintext highlighter-rouge">ext</code> section.</li>
+</ul>
+
+<p><strong>Core Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.ashley:ashley:$ashleyVersion"</span>
+</code></pre></div></div>
+<p><strong>Android Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.ashley:ashley:$ashleyVersion"</span>
+</code></pre></div></div>
+<p><strong>HTML Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.ashley:ashley:$ashleyVersion:sources"</span>
+</code></pre></div></div>
+<p>and in <code class="language-plaintext highlighter-rouge">./html/src/yourgamedomain/GdxDefinition*.gwt.xml</code> add <code class="language-plaintext highlighter-rouge">&lt;inherits name='com.badlogic.ashley_gwt' /&gt;</code></p>
+
+<hr />
+
+<h4 id="ai-gradle">AI Gradle</h4>
+
+<ul>
+  <li><strong>Note:</strong> This extension release cycle is not dependent on the main libGDX library, and so it is not unusual to have a new version published between two libGDX releases. If you want to pull in a new (or different) version, check <a href="https://repo1.maven.org/maven2/com/badlogicgames/gdx/gdx-ai/">https://repo1.maven.org/maven2/com/badlogicgames/gdx/gdx-ai/</a> and change the <code class="language-plaintext highlighter-rouge">aiVersion</code> value in the <code class="language-plaintext highlighter-rouge">ext</code> section.</li>
+</ul>
+
+<p><strong>Core Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-ai:$aiVersion"</span>
+</code></pre></div></div>
+<p><strong>Android Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-ai:$aiVersion"</span>
+</code></pre></div></div>
+<p><strong>HTML Dependency:</strong></p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-ai:$aiVersion:sources"</span>
+</code></pre></div></div>
+<p>and in <code class="language-plaintext highlighter-rouge">./html/src/yourgamedomain/GdxDefinition*.gwt.xml</code> add <code class="language-plaintext highlighter-rouge">&lt;inherits name='com.badlogic.gdx.ai' /&gt;</code></p>
+
+<hr />
+
+<h3 id="external-dependencies">External Dependencies</h3>
+<h4 id="adding-external-repositories">Adding external repositories</h4>
+<p>Gradle finds files defined as dependencies by looking through all the repositories defined in the buildscript. Gradle understands several repository formats, which include Maven and Ivy.</p>
+
+<p>Under the <code class="language-plaintext highlighter-rouge">allprojects</code> stub, you can see how repositories are defined. Here is an example:</p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">allprojects</span> <span class="o">{</span>    
+    <span class="n">repositories</span> <span class="o">{</span>
+        <span class="n">mavenCentral</span><span class="o">()</span> <span class="c1">// Maven Central repo</span>
+        <span class="n">mavenLocal</span><span class="o">()</span> <span class="c1">// local Maven repo</span>
+        <span class="n">maven</span> <span class="o">{</span> <span class="n">url</span> <span class="s2">"https://oss.sonatype.org/content/repositories/snapshots/"</span> <span class="o">}</span> <span class="c1">// remote Maven repo: Sonatype snapshots</span>
+        <span class="n">maven</span> <span class="o">{</span> <span class="n">url</span> <span class="s2">"https://jitpack.io"</span> <span class="o">}</span> <span class="c1">// remote Maven repo: Jitpack</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<h4 id="adding-dependencies">Adding Dependencies</h4>
+<p>External dependencies are identified by their group, name, version and sometimes classifier attributes.</p>
+
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencies</span> <span class="o">{</span>
+    <span class="n">implementation</span> <span class="nl">group:</span> <span class="s1">'com.badlogicgames.gdx'</span><span class="o">,</span> <span class="nl">name:</span> <span class="s1">'gdx'</span><span class="o">,</span> <span class="nl">version:</span> <span class="s1">'1.0-SNAPSHOT'</span><span class="o">,</span> <span class="nl">classifier:</span> <span class="s1">'natives-desktop'</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Gradle allows you to use shortcuts when defining external dependencies, the above configuration is the same as:</p>
+
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencies</span> <span class="o">{</span>
+    <span class="n">implementation</span> <span class="s1">'com.badlogicgames.gdx:gdx:1.0-SNAPSHOT:natives-desktop'</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="mavenizing-local-dependencies">Mavenizing Local Dependencies</h3>
+<p>If you would prefer to use maven repositories to manage local .jar files, these two commands will take any local .jar file and install them (and their source) to your local maven repository.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn <span class="nb">install</span>:install-file <span class="nt">-Dfile</span><span class="o">=</span>&lt;path-to-file&gt; <span class="nt">-DgroupId</span><span class="o">=</span>&lt;group-id&gt; <span class="nt">-DartifactId</span><span class="o">=</span>&lt;artifact-id&gt; <span class="nt">-Dversion</span><span class="o">=</span>&lt;version&gt; <span class="nt">-Dpackaging</span><span class="o">=</span>&lt;packaging&gt;
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn <span class="nb">install</span>:install-file <span class="nt">-Dfile</span><span class="o">=</span>&lt;path-to-source-file&gt; <span class="nt">-DgroupId</span><span class="o">=</span>&lt;group-id&gt; <span class="nt">-DartifactId</span><span class="o">=</span>&lt;artifact-id&gt; <span class="nt">-Dversion</span><span class="o">=</span>&lt;version&gt; <span class="nt">-Dpackaging</span><span class="o">=</span>&lt;packaging&gt; <span class="nt">-Dclassifier</span><span class="o">=</span>sources
+</code></pre></div></div>
+
+<p>To then set up gradle to include your new dependency, edit your build.gradle file in the root project directory and edit the core project entry:</p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">project</span><span class="o">(</span><span class="s2">":core"</span><span class="o">)</span> <span class="o">{</span>
+   <span class="o">...</span>
+
+    <span class="n">dependencies</span> <span class="o">{</span>
+        <span class="o">...</span>
+        <span class="n">implementation</span> <span class="s2">"&lt;group-id&gt;:&lt;artifact-id&gt;:&lt;version&gt;"</span>
+        <span class="n">implementation</span> <span class="s2">"&lt;group-id&gt;:&lt;artifact-id&gt;:&lt;version&gt;:sources"</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>After this you will need to refresh your dependencies for your IDE to see, so run:<br />
+Command line - <code class="language-plaintext highlighter-rouge">$ ./gradlew --refresh-dependencies</code><br />
+Eclipse - <code class="language-plaintext highlighter-rouge">$ ./gradlew eclipse</code><br />
+IntelliJ - <code class="language-plaintext highlighter-rouge">$ ./gradlew idea</code></p>
+
+<p>Also, don’t forget that any dependencies added this way also need to be included in the <a href="#gwt-inheritance">GWT inheritance file</a>.</p>
+
+<h3 id="file-dependencies">File Dependencies</h3>
+<p>If you have a dependency that is not mavenized, you can still depend on them!</p>
+
+<p>To do this, in your project stub in the root <code class="language-plaintext highlighter-rouge">build.gradle</code> file, locate the dependencies { } section as always, and add the following:</p>
+
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencies</span> <span class="o">{</span>
+    <span class="n">implementation</span> <span class="nf">fileTree</span><span class="o">(</span><span class="nl">dir:</span> <span class="s1">'libs'</span><span class="o">,</span> <span class="nl">include:</span> <span class="s1">'*.jar'</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This will include all the .jar files in the libs directory as dependencies.</p>
+
+<p><strong>NOTE</strong>: “dir” is relative to the project root, if you add the dependencies to your android project, ‘libs’ would need to be in the android/ directory. If you added the dependencies in the core project, ‘libs’ would need to be in the core/ directory.</p>
+
+<p>An example with a more <em>complete</em> script:</p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">project</span><span class="o">(</span><span class="s2">":android"</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">"android"</span>
+
+    <span class="n">configurations</span> <span class="o">{</span> <span class="n">natives</span> <span class="o">}</span>
+
+    <span class="n">dependencies</span> <span class="o">{</span>
+        <span class="n">implementation</span> <span class="nf">project</span><span class="o">(</span><span class="s2">":core"</span><span class="o">)</span>
+        <span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"</span>        
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"</span>
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-arm64-v8a"</span>
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"</span>
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86_64"</span>
+
+        <span class="n">implementation</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype:$gdxVersion"</span>        
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi-v7a"</span>
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-arm64-v8a"</span>
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86"</span>
+        <span class="n">natives</span> <span class="s2">"com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86_64"</span>
+        <span class="n">implementation</span> <span class="nf">fileTree</span><span class="o">(</span><span class="nl">dir:</span> <span class="s1">'libs'</span><span class="o">,</span> <span class="nl">include:</span> <span class="s1">'*.jar'</span><span class="o">)</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>It is worth nothing that these file dependencies are not included in the published dependency descriptor for your project, but they are included in transitive project dependencies within the same build.</p>
+
+<h5 id="android-pitfall">Android Pitfall</h5>
+<p>When adding <code class="language-plaintext highlighter-rouge">flat file</code> dependencies to a project, for example the core project, you would need to duplicate the dependency declaration for the android project. This is because the Android Gradle plugin currently <a href="https://code.google.com/p/android/issues/detail?id=186012">can’t handle</a> transitive <code class="language-plaintext highlighter-rouge">flat file</code> dependencies.</p>
+
+<p>For example, if you were to add the all the jars in your <code class="language-plaintext highlighter-rouge">libs</code> directory as dependencies for your project, you would need to do the following.</p>
+
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">project</span><span class="o">(</span><span class="s2">":core"</span><span class="o">)</span> <span class="o">{</span>
+   <span class="o">...</span>
+   <span class="n">implementation</span> <span class="nf">fileTree</span><span class="o">(</span><span class="nl">dir:</span> <span class="s1">'../libs'</span><span class="o">,</span> <span class="nl">include:</span> <span class="s1">'*.jar'</span><span class="o">)</span>
+   <span class="o">...</span>
+<span class="o">}</span>
+
+<span class="c1">// And also</span>
+
+<span class="n">project</span><span class="o">(</span><span class="s2">":android"</span><span class="o">)</span> <span class="o">{</span>
+   <span class="o">...</span>
+   <span class="n">implementation</span> <span class="nf">fileTree</span><span class="o">(</span><span class="nl">dir:</span> <span class="s1">'../libs'</span><span class="o">,</span> <span class="nl">include:</span> <span class="s1">'*.jar'</span><span class="o">)</span>
+   <span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This is only required for the android project, all other projects inherit <code class="language-plaintext highlighter-rouge">flat file</code> dependencies OK.</p>
+
+<h3 id="gwt-inheritance">Gwt Inheritance</h3>
+<p>Gwt is special, so in order to let the GWT compiler know what modules the project depends on, and <em>inherits</em> from, you need to let it know.</p>
+
+<p>This is done in the <code class="language-plaintext highlighter-rouge">gwt.xml</code> files in the gwt sub directory. You will need to make the changes both to the <code class="language-plaintext highlighter-rouge">GdxDefinition.gwt.xml</code> and also the <code class="language-plaintext highlighter-rouge">GdxDefinitionSuperdev.gwt.xml</code>.</p>
+
+<p><strong>The <em>default</em> gwt.xml:</strong></p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit trunk//EN" "http://google-web-toolkit.googlecode.com/svn/trunk/distro-source/core/src/gwt-module.dtd"&gt;</span>
+<span class="nt">&lt;module</span> <span class="na">rename-to=</span><span class="s">"html"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;inherits</span> <span class="na">name=</span><span class="s">'com.badlogic.gdx.backends.gdx_backends_gwt'</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;inherits</span> <span class="na">name=</span><span class="s">'MyGameName'</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;entry-point</span> <span class="na">class=</span><span class="s">'com.badlogic.mygame.client.HtmlLauncher'</span> <span class="nt">/&gt;</span>
+
+	<span class="nt">&lt;set-configuration-property</span> <span class="na">name=</span><span class="s">"gdx.assetpath"</span> <span class="na">value=</span><span class="s">"../android/assets"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/module&gt;</span>
+</code></pre></div></div>
+<p>We depend on the libGDX gwt backend, as well as the core project, so we have them defined in a <inherits> tag. So when you add your dependency via methods above, you need to add it here too!</inherits></p>
+
+<h4 id="libgdx-extension-inherits">libGDX Extension Inherits</h4>
+<p>These are the libGDX extensions that are supported in gwt</p>
+
+<ul>
+  <li>libGDX Core - <code class="language-plaintext highlighter-rouge">&lt;inherits name='com.badlogic.gdx.backends.gdx_backends_gwt' /&gt;</code></li>
+  <li>Box2d       - <code class="language-plaintext highlighter-rouge">&lt;inherits name='com.badlogic.gdx.physics.box2d.box2d-gwt' /&gt;</code></li>
+  <li>Box2dLights - <code class="language-plaintext highlighter-rouge">&lt;inherits name='Box2DLights' /&gt;</code></li>
+  <li>Controllers - <code class="language-plaintext highlighter-rouge">&lt;inherits name='com.badlogic.gdx.controllers.controllers-gwt' /&gt;</code></li>
+  <li>Ashley      - <code class="language-plaintext highlighter-rouge">&lt;inherits name='com.badlogic.ashley_gwt' /&gt;</code></li>
+  <li>AI          - <code class="language-plaintext highlighter-rouge">&lt;inherits name='com.badlogic.gdx.ai' /&gt;</code></li>
+</ul>
+
+<h3 id="dependency-management-for-libraries">Dependency management for libraries</h3>
+<p>If you’re creating a library that people can include in their projects via gradle, you might need to replace the <em>implementation</em> keyword by <em>api</em>.
+Any dependency of your library that you declare with <em>api</em> will be visible and usable by others that depend on your library while <em>implementation</em> makes it only accessible for you.</p>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

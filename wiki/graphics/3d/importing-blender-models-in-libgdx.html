@@ -1,0 +1,670 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Importing Blender models in LibGDX - libGDX</title>
+
+  <meta name="description" content="LibGDX provides its own 3D format out of the box called G3D (g3dj and g3db files), this article describes steps from Blender to your game using this format. OBJ format...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Importing Blender models in LibGDX">
+<meta property="og:url" content="https://libgdx.com/wiki/graphics/3d/importing-blender-models-in-libgdx">
+
+
+  <meta property="og:description" content="LibGDX provides its own 3D format out of the box called G3D (g3dj and g3db files), this article describes steps from Blender to your game using this format. OBJ format...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/graphics/3d/importing-blender-models-in-libgdx">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Importing Blender models in LibGDX
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/graphics/3d/importing-blender-models-in-libgdx.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/graphics/3d/importing-blender-models-in-libgdx.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <p>LibGDX provides its own 3D format out of the box called <strong>G3D</strong> (g3dj and g3db files), this article describes steps from Blender to your game using this format. <strong>OBJ</strong> format is partially supported and not recommended for production. Alternatively, you can use <strong>glTF</strong> format via third party library <a href="https://github.com/mgsx-dev/gdx-gltf">gdx-gltf</a> which also provides advanced features like PBR rendering.</p>
+
+<p><strong>Note:</strong> <em>while this page uses Blender for practical examples, most of it applies to <strong>other modeling applications</strong> as well.</em></p>
+
+<p>Blender is an open-source modeling application you can use to create 3D models, scenes and animations. You can get Blender at <a href="https://www.blender.org/">blender.org</a>. If you are new to creating 3D models using Blender, you can checkout the <a href="https://www.blender.org/support/tutorials/">blender tutorials</a>. This page provides practical tips on preparing and converting your Blender model for use in libGDX.</p>
+
+<h3 id="blender-considerations">Blender considerations</h3>
+<p>As Blender is a multi-purpose tool, there are certain pitfalls you can stumble into that will make your model ill suited for game development. One such mistake is using the Rigify plugin to animate your model: it will add so much stuff that your model will grow in size to at the very least 3mb (per animated model), and possibly even more, so use that with great care.</p>
+
+<p>Another size consideration may be (depending on type and amount of animations) to set your key frame interpolation to linear (from the default bezier interpolation). This may drastically improve your g3db file size (but it may also change how your animations look, so check before you hit save). To change keyframe interpolation in blender, switch to the animation perspective, select all your keyframe nodes with the A key in the Dope Sheet, press T and select “Linear”.</p>
+
+<h3 id="blender-animation">Blender Animation</h3>
+<p>Make sure to use the Action Editor for you animation of your models. The name you provide for the animation dropsheet in blender is the animation ID you can use in your code. In the below snapshot, CubeAction would be the name. Don’t forget to hit that little F to ensure the action is saved!
+<img src="/assets/wiki/images/800px-Doc26-actionEditor.png" alt="images/800px-Doc26-actionEditor.png" /></p>
+
+<h3 id="exporting-to-fbx-and-converting-to-g3db">Exporting to FBX and converting to G3DB</h3>
+<p><strong>Note:</strong> <em>see this project <a href="https://github.com/haz00/blender-g3d-exporter">here</a>) which converts directly from .blend files. *For Older Blender versions &lt;2.8, check this project: <a href="https://github.com/Dancovich/libgdx_blender_g3d_exporter">here</a>.</em></p>
+
+<p>The default (preferred) method is to export to FBX. Make sure you select all and only those options (e.g. nodes and animations) you want to actually include. Don’t include your camera, lights, etc. Next download the latest version of <a href="https://github.com/libgdx/fbx-conv">fbx-conv</a> and convert the FBX file to G3DB. You’ll need to flip texture coordinates by using the <code class="language-plaintext highlighter-rouge">-f</code> commandline option.
+<code class="language-plaintext highlighter-rouge">fbx-conv -f file.fbx</code></p>
+
+<p>Optionally, you may also convert your file to the G3DJ format, which is a JSON format which is readily viewable with a simple text editor. <code class="language-plaintext highlighter-rouge">fbx-conv -f -o G3DJ file.fbx</code> Please note that G3DJ will take longer to load when you run your application, as it is not a binary format.</p>
+
+<p>Please note that there is a known limitation to using the FBX export in Blender. The current exporter only supports texface textures (i.e. textures assigned to an UV map).</p>
+
+<p>Also note that Blender exports at 1 unit = 1 meter, while libGDX imports at a scale of 1 unit = 1 cm, making imported models 100x bigger. Change the export options from the default 1.00 to 0.01 to fix. <img src="https://i.imgur.com/h2Pw7HA.png" alt="Changing Blender fbx export options." /></p>
+
+<h3 id="setting-the-coordinate-system-up-axis">Setting the coordinate system (up-axis)</h3>
+<p>The coordinate system Blender uses (z-up) is different compared to the most common system used for games (y-up). The Blender FBX exporter contains the option to change the coordinate system to y-up (which might be even the default in the FBX exporter), do not use this option, instead set it to Blender’s default (z-up).</p>
+
+<p>Fbx-conv will compensate the coordinate system by rotating the model (to y-up). However it will only be able to do this, if the fbx file itself contains the correct information. The Blender FBX exporter option will not modify the model, instead it will simply act like its y-up (causing fbx-conv unable to compensate).</p>
+
+<p>When fbx-conv needs to compensate the coordinate system, it will rotate all root nodes of the model 90 degrees along the X-axis. It will also modify any animations accordingly. The geometry (vertices) itself however, remains unchanged.</p>
+
+<p>However, if you want to use z-up in your application, then you can set Blender’s FBX exporter coordinate system option to y-up. This will cause fbx-conv not to rotate your model and animations, so it will be z-up.</p>
+
+<h3 id="troubleshooting-missing-textures">Troubleshooting missing textures</h3>
+
+<p>If your faces are not drawn, please check try disabling back face culling. Your faces may be missing because they are facing away from the camera. <code class="language-plaintext highlighter-rouge">DefaultShader.defaultCullFace = 0;</code><br />
+Also, it is quite common that the materials from Blender export with opacity set to Zero. If you notice your model is not being rendered. Go to the Material in Blender, and below “Transparency” set its Alpha to the desired one (usually 1, for full opacity).</p>
+
+<h3 id="troubleshooting-black-textures">Troubleshooting black textures</h3>
+
+<p>Please ensure you limit the size of your texture files to POT (power of two dimensions) which are square shaped meaning of equal width and height (e.g. 32x32, 64x64 etc). A maximum recommended size would be 1024x1024 for widespread support, however larger sizes may still render, depending on device. Often non-POT textures render correctly on a desktop, but not on mobiles. This is a limitation specific to the GPU being used, and non-POT support will vary from device to device.</p>
+
+<p>Additionally test that your lighting/color is configured in a way which will illuminate your model instance. A good test is to pass a null environment pointer to your Model Batch, which will disable lighting effects.</p>
+
+<p>If you have used Blender’s FBX export script, please ensure your textures were assigned to a UV map, as the export script only supports texface textures, go to edit mode, in UV/Texture editor select the texture/image that you want to export with the object.</p>
+
+<h3 id="rrss-warning">RrSs warning</h3>
+<p>When using the Blender FBX exporter, you might receive a RrSs warning when converting the FBX file. This is due to the Blender FBX exporter wrongfully exporting the transformations. The fbx-conv utility will correct this and you can safely ignore the warning.</p>
+
+<h3 id="maximum-vertices">Maximum vertices</h3>
+<p>A model (g3dj or g3db file) can contain multiple meshes. These meshes are indexed. The indices used by libGDX are <code class="language-plaintext highlighter-rouge">short</code> values. Java’s maximum <code class="language-plaintext highlighter-rouge">short</code> value is 32,767. In other words: you practically can’t use more than 32767 vertices within a single mesh. Therefore you should make sure that your meshes never exceeds this limitation.</p>
+
+<p>By default, <code class="language-plaintext highlighter-rouge">fbx-conv</code> warns you when you try to convert a mesh that contains more than 32767 <em>indices</em>. While this doesn’t have to mean that it will also result in more than 32767 <em>vertices</em>, it is a good indication that your mesh it is too <a href="https://en.wikipedia.org/wiki/Low_poly">“high-poly”</a> and might cause issues. In this case you should consider lowering the polygon count or splitting the mesh into multiple parts.</p>
+
+<p>If your model contains multiple similar meshes with less than 32767 vertices, then <code class="language-plaintext highlighter-rouge">fbx-conv</code> will try to combine these into a single mesh. When it combines meshes it will never exceed the maximum number of vertices of 32767. You can change this maximum using the <code class="language-plaintext highlighter-rouge">-m</code> command line option.</p>
+
+<p><strong>Warning:</strong> increasing the maximum number of vertices used by <code class="language-plaintext highlighter-rouge">fbx-conv</code> <strong>will not</strong> increase java’s maximum <code class="language-plaintext highlighter-rouge">short</code> value.</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">fbx-conv</code> will never split your mesh</strong>, unless your mesh is skinned and exceeds the maximum number amount of bones specified. Simply because it doesn’t have enough information to do so.</p>
+
+<blockquote>
+  <p>Note that in contrast to java, both fbx-conv and opengl support <code class="language-plaintext highlighter-rouge">unsigned</code> indices. Therefore you might not notice issues between 32767 and 65535 vertices in some cases and devices. You should not rely on this though.</p>
+</blockquote>
+
+<h3 id="using-the-model-preview-utility">Using the Model Preview Utility</h3>
+
+<p>There is a model preview utility at <a href="https://github.com/ASneakyFox/libgdx-fbxconv-gui">https://github.com/ASneakyFox/libgdx-fbxconv-gui</a> which you can use to preview your models. Download a precompiled release from <a href="https://github.com/ASneakyFox/libgdx-fbxconv-gui/releases">the releases section</a>.</p>
+
+<p><img src="https://user-images.githubusercontent.com/7131566/35468742-9a5dd6ac-02f2-11e8-8988-d32ba45b03a2.PNG" alt="" /></p>
+
+<h3 id="loading-a-g3dj-file-into-libgdx-and-instantiating-it">Loading a G3DJ file into libGDX and instantiating it</h3>
+
+<p>The simplest way to load a G3DJ file into libGDX is the following:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Model</span> <span class="n">model</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">G3dModelLoader</span><span class="o">(</span><span class="k">new</span> <span class="nc">JsonReader</span><span class="o">()).</span><span class="na">loadModel</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="n">modelFileName</span><span class="o">));</span>
+</code></pre></div></div>
+<p>This will import the G3DJ file. To actually create a run-time instance of it, we can use a <code class="language-plaintext highlighter-rouge">ModelBuilder</code> in combination with a <code class="language-plaintext highlighter-rouge">ModelBatch</code>:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ModelBuilder</span> <span class="n">modelBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ModelBuilder</span><span class="o">();</span>
+<span class="nc">Model</span> <span class="n">model</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">G3dModelLoader</span><span class="o">(</span><span class="k">new</span> <span class="nc">JsonReader</span><span class="o">()).</span><span class="na">loadModel</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="n">modelFileName</span><span class="o">));</span>
+<span class="nc">ModelInstance</span> <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ModelInstance</span><span class="o">(</span><span class="n">model</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h4 id="loading-and-rendering-a-g3dj-file-example">Loading and rendering a G3DJ file example</h4>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.badlogic.gdx.ApplicationListener</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.Gdx</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.Color</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.GL20</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.PerspectiveCamera</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.VertexAttributes.Usage</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.g3d.Environment</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.g3d.Model</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.g3d.ModelBatch</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.g3d.ModelInstance</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.g3d.environment.DirectionalLight</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.g3d.Material</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.g3d.utils.CameraInputController</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.g3d.utils.ModelBuilder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.utils.JsonReader</span><span class="o">;</span>
+
+<span class="cm">/**
+ * Example program that imports "myModel.g3dj" from the assets folder and renders it onto the screen.
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ImportG3DJ</span> <span class="kd">implements</span> <span class="nc">ApplicationListener</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">Environment</span> <span class="n">environment</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">PerspectiveCamera</span> <span class="n">camera</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">CameraInputController</span> <span class="n">cameraController</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">ModelBatch</span> <span class="n">modelBatch</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Model</span> <span class="n">model</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">ModelInstance</span> <span class="n">instance</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">create</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// Create an environment so we have some lighting</span>
+        <span class="n">environment</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Environment</span><span class="o">();</span>
+        <span class="n">environment</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="k">new</span> <span class="nc">ColorAttribute</span><span class="o">(</span><span class="nc">ColorAttribute</span><span class="o">.</span><span class="na">AmbientLight</span><span class="o">,</span> <span class="mf">0.4f</span><span class="o">,</span> <span class="mf">0.4f</span><span class="o">,</span> <span class="mf">0.4f</span><span class="o">,</span> <span class="mi">1</span><span class="n">f</span><span class="o">));</span>
+        <span class="n">environment</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">DirectionalLight</span><span class="o">().</span><span class="na">set</span><span class="o">(</span><span class="mf">0.8f</span><span class="o">,</span> <span class="mf">0.8f</span><span class="o">,</span> <span class="mf">0.8f</span><span class="o">,</span> <span class="o">-</span><span class="mi">1</span><span class="n">f</span><span class="o">,</span> <span class="o">-</span><span class="mf">0.8f</span><span class="o">,</span> <span class="o">-</span><span class="mf">0.2f</span><span class="o">));</span>
+
+        <span class="n">modelBatch</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ModelBatch</span><span class="o">();</span>
+
+        <span class="c1">// Create a perspective camera with some sensible defaults</span>
+        <span class="n">camera</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PerspectiveCamera</span><span class="o">(</span><span class="mi">67</span><span class="o">,</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getWidth</span><span class="o">(),</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getHeight</span><span class="o">());</span>
+        <span class="n">camera</span><span class="o">.</span><span class="na">position</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="mi">10</span><span class="n">f</span><span class="o">,</span> <span class="mi">10</span><span class="n">f</span><span class="o">,</span> <span class="mi">10</span><span class="n">f</span><span class="o">);</span>
+        <span class="n">camera</span><span class="o">.</span><span class="na">lookAt</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+        <span class="n">camera</span><span class="o">.</span><span class="na">near</span> <span class="o">=</span> <span class="mi">1</span><span class="n">f</span><span class="o">;</span>
+        <span class="n">camera</span><span class="o">.</span><span class="na">far</span> <span class="o">=</span> <span class="mi">300</span><span class="n">f</span><span class="o">;</span>
+        <span class="n">camera</span><span class="o">.</span><span class="na">update</span><span class="o">();</span>
+
+        <span class="c1">// Import and instantiate our model (called "myModel.g3dj")</span>
+        <span class="nc">ModelBuilder</span> <span class="n">modelBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ModelBuilder</span><span class="o">();</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">G3dModelLoader</span><span class="o">(</span><span class="k">new</span> <span class="nc">JsonReader</span><span class="o">()).</span><span class="na">loadModel</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"myModel.g3dj"</span><span class="o">));</span>
+        <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ModelInstance</span><span class="o">(</span><span class="n">model</span><span class="o">);</span>
+
+        <span class="n">cameraController</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CameraInputController</span><span class="o">(</span><span class="n">camera</span><span class="o">);</span>
+        <span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">setInputProcessor</span><span class="o">(</span><span class="n">cameraController</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">render</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">cameraController</span><span class="o">.</span><span class="na">update</span><span class="o">();</span>
+
+        <span class="c1">// Clear the stuff that is left over from the previous render cycle</span>
+        <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glViewport</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getWidth</span><span class="o">(),</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getHeight</span><span class="o">());</span>
+        <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glClear</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_COLOR_BUFFER_BIT</span> <span class="o">|</span> <span class="no">GL20</span><span class="o">.</span><span class="na">GL_DEPTH_BUFFER_BIT</span><span class="o">);</span>
+
+        <span class="c1">// Let our ModelBatch take care of efficient rendering of our ModelInstance</span>
+        <span class="n">modelBatch</span><span class="o">.</span><span class="na">begin</span><span class="o">(</span><span class="n">camera</span><span class="o">);</span>
+        <span class="n">modelBatch</span><span class="o">.</span><span class="na">render</span><span class="o">(</span><span class="n">instance</span><span class="o">,</span> <span class="n">environment</span><span class="o">);</span>
+        <span class="n">modelBatch</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">dispose</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">modelBatch</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
+        <span class="n">model</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">resize</span><span class="o">(</span><span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">pause</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">resume</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

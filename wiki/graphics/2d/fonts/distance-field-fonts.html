@@ -1,0 +1,697 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Distance field fonts - libGDX</title>
+
+  <meta name="description" content="rendering super-smooth scalable bitmap fonts Signed distance field rendering is a technique used in Team Fortress 2, and documented by Chris Green of Valve in the SIGGRAPH 2007 paper Improved...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Distance field fonts">
+<meta property="og:url" content="https://libgdx.com/wiki/graphics/2d/fonts/distance-field-fonts">
+
+
+  <meta property="og:description" content="rendering super-smooth scalable bitmap fonts Signed distance field rendering is a technique used in Team Fortress 2, and documented by Chris Green of Valve in the SIGGRAPH 2007 paper Improved...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/graphics/2d/fonts/distance-field-fonts">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Distance field fonts
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/graphics/2d/fonts/distance-field-fonts.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/graphics/2d/fonts/distance-field-fonts.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <h2 id="rendering-super-smooth-scalable-bitmap-fonts">rendering super-smooth scalable bitmap fonts</h2>
+
+<p>Signed distance field rendering is a technique used in Team Fortress 2, and documented by Chris Green of Valve in the SIGGRAPH 2007 paper <a href="https://steamcdn-a.akamaihd.net/apps/valve/2007/SIGGRAPH2007_AlphaTestedMagnification.pdf">Improved Alpha-Tested Magniﬁcation for Vector Textures and Special Effects.</a> It allows you to render bitmap fonts without jagged edges even at high magnifications. This article describes how to implement the technique in libgdx.</p>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>Traditional bitmap fonts work fine if the pixels in the font map 1:1 onto screen pixels. However, they look bad when rotated, and increasingly worse when scaled up. Either you end up seeing individual pixels, or you turn on linear interpolation and end up with a smudgy blur instead.</p>
+
+<p>Using a distance field font lets you render text that remains crisp even under rotations and other arbitrary transforms, even blown up to a large magnification, without notable extra run-time cost. You can see the difference below:</p>
+
+<p><img src="/assets/wiki/images/distance-field-fonts.png" alt="images/distance-field-fonts.png" /></p>
+
+<p>The same technique can also be used to draw symbols, logos, anything. The major drawback is that it works only for monochrome images; it is not possible to use this technique for arbitrary color images.</p>
+
+<p>There is an example of rendering in the libGDX source code. Check out <code class="language-plaintext highlighter-rouge">com.badlogic.gdx.tests.BitmapFontDistanceFieldTest</code> in the <code class="language-plaintext highlighter-rouge">gdx-tests</code> project. It was used to produce the above screenshot. There’s also <a href="https://github.com/libgdx/libgdx/blob/master/tests/gdx-tests/src/com/badlogic/gdx/tests/BitmapFontDistanceFieldTest.java"><code class="language-plaintext highlighter-rouge">com.badlogic.gdx.graphics.g2d.DistanceFieldFont.java</code></a> class if you want to jump directly to usage.</p>
+
+<h1 id="how-does-it-work">How does it work?</h1>
+
+<p>The idea is pretty simple. Instead of providing a (possibly anti-aliased) black and white image of the font, we pre-process it to produce a <em>signed distance field</em>. The rightmost column in the screenshot above shows what our font image looks like after pre-processing.</p>
+
+<p>The pre-processor takes a black and white image as input, with a black background and a white glyph. For each white pixel, it computes the distance to the closest black pixel, and vice versa. For black pixels, the distance for black pixels is then negated, and the result is normalized to the range 0-1. This gives us a smooth, continuous field, with 0.5 exactly on the edge of the original glyph, decreasing to 0.0 as we move farther away, and increasing to 1.0 when we move towards the inside.</p>
+
+<p>We then set up alpha testing to output a pixel only when the alpha is greater than 0.5. With a texture that uses nearest-neighbour interpolation, this will look exactly the same as our input image. However, the distance field image is much better suited to linear interpolation than a traditional font image is: compare the third and fourth columns in the picture above.</p>
+
+<h1 id="generating-the-font">Generating the font</h1>
+
+<p>This process is much the same as for regular <a href="/wiki/graphics/2d/fonts/bitmap-fonts">bitmap fonts</a>, but with different settings.</p>
+
+<ul>
+  <li><a href="/wiki/tools/hiero">Fire up Hiero</a> and choose your font and attributes as normal.</li>
+  <li>In the “Effects” list on the right, double-click “Distance field”. (If there is no filter called “Distance field”, your version of Hiero is too old. Try the nightly build as described on the <a href="/wiki/tools/hiero">Hiero</a> page.)</li>
+  <li>Remove the default “Color” effect by clicking the X.</li>
+  <li>Set the color of the distance field if you like. It is best to leave this set to white, because you can change the color at rendering time.</li>
+  <li>Set the “Spread” to a suitable value. It should be about half the width of the thickest lines in your font, in pixels. At most, there should be small regions of bright white; don’t lose too much contrast.</li>
+  <li>In the bottom right corner, set the “Padding” on all four sides to be equal to the spread. You should see that your glyphs are no longer being clipped.</li>
+  <li>Set the “X” and “Y” to <em>minus</em> twice the spread. If you used a spread of 4, you’d set -8 for both X and Y. This is necessary because the padding increases the spacing between glyphs at rendering time.</li>
+  <li>Select the “Glyph cache” radio button and set the page size such that all glyphs fit on one page, with as little waste as possible. This makes loading easier.</li>
+  <li>Set the “Scale” to something larger than 1. We save this step for last because the higher the scale, the slower the font generation gets. 32 is a good value. You should now have something like this:</li>
+</ul>
+
+<p><img src="/assets/wiki/images/distance-field-fonts-hiero.png" alt="images/distance-field-fonts-hiero.png" /></p>
+
+<ul>
+  <li>Save the font as usual to your assets directory.</li>
+</ul>
+
+<h1 id="loading-the-font">Loading the font</h1>
+
+<p>There is no magic to loading the font into your game. You just need to make sure that you enable linear filtering on the texture:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Texture</span> <span class="n">texture</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Texture</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"myfont.png"</span><span class="o">));</span>
+<span class="n">texture</span><span class="o">.</span><span class="na">setFilter</span><span class="o">(</span><span class="nc">TextureFilter</span><span class="o">.</span><span class="na">Linear</span><span class="o">,</span> <span class="nc">TextureFilter</span><span class="o">.</span><span class="na">Linear</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>To make your font look better when down-scaled (less than 1:1 size), you can also turn on mipmapping:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Texture</span> <span class="n">texture</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Texture</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"myfont.png"</span><span class="o">),</span> <span class="kc">true</span><span class="o">);</span> <span class="c1">// true enables mipmaps</span>
+<span class="n">texture</span><span class="o">.</span><span class="na">setFilter</span><span class="o">(</span><span class="nc">TextureFilter</span><span class="o">.</span><span class="na">MipMapLinearNearest</span><span class="o">,</span> <span class="nc">TextureFilter</span><span class="o">.</span><span class="na">Linear</span><span class="o">);</span> <span class="c1">// linear filtering in nearest mipmap image</span>
+</code></pre></div></div>
+<p>Use either <code class="language-plaintext highlighter-rouge">MipMapLinearNearest</code> or the slower but smoother <code class="language-plaintext highlighter-rouge">MipMapLinearLinear</code>.</p>
+
+<p>Then create the font:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">BitmapFont</span> <span class="n">font</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BitmapFont</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"myfont.fnt"</span><span class="o">),</span> <span class="k">new</span> <span class="nc">TextureRegion</span><span class="o">(</span><span class="n">texture</span><span class="o">),</span> <span class="kc">false</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><em>Note</em>: Before LibGDX 1.6.0 (May 2015), if you’re replacing a “regular” font by a distance field font, be aware that the font metrics are not the same. In particular, the extra padding causes the baseline to shift downwards, so you’ll need to compensate by drawing your text higher. As of <a href="https://github.com/libgdx/libgdx/commit/c976f463c3686f6a3a615f2358dc31c25f60ce0d">commit c976f463</a>, padding should be compensated for automatically.</p>
+
+<h1 id="rendering-with-a-shader">Rendering with a shader</h1>
+
+<p>I’ll assume that you are familiar with shaders in libgdx; if not, read the <a href="/wiki/graphics/opengl-utils/shaders">page on shaders</a>.</p>
+
+<p>There is nothing special about the vertex shader; we can just duplicate the one that SpriteBatch uses by default. Just take care to name the variables in the way that <code class="language-plaintext highlighter-rouge">SpriteBatch</code> expects:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">uniform</span> <span class="n">mat4</span> <span class="n">u_projTrans</span><span class="p">;</span>
+
+<span class="n">attribute</span> <span class="n">vec4</span> <span class="n">a_position</span><span class="p">;</span>
+<span class="n">attribute</span> <span class="n">vec2</span> <span class="n">a_texCoord0</span><span class="p">;</span>
+<span class="n">attribute</span> <span class="n">vec4</span> <span class="n">a_color</span><span class="p">;</span>
+
+<span class="n">varying</span> <span class="n">vec4</span> <span class="n">v_color</span><span class="p">;</span>
+<span class="n">varying</span> <span class="n">vec2</span> <span class="n">v_texCoord</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">gl_Position</span> <span class="o">=</span> <span class="n">u_projTrans</span> <span class="o">*</span> <span class="n">a_position</span><span class="p">;</span>
+    <span class="n">v_texCoord</span> <span class="o">=</span> <span class="n">a_texCoord0</span><span class="p">;</span>
+    <span class="n">v_color</span> <span class="o">=</span> <span class="n">a_color</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The secret sauce is in the fragment shader. But even here, there’s not much to it:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifdef GL_ES
+</span><span class="n">precision</span> <span class="n">mediump</span> <span class="kt">float</span><span class="p">;</span>
+<span class="cp">#endif
+</span>
+<span class="n">uniform</span> <span class="n">sampler2D</span> <span class="n">u_texture</span><span class="p">;</span>
+
+<span class="n">varying</span> <span class="n">vec4</span> <span class="n">v_color</span><span class="p">;</span>
+<span class="n">varying</span> <span class="n">vec2</span> <span class="n">v_texCoord</span><span class="p">;</span>
+
+<span class="k">const</span> <span class="kt">float</span> <span class="n">smoothing</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mf">16.0</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">float</span> <span class="n">distance</span> <span class="o">=</span> <span class="n">texture2D</span><span class="p">(</span><span class="n">u_texture</span><span class="p">,</span> <span class="n">v_texCoord</span><span class="p">).</span><span class="n">a</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">alpha</span> <span class="o">=</span> <span class="n">smoothstep</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">-</span> <span class="n">smoothing</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="n">smoothing</span><span class="p">,</span> <span class="n">distance</span><span class="p">);</span>
+    <span class="n">gl_FragColor</span> <span class="o">=</span> <span class="n">vec4</span><span class="p">(</span><span class="n">v_color</span><span class="p">.</span><span class="n">rgb</span><span class="p">,</span> <span class="n">v_color</span><span class="p">.</span><span class="n">a</span> <span class="o">*</span> <span class="n">alpha</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Assuming you’ve saved these to your assets directory as <code class="language-plaintext highlighter-rouge">font.vert</code> and <code class="language-plaintext highlighter-rouge">font.frag</code>, you can load the shader as usual:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ShaderProgram</span> <span class="n">fontShader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ShaderProgram</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"font.vert"</span><span class="o">),</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"font.frag"</span><span class="o">));</span>
+<span class="k">if</span> <span class="o">(!</span><span class="n">fontShader</span><span class="o">.</span><span class="na">isCompiled</span><span class="o">())</span> <span class="o">{</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">app</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"fontShader"</span><span class="o">,</span> <span class="s">"compilation failed:\n"</span> <span class="o">+</span> <span class="n">fontShader</span><span class="o">.</span><span class="na">getLog</span><span class="o">());</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>To render the font using this shader, assuming that you already have a <code class="language-plaintext highlighter-rouge">SpriteBatch</code> and are between a <code class="language-plaintext highlighter-rouge">begin()</code> and <code class="language-plaintext highlighter-rouge">end()</code> call, is really straightforward:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">spriteBatch</span><span class="o">.</span><span class="na">setShader</span><span class="o">(</span><span class="n">fontShader</span><span class="o">);</span>
+<span class="n">font</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">spriteBatch</span><span class="o">,</span> <span class="s">"Hello smooth world!"</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
+<span class="n">spriteBatch</span><span class="o">.</span><span class="na">setShader</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h1 id="customizing-the-shader">Customizing the shader</h1>
+
+<p>Remember that <code class="language-plaintext highlighter-rouge">distance</code> is a value between 0 and 1, with 0 being far away from the letter, 0.5 being right on the edge, and 1 being well inside it. The <code class="language-plaintext highlighter-rouge">smoothstep</code> function in the shader above is mapping values well below 0.5 to 0, and values well above 0.5 to 1, but gives a smooth transition around 0.5 to provide antialiasing. The softness of this transition is configured by the <code class="language-plaintext highlighter-rouge">smoothing</code> constant, which you should tweak to be correct for your font and scale.</p>
+
+<p>The right <code class="language-plaintext highlighter-rouge">smoothing</code> value for crisp fonts is <code class="language-plaintext highlighter-rouge">0.25f / (spread * scale)</code>, where <code class="language-plaintext highlighter-rouge">spread</code> is the value you used when generating the font, and <code class="language-plaintext highlighter-rouge">scale</code> is the scale you’re drawing it at (how pixels in the distance field font are mapped to screen pixels). If the scale is not constant, you can pass it in via a <code class="language-plaintext highlighter-rouge">uniform</code> variable.</p>
+
+<p>There are all sorts of additional tricks you can do based on the <code class="language-plaintext highlighter-rouge">distance</code> variable in the shader. Here are some possibilities. I haven’t tested any of these; if you find bugs, please update this wiki page!</p>
+
+<h2 id="adding-an-outline">Adding an outline</h2>
+
+<p>The idea is that we output a different color when <code class="language-plaintext highlighter-rouge">distance</code> is between <code class="language-plaintext highlighter-rouge">outlineDistance</code> and <code class="language-plaintext highlighter-rouge">0.5</code>.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+<span class="k">const</span> <span class="kt">float</span> <span class="n">outlineDistance</span><span class="p">;</span> <span class="c1">// Between 0 and 0.5, 0 = thick outline, 0.5 = no outline</span>
+<span class="k">const</span> <span class="n">vec4</span> <span class="n">outlineColor</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="kt">void</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">float</span> <span class="n">distance</span> <span class="o">=</span> <span class="n">texture2D</span><span class="p">(</span><span class="n">u_texture</span><span class="p">,</span> <span class="n">v_texCoord</span><span class="p">).</span><span class="n">a</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">outlineFactor</span> <span class="o">=</span> <span class="n">smoothstep</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">-</span> <span class="n">smoothing</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="n">smoothing</span><span class="p">,</span> <span class="n">distance</span><span class="p">);</span>
+    <span class="n">vec4</span> <span class="n">color</span> <span class="o">=</span> <span class="n">mix</span><span class="p">(</span><span class="n">outlineColor</span><span class="p">,</span> <span class="n">v_color</span><span class="p">,</span> <span class="n">outlineFactor</span><span class="p">);</span>
+    <span class="kt">float</span> <span class="n">alpha</span> <span class="o">=</span> <span class="n">smoothstep</span><span class="p">(</span><span class="n">outlineDistance</span> <span class="o">-</span> <span class="n">smoothing</span><span class="p">,</span> <span class="n">outlineDistance</span> <span class="o">+</span> <span class="n">smoothing</span><span class="p">,</span> <span class="n">distance</span><span class="p">);</span>
+    <span class="n">gl_FragColor</span> <span class="o">=</span> <span class="n">vec4</span><span class="p">(</span><span class="n">color</span><span class="p">.</span><span class="n">rgb</span><span class="p">,</span> <span class="n">color</span><span class="p">.</span><span class="n">a</span> <span class="o">*</span> <span class="n">alpha</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="adding-a-drop-shadow">Adding a drop shadow</h2>
+
+<p>Here, we sample the texture a second time, slightly offset from the first. The second application gets a lot more smoothing applied to it, and is rendered “behind” the actual text.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+<span class="k">const</span> <span class="n">vec2</span> <span class="n">shadowOffset</span><span class="p">;</span> <span class="c1">// Between 0 and spread / textureSize</span>
+<span class="k">const</span> <span class="kt">float</span> <span class="n">shadowSmoothing</span><span class="p">;</span> <span class="c1">// Between 0 and 0.5</span>
+<span class="k">const</span> <span class="n">vec4</span> <span class="n">shadowColor</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="kt">void</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">float</span> <span class="n">distance</span> <span class="o">=</span> <span class="n">texture2D</span><span class="p">(</span><span class="n">u_texture</span><span class="p">,</span> <span class="n">v_texCoord</span><span class="p">).</span><span class="n">a</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">alpha</span> <span class="o">=</span> <span class="n">smoothstep</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">-</span> <span class="n">smoothing</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="n">smoothing</span><span class="p">,</span> <span class="n">distance</span><span class="p">);</span>
+    <span class="n">vec4</span> <span class="n">text</span> <span class="o">=</span> <span class="n">vec4</span><span class="p">(</span><span class="n">v_color</span><span class="p">.</span><span class="n">rgb</span><span class="p">,</span> <span class="n">v_color</span><span class="p">.</span><span class="n">a</span> <span class="o">*</span> <span class="n">alpha</span><span class="p">);</span>
+
+    <span class="kt">float</span> <span class="n">shadowDistance</span> <span class="o">=</span> <span class="n">texture2D</span><span class="p">(</span><span class="n">u_texture</span><span class="p">,</span> <span class="n">v_texCoord</span> <span class="o">-</span> <span class="n">shadowOffset</span><span class="p">).</span><span class="n">a</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">shadowAlpha</span> <span class="o">=</span> <span class="n">smoothstep</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">-</span> <span class="n">shadowSmoothing</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="n">shadowSmoothing</span><span class="p">,</span> <span class="n">shadowDistance</span><span class="p">);</span>
+    <span class="n">vec4</span> <span class="n">shadow</span> <span class="o">=</span> <span class="n">vec4</span><span class="p">(</span><span class="n">shadowColor</span><span class="p">.</span><span class="n">rgb</span><span class="p">,</span> <span class="n">shadowColor</span><span class="p">.</span><span class="n">a</span> <span class="o">*</span> <span class="n">shadowAlpha</span><span class="p">);</span>
+
+    <span class="n">gl_FragColor</span> <span class="o">=</span> <span class="n">mix</span><span class="p">(</span><span class="n">shadow</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">text</span><span class="p">.</span><span class="n">a</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="using-distance-fields-for-arbitrary-images">Using distance fields for arbitrary images</h1>
+
+<p>The generator used by Hiero can also be used as a stand-alone command line tool, to process pre-existing black and white images. Run it from an unzipped libGDX distribution directory as follows:</p>
+
+<p>Windows:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java <span class="nt">-cp</span> gdx.jar<span class="p">;</span>gdx-natives.jar<span class="p">;</span>gdx-backend-lwjgl.jar<span class="p">;</span>gdx-backend-lwjgl-natives.jar<span class="p">;</span>extensions<span class="se">\g</span>dx-tools<span class="se">\g</span>dx-tools.jar com.badlogic.gdx.tools.distancefield.DistanceFieldGenerator
+</code></pre></div></div>
+
+<p>Linux:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java <span class="nt">-cp</span> gdx.jar:gdx-natives.jar:gdx-backend-lwjgl.jar:gdx-backend-lwjgl-natives.jar:extensions/gdx-tools/gdx-tools.jar com.badlogic.gdx.tools.distancefield.DistanceFieldGenerator
+</code></pre></div></div>
+
+<p>This will print usage instructions:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Generates a distance field image from a black and white input image.
+The distance field image contains a solid color and stores the distance
+in the alpha channel.
+
+The output file format is inferred from the file name.
+
+Command line arguments: INFILE OUTFILE [OPTION...]
+
+Possible options:
+  --color rrggbb    color of output image (default: ffffff)
+  --downscale n     downscale by factor of n (default: 1)
+  --spread n        edge scan distance (default: 1)
+</code></pre></div></div>
+
+<p>The options are similar to those in Hiero described above, except that <code class="language-plaintext highlighter-rouge">spread</code> is defined in terms of pixels on the <em>input</em> image, not the downscaled output image. To get the same result, multiply it by <code class="language-plaintext highlighter-rouge">downscale</code>. Also note that the defaults are probably not very helpful, and you’ll want to specify both <code class="language-plaintext highlighter-rouge">--downscale</code> and <code class="language-plaintext highlighter-rouge">--spread</code>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java -cp extensions/gdx-tools.jar:gdx.jar com.badlogic.gdx.tools.distancefield.DistanceFieldGenerator
+     --downscale 32
+     --spread 128
+     logo.png logo-df.png
+</code></pre></div></div>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

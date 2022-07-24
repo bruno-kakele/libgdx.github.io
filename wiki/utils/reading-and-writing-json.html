@@ -1,0 +1,869 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Reading and writing JSON - libGDX</title>
+
+  <meta name="description" content="Overview Writing Object Graphs Reading Object Graphs Customizing Serialization Serialization Methods Event Based Parsing Supported Classes Overview libGDX can perform automatic object to JSON serialization and JSON to object deserialization....">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Reading and writing JSON">
+<meta property="og:url" content="https://libgdx.com/wiki/utils/reading-and-writing-json">
+
+
+  <meta property="og:description" content="Overview Writing Object Graphs Reading Object Graphs Customizing Serialization Serialization Methods Event Based Parsing Supported Classes Overview libGDX can perform automatic object to JSON serialization and JSON to object deserialization....">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/utils/reading-and-writing-json">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Reading and writing JSON
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/utils/reading-and-writing-json.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/utils/reading-and-writing-json.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <ul>
+  <li><a href="#overview">Overview</a></li>
+  <li><a href="#writing-object-graphs">Writing Object Graphs</a></li>
+  <li><a href="#reading-object-graphs">Reading Object Graphs</a></li>
+  <li><a href="#customizing-serialization">Customizing Serialization</a></li>
+  <li><a href="#serialization-methods">Serialization Methods</a></li>
+  <li><a href="#event-based-parsing">Event Based Parsing</a></li>
+  <li><a href="#supported-classes">Supported Classes</a></li>
+</ul>
+
+<h2 id="overview">Overview</h2>
+
+<p>libGDX can perform automatic object to JSON serialization and JSON to object deserialization. Four small classes make up the API:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">JsonWriter</code>: A builder style API for emitting JSON.</li>
+  <li><code class="language-plaintext highlighter-rouge">JsonReader</code>: Parses JSON and builds a DOM of <code class="language-plaintext highlighter-rouge">JsonValue</code> objects.</li>
+  <li><code class="language-plaintext highlighter-rouge">JsonValue</code>: Describes a JSON object, array, string, float, long, boolean, or null.</li>
+  <li><code class="language-plaintext highlighter-rouge">Json</code>: Reads and writes arbitrary object graphs using <code class="language-plaintext highlighter-rouge">JsonReader</code> and <code class="language-plaintext highlighter-rouge">JsonWriter</code>.</li>
+</ul>
+
+<p>To use these classes outside of libgdx, see the <a href="https://github.com/EsotericSoftware/jsonbeans/">JsonBeans</a> project.</p>
+
+<h2 id="writing-object-graphs">Writing Object Graphs</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">Json</code> class uses reflection to automatically serialize objects to JSON. For example, here are two classes (getters/setters and constructors omitted):</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+   <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">ArrayList</span> <span class="n">numbers</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PhoneNumber</span> <span class="o">{</span>
+   <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">String</span> <span class="n">number</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Example object graph using these classes:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">();</span>
+<span class="n">person</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Nate"</span><span class="o">);</span>
+<span class="n">person</span><span class="o">.</span><span class="na">setAge</span><span class="o">(</span><span class="mi">31</span><span class="o">);</span>
+<span class="nc">ArrayList</span> <span class="n">numbers</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">();</span>
+<span class="n">numbers</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">PhoneNumber</span><span class="o">(</span><span class="s">"Home"</span><span class="o">,</span> <span class="s">"206-555-1234"</span><span class="o">));</span>
+<span class="n">numbers</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">PhoneNumber</span><span class="o">(</span><span class="s">"Work"</span><span class="o">,</span> <span class="s">"425-555-4321"</span><span class="o">));</span>
+<span class="n">person</span><span class="o">.</span><span class="na">setNumbers</span><span class="o">(</span><span class="n">numbers</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>The code to serialize this object graph:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Json</span> <span class="n">json</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Json</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">json</span><span class="o">.</span><span class="na">toJson</span><span class="o">(</span><span class="n">person</span><span class="o">));</span>
+
+<span class="o">{</span><span class="nl">numbers:</span><span class="o">[{</span><span class="kd">class</span><span class="err">:</span><span class="nc">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">PhoneNumber</span><span class="o">,</span><span class="nl">number:</span><span class="s">"206-555-1234"</span><span class="o">,</span><span class="nl">name:</span><span class="nc">Home</span><span class="o">},{</span><span class="kd">class</span><span class="err">:</span><span class="nc">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">PhoneNumber</span><span class="o">,</span><span class="nl">number:</span><span class="s">"425-555-4321"</span><span class="o">,</span><span class="nl">name:</span><span class="nc">Work</span><span class="o">}],</span><span class="nl">name:</span><span class="nc">Nate</span><span class="o">,</span><span class="nl">age:</span><span class="mi">31</span><span class="o">}</span>
+</code></pre></div></div>
+
+<p>That is compact, but hardly legible. The <code class="language-plaintext highlighter-rouge">prettyPrint</code> method can be used:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Json</span> <span class="n">json</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Json</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">json</span><span class="o">.</span><span class="na">prettyPrint</span><span class="o">(</span><span class="n">person</span><span class="o">));</span>
+
+<span class="o">{</span>
+<span class="nl">numbers:</span> <span class="o">[</span>
+	<span class="o">{</span>
+		<span class="kd">class</span><span class="err">:</span> <span class="nc">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">PhoneNumber</span><span class="o">,</span>
+		<span class="nl">number:</span> <span class="s">"206-555-1234"</span><span class="o">,</span>
+		<span class="nl">name:</span> <span class="nc">Home</span>
+	<span class="o">},</span>
+	<span class="o">{</span>
+		<span class="kd">class</span><span class="err">:</span> <span class="nc">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">PhoneNumber</span><span class="o">,</span>
+		<span class="nl">number:</span> <span class="s">"425-555-4321"</span><span class="o">,</span>
+		<span class="nl">name:</span> <span class="nc">Work</span>
+	<span class="o">}</span>
+<span class="o">],</span>
+<span class="nl">name:</span> <span class="nc">Nate</span><span class="o">,</span>
+<span class="nl">age:</span> <span class="mi">31</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Note that the class for the <code class="language-plaintext highlighter-rouge">PhoneNumber</code> objects in the <code class="language-plaintext highlighter-rouge">ArrayList numbers</code> field appears in the JSON. This is required to recreate the object graph from the JSON because <code class="language-plaintext highlighter-rouge">ArrayList</code> can hold any type of object. Class names are only output when they are required for deserialization. If the field was <code class="language-plaintext highlighter-rouge">ArrayList&lt;PhoneNumber&gt; numbers</code> then class names would only appear when an item in the list extends <code class="language-plaintext highlighter-rouge">PhoneNumber</code>. If you know the concrete type or aren’t using generics, you can avoid class names being written by telling the <code class="language-plaintext highlighter-rouge">Json</code> class the types:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Json</span> <span class="n">json</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Json</span><span class="o">();</span>
+<span class="n">json</span><span class="o">.</span><span class="na">setElementType</span><span class="o">(</span><span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="s">"numbers"</span><span class="o">,</span> <span class="nc">PhoneNumber</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">json</span><span class="o">.</span><span class="na">prettyPrint</span><span class="o">(</span><span class="n">person</span><span class="o">));</span>
+
+<span class="o">{</span>
+<span class="nl">numbers:</span> <span class="o">[</span>
+	<span class="o">{</span>
+		<span class="nl">number:</span> <span class="s">"206-555-1234"</span><span class="o">,</span>
+		<span class="nl">name:</span> <span class="nc">Home</span>
+	<span class="o">},</span>
+	<span class="o">{</span>
+		<span class="nl">number:</span> <span class="s">"425-555-4321"</span><span class="o">,</span>
+		<span class="nl">name:</span> <span class="nc">Work</span>
+	<span class="o">}</span>
+<span class="o">],</span>
+<span class="nl">name:</span> <span class="nc">Nate</span><span class="o">,</span>
+<span class="nl">age:</span> <span class="mi">31</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>When writing the class cannot be avoided, an alias can be given:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Json</span> <span class="n">json</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Json</span><span class="o">();</span>
+<span class="n">json</span><span class="o">.</span><span class="na">addClassTag</span><span class="o">(</span><span class="s">"phoneNumber"</span><span class="o">,</span> <span class="nc">PhoneNumber</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">json</span><span class="o">.</span><span class="na">prettyPrint</span><span class="o">(</span><span class="n">person</span><span class="o">));</span>
+
+<span class="o">{</span>
+<span class="nl">numbers:</span> <span class="o">[</span>
+	<span class="o">{</span>
+		<span class="kd">class</span><span class="err">:</span> <span class="nc">phoneNumber</span><span class="o">,</span>
+		<span class="nl">number:</span> <span class="s">"206-555-1234"</span><span class="o">,</span>
+		<span class="nl">name:</span> <span class="nc">Home</span>
+	<span class="o">},</span>
+	<span class="o">{</span>
+		<span class="kd">class</span><span class="err">:</span> <span class="nc">phoneNumber</span><span class="o">,</span>
+		<span class="nl">number:</span> <span class="s">"425-555-4321"</span><span class="o">,</span>
+		<span class="nl">name:</span> <span class="nc">Work</span>
+	<span class="o">}</span>
+<span class="o">],</span>
+<span class="nl">name:</span> <span class="nc">Nate</span><span class="o">,</span>
+<span class="nl">age:</span> <span class="mi">31</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">Json</code> class can write and read both JSON and a couple JSON-like formats. It supports “JavaScript”, where the object property names are only quoted when needed. It also supports a “minimal” format (the default), where both object property names and values are only quoted when needed.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Json</span> <span class="n">json</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Json</span><span class="o">();</span>
+<span class="n">json</span><span class="o">.</span><span class="na">setOutputType</span><span class="o">(</span><span class="nc">OutputType</span><span class="o">.</span><span class="na">json</span><span class="o">);</span>
+<span class="n">json</span><span class="o">.</span><span class="na">setElementType</span><span class="o">(</span><span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="s">"numbers"</span><span class="o">,</span> <span class="nc">PhoneNumber</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">json</span><span class="o">.</span><span class="na">prettyPrint</span><span class="o">(</span><span class="n">person</span><span class="o">));</span>
+
+<span class="o">{</span>
+<span class="s">"numbers"</span><span class="o">:</span> <span class="o">[</span>
+	<span class="o">{</span>
+		<span class="s">"number"</span><span class="o">:</span> <span class="s">"206-555-1234"</span><span class="o">,</span>
+		<span class="s">"name"</span><span class="o">:</span> <span class="s">"Home"</span>
+	<span class="o">},</span>
+	<span class="o">{</span>
+		<span class="s">"number"</span><span class="o">:</span> <span class="s">"425-555-4321"</span><span class="o">,</span>
+		<span class="s">"name"</span><span class="o">:</span> <span class="s">"Work"</span>
+	<span class="o">}</span>
+<span class="o">],</span>
+<span class="s">"name"</span><span class="o">:</span> <span class="s">"Nate"</span><span class="o">,</span>
+<span class="s">"age"</span><span class="o">:</span> <span class="mi">31</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Note: By default, the Json class will not write those fields which have values that are identical to a newly constructed instance. If you wish to disable this behavior and include all fields, call <code class="language-plaintext highlighter-rouge">json.setUsePrototypes(false);</code>.</p>
+
+<h2 id="reading-object-graphs">Reading Object Graphs</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">Json</code> class uses reflection to automatically deserialize objects from JSON. Here is how to deserialize the JSON from the previous examples:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Json</span> <span class="n">json</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Json</span><span class="o">();</span>
+<span class="nc">String</span> <span class="n">text</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="na">toJson</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
+<span class="nc">Person</span> <span class="n">person2</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="na">fromJson</span><span class="o">(</span><span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">text</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>The type passed to <code class="language-plaintext highlighter-rouge">fromJson</code> is the type of the root of the object graph. From this, the <code class="language-plaintext highlighter-rouge">Json</code> class determines the types of all the fields and all other objects encountered, recursively. The “knownType” and “elementType” of the root can be passed to <code class="language-plaintext highlighter-rouge">toJson</code>. This is useful if the type of the root object is not known:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Json</span> <span class="n">json</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Json</span><span class="o">();</span>
+<span class="n">json</span><span class="o">.</span><span class="na">setOutputType</span><span class="o">(</span><span class="nc">OutputType</span><span class="o">.</span><span class="na">minimal</span><span class="o">);</span>
+<span class="nc">String</span> <span class="n">text</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="na">toJson</span><span class="o">(</span><span class="n">person</span><span class="o">,</span> <span class="nc">Object</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">json</span><span class="o">.</span><span class="na">prettyPrint</span><span class="o">(</span><span class="n">text</span><span class="o">));</span>
+<span class="nc">Object</span> <span class="n">person2</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="na">fromJson</span><span class="o">(</span><span class="nc">Object</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">text</span><span class="o">);</span>
+
+<span class="o">{</span>
+<span class="kd">class</span><span class="err">:</span> <span class="nc">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">Person</span><span class="o">,</span>
+<span class="nl">numbers:</span> <span class="o">[</span>
+	<span class="o">{</span>
+		<span class="kd">class</span><span class="err">:</span> <span class="nc">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">PhoneNumber</span><span class="o">,</span>
+		<span class="nl">number:</span> <span class="s">"206-555-1234"</span><span class="o">,</span>
+		<span class="nl">name:</span> <span class="nc">Home</span>
+	<span class="o">},</span>
+	<span class="o">{</span>
+		<span class="kd">class</span><span class="err">:</span> <span class="nc">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">PhoneNumber</span><span class="o">,</span>
+		<span class="nl">number:</span> <span class="s">"425-555-4321"</span><span class="o">,</span>
+		<span class="nl">name:</span> <span class="nc">Work</span>
+	<span class="o">}</span>
+<span class="o">],</span>
+<span class="nl">name:</span> <span class="nc">Nate</span><span class="o">,</span>
+<span class="nl">age:</span> <span class="mi">31</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>To read the JSON as a DOM of maps, arrays, and values, the <code class="language-plaintext highlighter-rouge">JsonReader</code> class can be used:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Json</span> <span class="n">json</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Json</span><span class="o">();</span>
+<span class="nc">String</span> <span class="n">text</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="na">toJson</span><span class="o">(</span><span class="n">person</span><span class="o">,</span> <span class="nc">Object</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="nc">JsonValue</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JsonReader</span><span class="o">().</span><span class="na">parse</span><span class="o">(</span><span class="n">text</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">JsonValue</code> describes a JSON object, array, string, float, long, boolean, or null.</p>
+
+<h2 id="customizing-serialization">Customizing Serialization</h2>
+
+<p>Usually automatic serialization is sufficient, however there are some classes where automatic serialization is not possible or custom serialization is desired. Serialization may be customized by having the class implement the <code class="language-plaintext highlighter-rouge">Json.Serializable</code> interface or by registering a <code class="language-plaintext highlighter-rouge">Json.Serializer</code> with the <code class="language-plaintext highlighter-rouge">Json</code> instance.</p>
+
+<p>This example uses <code class="language-plaintext highlighter-rouge">Json.Serializable</code> to write a phone number as an object with a single field:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">static</span> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">PhoneNumber</span> <span class="kd">implements</span> <span class="nc">Json</span><span class="o">.</span><span class="na">Serializable</span> <span class="o">{</span>
+   <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">String</span> <span class="n">number</span><span class="o">;</span>
+
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">write</span> <span class="o">(</span><span class="nc">Json</span> <span class="n">json</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">json</span><span class="o">.</span><span class="na">writeValue</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">number</span><span class="o">);</span>
+   <span class="o">}</span>
+
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">read</span> <span class="o">(</span><span class="nc">Json</span> <span class="n">json</span><span class="o">,</span> <span class="nc">JsonValue</span> <span class="n">jsonMap</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">name</span> <span class="o">=</span> <span class="n">jsonMap</span><span class="o">.</span><span class="na">child</span><span class="o">().</span><span class="na">name</span><span class="o">();</span>
+      <span class="n">number</span> <span class="o">=</span> <span class="n">jsonMap</span><span class="o">.</span><span class="na">child</span><span class="o">().</span><span class="na">asString</span><span class="o">();</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="nc">Json</span> <span class="n">json</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Json</span><span class="o">();</span>
+<span class="n">json</span><span class="o">.</span><span class="na">setElementType</span><span class="o">(</span><span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="s">"numbers"</span><span class="o">,</span> <span class="nc">PhoneNumber</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="nc">String</span> <span class="n">text</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="na">prettyPrint</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">text</span><span class="o">);</span>
+<span class="nc">Person</span> <span class="n">person2</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="na">fromJson</span><span class="o">(</span><span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">text</span><span class="o">);</span>
+
+<span class="o">{</span>
+<span class="nl">numbers:</span> <span class="o">[</span>
+	<span class="o">{</span>
+		<span class="nl">Home:</span> <span class="s">"206-555-1234"</span>
+	<span class="o">},</span>
+	<span class="o">{</span>
+		<span class="nl">Work:</span> <span class="s">"425-555-4321"</span>
+	<span class="o">}</span>
+<span class="o">],</span>
+<span class="nl">name:</span> <span class="nc">Nate</span><span class="o">,</span>
+<span class="nl">age:</span> <span class="mi">31</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The class implementing <code class="language-plaintext highlighter-rouge">Json.Serializable</code> must have a zero argument constructor because object construction is done for you. In the <code class="language-plaintext highlighter-rouge">write</code> method, the surrounding JSON object has already been written. The <code class="language-plaintext highlighter-rouge">read</code> method always receives a <code class="language-plaintext highlighter-rouge">JsonValue</code> that represents that JSON object.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Json.Serializer</code> provides more control over what is output, requiring <code class="language-plaintext highlighter-rouge">writeObjectStart</code> and <code class="language-plaintext highlighter-rouge">writeObjectEnd</code> to be called if you require a JSON object like <code class="language-plaintext highlighter-rouge">Json.Serializable</code>. Alternatively, a JSON array or a simple value (string, int, boolean) could be output instead of an object. <code class="language-plaintext highlighter-rouge">Json.Serializer</code> also allows the object creation to be customized:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Json</span> <span class="n">json</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Json</span><span class="o">();</span>
+<span class="n">json</span><span class="o">.</span><span class="na">setSerializer</span><span class="o">(</span><span class="nc">PhoneNumber</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Json</span><span class="o">.</span><span class="na">Serializer</span><span class="o">&lt;</span><span class="nc">PhoneNumber</span><span class="o">&gt;()</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">write</span> <span class="o">(</span><span class="nc">Json</span> <span class="n">json</span><span class="o">,</span> <span class="nc">PhoneNumber</span> <span class="n">number</span><span class="o">,</span> <span class="nc">Class</span> <span class="n">knownType</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">json</span><span class="o">.</span><span class="na">writeObjectStart</span><span class="o">();</span>
+      <span class="n">json</span><span class="o">.</span><span class="na">writeValue</span><span class="o">(</span><span class="n">number</span><span class="o">.</span><span class="na">name</span><span class="o">,</span> <span class="n">number</span><span class="o">.</span><span class="na">number</span><span class="o">);</span>
+      <span class="n">json</span><span class="o">.</span><span class="na">writeObjectEnd</span><span class="o">();</span>
+   <span class="o">}</span>
+
+   <span class="kd">public</span> <span class="nc">PhoneNumber</span> <span class="nf">read</span> <span class="o">(</span><span class="nc">Json</span> <span class="n">json</span><span class="o">,</span> <span class="nc">JsonValue</span> <span class="n">jsonData</span><span class="o">,</span> <span class="nc">Class</span> <span class="n">type</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">PhoneNumber</span> <span class="n">number</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PhoneNumber</span><span class="o">();</span>
+      <span class="n">number</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="n">jsonData</span><span class="o">.</span><span class="na">child</span><span class="o">().</span><span class="na">name</span><span class="o">());</span>
+      <span class="n">number</span><span class="o">.</span><span class="na">setNumber</span><span class="o">(</span><span class="n">jsonData</span><span class="o">.</span><span class="na">child</span><span class="o">().</span><span class="na">asString</span><span class="o">());</span>
+      <span class="k">return</span> <span class="n">number</span><span class="o">;</span>
+   <span class="o">}</span>
+<span class="o">});</span>
+<span class="n">json</span><span class="o">.</span><span class="na">setElementType</span><span class="o">(</span><span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="s">"numbers"</span><span class="o">,</span> <span class="nc">PhoneNumber</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="nc">String</span> <span class="n">text</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="na">prettyPrint</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">text</span><span class="o">);</span>
+<span class="nc">Person</span> <span class="n">person2</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="na">fromJson</span><span class="o">(</span><span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">text</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h2 id="serialization-methods">Serialization Methods</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Json</code> has many methods to read and write data to the JSON. Write methods without a name string are used to write a value that is not a JSON object field (eg, a string or an object in a JSON array). Write methods that take a name string are used to write a field name and value for a JSON object.</p>
+
+<p><code class="language-plaintext highlighter-rouge">writeObjectStart</code> is used to start writing a JSON object, then values can be written using the write methods that take a name string. When the object is finished, <code class="language-plaintext highlighter-rouge">writeObjectEnd</code> must be called:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">json</span><span class="o">.</span><span class="na">writeObjectStart</span><span class="o">();</span>
+<span class="n">json</span><span class="o">.</span><span class="na">writeValue</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="s">"value"</span><span class="o">);</span>
+<span class="n">json</span><span class="o">.</span><span class="na">writeObjectEnd</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">writeObjectStart</code> methods that take an actualType and a knownType will write a class field to the JSON if the types differ. This enables the actual type to be known during deserialization. For example, the known type may be java.util.Map but the actual type is java.util.LinkedHashMap (which extends HashMap), so deserialization needs to know the actual type to create.</p>
+
+<p>Writing arrays works in a similar manner, except the values should be written using the write methods that do not take a name string:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">json</span><span class="o">.</span><span class="na">writeArrayStart</span><span class="o">();</span>
+<span class="n">json</span><span class="o">.</span><span class="na">writeValue</span><span class="o">(</span><span class="s">"value1"</span><span class="o">);</span>
+<span class="n">json</span><span class="o">.</span><span class="na">writeValue</span><span class="o">(</span><span class="s">"value2"</span><span class="o">);</span>
+<span class="n">json</span><span class="o">.</span><span class="na">writeArrayEnd</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">Json</code> class can automatically write Java object fields and values. <code class="language-plaintext highlighter-rouge">writeFields</code> writes all fields and values for the specified Java object to the current JSON object:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">json</span><span class="o">.</span><span class="na">writeObjectStart</span><span class="o">();</span>
+<span class="n">json</span><span class="o">.</span><span class="na">writeFields</span><span class="o">(</span><span class="n">someObject</span><span class="o">);</span>
+<span class="n">json</span><span class="o">.</span><span class="na">writeObjectEnd</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">writeField</code> method writes the value for a single Java object field:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">json</span><span class="o">.</span><span class="na">writeObjectStart</span><span class="o">();</span>
+<span class="n">json</span><span class="o">.</span><span class="na">writeField</span><span class="o">(</span><span class="n">someObject</span><span class="o">,</span> <span class="s">"javaFieldName"</span><span class="o">,</span> <span class="s">"jsonFieldName"</span><span class="o">);</span>
+<span class="n">json</span><span class="o">.</span><span class="na">writeObjectEnd</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>Many of the write methods take an “element type” parameter. This is used to specify the known type of objects in a collection. For example, for a list:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ArrayList</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">();</span>
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">someObject1</span><span class="o">);</span>
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">someObject2</span><span class="o">);</span>
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">someObject3</span><span class="o">);</span>
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">someOtherObject</span><span class="o">);</span>
+<span class="o">...</span>
+<span class="n">json</span><span class="o">.</span><span class="na">writeObjectStart</span><span class="o">();</span>
+<span class="n">json</span><span class="o">.</span><span class="na">writeValue</span><span class="o">(</span><span class="s">"items"</span><span class="o">,</span> <span class="n">list</span><span class="o">);</span>
+<span class="n">json</span><span class="o">.</span><span class="na">writeObjectEnd</span><span class="o">();</span>
+
+<span class="o">{</span>
+	<span class="nl">items:</span> <span class="o">[</span>
+		<span class="o">{</span> <span class="kd">class</span><span class="err">:</span> <span class="nc">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">SomeObject</span><span class="o">,</span> <span class="nl">value:</span> <span class="mi">1</span> <span class="o">},</span>
+		<span class="o">{</span> <span class="kd">class</span><span class="err">:</span> <span class="nc">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">SomeObject</span><span class="o">,</span> <span class="nl">value:</span> <span class="mi">2</span> <span class="o">},</span>
+		<span class="o">{</span> <span class="kd">class</span><span class="err">:</span> <span class="nc">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">SomeObject</span><span class="o">,</span> <span class="nl">value:</span> <span class="mi">3</span> <span class="o">},</span>
+		<span class="o">{</span> <span class="kd">class</span><span class="err">:</span> <span class="nc">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">SomeOtherObject</span><span class="o">,</span> <span class="nl">value:</span> <span class="n">four</span> <span class="o">}</span>
+	<span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Here the known type of objects in the list is Object, so each object in the JSON for “items” has a class field that specifies Integer or String. By specifying the element type, Integer is used as the known type so only the last entry in the JSON for “items” has a class field:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">json</span><span class="o">.</span><span class="na">writeObjectStart</span><span class="o">();</span>
+<span class="n">json</span><span class="o">.</span><span class="na">writeValue</span><span class="o">(</span><span class="s">"items"</span><span class="o">,</span> <span class="n">list</span><span class="o">,</span> <span class="nc">ArrayList</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="n">json</span><span class="o">.</span><span class="na">writeObjectEnd</span><span class="o">();</span>
+
+<span class="o">{</span>
+	<span class="nl">items:</span> <span class="o">[</span>
+		<span class="o">{</span> <span class="nl">value:</span> <span class="mi">1</span> <span class="o">},</span>
+		<span class="o">{</span> <span class="nl">value:</span> <span class="mi">2</span> <span class="o">},</span>
+		<span class="o">{</span> <span class="nl">value:</span> <span class="mi">3</span> <span class="o">},</span>
+		<span class="o">{</span> <span class="kd">class</span><span class="err">:</span> <span class="nc">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">SomeOtherObject</span><span class="o">,</span> <span class="nl">value:</span> <span class="n">four</span> <span class="o">}</span>
+	<span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>For maps, the element type is used for the values. The keys for maps are always strings, a limitation of how object fields are described using JSON.</p>
+
+<p>Note that the <code class="language-plaintext highlighter-rouge">Json</code> class uses generics on Java field declarations to determine the element type where possible.</p>
+
+<h2 id="supported-classes">Supported Classes</h2>
+
+<p>Note that when using GWT, not all classes are serializable. <code class="language-plaintext highlighter-rouge">Json</code> supports the following:</p>
+<ul>
+  <li>POJOs</li>
+  <li>OrderedMap (but not ArrayMap)</li>
+  <li>Array</li>
+  <li>String</li>
+  <li>Float</li>
+  <li>Boolean</li>
+</ul>
+
+<p>Make sure to provide your own de/serializers or mark objects you don’t intend to serialize with the ‘transient’ keyword.</p>
+
+<h2 id="manual-and-event-based-parsing">Manual and Event Based Parsing</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">JsonReader</code> class reads JSON and has protected methods that are called as JSON objects, arrays, strings, floats, longs, and booleans are encountered. By default, these methods build a DOM out of <code class="language-plaintext highlighter-rouge">JsonValue</code> objects. These methods can be overridden to do your own event based JSON handling.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// read something </span>
+<span class="nc">JsonValue</span> <span class="n">fromJson</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JsonReader</span><span class="o">().</span><span class="na">parse</span><span class="o">(</span><span class="n">jsonAsString</span><span class="o">);</span>
+<span class="n">nickName</span> <span class="o">=</span> <span class="n">fromJson</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"nickName"</span><span class="o">);</span>
+<span class="c1">// ...</span>
+
+<span class="c1">// write something</span>
+<span class="nc">JsonValue</span> <span class="n">toJson</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JsonValue</span><span class="o">(</span><span class="nc">JsonValue</span><span class="o">.</span><span class="na">ValueType</span><span class="o">.</span><span class="na">object</span><span class="o">);</span>
+<span class="n">toJson</span><span class="o">.</span><span class="na">addChild</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">JsonValue</span><span class="o">(</span><span class="s">"some name"</span><span class="o">);</span>
+<span class="n">toJson</span><span class="o">.</span><span class="na">addChild</span><span class="o">(</span><span class="s">"age"</span><span class="o">,</span> <span class="mi">12</span><span class="o">);</span>
+<span class="c1">// ...</span>
+<span class="n">toJson</span><span class="o">.</span><span class="na">toJson</span><span class="o">(</span><span class="nc">JsonWriter</span><span class="o">.</span><span class="na">OutputType</span><span class="o">.</span><span class="na">json</span><span class="o">);</span>
+</code></pre></div></div>
+
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

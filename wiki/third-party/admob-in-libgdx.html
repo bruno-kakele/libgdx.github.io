@@ -1,0 +1,1286 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Admob in libgdx - libGDX</title>
+
+  <meta name="description" content="Introduction Background Setup Initialization Control Code iOS Setup (RoboVM) Introduction This article shows you how to set up AdMob with a libGDX app. This is current roughly with AdMob 4.0.4...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Admob in libgdx">
+<meta property="og:url" content="https://libgdx.com/wiki/third-party/admob-in-libgdx">
+
+
+  <meta property="og:description" content="Introduction Background Setup Initialization Control Code iOS Setup (RoboVM) Introduction This article shows you how to set up AdMob with a libGDX app. This is current roughly with AdMob 4.0.4...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/third-party/admob-in-libgdx">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Admob in libgdx
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/third-party/admob-in-libgdx.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/third-party/admob-in-libgdx.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <ul>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#background">Background</a></li>
+  <li><a href="#setup">Setup</a></li>
+  <li><a href="#initialization">Initialization</a></li>
+  <li><a href="#control">Control</a></li>
+  <li><a href="#code">Code</a></li>
+  <li><a href="#ios-setup-robovm">iOS Setup (RoboVM)</a></li>
+</ul>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>This article shows you how to set up AdMob with a libGDX app. This is current roughly with AdMob 4.0.4 and libGDX 0.9.1. The same instructions will work with Mobclix as well (and probably others), the only changes being the differences between the AdMob and Mobclix APIs. In the code snippets, I’m going to leave out the package and import lines for brevity. If you’re working in Eclipse, Ctrl-1 on any line showing an error will auto-fill-in the required imports.</p>
+
+<p>I should note that this isn’t the only way to make this work. But it’s one approach that worked for me, so I decided to share it in the hopes that others might find it useful as well.</p>
+
+<p>Please note that Google have deprecated 6.4.1 and earlier SDKs. For notes on how to use the new Google Mobile Ads approach, please see <a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads</a>. Thankfully the changes are very minimal from a developer/implementation point of view.</p>
+
+<h1 id="background">Background</h1>
+
+<p>Let’s look at the libGDX HelloWorld example and understand what it’s doing. There’s a HelloWorld class (in HelloWorld.java) that does all the libGDX stuff. There’s a HelloWorldDesktop class that creates and runs a HelloWorld on the desktop. And finally, there’s a HelloWorldAndroid class that creates and runs a HelloWorld on Android. Here’s what they look like:</p>
+
+<p>HelloWorldDesktop:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorldDesktop</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span> <span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">argv</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">new</span> <span class="nf">LwjglApplication</span><span class="o">(</span><span class="k">new</span> <span class="nc">HelloWorld</span><span class="o">(),</span> <span class="s">"Hello World"</span><span class="o">,</span> <span class="mi">480</span><span class="o">,</span> <span class="mi">320</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>HelloWorldAndroid:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorldAndroid</span> <span class="kd">extends</span> <span class="nc">AndroidApplication</span> <span class="o">{</span>
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span> <span class="o">(</span><span class="nc">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="n">initialize</span><span class="o">(</span><span class="k">new</span> <span class="nc">HelloWorld</span><span class="o">(),</span> <span class="kc">false</span><span class="o">);</span>		
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>HelloWorldIOS:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorldIOS</span> <span class="kd">extends</span> <span class="nc">Delegate</span> <span class="o">{</span>
+	<span class="nd">@Override</span>
+	<span class="kd">protected</span> <span class="nc">IOSApplication</span> <span class="nf">createApplication</span><span class="o">()</span> <span class="o">{</span>
+		<span class="kd">final</span> <span class="nc">IOSApplicationConfiguration</span> <span class="n">config</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">IOSApplicationConfiguration</span><span class="o">();</span>
+		<span class="n">config</span><span class="o">.</span><span class="na">orientationLandscape</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+		<span class="n">config</span><span class="o">.</span><span class="na">orientationPortrait</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">IOSApplication</span><span class="o">(</span><span class="k">new</span> <span class="nc">HelloWorld</span><span class="o">(),</span> <span class="n">config</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>They’re pretty similar. They all create a <code class="language-plaintext highlighter-rouge">new HelloWorld()</code>, and pass that into something that sets up the application. On the desktop that’s a LwjglApplication, on Android that’s the <code class="language-plaintext highlighter-rouge">initialize()</code> method and on IOS it’s <code class="language-plaintext highlighter-rouge">IOSApplication()</code>. Then the HelloWorld class does all the work of the application.</p>
+
+<p>Let’s take a closer look at the <code class="language-plaintext highlighter-rouge">initialize()</code> method. There are two forms, and one of them calls the other. If you follow that code through, here’s the stuff that sets up an Android application:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">initialize</span><span class="o">(</span><span class="nc">ApplicationListener</span> <span class="n">listener</span><span class="o">,</span> <span class="nc">AndroidApplicationConfiguration</span> <span class="n">config</span><span class="o">)</span> <span class="o">{</span>
+   	 <span class="n">graphics</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AndroidGraphics</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="o">...</span>
+
+<span class="o">...</span>
+
+       <span class="n">requestWindowFeature</span><span class="o">(</span><span class="nc">Window</span><span class="o">.</span><span class="na">FEATURE_NO_TITLE</span><span class="o">);</span>
+       <span class="n">getWindow</span><span class="o">().</span><span class="na">setFlags</span><span class="o">(</span><span class="nc">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">FLAG_FULLSCREEN</span><span class="o">,</span> <span class="nc">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">FLAG_FULLSCREEN</span><span class="o">);</span>
+       <span class="n">getWindow</span><span class="o">().</span><span class="na">clearFlags</span><span class="o">(</span><span class="nc">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">FLAG_FORCE_NOT_FULLSCREEN</span><span class="o">);</span>
+       <span class="n">setContentView</span><span class="o">(</span><span class="n">graphics</span><span class="o">.</span><span class="na">getView</span><span class="o">(),</span> <span class="n">createLayoutParams</span><span class="o">());</span>
+
+<span class="o">...</span>
+</code></pre></div></div>
+
+<p>Let’s see what it’s doing:</p>
+
+<ul>
+  <li>Create an AndroidGraphics object with some parameters</li>
+  <li>Specify that the window has no title</li>
+  <li>Specify that the window is fullscreen</li>
+  <li>Call <code class="language-plaintext highlighter-rouge">setContentView()</code> with a View from the AndroidGraphics object, and some layout parameters</li>
+</ul>
+
+<p>The last step hooks everything together, and sets up the Activity to use the libGDX view as its main (and only) View. I’m not going to explain what an Android Activity and View is, you can find that information easily enough with a Google search.</p>
+
+<p>With that background, let’s look at what needs to be changed to add AdMob to the application.</p>
+
+<h1 id="setup">Setup</h1>
+
+<p>To start out, follow the AdMob setup instructions as normal. Sign up, get your application key, configure your ad colors and refresh rate on the website, add the stuff needed to the AndroidManifest.xml file for permissions, activities, etc.</p>
+
+<h1 id="initialization">Initialization</h1>
+
+<p>The main thing to understand is that AdMob uses its own View. And we know that libGDX creates a View. If we call <code class="language-plaintext highlighter-rouge">setContentView()</code> with the libGDX View, then that’s what gets hooked up to the application, and there’s no place to add the AdMob view. So here’s what we need to do:</p>
+
+<ul>
+  <li>Create a Layout that can contain multiple views</li>
+  <li>Create the libGDX View, add that to the Layout</li>
+  <li>Create the AdMob view, add that to the Layout as well</li>
+  <li>Call <code class="language-plaintext highlighter-rouge">setContentView()</code> with the Layout</li>
+</ul>
+
+<p>Let’s dive into some code. This example uses the RelativeLayout class, because I found it easy to get multiple overlapping Views on the screen using that. This assumes that you want your libGDX View to be full-screen, and the AdMob view to be overlaid on top. If you want some other layout, like the AdMob view sitting next to a partial-screen libGDX View, then you’ll probably have to use a different Layout and set it up accordingly.</p>
+
+<p>First, create a RelativeLayout:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="nc">RelativeLayout</span> <span class="n">layout</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RelativeLayout</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Easy enough. Then, we need to create the libGDX View. There’s a different initialization function, <code class="language-plaintext highlighter-rouge">initializeForView()</code>, that does this. It is similar to <code class="language-plaintext highlighter-rouge">initialize()</code>, but instead of calling <code class="language-plaintext highlighter-rouge">setContentView()</code> with the libGDX View, it returns the View to you so you can use it. The way you call it is identical to calling <code class="language-plaintext highlighter-rouge">initialize()</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="nc">View</span> <span class="n">gameView</span> <span class="o">=</span> <span class="n">initializeForView</span><span class="o">(</span><span class="k">new</span> <span class="nc">HelloWorld</span><span class="o">(),</span> <span class="kc">false</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Let’s take a closer look inside <code class="language-plaintext highlighter-rouge">initializeForView()</code>. Again, there are two versions, and the bulk of the work is here:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">public</span> <span class="nc">View</span> <span class="nf">initializeForView</span><span class="o">(</span><span class="nc">ApplicationListener</span> <span class="n">listener</span><span class="o">,</span> <span class="nc">AndroidApplicationConfiguration</span> <span class="n">config</span><span class="o">)</span> <span class="o">{</span>
+   	 <span class="n">graphics</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AndroidGraphics</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="o">...</span>
+
+<span class="o">...</span>
+
+       <span class="k">return</span> <span class="n">graphics</span><span class="o">.</span><span class="na">getView</span><span class="o">();</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>You’ll note that this time, the function didn’t do anything about setting the Activity to be full-screen, removing the title, and so on. Most likely, you will want all those things. So make sure you call them in your AndroidActivity:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="n">requestWindowFeature</span><span class="o">(</span><span class="nc">Window</span><span class="o">.</span><span class="na">FEATURE_NO_TITLE</span><span class="o">);</span>
+        <span class="n">getWindow</span><span class="o">().</span><span class="na">setFlags</span><span class="o">(</span><span class="nc">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">FLAG_FULLSCREEN</span><span class="o">,</span> 
+        		<span class="nc">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">FLAG_FULLSCREEN</span><span class="o">);</span>
+        <span class="n">getWindow</span><span class="o">().</span><span class="na">clearFlags</span><span class="o">(</span><span class="nc">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">FLAG_FORCE_NOT_FULLSCREEN</span><span class="o">);</span>
+
+        <span class="nc">View</span> <span class="n">gameView</span> <span class="o">=</span> <span class="n">initializeForView</span><span class="o">(</span><span class="k">new</span> <span class="nc">HelloWorld</span><span class="o">(),</span> <span class="kc">false</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>That completes the setup for the libGDX View. Next, we create the AdMob view and kick it off by calling <code class="language-plaintext highlighter-rouge">loadAd()</code>. This assumes that you want it to start fetching ads immediately. If you want more customized behavior, then you’ll have to configure the AdView accordingly. I’m not going to cover that here.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="nc">AdView</span> <span class="n">adView</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AdView</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+        <span class="n">adView</span><span class="o">.</span><span class="na">setAdSize</span><span class="o">(</span><span class="nc">AdSize</span><span class="o">.</span><span class="na">BANNER</span><span class="o">);</span>
+        <span class="n">adView</span><span class="o">.</span><span class="na">setAdUnitId</span><span class="o">(</span><span class="s">"xxxxxxxx"</span><span class="o">);</span> <span class="c1">// Put in your secret key here</span>
+
+        <span class="nc">AdRequest</span> <span class="n">adRequest</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AdRequest</span><span class="o">.</span><span class="na">Builder</span><span class="o">().</span><span class="na">build</span><span class="o">();</span>
+        <span class="n">adView</span><span class="o">.</span><span class="na">loadAd</span><span class="o">(</span><span class="n">adRequest</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Now we have a Layout, and two Views. All that’s left is to add both the Views to the Layout, and then tell Android to use the Layout as the thing to display for the Activity.</p>
+
+<p>Views get stacked in the sequence in which you add them, so make sure you add the libGDX View first, since you want that under the AdMob View. If you do the reverse, the full-screen libGDX View will hide the AdMob View, and you’ll be left wondering why your ads aren’t showing up.</p>
+
+<p>Add the libGDX View. You can use the simpler form of <code class="language-plaintext highlighter-rouge">addView()</code>, because the libGDX View is full-screen, so there’s no positioning information needed.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="n">layout</span><span class="o">.</span><span class="na">addView</span><span class="o">(</span><span class="n">gameView</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Now we need to add the AdMob View. Here, you probably want some more control, because you want to position the ads in some specific area of the screen. There’s another <code class="language-plaintext highlighter-rouge">addView()</code> that takes some layout parameters, so let’s use that. In this example, I’m telling Android that I want the AdMob View to be as large as necessary to show the full ad, and I want to align it with the top right of the screen (technically, it’s aligning to the top right of the parent, but the parent is the Layout which fills the screen, so it’s effectively aligning with the screen):</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">LayoutParams</span> <span class="n">adParams</span> <span class="o">=</span> 
+        	<span class="k">new</span> <span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">(</span><span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">WRAP_CONTENT</span><span class="o">,</span> 
+        			<span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">WRAP_CONTENT</span><span class="o">);</span>
+        <span class="n">adParams</span><span class="o">.</span><span class="na">addRule</span><span class="o">(</span><span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">ALIGN_PARENT_TOP</span><span class="o">);</span>
+        <span class="n">adParams</span><span class="o">.</span><span class="na">addRule</span><span class="o">(</span><span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">ALIGN_PARENT_RIGHT</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Then we add the AdMob View using these layout parameters:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="n">layout</span><span class="o">.</span><span class="na">addView</span><span class="o">(</span><span class="n">adView</span><span class="o">,</span> <span class="n">adParams</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>And finally, all that’s needed is to tell Android to use this Layout:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="n">setContentView</span><span class="o">(</span><span class="n">layout</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Putting all of that together, here’s what it looks like:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorldAndroid</span> <span class="kd">extends</span> <span class="nc">AndroidApplication</span> <span class="o">{</span>
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span> <span class="o">(</span><span class="nc">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+
+        <span class="c1">// Create the layout</span>
+        <span class="nc">RelativeLayout</span> <span class="n">layout</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RelativeLayout</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+
+        <span class="c1">// Do the stuff that initialize() would do for you</span>
+        <span class="n">requestWindowFeature</span><span class="o">(</span><span class="nc">Window</span><span class="o">.</span><span class="na">FEATURE_NO_TITLE</span><span class="o">);</span>
+        <span class="n">getWindow</span><span class="o">().</span><span class="na">setFlags</span><span class="o">(</span><span class="nc">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">FLAG_FULLSCREEN</span><span class="o">,</span> 
+        		<span class="nc">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">FLAG_FULLSCREEN</span><span class="o">);</span>
+        <span class="n">getWindow</span><span class="o">().</span><span class="na">clearFlags</span><span class="o">(</span><span class="nc">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">FLAG_FORCE_NOT_FULLSCREEN</span><span class="o">);</span>
+
+        <span class="c1">// Create the libGDX View</span>
+        <span class="nc">View</span> <span class="n">gameView</span> <span class="o">=</span> <span class="n">initializeForView</span><span class="o">(</span><span class="k">new</span> <span class="nc">HelloWorld</span><span class="o">(),</span> <span class="kc">false</span><span class="o">);</span>
+
+        <span class="c1">// Create and setup the AdMob view</span>
+        <span class="nc">AdView</span> <span class="n">adView</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AdView</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+        <span class="n">adView</span><span class="o">.</span><span class="na">setAdSize</span><span class="o">(</span><span class="nc">AdSize</span><span class="o">.</span><span class="na">BANNER</span><span class="o">);</span>
+        <span class="n">adView</span><span class="o">.</span><span class="na">setAdUnitId</span><span class="o">(</span><span class="s">"xxxxxxxx"</span><span class="o">);</span> <span class="c1">// Put in your secret key here</span>
+
+        <span class="nc">AdRequest</span> <span class="n">adRequest</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AdRequest</span><span class="o">.</span><span class="na">Builder</span><span class="o">().</span><span class="na">build</span><span class="o">();</span>
+        <span class="n">adView</span><span class="o">.</span><span class="na">loadAd</span><span class="o">(</span><span class="n">adRequest</span><span class="o">);</span>
+
+        <span class="c1">// Add the libGDX view</span>
+        <span class="n">layout</span><span class="o">.</span><span class="na">addView</span><span class="o">(</span><span class="n">gameView</span><span class="o">);</span>
+
+        <span class="c1">// Add the AdMob view</span>
+        <span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">LayoutParams</span> <span class="n">adParams</span> <span class="o">=</span> 
+        	<span class="k">new</span> <span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">(</span><span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">WRAP_CONTENT</span><span class="o">,</span> 
+        			<span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">WRAP_CONTENT</span><span class="o">);</span>
+        <span class="n">adParams</span><span class="o">.</span><span class="na">addRule</span><span class="o">(</span><span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">ALIGN_PARENT_TOP</span><span class="o">);</span>
+        <span class="n">adParams</span><span class="o">.</span><span class="na">addRule</span><span class="o">(</span><span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">ALIGN_PARENT_RIGHT</span><span class="o">);</span>
+
+        <span class="n">layout</span><span class="o">.</span><span class="na">addView</span><span class="o">(</span><span class="n">adView</span><span class="o">,</span> <span class="n">adParams</span><span class="o">);</span>
+
+        <span class="c1">// Hook it all up</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">layout</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>And that’s it. Now you should have ads showing on top of your libGDX app. If you want the ads to be visible all the time, this should be all you need to do. If you want to control when the ads are visible from within your libGDX app, then there’s a little more work left.</p>
+
+<h1 id="control">Control</h1>
+
+<p>This example will show you how to turn the AdMob View’s visibility on and off from within your libGDX app. Note that this is probably not the best way to control AdMob. If your ad View is invisible, but still fetching ads in the background, then you’re wasting ad impressions, and that will negatively impact your ad revenue. I’m not going to talk about the best way to control the AdMob view - that varies from application to application. Also, there are things you can do on the website, and things you can do in your app. So look through the AdMob documentation for more information on that.</p>
+
+<p>The first thing you need to do is to make the AdView a member of your AndroidApplication, because you’ll need to refer to it later.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorldAndroid</span> <span class="kd">extends</span> <span class="nc">AndroidApplication</span> <span class="o">{</span>
+    <span class="kd">protected</span> <span class="nc">AdView</span> <span class="n">adView</span><span class="o">;</span>
+
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span> <span class="o">(</span><span class="nc">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+
+<span class="o">...</span>
+
+      <span class="n">adView</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AdView</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="nc">AdSize</span><span class="o">.</span><span class="na">BANNER</span><span class="o">,</span> <span class="s">"xxxxxxxx"</span><span class="o">);</span> <span class="c1">// Put in your secret key here</span>
+</code></pre></div></div>
+
+<p>The next thing you need to understand is a Handler. This is an Android mechanism that lets you send messages between threads. The HelloWorld app runs in its own thread (let’s call it the ‘game thread’), which is different from the thread where you created the AdView (the ‘UI thread’). AdMob (and many other libraries, for that matter) gets cranky if you try to manipulate the AdView from any thread other than the UI thread. So what can you do? From the other thread, you send a message back to your UI thread. The next time the UI thread is scheduled to run, it picks up the message, and takes the action. All of this is handled by something called a Handler. Let’s see how you set that up:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorldAndroid</span> <span class="kd">extends</span> <span class="nc">AndroidApplication</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">SHOW_ADS</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">HIDE_ADS</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="kd">protected</span> <span class="nc">Handler</span> <span class="n">handler</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Handler</span><span class="o">()</span>
+    <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">handleMessage</span><span class="o">(</span><span class="nc">Message</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">switch</span><span class="o">(</span><span class="n">msg</span><span class="o">.</span><span class="na">what</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">case</span> <span class="nl">SHOW_ADS:</span>
+                <span class="o">{</span>
+                    <span class="n">adView</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="nc">View</span><span class="o">.</span><span class="na">VISIBLE</span><span class="o">);</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">case</span> <span class="nl">HIDE_ADS:</span>
+                <span class="o">{</span>
+                    <span class="n">adView</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="nc">View</span><span class="o">.</span><span class="na">GONE</span><span class="o">);</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+</code></pre></div></div>
+
+<p>That’s the part that will process the message. You’ve defined two constants - <code class="language-plaintext highlighter-rouge">SHOW_ADS</code> and <code class="language-plaintext highlighter-rouge">HIDE_ADS</code>. If the message contains either one of those constants, this code makes the AdView visible or invisible, as instructed.</p>
+
+<p>That leaves two things:</p>
+
+<ul>
+  <li>Some code to send a message containing the <code class="language-plaintext highlighter-rouge">SHOW_ADS</code> or <code class="language-plaintext highlighter-rouge">HIDE_ADS</code> command</li>
+  <li>Some way to call that code from within the libGDX app’s game thread</li>
+</ul>
+
+<p>There are multiple ways to solve that problem. One solution is to use an interface that defines functionality that the AndroidApplication can provide, like the ability to show and hide ads. Here’s the definition of such an interface. Note that this should go in its own Java file:</p>
+
+<p>IActivityRequestHandler.java:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public interface IActivityRequestHandler {
+   public void showAds(boolean show);
+}
+</code></pre></div></div>
+
+<p>This interface defines just one function, <code class="language-plaintext highlighter-rouge">showAds()</code>. If you later want to add other functionality that you need to call from the game thread and have it run in the UI thread, you can add more methods in here.</p>
+
+<p>Now that we have an interface, our AndroidApplication must implement that interface:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorldAndroid</span> <span class="kd">extends</span> <span class="nc">AndroidApplication</span> <span class="kd">implements</span> <span class="nc">IActivityRequestHandler</span>  <span class="o">{</span>
+
+<span class="o">...</span>
+
+    <span class="c1">// This is the callback that posts a message for the handler</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">showAds</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">show</span><span class="o">)</span> <span class="o">{</span>
+       <span class="n">handler</span><span class="o">.</span><span class="na">sendEmptyMessage</span><span class="o">(</span><span class="n">show</span> <span class="o">?</span> <span class="no">SHOW_ADS</span> <span class="o">:</span> <span class="no">HIDE_ADS</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>And there’s our implementation of the <code class="language-plaintext highlighter-rouge">showAds()</code> function. It’s pretty simple - it sends a message to our Handler. <code class="language-plaintext highlighter-rouge">sendEmptyMessage</code> is handy when the message only needs to contain a single code, as in this case. If you need to convey more information in the message, you’ll have to send a more complex message, and the Handler code for processing that message must change accordingly.</p>
+
+<p>Now we have a mechanism to send a message to the UI thread, so that the UI thread can process it. Next, we need a way to get the game thread to call this functionality. To do this, the HelloWorld object needs to know about the HelloWorldAndroid object, so it can call the <code class="language-plaintext highlighter-rouge">showAds()</code> function. One way to do this is to define a constructor for HelloWorld that takes a parameter:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="kd">implements</span> <span class="nc">ApplicationListener</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">IActivityRequestHandler</span> <span class="n">myRequestHandler</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">HelloWorld</span><span class="o">(</span><span class="nc">IActivityRequestHandler</span> <span class="n">handler</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">myRequestHandler</span> <span class="o">=</span> <span class="n">handler</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>That lets you save the reference to the IActivityRequestHandler that was passed in by the caller. Now, you can access myRequestHandler from anywhere in this object, so when you want to turn ads on, all you do is:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">myRequestHandler</span><span class="o">.</span><span class="na">showAds</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Back in the HelloWorldAndroid class, we need to create the HelloWorld with this new constructor:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="nc">View</span> <span class="n">gameView</span> <span class="o">=</span> <span class="n">initializeForView</span><span class="o">(</span><span class="k">new</span> <span class="nc">HelloWorld</span><span class="o">(</span><span class="k">this</span><span class="o">),</span> <span class="kc">false</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Note the <code class="language-plaintext highlighter-rouge">this</code> parameter in the HelloWorld constructor - that’s how you pass in a reference to the HelloWorldAndroid object to the HelloWorld object.</p>
+
+<p>There’s just one thing left. Remember the desktop version - that needs to be updated to call the new constructor as well. To do this, HelloWorldDesktop must implement the IActivityRequestHandler interface as well, so HelloWorld has something on which it can call <code class="language-plaintext highlighter-rouge">showAds()</code>. But the implementation can be empty here, since we don’t have any ads to show on the desktop. We need to cheat a little here, because <code class="language-plaintext highlighter-rouge">main()</code> is a static function, so there’s no <code class="language-plaintext highlighter-rouge">this</code> when you’re in that function. The following solution works, but there are probably better ways of handling this:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorldDesktop</span> <span class="kd">implements</span> <span class="nc">IActivityRequestHandler</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="nc">HelloWorldDesktop</span> <span class="n">application</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span> <span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">argv</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">application</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">application</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HelloWorldDesktop</span><span class="o">();</span>
+        <span class="o">}</span>
+		
+        <span class="k">new</span> <span class="nf">LwjglApplication</span><span class="o">(</span><span class="k">new</span> <span class="nc">HelloWorld</span><span class="o">(</span><span class="n">application</span><span class="o">),</span> <span class="s">"Hello World"</span><span class="o">,</span> <span class="mi">480</span><span class="o">,</span> <span class="mi">320</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">showAds</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">show</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// TODO Auto-generated method stub</span>
+	
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>That’s it. Now you can show and hide AdMob ads from within your libGDX app.</p>
+
+<h1 id="code">Code</h1>
+
+<p>Here’s the full code for the various classes, for completeness:</p>
+
+<p>HelloWorldAndroid.java:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*******************************************************************************
+ * Copyright 2011 See AUTHORS file.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/</span>
+<span class="cm">/*
+ * Copyright 2010 Mario Zechner (contact@badlogicgames.com), Nathan Sweet (admin@esotericsoftware.com)
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
+ * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */</span>
+
+<span class="kn">package</span> <span class="nn">com.badlogic.gdx</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">android.os.Bundle</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.os.Handler</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.os.Message</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.view.View</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.view.Window</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.view.WindowManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.widget.RelativeLayout</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.backends.android.AndroidApplication</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.helloworld.HelloWorld</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.helloworld.IActivityRequestHandler</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.mobclix.android.sdk.MobclixMMABannerXLAdView</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorldAndroid</span> <span class="kd">extends</span> <span class="nc">AndroidApplication</span> <span class="kd">implements</span> <span class="nc">IActivityRequestHandler</span>  <span class="o">{</span>
+
+    <span class="kd">protected</span> <span class="nc">AdView</span> <span class="n">adView</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">SHOW_ADS</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">HIDE_ADS</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="kd">protected</span> <span class="nc">Handler</span> <span class="n">handler</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Handler</span><span class="o">()</span>
+    <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">handleMessage</span><span class="o">(</span><span class="nc">Message</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">switch</span><span class="o">(</span><span class="n">msg</span><span class="o">.</span><span class="na">what</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">case</span> <span class="nl">SHOW_ADS:</span>
+                <span class="o">{</span>
+                    <span class="n">adView</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="nc">View</span><span class="o">.</span><span class="na">VISIBLE</span><span class="o">);</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">case</span> <span class="nl">HIDE_ADS:</span>
+                <span class="o">{</span>
+                    <span class="n">adView</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="nc">View</span><span class="o">.</span><span class="na">GONE</span><span class="o">);</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span> <span class="o">(</span><span class="nc">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+
+        <span class="c1">// Create the layout</span>
+        <span class="nc">RelativeLayout</span> <span class="n">layout</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RelativeLayout</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+
+        <span class="c1">// Do the stuff that initialize() would do for you</span>
+        <span class="n">requestWindowFeature</span><span class="o">(</span><span class="nc">Window</span><span class="o">.</span><span class="na">FEATURE_NO_TITLE</span><span class="o">);</span>
+        <span class="n">getWindow</span><span class="o">().</span><span class="na">setFlags</span><span class="o">(</span><span class="nc">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">FLAG_FULLSCREEN</span><span class="o">,</span> 
+        		<span class="nc">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">FLAG_FULLSCREEN</span><span class="o">);</span>
+        <span class="n">getWindow</span><span class="o">().</span><span class="na">clearFlags</span><span class="o">(</span><span class="nc">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">FLAG_FORCE_NOT_FULLSCREEN</span><span class="o">);</span>
+
+        <span class="c1">// Create the libGDX View</span>
+        <span class="nc">View</span> <span class="n">gameView</span> <span class="o">=</span> <span class="n">initializeForView</span><span class="o">(</span><span class="k">new</span> <span class="nc">HelloWorld</span><span class="o">(</span><span class="k">this</span><span class="o">),</span> <span class="kc">false</span><span class="o">);</span>
+
+        <span class="c1">// Create and setup the AdMob view</span>
+        <span class="nc">AdView</span> <span class="n">adView</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AdView</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+        <span class="n">adView</span><span class="o">.</span><span class="na">setAdSize</span><span class="o">(</span><span class="nc">AdSize</span><span class="o">.</span><span class="na">BANNER</span><span class="o">);</span>
+        <span class="n">adView</span><span class="o">.</span><span class="na">setAdUnitId</span><span class="o">(</span><span class="s">"xxxxxxxx"</span><span class="o">);</span> <span class="c1">// Put in your secret key here</span>
+
+        <span class="nc">AdRequest</span> <span class="n">adRequest</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AdRequest</span><span class="o">.</span><span class="na">Builder</span><span class="o">().</span><span class="na">build</span><span class="o">();</span>
+        <span class="n">adView</span><span class="o">.</span><span class="na">loadAd</span><span class="o">(</span><span class="n">adRequest</span><span class="o">);</span>
+
+        <span class="c1">// Add the libGDX view</span>
+        <span class="n">layout</span><span class="o">.</span><span class="na">addView</span><span class="o">(</span><span class="n">gameView</span><span class="o">);</span>
+
+        <span class="c1">// Add the AdMob view</span>
+        <span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">LayoutParams</span> <span class="n">adParams</span> <span class="o">=</span> 
+        	<span class="k">new</span> <span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">(</span><span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">WRAP_CONTENT</span><span class="o">,</span> 
+        			<span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">WRAP_CONTENT</span><span class="o">);</span>
+        <span class="n">adParams</span><span class="o">.</span><span class="na">addRule</span><span class="o">(</span><span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">ALIGN_PARENT_TOP</span><span class="o">);</span>
+        <span class="n">adParams</span><span class="o">.</span><span class="na">addRule</span><span class="o">(</span><span class="nc">RelativeLayout</span><span class="o">.</span><span class="na">ALIGN_PARENT_RIGHT</span><span class="o">);</span>
+
+        <span class="n">layout</span><span class="o">.</span><span class="na">addView</span><span class="o">(</span><span class="n">adView</span><span class="o">,</span> <span class="n">adParams</span><span class="o">);</span>
+
+        <span class="c1">// Hook it all up</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">layout</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="c1">// This is the callback that posts a message for the handler</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">showAds</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">show</span><span class="o">)</span> <span class="o">{</span>
+       <span class="n">handler</span><span class="o">.</span><span class="na">sendEmptyMessage</span><span class="o">(</span><span class="n">show</span> <span class="o">?</span> <span class="no">SHOW_ADS</span> <span class="o">:</span> <span class="no">HIDE_ADS</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>HelloWorldDesktop.java:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*******************************************************************************
+ * Copyright 2011 See AUTHORS file.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/</span>
+<span class="kn">package</span> <span class="nn">com.badlogic.gdx.helloworld</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.backends.lwjgl.LwjglApplication</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorldDesktop</span> <span class="kd">implements</span> <span class="nc">IActivityRequestHandler</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="nc">HelloWorldDesktop</span> <span class="n">application</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span> <span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">argv</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">application</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">application</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HelloWorldDesktop</span><span class="o">();</span>
+        <span class="o">}</span>
+		
+        <span class="k">new</span> <span class="nf">LwjglApplication</span><span class="o">(</span><span class="k">new</span> <span class="nc">HelloWorld</span><span class="o">(</span><span class="n">application</span><span class="o">),</span> <span class="s">"Hello World"</span><span class="o">,</span> <span class="mi">480</span><span class="o">,</span> <span class="mi">320</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">showAds</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">show</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// TODO Auto-generated method stub</span>
+	
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>HelloWorld.java:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*******************************************************************************
+ * Copyright 2011 See AUTHORS file.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/</span>
+<span class="kn">package</span> <span class="nn">com.badlogic.gdx.helloworld</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.ApplicationListener</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.Files.FileType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.Gdx</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.Color</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.GL10</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.Texture</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.Texture.TextureFilter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.Texture.TextureWrap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.g2d.BitmapFont</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.g2d.SpriteBatch</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.math.Vector2</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="kd">implements</span> <span class="nc">ApplicationListener</span> <span class="o">{</span>
+	<span class="nc">SpriteBatch</span> <span class="n">spriteBatch</span><span class="o">;</span>
+	<span class="nc">Texture</span> <span class="n">texture</span><span class="o">;</span>
+	<span class="nc">BitmapFont</span> <span class="n">font</span><span class="o">;</span>
+	<span class="nc">Vector2</span> <span class="n">textPosition</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Vector2</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+	<span class="nc">Vector2</span> <span class="n">textDirection</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Vector2</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+
+    <span class="kd">private</span> <span class="nc">IActivityRequestHandler</span> <span class="n">myRequestHandler</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">HelloWorld</span><span class="o">(</span><span class="nc">IActivityRequestHandler</span> <span class="n">handler</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">myRequestHandler</span> <span class="o">=</span> <span class="n">handler</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">create</span> <span class="o">()</span> <span class="o">{</span>
+		<span class="n">font</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BitmapFont</span><span class="o">();</span>
+		<span class="n">font</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">);</span>
+		<span class="n">texture</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Texture</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"data/badlogic.jpg"</span><span class="o">));</span>
+		<span class="n">spriteBatch</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SpriteBatch</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">render</span> <span class="o">()</span> <span class="o">{</span>
+		<span class="kt">int</span> <span class="n">centerX</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+		<span class="kt">int</span> <span class="n">centerY</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getHeight</span><span class="o">()</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+
+		<span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getGL10</span><span class="o">().</span><span class="na">glClear</span><span class="o">(</span><span class="no">GL10</span><span class="o">.</span><span class="na">GL_COLOR_BUFFER_BIT</span><span class="o">);</span>
+		
+		<span class="c1">// more fun but confusing :)</span>
+		<span class="c1">//textPosition.add(textDirection.tmp().mul(Gdx.graphics.getDeltaTime()).mul(60));</span>
+		<span class="n">textPosition</span><span class="o">.</span><span class="na">x</span> <span class="o">+=</span> <span class="n">textDirection</span><span class="o">.</span><span class="na">x</span> <span class="o">*</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getDeltaTime</span><span class="o">()</span> <span class="o">*</span> <span class="mi">60</span><span class="o">;</span>
+		<span class="n">textPosition</span><span class="o">.</span><span class="na">y</span> <span class="o">+=</span> <span class="n">textDirection</span><span class="o">.</span><span class="na">y</span> <span class="o">*</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getDeltaTime</span><span class="o">()</span> <span class="o">*</span> <span class="mi">60</span><span class="o">;</span>
+
+		<span class="k">if</span> <span class="o">(</span><span class="n">textPosition</span><span class="o">.</span><span class="na">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">)</span> <span class="o">{</span>
+			<span class="n">textDirection</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="o">-</span><span class="n">textDirection</span><span class="o">.</span><span class="na">x</span><span class="o">;</span>
+			<span class="n">textPosition</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">textPosition</span><span class="o">.</span><span class="na">x</span> <span class="o">&gt;</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getWidth</span><span class="o">())</span> <span class="o">{</span>
+			<span class="n">textDirection</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="o">-</span><span class="n">textDirection</span><span class="o">.</span><span class="na">x</span><span class="o">;</span>
+			<span class="n">textPosition</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getWidth</span><span class="o">();</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">textPosition</span><span class="o">.</span><span class="na">y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">textDirection</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="o">-</span><span class="n">textDirection</span><span class="o">.</span><span class="na">y</span><span class="o">;</span>
+			<span class="n">textPosition</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>			
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">textPosition</span><span class="o">.</span><span class="na">y</span> <span class="o">&gt;</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getHeight</span><span class="o">())</span> <span class="o">{</span>
+			<span class="n">textDirection</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="o">-</span><span class="n">textDirection</span><span class="o">.</span><span class="na">y</span><span class="o">;</span>
+			<span class="n">textPosition</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getHeight</span><span class="o">();</span>			
+		<span class="o">}</span>
+
+		<span class="n">spriteBatch</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+		<span class="n">spriteBatch</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">WHITE</span><span class="o">);</span>
+		<span class="n">spriteBatch</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">texture</span><span class="o">,</span> 
+							  <span class="n">centerX</span> <span class="o">-</span> <span class="n">texture</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">/</span> <span class="mi">2</span><span class="o">,</span> 
+							  <span class="n">centerY</span> <span class="o">-</span> <span class="n">texture</span><span class="o">.</span><span class="na">getHeight</span><span class="o">()</span> <span class="o">/</span> <span class="mi">2</span><span class="o">,</span> 
+							  <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">texture</span><span class="o">.</span><span class="na">getWidth</span><span class="o">(),</span> <span class="n">texture</span><span class="o">.</span><span class="na">getHeight</span><span class="o">());</span>		
+		<span class="n">font</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">spriteBatch</span><span class="o">,</span> <span class="s">"Hello World!"</span><span class="o">,</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">textPosition</span><span class="o">.</span><span class="na">x</span><span class="o">,</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">textPosition</span><span class="o">.</span><span class="na">y</span><span class="o">);</span>
+		<span class="n">spriteBatch</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">resize</span> <span class="o">(</span><span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">spriteBatch</span><span class="o">.</span><span class="na">getProjectionMatrix</span><span class="o">().</span><span class="na">setToOrtho2D</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">);</span>
+		<span class="n">textPosition</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">pause</span> <span class="o">()</span> <span class="o">{</span>
+
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">resume</span> <span class="o">()</span> <span class="o">{</span>
+
+	<span class="o">}</span>
+	
+	<span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">dispose</span> <span class="o">()</span> <span class="o">{</span>
+
+	<span class="o">}</span>
+	
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h1 id="ios-setup-robovm">iOS Setup (RoboVM)</h1>
+
+<p>For admob to work on IOS it’s best to make sure you are doing the following things:</p>
+
+<ul>
+  <li>
+    <p>Make sure you project is using the latest libGDX version</p>
+  </li>
+  <li>
+    <p>Make sure you are on the latest RoboVM</p>
+  </li>
+  <li>
+    <p>Make sure you are using the latest admob bindings found here <a href="https://github.com/MobiVM/robovm-robopods/tree/master/google-mobile-ads">robovm-ios-bindings - admob</a></p>
+  </li>
+  <li>
+    <p>Admob needs a separate ad unit for iOS, so make sure you create a new app the key will be different than the one used for Android.</p>
+  </li>
+</ul>
+
+<hr />
+
+<ol>
+  <li>
+    <p>Follow the <a href="https://github.com/MobiVM/robovm-robopods/tree/master/google-mobile-ads/ios">AdMob RoboPod installation instructions</a>.</p>
+  </li>
+  <li>
+    <p>Now with the configuration complete you can make calls to the AdMob API from Java and configure ads as desired. The following is an example on how to integrate a Banners ad at the top of the screen:</p>
+  </li>
+</ol>
+
+<p><em>WARNING the following code may be a bit outdated for latest RoboPod version, use it as a reference</em></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.badlogic.gdx</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.robovm.apple.coregraphics.CGRect</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.robovm.apple.coregraphics.CGSize</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.robovm.apple.foundation.NSArray</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.robovm.apple.foundation.NSAutoreleasePool</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.robovm.apple.foundation.NSObject</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.robovm.apple.foundation.NSString</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.robovm.apple.uikit.UIApplication</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.robovm.apple.uikit.UIScreen</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.robovm.bindings.admob.GADAdSizeManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.robovm.bindings.admob.GADBannerView</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.robovm.bindings.admob.GADBannerViewDelegateAdapter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.robovm.bindings.admob.GADRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.robovm.bindings.admob.GADRequestError</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.Application</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.backends.iosrobovm.IOSApplication</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.backends.iosrobovm.IOSApplication.Delegate</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.backends.iosrobovm.IOSApplicationConfiguration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.utils.Logger</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorldIOS</span> <span class="kd">extends</span> <span class="nc">Delegate</span> <span class="kd">implements</span> <span class="nc">IActivityRequestHandler</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Logger</span> <span class="n">log</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Logger</span><span class="o">(</span><span class="nc">HelloWorldIOS</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="nc">Application</span><span class="o">.</span><span class="na">LOG_DEBUG</span><span class="o">);</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="no">USE_TEST_DEVICES</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">GADBannerView</span> <span class="n">adview</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">boolean</span> <span class="n">adsInitialized</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">IOSApplication</span> <span class="n">iosApplication</span><span class="o">;</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">protected</span> <span class="nc">IOSApplication</span> <span class="nf">createApplication</span><span class="o">()</span> <span class="o">{</span>
+		<span class="kd">final</span> <span class="nc">IOSApplicationConfiguration</span> <span class="n">config</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">IOSApplicationConfiguration</span><span class="o">();</span>
+		<span class="n">config</span><span class="o">.</span><span class="na">orientationLandscape</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+		<span class="n">config</span><span class="o">.</span><span class="na">orientationPortrait</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+		<span class="n">iosApplication</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">IOSApplication</span><span class="o">(</span><span class="k">new</span> <span class="nc">HelloWorld</span><span class="o">(</span><span class="k">this</span><span class="o">),</span> <span class="n">config</span><span class="o">);</span>
+		<span class="k">return</span> <span class="n">iosApplication</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">argv</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">NSAutoreleasePool</span> <span class="n">pool</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NSAutoreleasePool</span><span class="o">();</span>
+		<span class="nc">UIApplication</span><span class="o">.</span><span class="na">main</span><span class="o">(</span><span class="n">argv</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="nc">HelloWorldIOS</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+		<span class="n">pool</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">hide</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">initializeAds</span><span class="o">();</span>
+
+		<span class="kd">final</span> <span class="nc">CGSize</span> <span class="n">screenSize</span> <span class="o">=</span> <span class="nc">UIScreen</span><span class="o">.</span><span class="na">getMainScreen</span><span class="o">().</span><span class="na">getBounds</span><span class="o">().</span><span class="na">size</span><span class="o">();</span>
+		<span class="kt">double</span> <span class="n">screenWidth</span> <span class="o">=</span> <span class="n">screenSize</span><span class="o">.</span><span class="na">width</span><span class="o">();</span>
+
+		<span class="kd">final</span> <span class="nc">CGSize</span> <span class="n">adSize</span> <span class="o">=</span> <span class="n">adview</span><span class="o">.</span><span class="na">getBounds</span><span class="o">().</span><span class="na">size</span><span class="o">();</span>
+		<span class="kt">double</span> <span class="n">adWidth</span> <span class="o">=</span> <span class="n">adSize</span><span class="o">.</span><span class="na">width</span><span class="o">();</span>
+		<span class="kt">double</span> <span class="n">adHeight</span> <span class="o">=</span> <span class="n">adSize</span><span class="o">.</span><span class="na">height</span><span class="o">();</span>
+
+		<span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"Hidding ad. size[%s, %s]"</span><span class="o">,</span> <span class="n">adWidth</span><span class="o">,</span> <span class="n">adHeight</span><span class="o">));</span>
+
+		<span class="kt">float</span> <span class="n">bannerWidth</span> <span class="o">=</span> <span class="o">(</span><span class="kt">float</span><span class="o">)</span> <span class="n">screenWidth</span><span class="o">;</span>
+		<span class="kt">float</span> <span class="n">bannerHeight</span> <span class="o">=</span> <span class="o">(</span><span class="kt">float</span><span class="o">)</span> <span class="o">(</span><span class="n">bannerWidth</span> <span class="o">/</span> <span class="n">adWidth</span> <span class="o">*</span> <span class="n">adHeight</span><span class="o">);</span>
+
+		<span class="n">adview</span><span class="o">.</span><span class="na">setFrame</span><span class="o">(</span><span class="k">new</span> <span class="nc">CGRect</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="o">-</span><span class="n">bannerHeight</span><span class="o">,</span> <span class="n">bannerWidth</span><span class="o">,</span> <span class="n">bannerHeight</span><span class="o">));</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">show</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">initializeAds</span><span class="o">();</span>
+
+		<span class="kd">final</span> <span class="nc">CGSize</span> <span class="n">screenSize</span> <span class="o">=</span> <span class="nc">UIScreen</span><span class="o">.</span><span class="na">getMainScreen</span><span class="o">().</span><span class="na">getBounds</span><span class="o">().</span><span class="na">size</span><span class="o">();</span>
+		<span class="kt">double</span> <span class="n">screenWidth</span> <span class="o">=</span> <span class="n">screenSize</span><span class="o">.</span><span class="na">width</span><span class="o">();</span>
+
+		<span class="kd">final</span> <span class="nc">CGSize</span> <span class="n">adSize</span> <span class="o">=</span> <span class="n">adview</span><span class="o">.</span><span class="na">getBounds</span><span class="o">().</span><span class="na">size</span><span class="o">();</span>
+		<span class="kt">double</span> <span class="n">adWidth</span> <span class="o">=</span> <span class="n">adSize</span><span class="o">.</span><span class="na">width</span><span class="o">();</span>
+		<span class="kt">double</span> <span class="n">adHeight</span> <span class="o">=</span> <span class="n">adSize</span><span class="o">.</span><span class="na">height</span><span class="o">();</span>
+
+		<span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"Showing ad. size[%s, %s]"</span><span class="o">,</span> <span class="n">adWidth</span><span class="o">,</span> <span class="n">adHeight</span><span class="o">));</span>
+
+		<span class="kt">float</span> <span class="n">bannerWidth</span> <span class="o">=</span> <span class="o">(</span><span class="kt">float</span><span class="o">)</span> <span class="n">screenWidth</span><span class="o">;</span>
+		<span class="kt">float</span> <span class="n">bannerHeight</span> <span class="o">=</span> <span class="o">(</span><span class="kt">float</span><span class="o">)</span> <span class="o">(</span><span class="n">bannerWidth</span> <span class="o">/</span> <span class="n">adWidth</span> <span class="o">*</span> <span class="n">adHeight</span><span class="o">);</span>
+
+		<span class="n">adview</span><span class="o">.</span><span class="na">setFrame</span><span class="o">(</span><span class="k">new</span> <span class="nc">CGRect</span><span class="o">((</span><span class="n">screenWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="o">)</span> <span class="o">-</span> <span class="n">adWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">bannerWidth</span><span class="o">,</span> <span class="n">bannerHeight</span><span class="o">));</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">initializeAds</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(!</span><span class="n">adsInitialized</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"Initalizing ads..."</span><span class="o">);</span>
+
+			<span class="n">adsInitialized</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+			<span class="n">adview</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GADBannerView</span><span class="o">(</span><span class="nc">GADAdSizeManager</span><span class="o">.</span><span class="na">smartBannerPortrait</span><span class="o">());</span>
+			<span class="n">adview</span><span class="o">.</span><span class="na">setAdUnitID</span><span class="o">(</span><span class="s">"xxxxxxxx"</span><span class="o">);</span> <span class="c1">//put your secret key here</span>
+			<span class="n">adview</span><span class="o">.</span><span class="na">setRootViewController</span><span class="o">(</span><span class="n">iosApplication</span><span class="o">.</span><span class="na">getUIViewController</span><span class="o">());</span>
+			<span class="n">iosApplication</span><span class="o">.</span><span class="na">getUIViewController</span><span class="o">().</span><span class="na">getView</span><span class="o">().</span><span class="na">addSubview</span><span class="o">(</span><span class="n">adview</span><span class="o">);</span>
+
+			<span class="kd">final</span> <span class="nc">GADRequest</span> <span class="n">request</span> <span class="o">=</span> <span class="nc">GADRequest</span><span class="o">.</span><span class="na">request</span><span class="o">();</span>
+			<span class="k">if</span> <span class="o">(</span><span class="no">USE_TEST_DEVICES</span><span class="o">)</span> <span class="o">{</span>
+				<span class="kd">final</span> <span class="nc">NSArray</span><span class="o">&lt;?&gt;</span> <span class="n">testDevices</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NSArray</span><span class="o">&lt;</span><span class="nc">NSObject</span><span class="o">&gt;(</span>
+						<span class="k">new</span> <span class="nf">NSString</span><span class="o">(</span><span class="nc">GADRequest</span><span class="o">.</span><span class="na">GAD_SIMULATOR_ID</span><span class="o">));</span>
+				<span class="n">request</span><span class="o">.</span><span class="na">setTestDevices</span><span class="o">(</span><span class="n">testDevices</span><span class="o">);</span>
+				<span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"Test devices: "</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="na">getTestDevices</span><span class="o">());</span>
+			<span class="o">}</span>
+
+			<span class="n">adview</span><span class="o">.</span><span class="na">setDelegate</span><span class="o">(</span><span class="k">new</span> <span class="nc">GADBannerViewDelegateAdapter</span><span class="o">()</span> <span class="o">{</span>
+				<span class="nd">@Override</span>
+				<span class="kd">public</span> <span class="kt">void</span> <span class="nf">didReceiveAd</span><span class="o">(</span><span class="nc">GADBannerView</span> <span class="n">view</span><span class="o">)</span> <span class="o">{</span>
+					<span class="kd">super</span><span class="o">.</span><span class="na">didReceiveAd</span><span class="o">(</span><span class="n">view</span><span class="o">);</span>
+					<span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"didReceiveAd"</span><span class="o">);</span>
+				<span class="o">}</span>
+
+				<span class="nd">@Override</span>
+				<span class="kd">public</span> <span class="kt">void</span> <span class="nf">didFailToReceiveAd</span><span class="o">(</span><span class="nc">GADBannerView</span> <span class="n">view</span><span class="o">,</span>
+						<span class="nc">GADRequestError</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+					<span class="kd">super</span><span class="o">.</span><span class="na">didFailToReceiveAd</span><span class="o">(</span><span class="n">view</span><span class="o">,</span> <span class="n">error</span><span class="o">);</span>
+					<span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"didFailToReceiveAd:"</span> <span class="o">+</span> <span class="n">error</span><span class="o">);</span>
+				<span class="o">}</span>
+			<span class="o">});</span>
+
+			<span class="n">adview</span><span class="o">.</span><span class="na">loadRequest</span><span class="o">(</span><span class="n">request</span><span class="o">);</span>
+
+			<span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"Initalizing ads complete."</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">showAds</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">show</span><span class="o">)</span> <span class="o">{</span>
+    	<span class="n">initializeAds</span><span class="o">();</span>
+
+       	<span class="kd">final</span> <span class="nc">CGSize</span> <span class="n">screenSize</span> <span class="o">=</span> <span class="nc">UIScreen</span><span class="o">.</span><span class="na">getMainScreen</span><span class="o">().</span><span class="na">getBounds</span><span class="o">().</span><span class="na">size</span><span class="o">();</span>
+		<span class="kt">double</span> <span class="n">screenWidth</span> <span class="o">=</span> <span class="n">screenSize</span><span class="o">.</span><span class="na">width</span><span class="o">();</span>
+
+		<span class="kd">final</span> <span class="nc">CGSize</span> <span class="n">adSize</span> <span class="o">=</span> <span class="n">adview</span><span class="o">.</span><span class="na">getBounds</span><span class="o">().</span><span class="na">size</span><span class="o">();</span>
+		<span class="kt">double</span> <span class="n">adWidth</span> <span class="o">=</span> <span class="n">adSize</span><span class="o">.</span><span class="na">width</span><span class="o">();</span>
+		<span class="kt">double</span> <span class="n">adHeight</span> <span class="o">=</span> <span class="n">adSize</span><span class="o">.</span><span class="na">height</span><span class="o">();</span>
+
+		<span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"Hidding ad. size[%s, %s]"</span><span class="o">,</span> <span class="n">adWidth</span><span class="o">,</span> <span class="n">adHeight</span><span class="o">));</span>
+
+		<span class="kt">float</span> <span class="n">bannerWidth</span> <span class="o">=</span> <span class="o">(</span><span class="kt">float</span><span class="o">)</span> <span class="n">screenWidth</span><span class="o">;</span>
+		<span class="kt">float</span> <span class="n">bannerHeight</span> <span class="o">=</span> <span class="o">(</span><span class="kt">float</span><span class="o">)</span> <span class="o">(</span><span class="n">bannerWidth</span> <span class="o">/</span> <span class="n">adWidth</span> <span class="o">*</span> <span class="n">adHeight</span><span class="o">);</span>
+
+		<span class="k">if</span><span class="o">(</span><span class="n">show</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">adview</span><span class="o">.</span><span class="na">setFrame</span><span class="o">(</span><span class="k">new</span> <span class="nc">CGRect</span><span class="o">((</span><span class="n">screenWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="o">)</span> <span class="o">-</span> <span class="n">adWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">bannerWidth</span><span class="o">,</span> <span class="n">bannerHeight</span><span class="o">));</span>
+		<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+			<span class="n">adview</span><span class="o">.</span><span class="na">setFrame</span><span class="o">(</span><span class="k">new</span> <span class="nc">CGRect</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="o">-</span><span class="n">bannerHeight</span><span class="o">,</span> <span class="n">bannerWidth</span><span class="o">,</span> <span class="n">bannerHeight</span><span class="o">));</span>
+		<span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

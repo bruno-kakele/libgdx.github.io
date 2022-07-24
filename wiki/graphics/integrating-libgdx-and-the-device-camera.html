@@ -1,0 +1,1600 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Integrating libgdx and the device camera - libGDX</title>
+
+  <meta name="description" content="This article shows how to integrate the Android device camera with your libGDX application. This functionality can be used in order to let the user see what going on behind...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Integrating libgdx and the device camera">
+<meta property="og:url" content="https://libgdx.com/wiki/graphics/integrating-libgdx-and-the-device-camera">
+
+
+  <meta property="og:description" content="This article shows how to integrate the Android device camera with your libGDX application. This functionality can be used in order to let the user see what going on behind...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/graphics/integrating-libgdx-and-the-device-camera">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Integrating libgdx and the device camera
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/graphics/integrating-libgdx-and-the-device-camera.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/graphics/integrating-libgdx-and-the-device-camera.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <p>This article shows how to integrate the Android device camera with your libGDX application.
+This functionality can be used in order to let the user see what going on behind the device while playing and walking on the street, or even have some interaction between  the game and the real world (FPS game using the face detection mechanism?)</p>
+
+<h1 id="a-quick-outline">A Quick Outline</h1>
+<ul>
+  <li>Create the libGDX view with alpha channel (this is not the default), so that the camera preview will be shown behind it.</li>
+  <li>Create the DeviceCameraController object responsible for the Camera surface where the preview is drawn.</li>
+  <li>Interact with the DeviceCameraController from your application code, most of the camera functionality is called asynchronously according to: <a href="https://code.google.com/p/libgdx-users/wiki/IntegratingAndroidNativeUiElements3TierProjectSetup">https://code.google.com/p/libgdx-users/wiki/IntegratingAndroidNativeUiElements3TierProjectSetup</a></li>
+  <li>Take a picture
+    <ul>
+      <li>For taking a picture the Camera has a specific state machine that should be followed.</li>
+      <li>After getting the picture date from the camera, merge it with the libGDX screen-shot and write the result, this process is quite slow and can be done in a separate thread.</li>
+    </ul>
+  </li>
+  <li>Continue with the preview (The picture taken is frozen on the screen until the preview is explicitly restarted) or hide the CameraSurface all together.</li>
+</ul>
+
+<p>The sample application does the following:</p>
+<ul>
+  <li>draws a cube with the libGDX splash screen as its faces’ texture</li>
+  <li>upon the user touching the screen the Camera preview is started and drawn behind the cube</li>
+  <li>when the user untouch the screen:
+    <ul>
+      <li>the Camera starts auto-focusing ;</li>
+      <li>take a picture if succeeded to focus ;</li>
+      <li>take a screen-shot of the libGDX scene according to: <a href="https://libgdx.com/wiki/graphics/taking-a-screenshot">https://libgdx.com/wiki/graphics/taking-a-screenshot</a> ;</li>
+      <li>saves the merged picture to the storage ;</li>
+      <li>and remove the Preview.</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="the-gory-details">The Gory Details</h1>
+
+<h2 id="creating-the-libgdx-application">Creating the libGDX application</h2>
+<p>Initialize your Application in the !MainActivity class in the Android project, but modify the AndroidApplicationConfiguration object before passing it to the initialize method:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="nc">AndroidApplicationConfiguration</span> <span class="n">cfg</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AndroidApplicationConfiguration</span><span class="o">();</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="na">useGL20</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="c1">// we need to change the default pixel format - since it does not include an alpha channel </span>
+        <span class="c1">// we need the alpha channel so the camera preview will be seen behind the GL scene</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="na">r</span> <span class="o">=</span> <span class="mi">8</span><span class="o">;</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="na">g</span> <span class="o">=</span> <span class="mi">8</span><span class="o">;</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="na">b</span> <span class="o">=</span> <span class="mi">8</span><span class="o">;</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="na">a</span> <span class="o">=</span> <span class="mi">8</span><span class="o">;</span>
+</code></pre></div></div>
+<p>After the initialization make sure the OpenGL surface format is defined as TRANSLUCENT</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="k">if</span> <span class="o">(</span><span class="n">graphics</span><span class="o">.</span><span class="na">getView</span><span class="o">()</span> <span class="k">instanceof</span> <span class="nc">SurfaceView</span><span class="o">)</span> <span class="o">{</span>
+        	<span class="nc">SurfaceView</span> <span class="n">glView</span> <span class="o">=</span> <span class="o">(</span><span class="nc">SurfaceView</span><span class="o">)</span> <span class="n">graphics</span><span class="o">.</span><span class="na">getView</span><span class="o">();</span>
+			<span class="c1">// force alpha channel - I'm not sure we need this as the GL surface is already using alpha channel</span>
+			<span class="n">glView</span><span class="o">.</span><span class="na">getHolder</span><span class="o">().</span><span class="na">setFormat</span><span class="o">(</span><span class="nc">PixelFormat</span><span class="o">.</span><span class="na">TRANSLUCENT</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+<p>We also create a new method in the !MainActivity class to help us call asynchronous functions:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">post</span><span class="o">(</span><span class="nc">Runnable</span> <span class="n">r</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">handler</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">r</span><span class="o">);</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="draw-frame-in-the-render-method">Draw frame in the render() method</h2>
+<p>The important thing in this part is to clear the screen using the <code class="language-plaintext highlighter-rouge">glClearColor()</code> with a color with its alpha channel set to 0 when you want the Camera preview to be shown behind your scene.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl10</span><span class="o">.</span><span class="na">glClearColor</span><span class="o">(</span><span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">);</span> 
+</code></pre></div></div>
+<p>After clearing the screen you can draw everything else as usual. note that object drawn with a transparent color will show through to the Camera preview (even if there is an object behind it that has a non transparent color, but is not drawn due to the objects Z-order).</p>
+
+<h2 id="camera-state-machine">Camera State Machine</h2>
+<p>The android camera has a specific state machine that must be followed. This state machine can be managed by the application using callbacks. This state machine is managed by the AndroidDeviceCameraController (This class implements an abstract interface defined in the base project, In the Desktop application this interface is implemented by an empty class just for compilation compatibility).</p>
+
+<p>The Camera State machine is:
+Ready -&gt; Preview -&gt; autoFocusing -&gt; ShutterCalled -&gt; Raw PictureData -&gt; Postview PictureData -&gt; Jpeg PictureData -&gt; Ready</p>
+
+<p>From this state machine the sample code only implements:
+Ready -&gt; Preview -&gt; autoFocusing -&gt; Jpeg PictureData -&gt; Ready</p>
+
+<p>So The AndroidDeviceCameraController implements the additional two Camera interfaces: Camera.PictureCallback &amp; Camera.AutoFocusCallback</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class AndroidDeviceCameraController implements DeviceCameraControl, Camera.PictureCallback, Camera.AutoFocusCallback {
+.
+.
+.
+}
+</code></pre></div></div>
+
+<h2 id="preparing-the-camera">Preparing the Camera</h2>
+<p>We create a CameraSurface object which holds the Camera object and manages the Surface on which the Camera draws the preview images</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CameraSurface</span> <span class="kd">extends</span> <span class="nc">SurfaceView</span> <span class="kd">implements</span> <span class="nc">SurfaceHolder</span><span class="o">.</span><span class="na">Callback</span> <span class="o">{</span>
+		<span class="kd">private</span> <span class="nc">Camera</span> <span class="n">camera</span><span class="o">;</span>
+
+		<span class="kd">public</span> <span class="nf">CameraSurface</span><span class="o">(</span> <span class="nc">Context</span> <span class="n">context</span> <span class="o">)</span> <span class="o">{</span>
+			<span class="kd">super</span><span class="o">(</span> <span class="n">context</span> <span class="o">);</span>
+			<span class="c1">// We're implementing the Callback interface and want to get notified</span>
+			<span class="c1">// about certain surface events.</span>
+			<span class="n">getHolder</span><span class="o">().</span><span class="na">addCallback</span><span class="o">(</span> <span class="k">this</span> <span class="o">);</span>
+			<span class="c1">// We're changing the surface to a PUSH surface, meaning we're receiving</span>
+			<span class="c1">// all buffer data from another component - the camera, in this case.</span>
+			<span class="n">getHolder</span><span class="o">().</span><span class="na">setType</span><span class="o">(</span> <span class="nc">SurfaceHolder</span><span class="o">.</span><span class="na">SURFACE_TYPE_PUSH_BUFFERS</span> <span class="o">);</span>
+		<span class="o">}</span>
+
+		<span class="kd">public</span> <span class="kt">void</span> <span class="nf">surfaceCreated</span><span class="o">(</span> <span class="nc">SurfaceHolder</span> <span class="n">holder</span> <span class="o">)</span> <span class="o">{</span>
+			<span class="c1">// Once the surface is created, simply open a handle to the camera hardware.</span>
+			<span class="n">camera</span> <span class="o">=</span> <span class="nc">Camera</span><span class="o">.</span><span class="na">open</span><span class="o">();</span>
+		<span class="o">}</span>
+
+		<span class="kd">public</span> <span class="kt">void</span> <span class="nf">surfaceChanged</span><span class="o">(</span> <span class="nc">SurfaceHolder</span> <span class="n">holder</span><span class="o">,</span> <span class="kt">int</span> <span class="n">format</span><span class="o">,</span> <span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span> <span class="o">)</span> <span class="o">{</span>
+			<span class="c1">// This method is called when the surface changes, e.g. when it's size is set.</span>
+			<span class="c1">// We use the opportunity to initialize the camera preview display dimensions.</span>
+			<span class="nc">Camera</span><span class="o">.</span><span class="na">Parameters</span> <span class="n">p</span> <span class="o">=</span> <span class="n">camera</span><span class="o">.</span><span class="na">getParameters</span><span class="o">();</span>
+			<span class="n">p</span><span class="o">.</span><span class="na">setPreviewSize</span><span class="o">(</span> <span class="n">width</span><span class="o">,</span> <span class="n">height</span> <span class="o">);</span>
+			<span class="n">camera</span><span class="o">.</span><span class="na">setParameters</span><span class="o">(</span> <span class="n">p</span> <span class="o">);</span>
+
+			<span class="c1">// We also assign the preview display to this surface...</span>
+			<span class="k">try</span> <span class="o">{</span>
+			    <span class="n">camera</span><span class="o">.</span><span class="na">setPreviewDisplay</span><span class="o">(</span> <span class="n">holder</span> <span class="o">);</span>
+			<span class="o">}</span> <span class="k">catch</span><span class="o">(</span> <span class="nc">IOException</span> <span class="n">e</span> <span class="o">)</span> <span class="o">{</span>
+			    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+
+		<span class="kd">public</span> <span class="kt">void</span> <span class="nf">surfaceDestroyed</span><span class="o">(</span> <span class="nc">SurfaceHolder</span> <span class="n">holder</span> <span class="o">)</span> <span class="o">{</span>
+			<span class="c1">// Once the surface gets destroyed, we stop the preview mode and release</span>
+			<span class="c1">// the whole camera since we no longer need it.</span>
+			<span class="n">camera</span><span class="o">.</span><span class="na">stopPreview</span><span class="o">();</span>
+			<span class="n">camera</span><span class="o">.</span><span class="na">release</span><span class="o">();</span>
+			<span class="n">camera</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="o">}</span>
+
+		<span class="kd">public</span> <span class="nc">Camera</span> <span class="nf">getCamera</span><span class="o">()</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="n">camera</span><span class="o">;</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The camera object is only created by calling the static Camera.open() method after the <code class="language-plaintext highlighter-rouge">surfaceCreated()</code> callback is being called.
+Until then the camera is not ready and cannot be used.</p>
+
+<h2 id="showing-the-camera-preview">Showing the Camera preview</h2>
+<p>When the <code class="language-plaintext highlighter-rouge">surfaceChanged()</code> callback is called, we set the camera preview size and sets our CameraSurface object as the Camera preview display.</p>
+
+<p>Now back to the AndroidDeviceCameraController Class. In the next method we prepare the Camera by creating the CameraSurface object (only if needed) and add it as !ContentView to the activity:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">prepareCamera</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">cameraSurface</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">cameraSurface</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CameraSurface</span><span class="o">(</span><span class="n">activity</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="n">activity</span><span class="o">.</span><span class="na">addContentView</span><span class="o">(</span> <span class="n">cameraSurface</span><span class="o">,</span> <span class="k">new</span> <span class="nc">LayoutParams</span><span class="o">(</span> <span class="nc">LayoutParams</span><span class="o">.</span><span class="na">WRAP_CONTENT</span><span class="o">,</span> <span class="nc">LayoutParams</span><span class="o">.</span><span class="na">WRAP_CONTENT</span> <span class="o">)</span> <span class="o">);</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+<p>This method should be called asynchronous from the libGDX rendering thread so we actually call the <code class="language-plaintext highlighter-rouge">prepareCameraAsync()</code> method</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">prepareCameraAsync</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">Runnable</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+			<span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+				<span class="n">prepareCamera</span><span class="o">();</span>
+			<span class="o">}</span>
+		<span class="o">};</span>
+		<span class="n">activity</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">r</span><span class="o">);</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<p>We know that we can pass from the prepare state to the preview state, when the !CameraSurface and the camera objects are ready (by checking that the !CameraSurface &amp; Camera objects exists):</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isReady</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">cameraSurface</span><span class="o">!=</span><span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">cameraSurface</span><span class="o">.</span><span class="na">getCamera</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<p>We do this by calling startPreview method via its Async sibling</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">startPreviewAsync</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">Runnable</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+			<span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+				<span class="n">startPreview</span><span class="o">();</span>
+			<span class="o">}</span>
+		<span class="o">};</span>
+		<span class="n">activity</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">r</span><span class="o">);</span>
+	<span class="o">}</span>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">startPreview</span><span class="o">()</span> <span class="o">{</span>
+		<span class="c1">// ...and start previewing. From now on, the camera keeps pushing preview</span>
+		<span class="c1">// images to the surface.</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">cameraSurface</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">cameraSurface</span><span class="o">.</span><span class="na">getCamera</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">cameraSurface</span><span class="o">.</span><span class="na">getCamera</span><span class="o">().</span><span class="na">startPreview</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<p>In this state the user should see the Camera preview screen (assuming that we cleared the screen with a color having its alpha component sets to 0).</p>
+
+<h2 id="taking-a-picture">Taking a picture</h2>
+<p>When we would like to take the picture, we set the suitable Camera parameters (we can do it in any stage before actually taking the picture)</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCameraParametersForPicture</span><span class="o">(</span><span class="nc">Camera</span> <span class="n">camera</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// Before we take the picture - we make sure all camera parameters are as we like them</span>
+		<span class="c1">// Use max resolution and auto focus</span>
+		<span class="nc">Camera</span><span class="o">.</span><span class="na">Parameters</span> <span class="n">p</span> <span class="o">=</span> <span class="n">camera</span><span class="o">.</span><span class="na">getParameters</span><span class="o">();</span>
+		<span class="nc">List</span><span class="o">&lt;</span><span class="nc">Camera</span><span class="o">.</span><span class="na">Size</span><span class="o">&gt;</span> <span class="n">supportedSizes</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">getSupportedPictureSizes</span><span class="o">();</span>
+		<span class="kt">int</span> <span class="n">maxSupportedWidth</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+		<span class="kt">int</span> <span class="n">maxSupportedHeight</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+		<span class="k">for</span> <span class="o">(</span><span class="nc">Camera</span><span class="o">.</span><span class="na">Size</span> <span class="n">size</span> <span class="o">:</span> <span class="n">supportedSizes</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">size</span><span class="o">.</span><span class="na">width</span> <span class="o">&gt;</span> <span class="n">maxSupportedWidth</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">maxSupportedWidth</span> <span class="o">=</span> <span class="n">size</span><span class="o">.</span><span class="na">width</span><span class="o">;</span>
+				<span class="n">maxSupportedHeight</span> <span class="o">=</span> <span class="n">size</span><span class="o">.</span><span class="na">height</span><span class="o">;</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+		<span class="n">p</span><span class="o">.</span><span class="na">setPictureSize</span><span class="o">(</span><span class="n">maxSupportedWidth</span><span class="o">,</span> <span class="n">maxSupportedHeight</span><span class="o">);</span>
+		<span class="n">p</span><span class="o">.</span><span class="na">setFocusMode</span><span class="o">(</span><span class="nc">Camera</span><span class="o">.</span><span class="na">Parameters</span><span class="o">.</span><span class="na">FOCUS_MODE_AUTO</span><span class="o">);</span>
+		<span class="n">camera</span><span class="o">.</span><span class="na">setParameters</span><span class="o">(</span> <span class="n">p</span> <span class="o">);</span>    	
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<p>In this example we take a picture with the Camera maximal available resolution, and sets the focus mode to AutoFocus. After setting the camera parameters we call the camera autoFocus method, with the proper callback. this callback will be called when the camera is Focused, or after a timeout.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">takePicture</span><span class="o">()</span> <span class="o">{</span>
+		<span class="c1">// the user request to take a picture - start the process by requesting focus</span>
+	    	<span class="n">setCameraParametersForPicture</span><span class="o">(</span><span class="n">cameraSurface</span><span class="o">.</span><span class="na">getCamera</span><span class="o">());</span>
+	    	<span class="n">cameraSurface</span><span class="o">.</span><span class="na">getCamera</span><span class="o">().</span><span class="na">autoFocus</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+<p>When reaching a Focus, we call the actual Camera takePicture() method, with only onJpegPicture callback set.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">onAutoFocus</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">success</span><span class="o">,</span> <span class="nc">Camera</span> <span class="n">camera</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// Focus process finished, we now have focus (or not)</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">success</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">camera</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">camera</span><span class="o">.</span><span class="na">stopPreview</span><span class="o">();</span>
+				<span class="c1">// We now have focus take the actual picture</span>
+				<span class="n">camera</span><span class="o">.</span><span class="na">takePicture</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="k">this</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">onPictureTaken</span><span class="o">(</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">pictureData</span><span class="o">,</span> <span class="nc">Camera</span> <span class="n">camera</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">pictureData</span> <span class="o">=</span> <span class="n">pictureData</span><span class="o">;</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="taking-the-libgdx-screenshot">Taking the libGDX screenshot</h2>
+<p>In the render() method we wait until the pictureData object contains the Jpeg image and then create a Pixmap object out of this data:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="k">if</span> <span class="o">(</span><span class="n">deviceCameraControl</span><span class="o">.</span><span class="na">getPictureData</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// camera picture was actually taken</span>
+		<span class="nc">Pixmap</span> <span class="n">cameraPixmap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Pixmap</span><span class="o">(</span><span class="n">deviceCameraControl</span><span class="o">.</span><span class="na">getPictureData</span><span class="o">(),</span> <span class="mi">0</span><span class="o">,</span> <span class="n">deviceCameraControl</span><span class="o">.</span><span class="na">getPictureData</span><span class="o">().</span><span class="na">length</span><span class="o">);</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+<p>and take the screenshot:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">public</span> <span class="nc">Pixmap</span> <span class="nf">getScreenshot</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">w</span><span class="o">,</span> <span class="kt">int</span> <span class="n">h</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">flipY</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glPixelStorei</span><span class="o">(</span><span class="no">GL10</span><span class="o">.</span><span class="na">GL_PACK_ALIGNMENT</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+
+		<span class="kd">final</span> <span class="nc">Pixmap</span> <span class="n">pixmap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Pixmap</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">h</span><span class="o">,</span> <span class="nc">Format</span><span class="o">.</span><span class="na">RGBA8888</span><span class="o">);</span>
+		<span class="nc">ByteBuffer</span> <span class="n">pixels</span> <span class="o">=</span> <span class="n">pixmap</span><span class="o">.</span><span class="na">getPixels</span><span class="o">();</span>
+		<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glReadPixels</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">w</span><span class="o">,</span> <span class="n">h</span><span class="o">,</span> <span class="no">GL10</span><span class="o">.</span><span class="na">GL_RGBA</span><span class="o">,</span> <span class="no">GL10</span><span class="o">.</span><span class="na">GL_UNSIGNED_BYTE</span><span class="o">,</span> <span class="n">pixels</span><span class="o">);</span>
+
+		<span class="kd">final</span> <span class="kt">int</span> <span class="n">numBytes</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="mi">4</span><span class="o">;</span>
+		<span class="kt">byte</span><span class="o">[]</span> <span class="n">lines</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">numBytes</span><span class="o">];</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">flipY</span><span class="o">)</span> <span class="o">{</span>
+			<span class="kd">final</span> <span class="kt">int</span> <span class="n">numBytesPerLine</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="mi">4</span><span class="o">;</span>
+			<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">h</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+				<span class="n">pixels</span><span class="o">.</span><span class="na">position</span><span class="o">((</span><span class="n">h</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">*</span> <span class="n">numBytesPerLine</span><span class="o">);</span>
+				<span class="n">pixels</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">lines</span><span class="o">,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">numBytesPerLine</span><span class="o">,</span> <span class="n">numBytesPerLine</span><span class="o">);</span>
+			<span class="o">}</span>
+			<span class="n">pixels</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+			<span class="n">pixels</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">lines</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+			<span class="n">pixels</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+			<span class="n">pixels</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">lines</span><span class="o">);</span>
+		<span class="o">}</span>
+
+		<span class="k">return</span> <span class="n">pixmap</span><span class="o">;</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The next two operations are CPU and time consuming tasks so they should probably done in a separate thread with some kind of progress bar. In the code sample they are done directly in the rendering thread, so the screen is frozen during this processing.</p>
+
+<h2 id="merging-the-screenshot-and-the-camera-picture-together">Merging the screenshot and the Camera picture together</h2>
+<p>We now have to merge the two Pixmap object. The libGDX Pixmap object can do this for us, but since the camera picture may have different aspect ratio we first need to fix it manually.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">merge2Pixmaps</span><span class="o">(</span><span class="nc">Pixmap</span> <span class="n">mainPixmap</span><span class="o">,</span> <span class="nc">Pixmap</span> <span class="n">overlayedPixmap</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// merge to data and Gdx screen shot - but fix Aspect Ratio issues between the screen and the camera</span>
+		<span class="nc">Pixmap</span><span class="o">.</span><span class="na">setFilter</span><span class="o">(</span><span class="nc">Filter</span><span class="o">.</span><span class="na">BiLinear</span><span class="o">);</span>
+		<span class="kt">float</span> <span class="n">mainPixmapAR</span> <span class="o">=</span> <span class="o">(</span><span class="kt">float</span><span class="o">)</span><span class="n">mainPixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">/</span> <span class="n">mainPixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">();</span>
+		<span class="kt">float</span> <span class="n">overlayedPixmapAR</span> <span class="o">=</span> <span class="o">(</span><span class="kt">float</span><span class="o">)</span><span class="n">overlayedPixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">/</span> <span class="n">overlayedPixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">();</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">overlayedPixmapAR</span> <span class="o">&lt;</span> <span class="n">mainPixmapAR</span><span class="o">)</span> <span class="o">{</span>
+			<span class="kt">int</span> <span class="n">overlayNewWidth</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(((</span><span class="kt">float</span><span class="o">)</span><span class="n">mainPixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">()</span> <span class="o">/</span> <span class="n">overlayedPixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">())</span> <span class="o">*</span> <span class="n">overlayedPixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">());</span>
+			<span class="kt">int</span> <span class="n">overlayStartX</span> <span class="o">=</span> <span class="o">(</span><span class="n">mainPixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">-</span> <span class="n">overlayNewWidth</span><span class="o">)/</span><span class="mi">2</span><span class="o">;</span>
+			<span class="n">mainPixmap</span><span class="o">.</span><span class="na">drawPixmap</span><span class="o">(</span><span class="n">overlayedPixmap</span><span class="o">,</span> 
+						<span class="mi">0</span><span class="o">,</span> 
+						<span class="mi">0</span><span class="o">,</span> 
+						<span class="n">overlayedPixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">(),</span> 
+						<span class="n">overlayedPixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">(),</span> 
+						<span class="n">overlayStartX</span><span class="o">,</span> 
+						<span class="mi">0</span><span class="o">,</span> 
+						<span class="n">overlayNewWidth</span><span class="o">,</span> 
+						<span class="n">mainPixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">());</span>
+		<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+			<span class="kt">int</span> <span class="n">overlayNewHeight</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(((</span><span class="kt">float</span><span class="o">)</span><span class="n">mainPixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">/</span> <span class="n">overlayedPixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">())</span> <span class="o">*</span> <span class="n">overlayedPixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">());</span>
+			<span class="kt">int</span> <span class="n">overlayStartY</span> <span class="o">=</span> <span class="o">(</span><span class="n">mainPixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">()</span> <span class="o">-</span> <span class="n">overlayNewHeight</span><span class="o">)/</span><span class="mi">2</span><span class="o">;</span>
+			<span class="n">mainPixmap</span><span class="o">.</span><span class="na">drawPixmap</span><span class="o">(</span><span class="n">overlayedPixmap</span><span class="o">,</span> 
+						<span class="mi">0</span><span class="o">,</span> 
+						<span class="mi">0</span><span class="o">,</span> 
+						<span class="n">overlayedPixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">(),</span> 
+						<span class="n">overlayedPixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">(),</span> 
+						<span class="mi">0</span><span class="o">,</span> 
+						<span class="n">overlayStartY</span><span class="o">,</span> 
+						<span class="n">mainPixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">(),</span> 
+						<span class="n">overlayNewHeight</span><span class="o">);</span>					
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="saving-the-resulting-image-as-a-jpeg">Saving the resulting image as a Jpeg</h2>
+<p>In order to save the resulting image we can save it to the storage using the PixmapIO class. however, the CIM format is not interoperable, and the PNG format will probably result in huge files.
+One way is to save the resulting image as a Jpeg using the Android Bitmap class. This function is implemented inside the AndroidDeviceCameraController, since it is Android specific.
+However, the libGDX pixel format is RGBA and the Bitmap pixel format is ARGB so we need to shuffle some bits around to get the colors right.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">saveAsJpeg</span><span class="o">(</span><span class="nc">FileHandle</span> <span class="n">jpgfile</span><span class="o">,</span> <span class="nc">Pixmap</span> <span class="n">pixmap</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">FileOutputStream</span> <span class="n">fos</span><span class="o">;</span>
+		<span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+		<span class="kt">int</span> <span class="n">xl</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span><span class="n">yl</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="nc">Bitmap</span> <span class="n">bmp</span> <span class="o">=</span> <span class="nc">Bitmap</span><span class="o">.</span><span class="na">createBitmap</span><span class="o">(</span><span class="n">pixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">(),</span> <span class="n">pixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">(),</span> <span class="nc">Bitmap</span><span class="o">.</span><span class="na">Config</span><span class="o">.</span><span class="na">ARGB_8888</span><span class="o">);</span>
+			<span class="c1">// we need to switch between libGDX RGBA format to Android ARGB format</span>
+			<span class="k">for</span> <span class="o">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span><span class="n">xl</span><span class="o">=</span><span class="n">pixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">();</span> <span class="n">x</span><span class="o">&lt;</span><span class="n">xl</span><span class="o">;</span><span class="n">x</span><span class="o">++)</span> <span class="o">{</span>
+				<span class="k">for</span> <span class="o">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span><span class="n">yl</span><span class="o">=</span><span class="n">pixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">();</span> <span class="n">y</span><span class="o">&lt;</span><span class="n">yl</span><span class="o">;</span><span class="n">y</span><span class="o">++)</span> <span class="o">{</span>
+					<span class="kt">int</span> <span class="n">color</span> <span class="o">=</span> <span class="n">pixmap</span><span class="o">.</span><span class="na">getPixel</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
+					<span class="c1">// RGBA =&gt; ARGB</span>
+					<span class="kt">int</span> <span class="no">RGB</span> <span class="o">=</span> <span class="n">color</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="o">;</span>
+					<span class="kt">int</span> <span class="no">A</span> <span class="o">=</span> <span class="o">(</span><span class="n">color</span> <span class="o">&amp;</span> <span class="mh">0x000000ff</span><span class="o">)</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="o">;</span>
+					<span class="kt">int</span> <span class="no">ARGB</span> <span class="o">=</span> <span class="no">A</span> <span class="o">|</span> <span class="no">RGB</span><span class="o">;</span>
+					<span class="n">bmp</span><span class="o">.</span><span class="na">setPixel</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="no">ARGB</span><span class="o">);</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+			<span class="c1">// Finished Color format conversion</span>
+			<span class="n">fos</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="n">jpgfile</span><span class="o">.</span><span class="na">file</span><span class="o">());</span>
+			<span class="n">bmp</span><span class="o">.</span><span class="na">compress</span><span class="o">(</span><span class="nc">CompressFormat</span><span class="o">.</span><span class="na">JPEG</span><span class="o">,</span> <span class="mi">90</span><span class="o">,</span> <span class="n">fos</span><span class="o">);</span>
+			<span class="c1">// Finished Comression to JPEG file</span>
+			<span class="n">fos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">FileNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IllegalArgumentException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>			
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="stoping-the-preview">Stoping the preview</h2>
+<p>After finishing to save the picture, we stop the preview and remove the !CameraSurface from the Activity views, and we also stop the camera from sending the preview to the camera surface. Again we need to do this asynchronously.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">stopPreviewAsync</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">Runnable</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+			<span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+				<span class="n">stopPreview</span><span class="o">();</span>
+			<span class="o">}</span>
+		<span class="o">};</span>
+		<span class="n">activity</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">r</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">stopPreview</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// stop previewing.</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">cameraSurface</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">cameraSurface</span><span class="o">.</span><span class="na">getCamera</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">cameraSurface</span><span class="o">.</span><span class="na">getCamera</span><span class="o">().</span><span class="na">stopPreview</span><span class="o">();</span>
+			<span class="o">}</span>
+			<span class="nc">ViewParent</span> <span class="n">parentView</span> <span class="o">=</span> <span class="n">cameraSurface</span><span class="o">.</span><span class="na">getParent</span><span class="o">();</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">parentView</span> <span class="k">instanceof</span> <span class="nc">ViewGroup</span><span class="o">)</span> <span class="o">{</span>
+				<span class="nc">ViewGroup</span> <span class="n">viewGroup</span> <span class="o">=</span> <span class="o">(</span><span class="nc">ViewGroup</span><span class="o">)</span> <span class="n">parentView</span><span class="o">;</span>
+				<span class="n">viewGroup</span><span class="o">.</span><span class="na">removeView</span><span class="o">(</span><span class="n">cameraSurface</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="fixing-screen-and-camera-resolution-discrepancies">Fixing Screen and Camera resolution discrepancies</h2>
+<p>There is still one problem in our Pixmaps merging process. The resolution of the Camera and our screenshot maybe very different (e.g. in my test on Sumsung Galaxy Ace, I was streaching a 480x320 screenshot to a 2560x1920 picture). one way around it is to enlarge the libGDX view size to a larger size than the actual physical device screen size.
+This is done using the setFixedSize() function. The actual screen size that can be defined depends on the memory allocated to the GPU and again your mileage may vary.
+I found that if I do it once during the initialization I can set the virtual screen size to 1920x1280, but this will results with a slower rendering.
+Other way to do it is to call the setFixedSize() function only during the takingPicture procedure and returning it to its orignal afterwards. However, in this case I managed to set the virtual screen size to 960x640 (probably because some of the GPU memory is already allocated for the screen with the original size)</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFixedSize</span><span class="o">(</span><span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">graphics</span><span class="o">.</span><span class="na">getView</span><span class="o">()</span> <span class="k">instanceof</span> <span class="nc">SurfaceView</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">SurfaceView</span> <span class="n">glView</span> <span class="o">=</span> <span class="o">(</span><span class="nc">SurfaceView</span><span class="o">)</span> <span class="n">graphics</span><span class="o">.</span><span class="na">getView</span><span class="o">();</span>
+			<span class="n">glView</span><span class="o">.</span><span class="na">getHolder</span><span class="o">().</span><span class="na">setFixedSize</span><span class="o">(</span><span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">);</span>
+			<span class="n">glView</span><span class="o">.</span><span class="na">getHolder</span><span class="o">().</span><span class="na">setFormat</span><span class="o">(</span><span class="nc">PixelFormat</span><span class="o">.</span><span class="na">TRANSLUCENT</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">restoreFixedSize</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">graphics</span><span class="o">.</span><span class="na">getView</span><span class="o">()</span> <span class="k">instanceof</span> <span class="nc">SurfaceView</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">SurfaceView</span> <span class="n">glView</span> <span class="o">=</span> <span class="o">(</span><span class="nc">SurfaceView</span><span class="o">)</span> <span class="n">graphics</span><span class="o">.</span><span class="na">getView</span><span class="o">();</span>
+			<span class="n">glView</span><span class="o">.</span><span class="na">getHolder</span><span class="o">().</span><span class="na">setFixedSize</span><span class="o">(</span><span class="n">origWidth</span><span class="o">,</span> <span class="n">origHeight</span><span class="o">);</span>
+			<span class="n">glView</span><span class="o">.</span><span class="na">getHolder</span><span class="o">().</span><span class="na">setFormat</span><span class="o">(</span><span class="nc">PixelFormat</span><span class="o">.</span><span class="na">TRANSLUCENT</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="some-notes">Some Notes</h2>
+
+<h3 id="note">Note</h3>
+<p>This code is Android specific, and will not work with the generic cross platform code, but I guess one can provide similar functionality, at least for the desktop application.</p>
+
+<h3 id="another-note">Another note</h3>
+<p>The process of merging and writing the merge image to the storage, takes quite a lot of time due to the format mismatch between libGDX color scheme (RGBA) and the Bitmap class used here (ARGB), if someone find a quicker way, I’d be happy to hear about it.</p>
+
+<h3 id="last-note">Last note</h3>
+<p>I tested this only with a handful of Android devices, and experienced different behaviors probably due to the different GPU implementations. The Samsung GSIII even managed to XOR white elements with the camera image instead of simply overlaying them (Other colors didn’t showed this effects). So your mileage may vary depending on the actual phone used.</p>
+
+<h1 id="the-code">The Code</h1>
+
+<p>Here’s the full code for the projects’ classes:</p>
+
+<h2 id="android-project">Android Project</h2>
+
+<p>MainActivity.java:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+ * Copyright 2012 Johnny Lish (johnnyoneeyed@gmail.com)
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
+ * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */</span>
+
+<span class="kn">package</span> <span class="nn">com.johnny.camerademo</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">android.graphics.PixelFormat</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.os.Bundle</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.view.SurfaceView</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.backends.android.AndroidApplication</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.backends.android.AndroidApplicationConfiguration</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainActivity</span> <span class="kd">extends</span> <span class="nc">AndroidApplication</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">origWidth</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">origHeight</span><span class="o">;</span>
+
+	<span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="nc">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        
+        <span class="nc">AndroidApplicationConfiguration</span> <span class="n">cfg</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AndroidApplicationConfiguration</span><span class="o">();</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="na">useGL20</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="c1">// we need to change the default pixel format - since it does not include an alpha channel </span>
+        <span class="c1">// we need the alpha channel so the camera preview will be seen behind the GL scene</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="na">r</span> <span class="o">=</span> <span class="mi">8</span><span class="o">;</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="na">g</span> <span class="o">=</span> <span class="mi">8</span><span class="o">;</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="na">b</span> <span class="o">=</span> <span class="mi">8</span><span class="o">;</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="na">a</span> <span class="o">=</span> <span class="mi">8</span><span class="o">;</span>
+        
+        <span class="nc">DeviceCameraControl</span> <span class="n">cameraControl</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AndroidDeviceCameraController</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+        <span class="n">initialize</span><span class="o">(</span><span class="k">new</span> <span class="nc">CameraDemo</span><span class="o">(</span><span class="n">cameraControl</span><span class="o">),</span> <span class="n">cfg</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">graphics</span><span class="o">.</span><span class="na">getView</span><span class="o">()</span> <span class="k">instanceof</span> <span class="nc">SurfaceView</span><span class="o">)</span> <span class="o">{</span>
+        	<span class="nc">SurfaceView</span> <span class="n">glView</span> <span class="o">=</span> <span class="o">(</span><span class="nc">SurfaceView</span><span class="o">)</span> <span class="n">graphics</span><span class="o">.</span><span class="na">getView</span><span class="o">();</span>
+			<span class="c1">// force alpha channel - I'm not sure we need this as the GL surface is already using alpha channel</span>
+			<span class="n">glView</span><span class="o">.</span><span class="na">getHolder</span><span class="o">().</span><span class="na">setFormat</span><span class="o">(</span><span class="nc">PixelFormat</span><span class="o">.</span><span class="na">TRANSLUCENT</span><span class="o">);</span>
+		<span class="o">}</span>
+        <span class="c1">// we don't want the screen to turn off during the long image saving process </span>
+        <span class="n">graphics</span><span class="o">.</span><span class="na">getView</span><span class="o">().</span><span class="na">setKeepScreenOn</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="c1">// keep the original screen size  </span>
+    	<span class="n">origWidth</span> <span class="o">=</span> <span class="n">graphics</span><span class="o">.</span><span class="na">getWidth</span><span class="o">();</span>
+    	<span class="n">origHeight</span> <span class="o">=</span> <span class="n">graphics</span><span class="o">.</span><span class="na">getHeight</span><span class="o">();</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">post</span><span class="o">(</span><span class="nc">Runnable</span> <span class="n">r</span><span class="o">)</span> <span class="o">{</span>
+    	<span class="n">handler</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">r</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFixedSize</span><span class="o">(</span><span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">graphics</span><span class="o">.</span><span class="na">getView</span><span class="o">()</span> <span class="k">instanceof</span> <span class="nc">SurfaceView</span><span class="o">)</span> <span class="o">{</span>
+        	<span class="nc">SurfaceView</span> <span class="n">glView</span> <span class="o">=</span> <span class="o">(</span><span class="nc">SurfaceView</span><span class="o">)</span> <span class="n">graphics</span><span class="o">.</span><span class="na">getView</span><span class="o">();</span>
+			<span class="n">glView</span><span class="o">.</span><span class="na">getHolder</span><span class="o">().</span><span class="na">setFormat</span><span class="o">(</span><span class="nc">PixelFormat</span><span class="o">.</span><span class="na">TRANSLUCENT</span><span class="o">);</span>
+        	<span class="n">glView</span><span class="o">.</span><span class="na">getHolder</span><span class="o">().</span><span class="na">setFixedSize</span><span class="o">(</span><span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">restoreFixedSize</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">graphics</span><span class="o">.</span><span class="na">getView</span><span class="o">()</span> <span class="k">instanceof</span> <span class="nc">SurfaceView</span><span class="o">)</span> <span class="o">{</span>
+        	<span class="nc">SurfaceView</span> <span class="n">glView</span> <span class="o">=</span> <span class="o">(</span><span class="nc">SurfaceView</span><span class="o">)</span> <span class="n">graphics</span><span class="o">.</span><span class="na">getView</span><span class="o">();</span>
+			<span class="n">glView</span><span class="o">.</span><span class="na">getHolder</span><span class="o">().</span><span class="na">setFormat</span><span class="o">(</span><span class="nc">PixelFormat</span><span class="o">.</span><span class="na">TRANSLUCENT</span><span class="o">);</span>
+        	<span class="n">glView</span><span class="o">.</span><span class="na">getHolder</span><span class="o">().</span><span class="na">setFixedSize</span><span class="o">(</span><span class="n">origWidth</span><span class="o">,</span> <span class="n">origHeight</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>CameraSurface.java:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+ * Copyright 2012 Johnny Lish (johnnyoneeyed@gmail.com)
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
+ * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */</span>
+
+<span class="kn">package</span> <span class="nn">com.johnny.camerademo</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">android.content.Context</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.hardware.Camera</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.view.SurfaceHolder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.view.SurfaceView</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CameraSurface</span> <span class="kd">extends</span> <span class="nc">SurfaceView</span> <span class="kd">implements</span> <span class="nc">SurfaceHolder</span><span class="o">.</span><span class="na">Callback</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">Camera</span> <span class="n">camera</span><span class="o">;</span>
+ 
+    <span class="kd">public</span> <span class="nf">CameraSurface</span><span class="o">(</span> <span class="nc">Context</span> <span class="n">context</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span> <span class="n">context</span> <span class="o">);</span>
+        <span class="c1">// We're implementing the Callback interface and want to get notified</span>
+        <span class="c1">// about certain surface events.</span>
+        <span class="n">getHolder</span><span class="o">().</span><span class="na">addCallback</span><span class="o">(</span> <span class="k">this</span> <span class="o">);</span>
+        <span class="c1">// We're changing the surface to a PUSH surface, meaning we're receiving</span>
+        <span class="c1">// all buffer data from another component - the camera, in this case.</span>
+        <span class="n">getHolder</span><span class="o">().</span><span class="na">setType</span><span class="o">(</span> <span class="nc">SurfaceHolder</span><span class="o">.</span><span class="na">SURFACE_TYPE_PUSH_BUFFERS</span> <span class="o">);</span>
+    <span class="o">}</span>
+ 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">surfaceCreated</span><span class="o">(</span> <span class="nc">SurfaceHolder</span> <span class="n">holder</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Once the surface is created, simply open a handle to the camera hardware.</span>
+        <span class="n">camera</span> <span class="o">=</span> <span class="nc">Camera</span><span class="o">.</span><span class="na">open</span><span class="o">();</span>
+    <span class="o">}</span>
+ 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">surfaceChanged</span><span class="o">(</span> <span class="nc">SurfaceHolder</span> <span class="n">holder</span><span class="o">,</span> <span class="kt">int</span> <span class="n">format</span><span class="o">,</span> <span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// This method is called when the surface changes, e.g. when it's size is set.</span>
+        <span class="c1">// We use the opportunity to initialize the camera preview display dimensions.</span>
+        <span class="nc">Camera</span><span class="o">.</span><span class="na">Parameters</span> <span class="n">p</span> <span class="o">=</span> <span class="n">camera</span><span class="o">.</span><span class="na">getParameters</span><span class="o">();</span>
+        <span class="n">p</span><span class="o">.</span><span class="na">setPreviewSize</span><span class="o">(</span> <span class="n">width</span><span class="o">,</span> <span class="n">height</span> <span class="o">);</span>
+        <span class="n">camera</span><span class="o">.</span><span class="na">setParameters</span><span class="o">(</span> <span class="n">p</span> <span class="o">);</span>
+ 
+        <span class="c1">// We also assign the preview display to this surface...</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">camera</span><span class="o">.</span><span class="na">setPreviewDisplay</span><span class="o">(</span> <span class="n">holder</span> <span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span> <span class="nc">IOException</span> <span class="n">e</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+ 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">surfaceDestroyed</span><span class="o">(</span> <span class="nc">SurfaceHolder</span> <span class="n">holder</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Once the surface gets destroyed, we stop the preview mode and release</span>
+        <span class="c1">// the whole camera since we no longer need it.</span>
+        <span class="n">camera</span><span class="o">.</span><span class="na">stopPreview</span><span class="o">();</span>
+        <span class="n">camera</span><span class="o">.</span><span class="na">release</span><span class="o">();</span>
+        <span class="n">camera</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">Camera</span> <span class="nf">getCamera</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">camera</span><span class="o">;</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>AndroidDeviceCameraController.java</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+ * Copyright 2012 Johnny Lish (johnnyoneeyed@gmail.com)
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
+ * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */</span>
+
+<span class="kn">package</span> <span class="nn">com.johnny.camerademo</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.FileNotFoundException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.FileOutputStream</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.files.FileHandle</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.Pixmap</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">android.graphics.Bitmap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.graphics.Bitmap.CompressFormat</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.hardware.Camera</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.view.ViewGroup</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.view.ViewParent</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.view.ViewGroup.LayoutParams</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AndroidDeviceCameraController</span> <span class="kd">implements</span> <span class="nc">DeviceCameraControl</span><span class="o">,</span> <span class="nc">Camera</span><span class="o">.</span><span class="na">PictureCallback</span><span class="o">,</span> <span class="nc">Camera</span><span class="o">.</span><span class="na">AutoFocusCallback</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">ONE_SECOND_IN_MILI</span> <span class="o">=</span> <span class="mi">1000</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">MainActivity</span> <span class="n">activity</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">CameraSurface</span> <span class="n">cameraSurface</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">byte</span><span class="o">[]</span> <span class="n">pictureData</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nf">AndroidDeviceCameraController</span><span class="o">(</span><span class="nc">MainActivity</span> <span class="n">activity</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">activity</span> <span class="o">=</span> <span class="n">activity</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">prepareCamera</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">activity</span><span class="o">.</span><span class="na">setFixedSize</span><span class="o">(</span><span class="mi">960</span><span class="o">,</span><span class="mi">640</span><span class="o">);</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">cameraSurface</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">cameraSurface</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CameraSurface</span><span class="o">(</span><span class="n">activity</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="n">activity</span><span class="o">.</span><span class="na">addContentView</span><span class="o">(</span> <span class="n">cameraSurface</span><span class="o">,</span> <span class="k">new</span> <span class="nc">LayoutParams</span><span class="o">(</span> <span class="nc">LayoutParams</span><span class="o">.</span><span class="na">WRAP_CONTENT</span><span class="o">,</span> <span class="nc">LayoutParams</span><span class="o">.</span><span class="na">WRAP_CONTENT</span> <span class="o">)</span> <span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">startPreview</span><span class="o">()</span> <span class="o">{</span>
+		<span class="c1">// ...and start previewing. From now on, the camera keeps pushing preview</span>
+		<span class="c1">// images to the surface.</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">cameraSurface</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">cameraSurface</span><span class="o">.</span><span class="na">getCamera</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">cameraSurface</span><span class="o">.</span><span class="na">getCamera</span><span class="o">().</span><span class="na">startPreview</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">stopPreview</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// stop previewing.</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">cameraSurface</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">ViewParent</span> <span class="n">parentView</span> <span class="o">=</span> <span class="n">cameraSurface</span><span class="o">.</span><span class="na">getParent</span><span class="o">();</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">parentView</span> <span class="k">instanceof</span> <span class="nc">ViewGroup</span><span class="o">)</span> <span class="o">{</span>
+				<span class="nc">ViewGroup</span> <span class="n">viewGroup</span> <span class="o">=</span> <span class="o">(</span><span class="nc">ViewGroup</span><span class="o">)</span> <span class="n">parentView</span><span class="o">;</span>
+				<span class="n">viewGroup</span><span class="o">.</span><span class="na">removeView</span><span class="o">(</span><span class="n">cameraSurface</span><span class="o">);</span>
+			<span class="o">}</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">cameraSurface</span><span class="o">.</span><span class="na">getCamera</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">cameraSurface</span><span class="o">.</span><span class="na">getCamera</span><span class="o">().</span><span class="na">stopPreview</span><span class="o">();</span>
+			<span class="o">}</span>
+        <span class="o">}</span>
+		<span class="n">activity</span><span class="o">.</span><span class="na">restoreFixedSize</span><span class="o">();</span>
+	<span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCameraParametersForPicture</span><span class="o">(</span><span class="nc">Camera</span> <span class="n">camera</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Before we take the picture - we make sure all camera parameters are as we like them</span>
+    	<span class="c1">// Use max resolution and auto focus</span>
+        <span class="nc">Camera</span><span class="o">.</span><span class="na">Parameters</span> <span class="n">p</span> <span class="o">=</span> <span class="n">camera</span><span class="o">.</span><span class="na">getParameters</span><span class="o">();</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Camera</span><span class="o">.</span><span class="na">Size</span><span class="o">&gt;</span> <span class="n">supportedSizes</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">getSupportedPictureSizes</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">maxSupportedWidth</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">maxSupportedHeight</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">Camera</span><span class="o">.</span><span class="na">Size</span> <span class="n">size</span> <span class="o">:</span> <span class="n">supportedSizes</span><span class="o">)</span> <span class="o">{</span>
+        	<span class="k">if</span> <span class="o">(</span><span class="n">size</span><span class="o">.</span><span class="na">width</span> <span class="o">&gt;</span> <span class="n">maxSupportedWidth</span><span class="o">)</span> <span class="o">{</span>
+        		<span class="n">maxSupportedWidth</span> <span class="o">=</span> <span class="n">size</span><span class="o">.</span><span class="na">width</span><span class="o">;</span>
+        		<span class="n">maxSupportedHeight</span> <span class="o">=</span> <span class="n">size</span><span class="o">.</span><span class="na">height</span><span class="o">;</span>
+        	<span class="o">}</span>
+        <span class="o">}</span>
+    	<span class="n">p</span><span class="o">.</span><span class="na">setPictureSize</span><span class="o">(</span><span class="n">maxSupportedWidth</span><span class="o">,</span> <span class="n">maxSupportedHeight</span><span class="o">);</span>
+    	<span class="n">p</span><span class="o">.</span><span class="na">setFocusMode</span><span class="o">(</span><span class="nc">Camera</span><span class="o">.</span><span class="na">Parameters</span><span class="o">.</span><span class="na">FOCUS_MODE_AUTO</span><span class="o">);</span>
+        <span class="n">camera</span><span class="o">.</span><span class="na">setParameters</span><span class="o">(</span> <span class="n">p</span> <span class="o">);</span>    	
+    <span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">takePicture</span><span class="o">()</span> <span class="o">{</span>
+		<span class="c1">// the user request to take a picture - start the process by requesting focus</span>
+    		<span class="n">setCameraParametersForPicture</span><span class="o">(</span><span class="n">cameraSurface</span><span class="o">.</span><span class="na">getCamera</span><span class="o">());</span>
+    		<span class="n">cameraSurface</span><span class="o">.</span><span class="na">getCamera</span><span class="o">().</span><span class="na">autoFocus</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">onAutoFocus</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">success</span><span class="o">,</span> <span class="nc">Camera</span> <span class="n">camera</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// Focus process finished, we now have focus (or not)</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">success</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">camera</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">camera</span><span class="o">.</span><span class="na">stopPreview</span><span class="o">();</span>
+				<span class="c1">// We now have focus take the actual picture</span>
+				<span class="n">camera</span><span class="o">.</span><span class="na">takePicture</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="k">this</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">onPictureTaken</span><span class="o">(</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">pictureData</span><span class="o">,</span> <span class="nc">Camera</span> <span class="n">camera</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// We got the picture data - keep it</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">pictureData</span> <span class="o">=</span> <span class="n">pictureData</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">getPictureData</span><span class="o">()</span> <span class="o">{</span>
+		<span class="c1">// Give to picture data to whom ever requested it</span>
+		<span class="k">return</span> <span class="n">pictureData</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">prepareCameraAsync</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">Runnable</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+			<span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+				<span class="n">prepareCamera</span><span class="o">();</span>
+			<span class="o">}</span>
+		<span class="o">};</span>
+		<span class="n">activity</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">r</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">startPreviewAsync</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">Runnable</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+			<span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+				<span class="n">startPreview</span><span class="o">();</span>
+			<span class="o">}</span>
+		<span class="o">};</span>
+		<span class="n">activity</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">r</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">stopPreviewAsync</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">Runnable</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+			<span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+				<span class="n">stopPreview</span><span class="o">();</span>
+			<span class="o">}</span>
+		<span class="o">};</span>
+		<span class="n">activity</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">r</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">takePictureAsync</span><span class="o">(</span><span class="kt">long</span> <span class="n">timeout</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">timeout</span> <span class="o">*=</span> <span class="no">ONE_SECOND_IN_MILI</span><span class="o">;</span>
+		<span class="n">pictureData</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="nc">Runnable</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+			<span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+				<span class="n">takePicture</span><span class="o">();</span>
+			<span class="o">}</span>
+		<span class="o">};</span>
+		<span class="n">activity</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">r</span><span class="o">);</span>
+		<span class="k">while</span> <span class="o">(</span><span class="n">pictureData</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">timeout</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">try</span> <span class="o">{</span>
+				<span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="no">ONE_SECOND_IN_MILI</span><span class="o">);</span>
+				<span class="n">timeout</span> <span class="o">-=</span> <span class="no">ONE_SECOND_IN_MILI</span><span class="o">;</span>
+			<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+				<span class="c1">// TODO Auto-generated catch block</span>
+				<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">pictureData</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">cameraSurface</span><span class="o">.</span><span class="na">getCamera</span><span class="o">().</span><span class="na">cancelAutoFocus</span><span class="o">();</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="n">pictureData</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">saveAsJpeg</span><span class="o">(</span><span class="nc">FileHandle</span> <span class="n">jpgfile</span><span class="o">,</span> <span class="nc">Pixmap</span> <span class="n">pixmap</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">FileOutputStream</span> <span class="n">fos</span><span class="o">;</span>
+		<span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+		<span class="kt">int</span> <span class="n">xl</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span><span class="n">yl</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="nc">Bitmap</span> <span class="n">bmp</span> <span class="o">=</span> <span class="nc">Bitmap</span><span class="o">.</span><span class="na">createBitmap</span><span class="o">(</span><span class="n">pixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">(),</span> <span class="n">pixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">(),</span> <span class="nc">Bitmap</span><span class="o">.</span><span class="na">Config</span><span class="o">.</span><span class="na">ARGB_8888</span><span class="o">);</span>
+			<span class="c1">// we need to switch between libGDX RGBA format to Android ARGB format</span>
+			<span class="k">for</span> <span class="o">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span><span class="n">xl</span><span class="o">=</span><span class="n">pixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">();</span> <span class="n">x</span><span class="o">&lt;</span><span class="n">xl</span><span class="o">;</span><span class="n">x</span><span class="o">++)</span> <span class="o">{</span>
+				<span class="k">for</span> <span class="o">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span><span class="n">yl</span><span class="o">=</span><span class="n">pixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">();</span> <span class="n">y</span><span class="o">&lt;</span><span class="n">yl</span><span class="o">;</span><span class="n">y</span><span class="o">++)</span> <span class="o">{</span>
+					<span class="kt">int</span> <span class="n">color</span> <span class="o">=</span> <span class="n">pixmap</span><span class="o">.</span><span class="na">getPixel</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
+					<span class="c1">// RGBA =&gt; ARGB</span>
+					<span class="kt">int</span> <span class="no">RGB</span> <span class="o">=</span> <span class="n">color</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="o">;</span>
+					<span class="kt">int</span> <span class="no">A</span> <span class="o">=</span> <span class="o">(</span><span class="n">color</span> <span class="o">&amp;</span> <span class="mh">0x000000ff</span><span class="o">)</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="o">;</span>
+					<span class="kt">int</span> <span class="no">ARGB</span> <span class="o">=</span> <span class="no">A</span> <span class="o">|</span> <span class="no">RGB</span><span class="o">;</span>
+					<span class="n">bmp</span><span class="o">.</span><span class="na">setPixel</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="no">ARGB</span><span class="o">);</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+			<span class="n">fos</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="n">jpgfile</span><span class="o">.</span><span class="na">file</span><span class="o">());</span>
+			<span class="n">bmp</span><span class="o">.</span><span class="na">compress</span><span class="o">(</span><span class="nc">CompressFormat</span><span class="o">.</span><span class="na">JPEG</span><span class="o">,</span> <span class="mi">90</span><span class="o">,</span> <span class="n">fos</span><span class="o">);</span>
+			<span class="n">fos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">FileNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IllegalArgumentException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>			
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isReady</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">cameraSurface</span><span class="o">!=</span><span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">cameraSurface</span><span class="o">.</span><span class="na">getCamera</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="base-project">Base Project</h2>
+<p>DeviceCameraControl.java</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+ * Copyright 2012 Johnny Lish (johnnyoneeyed@gmail.com)
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
+ * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */</span>
+
+<span class="kn">package</span> <span class="nn">com.johnny.camerademo</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.files.FileHandle</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.Pixmap</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">DeviceCameraControl</span> <span class="o">{</span>
+
+	<span class="c1">// Synchronous interface</span>
+	<span class="kt">void</span> <span class="nf">prepareCamera</span><span class="o">();</span>
+
+	<span class="kt">void</span> <span class="nf">startPreview</span><span class="o">();</span>
+
+	<span class="kt">void</span> <span class="nf">stopPreview</span><span class="o">();</span>
+
+	<span class="kt">void</span> <span class="nf">takePicture</span><span class="o">();</span>
+
+	<span class="kt">byte</span><span class="o">[]</span> <span class="nf">getPictureData</span><span class="o">();</span>
+
+	<span class="c1">// Asynchronous interface - need when called from a non platform thread (GDX OpenGl thread)</span>
+	<span class="kt">void</span> <span class="nf">startPreviewAsync</span><span class="o">();</span>
+
+	<span class="kt">void</span> <span class="nf">stopPreviewAsync</span><span class="o">();</span>
+
+	<span class="kt">byte</span><span class="o">[]</span> <span class="nf">takePictureAsync</span><span class="o">(</span><span class="kt">long</span> <span class="n">timeout</span><span class="o">);</span>
+
+	<span class="kt">void</span> <span class="nf">saveAsJpeg</span><span class="o">(</span><span class="nc">FileHandle</span> <span class="n">jpgfile</span><span class="o">,</span> <span class="nc">Pixmap</span> <span class="n">cameraPixmap</span><span class="o">);</span>
+
+	<span class="kt">boolean</span> <span class="nf">isReady</span><span class="o">();</span>
+
+	<span class="kt">void</span> <span class="nf">prepareCameraAsync</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>CameraDemo.java:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+ * Copyright 2012 Johnny Lish (johnnyoneeyed@gmail.com)
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
+ * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */</span>
+
+<span class="kn">package</span> <span class="nn">com.johnny.camerademo</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.nio.ByteBuffer</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.ApplicationListener</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.Gdx</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.files.FileHandle</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.Color</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.GL10</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.Mesh</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.PerspectiveCamera</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.Pixmap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.Texture</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.Texture.TextureFilter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.VertexAttribute</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.Pixmap.Filter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.Pixmap.Format</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.VertexAttributes.Usage</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CameraDemo</span> <span class="kd">implements</span> <span class="nc">ApplicationListener</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">enum</span> <span class="nc">Mode</span> <span class="o">{</span>
+		<span class="n">normal</span><span class="o">,</span>
+		<span class="n">prepare</span><span class="o">,</span>
+		<span class="n">preview</span><span class="o">,</span>
+		<span class="n">takePicture</span><span class="o">,</span> 
+		<span class="n">waitForPictureReady</span><span class="o">,</span> 
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">float</span> <span class="n">vertexData</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span>   
+		<span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="c1">// quad/face 0/Vertex 0 </span>
+		<span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">1.0f</span><span class="o">,</span> <span class="c1">// quad/face 0/Vertex 1</span>
+		<span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="mf">1.0f</span><span class="o">,</span> <span class="c1">// quad/face 0/Vertex 2</span>
+		<span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="c1">// quad/face 0/Vertex 3</span>
+
+		<span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="mf">1.0f</span><span class="o">,</span> <span class="c1">// quad/face 1/Vertex 4</span>
+		<span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">1.0f</span><span class="o">,</span> <span class="c1">// quad/face 1/Vertex 5</span>
+		<span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="c1">// quad/face 1/Vertex 6</span>
+		<span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="c1">// quad/face 1/Vertex 7</span>
+		
+		<span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="c1">// quad/face 2/Vertex 8</span>
+		<span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">1.0f</span><span class="o">,</span> <span class="c1">// quad/face 2/Vertex 9</span>
+		<span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="mf">1.0f</span><span class="o">,</span> <span class="c1">// quad/face 2/Vertex 10</span>
+		<span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="c1">// quad/face 2/Vertex 11</span>
+		
+		<span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="mf">1.0f</span><span class="o">,</span> <span class="c1">// quad/face 3/Vertex 12</span>
+		<span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">1.0f</span><span class="o">,</span> <span class="c1">// quad/face 3/Vertex 13</span>
+		<span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="c1">// quad/face 3/Vertex 14</span>
+		<span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="c1">// quad/face 3/Vertex 15</span>
+
+		<span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="mf">1.0f</span><span class="o">,</span> <span class="c1">// quad/face 4/Vertex 16</span>
+		<span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">1.0f</span><span class="o">,</span> <span class="c1">// quad/face 4/Vertex 17</span>
+		<span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="c1">// quad/face 4/Vertex 18</span>
+		<span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="c1">// quad/face 4/Vertex 19</span>
+		
+		<span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="mf">1.0f</span><span class="o">,</span> <span class="c1">// quad/face 5/Vertex 20</span>
+		<span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">1.0f</span><span class="o">,</span> <span class="c1">// quad/face 5/Vertex 21</span>
+		<span class="mf">1.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="c1">// quad/face 5/Vertex 22</span>
+		<span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">0.0f</span><span class="o">,</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">toFloatBits</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">,</span><span class="mi">255</span><span class="o">),</span>  <span class="mf">1.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="c1">// quad/face 5/Vertex 23</span>
+	<span class="o">};</span>
+
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">short</span> <span class="n">facesVerticesIndex</span><span class="o">[][]</span> <span class="o">=</span> <span class="o">{</span>
+		<span class="o">{</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span> <span class="o">},</span>
+		<span class="o">{</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">7</span> <span class="o">},</span>
+		<span class="o">{</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">11</span> <span class="o">},</span>
+		<span class="o">{</span> <span class="mi">12</span><span class="o">,</span> <span class="mi">13</span><span class="o">,</span> <span class="mi">14</span><span class="o">,</span> <span class="mi">15</span> <span class="o">},</span>
+		<span class="o">{</span> <span class="mi">16</span><span class="o">,</span> <span class="mi">17</span><span class="o">,</span> <span class="mi">18</span><span class="o">,</span> <span class="mi">19</span> <span class="o">},</span>
+		<span class="o">{</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">21</span><span class="o">,</span> <span class="mi">22</span><span class="o">,</span> <span class="mi">23</span> <span class="o">}</span>
+	<span class="o">};</span>
+
+	<span class="kd">private</span> <span class="kd">final</span> <span class="kd">static</span> <span class="nc">VertexAttribute</span> <span class="n">verticesAttributes</span><span class="o">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">VertexAttribute</span><span class="o">[]</span> <span class="o">{</span> 
+		<span class="k">new</span> <span class="nf">VertexAttribute</span><span class="o">(</span><span class="nc">Usage</span><span class="o">.</span><span class="na">Position</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="s">"a_position"</span><span class="o">),</span> 
+		<span class="k">new</span> <span class="nf">VertexAttribute</span><span class="o">(</span><span class="nc">Usage</span><span class="o">.</span><span class="na">ColorPacked</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="s">"a_color"</span><span class="o">),</span>
+		<span class="k">new</span> <span class="nf">VertexAttribute</span><span class="o">(</span><span class="nc">Usage</span><span class="o">.</span><span class="na">TextureCoordinates</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="s">"a_texCoords"</span><span class="o">),</span>
+	<span class="o">};</span>
+
+
+	<span class="kd">private</span> <span class="nc">Texture</span> <span class="n">texture</span><span class="o">;</span>
+
+
+	<span class="kd">private</span> <span class="nc">Mesh</span><span class="o">[]</span> <span class="n">mesh</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Mesh</span><span class="o">[</span><span class="mi">6</span><span class="o">];</span>
+
+
+	<span class="kd">private</span> <span class="nc">PerspectiveCamera</span> <span class="n">camera</span><span class="o">;</span>
+
+
+	<span class="kd">private</span> <span class="nc">Mode</span> <span class="n">mode</span> <span class="o">=</span> <span class="nc">Mode</span><span class="o">.</span><span class="na">normal</span><span class="o">;</span>
+
+
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">DeviceCameraControl</span> <span class="n">deviceCameraControl</span><span class="o">;</span>
+
+
+	<span class="kd">public</span> <span class="nf">CameraDemo</span><span class="o">(</span><span class="nc">DeviceCameraControl</span> <span class="n">cameraControl</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">deviceCameraControl</span> <span class="o">=</span> <span class="n">cameraControl</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">create</span><span class="o">()</span> <span class="o">{</span>		
+		
+		<span class="c1">// Load the libGDX splash screen texture</span>
+		<span class="n">texture</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Texture</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"data/libgdx.png"</span><span class="o">));</span>
+		<span class="n">texture</span><span class="o">.</span><span class="na">setFilter</span><span class="o">(</span><span class="nc">TextureFilter</span><span class="o">.</span><span class="na">Linear</span><span class="o">,</span> <span class="nc">TextureFilter</span><span class="o">.</span><span class="na">Linear</span><span class="o">);</span>
+	
+		<span class="c1">// Create the 6 faces of the Cube</span>
+		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">6</span><span class="o">;</span><span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="n">mesh</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Mesh</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="mi">24</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="n">verticesAttributes</span><span class="o">);</span>
+			<span class="n">mesh</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">setVertices</span><span class="o">(</span><span class="n">vertexData</span><span class="o">);</span>
+			<span class="n">mesh</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">setIndices</span><span class="o">(</span><span class="n">facesVerticesIndex</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+		<span class="o">}</span>
+		
+		<span class="c1">// Create the OpenGL Camera</span>
+		<span class="n">camera</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PerspectiveCamera</span><span class="o">(</span><span class="mf">67.0f</span><span class="o">,</span> <span class="mf">2.0f</span> <span class="o">*</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">/</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getHeight</span><span class="o">(),</span> <span class="mf">2.0f</span><span class="o">);</span>
+		<span class="n">camera</span><span class="o">.</span><span class="na">far</span> <span class="o">=</span> <span class="mf">100.0f</span><span class="o">;</span>
+		<span class="n">camera</span><span class="o">.</span><span class="na">near</span> <span class="o">=</span> <span class="mf">0.1f</span><span class="o">;</span>
+		<span class="n">camera</span><span class="o">.</span><span class="na">position</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="mf">2.0f</span><span class="o">,</span><span class="mf">2.0f</span><span class="o">,</span><span class="mf">2.0f</span><span class="o">);</span>
+        <span class="n">camera</span><span class="o">.</span><span class="na">lookAt</span><span class="o">(</span><span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">);</span>
+
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">dispose</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">texture</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
+		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">6</span><span class="o">;</span><span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="n">mesh</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">dispose</span><span class="o">();</span>
+			<span class="n">mesh</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="n">texture</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">render</span><span class="o">()</span> <span class="o">{</span>		
+		<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isTouched</span><span class="o">())</span> <span class="o">{</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">mode</span> <span class="o">==</span> <span class="nc">Mode</span><span class="o">.</span><span class="na">normal</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">mode</span> <span class="o">=</span> <span class="nc">Mode</span><span class="o">.</span><span class="na">prepare</span><span class="o">;</span>
+				<span class="k">if</span> <span class="o">(</span><span class="n">deviceCameraControl</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+					<span class="n">deviceCameraControl</span><span class="o">.</span><span class="na">prepareCameraAsync</span><span class="o">();</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+		<span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// touch removed</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">mode</span> <span class="o">==</span> <span class="nc">Mode</span><span class="o">.</span><span class="na">preview</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">mode</span> <span class="o">=</span> <span class="nc">Mode</span><span class="o">.</span><span class="na">takePicture</span><span class="o">;</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+
+		<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl10</span><span class="o">.</span><span class="na">glHint</span><span class="o">(</span><span class="no">GL10</span><span class="o">.</span><span class="na">GL_PERSPECTIVE_CORRECTION_HINT</span><span class="o">,</span> <span class="no">GL10</span><span class="o">.</span><span class="na">GL_NICEST</span><span class="o">);</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">mode</span> <span class="o">==</span> <span class="nc">Mode</span><span class="o">.</span><span class="na">takePicture</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl10</span><span class="o">.</span><span class="na">glClearColor</span><span class="o">(</span><span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">);</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">deviceCameraControl</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">deviceCameraControl</span><span class="o">.</span><span class="na">takePicture</span><span class="o">();</span>
+			<span class="o">}</span>
+			<span class="n">mode</span> <span class="o">=</span> <span class="nc">Mode</span><span class="o">.</span><span class="na">waitForPictureReady</span><span class="o">;</span>
+		<span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">mode</span> <span class="o">==</span> <span class="nc">Mode</span><span class="o">.</span><span class="na">waitForPictureReady</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl10</span><span class="o">.</span><span class="na">glClearColor</span><span class="o">(</span><span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">);</span>			
+		<span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">mode</span> <span class="o">==</span> <span class="nc">Mode</span><span class="o">.</span><span class="na">prepare</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl10</span><span class="o">.</span><span class="na">glClearColor</span><span class="o">(</span><span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">);</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">deviceCameraControl</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+				<span class="k">if</span> <span class="o">(</span><span class="n">deviceCameraControl</span><span class="o">.</span><span class="na">isReady</span><span class="o">())</span> <span class="o">{</span>
+					<span class="n">deviceCameraControl</span><span class="o">.</span><span class="na">startPreviewAsync</span><span class="o">();</span>
+					<span class="n">mode</span> <span class="o">=</span> <span class="nc">Mode</span><span class="o">.</span><span class="na">preview</span><span class="o">;</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+		<span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">mode</span> <span class="o">==</span> <span class="nc">Mode</span><span class="o">.</span><span class="na">preview</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl10</span><span class="o">.</span><span class="na">glClearColor</span><span class="o">(</span><span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// mode = normal</span>
+			<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl10</span><span class="o">.</span><span class="na">glClearColor</span><span class="o">(</span><span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">1.0f</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl10</span><span class="o">.</span><span class="na">glClear</span><span class="o">(</span><span class="no">GL10</span><span class="o">.</span><span class="na">GL_COLOR_BUFFER_BIT</span> <span class="o">|</span> <span class="no">GL10</span><span class="o">.</span><span class="na">GL_DEPTH_BUFFER_BIT</span><span class="o">);</span>
+		<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl10</span><span class="o">.</span><span class="na">glEnable</span><span class="o">(</span><span class="no">GL10</span><span class="o">.</span><span class="na">GL_DEPTH_TEST</span><span class="o">);</span>
+		<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl10</span><span class="o">.</span><span class="na">glEnable</span><span class="o">(</span><span class="no">GL10</span><span class="o">.</span><span class="na">GL_TEXTURE</span><span class="o">);</span>			
+		<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl10</span><span class="o">.</span><span class="na">glEnable</span><span class="o">(</span><span class="no">GL10</span><span class="o">.</span><span class="na">GL_TEXTURE_2D</span><span class="o">);</span>			
+		<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl10</span><span class="o">.</span><span class="na">glEnable</span><span class="o">(</span><span class="no">GL10</span><span class="o">.</span><span class="na">GL_LINE_SMOOTH</span><span class="o">);</span>
+		<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl10</span><span class="o">.</span><span class="na">glDepthFunc</span><span class="o">(</span><span class="no">GL10</span><span class="o">.</span><span class="na">GL_LEQUAL</span><span class="o">);</span>
+		<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl10</span><span class="o">.</span><span class="na">glClearDepthf</span><span class="o">(</span><span class="mf">1.0</span><span class="no">F</span><span class="o">);</span>
+		<span class="n">camera</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+		<span class="n">camera</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">gl10</span><span class="o">);</span>
+		<span class="n">texture</span><span class="o">.</span><span class="na">bind</span><span class="o">();</span>
+		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">6</span><span class="o">;</span><span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="n">mesh</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">render</span><span class="o">(</span><span class="no">GL10</span><span class="o">.</span><span class="na">GL_TRIANGLE_FAN</span><span class="o">,</span> <span class="mi">0</span> <span class="o">,</span><span class="mi">4</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">mode</span> <span class="o">==</span> <span class="nc">Mode</span><span class="o">.</span><span class="na">waitForPictureReady</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">deviceCameraControl</span><span class="o">.</span><span class="na">getPictureData</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// camera picture was actually taken</span>
+				<span class="c1">// take Gdx Screenshot</span>
+				<span class="nc">Pixmap</span> <span class="n">screenshotPixmap</span> <span class="o">=</span> <span class="n">getScreenshot</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getWidth</span><span class="o">(),</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getHeight</span><span class="o">(),</span> <span class="kc">true</span><span class="o">);</span>
+				<span class="nc">Pixmap</span> <span class="n">cameraPixmap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Pixmap</span><span class="o">(</span><span class="n">deviceCameraControl</span><span class="o">.</span><span class="na">getPictureData</span><span class="o">(),</span> <span class="mi">0</span><span class="o">,</span> <span class="n">deviceCameraControl</span><span class="o">.</span><span class="na">getPictureData</span><span class="o">().</span><span class="na">length</span><span class="o">);</span>
+				<span class="n">merge2Pixmaps</span><span class="o">(</span><span class="n">cameraPixmap</span><span class="o">,</span> <span class="n">screenshotPixmap</span><span class="o">);</span>
+				<span class="c1">// we could call PixmapIO.writePNG(pngfile, cameraPixmap);</span>
+				<span class="nc">FileHandle</span> <span class="n">jpgfile</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">external</span><span class="o">(</span><span class="s">"libGdxSnapshot.jpg"</span><span class="o">);</span>
+				<span class="n">deviceCameraControl</span><span class="o">.</span><span class="na">saveAsJpeg</span><span class="o">(</span><span class="n">jpgfile</span><span class="o">,</span> <span class="n">cameraPixmap</span><span class="o">);</span>
+				<span class="n">deviceCameraControl</span><span class="o">.</span><span class="na">stopPreviewAsync</span><span class="o">();</span>
+				<span class="n">mode</span> <span class="o">=</span> <span class="nc">Mode</span><span class="o">.</span><span class="na">normal</span><span class="o">;</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	
+	<span class="kd">private</span> <span class="nc">Pixmap</span> <span class="nf">merge2Pixmaps</span><span class="o">(</span><span class="nc">Pixmap</span> <span class="n">mainPixmap</span><span class="o">,</span> <span class="nc">Pixmap</span> <span class="n">overlayedPixmap</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// merge to data and Gdx screen shot - but fix Aspect Ratio issues between the screen and the camera</span>
+		<span class="nc">Pixmap</span><span class="o">.</span><span class="na">setFilter</span><span class="o">(</span><span class="nc">Filter</span><span class="o">.</span><span class="na">BiLinear</span><span class="o">);</span>
+		<span class="kt">float</span> <span class="n">mainPixmapAR</span> <span class="o">=</span> <span class="o">(</span><span class="kt">float</span><span class="o">)</span><span class="n">mainPixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">/</span> <span class="n">mainPixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">();</span>
+		<span class="kt">float</span> <span class="n">overlayedPixmapAR</span> <span class="o">=</span> <span class="o">(</span><span class="kt">float</span><span class="o">)</span><span class="n">overlayedPixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">/</span> <span class="n">overlayedPixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">();</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">overlayedPixmapAR</span> <span class="o">&lt;</span> <span class="n">mainPixmapAR</span><span class="o">)</span> <span class="o">{</span>
+			<span class="kt">int</span> <span class="n">overlayNewWidth</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(((</span><span class="kt">float</span><span class="o">)</span><span class="n">mainPixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">()</span> <span class="o">/</span> <span class="n">overlayedPixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">())</span> <span class="o">*</span> <span class="n">overlayedPixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">());</span>
+			<span class="kt">int</span> <span class="n">overlayStartX</span> <span class="o">=</span> <span class="o">(</span><span class="n">mainPixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">-</span> <span class="n">overlayNewWidth</span><span class="o">)/</span><span class="mi">2</span><span class="o">;</span>
+			<span class="c1">// Overlaying pixmaps</span>
+			<span class="n">mainPixmap</span><span class="o">.</span><span class="na">drawPixmap</span><span class="o">(</span><span class="n">overlayedPixmap</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">overlayedPixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">(),</span> <span class="n">overlayedPixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">(),</span> <span class="n">overlayStartX</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">overlayNewWidth</span><span class="o">,</span> <span class="n">mainPixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">());</span>
+		<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+			<span class="kt">int</span> <span class="n">overlayNewHeight</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(((</span><span class="kt">float</span><span class="o">)</span><span class="n">mainPixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">/</span> <span class="n">overlayedPixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">())</span> <span class="o">*</span> <span class="n">overlayedPixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">());</span>
+			<span class="kt">int</span> <span class="n">overlayStartY</span> <span class="o">=</span> <span class="o">(</span><span class="n">mainPixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">()</span> <span class="o">-</span> <span class="n">overlayNewHeight</span><span class="o">)/</span><span class="mi">2</span><span class="o">;</span>
+			<span class="c1">// Overlaying pixmaps</span>
+			<span class="n">mainPixmap</span><span class="o">.</span><span class="na">drawPixmap</span><span class="o">(</span><span class="n">overlayedPixmap</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">overlayedPixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">(),</span> <span class="n">overlayedPixmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">(),</span> <span class="mi">0</span><span class="o">,</span> <span class="n">overlayStartY</span><span class="o">,</span> <span class="n">mainPixmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">(),</span> <span class="n">overlayNewHeight</span><span class="o">);</span>					
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="n">mainPixmap</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">Pixmap</span> <span class="nf">getScreenshot</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">w</span><span class="o">,</span> <span class="kt">int</span> <span class="n">h</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">flipY</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glPixelStorei</span><span class="o">(</span><span class="no">GL10</span><span class="o">.</span><span class="na">GL_PACK_ALIGNMENT</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+
+		<span class="kd">final</span> <span class="nc">Pixmap</span> <span class="n">pixmap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Pixmap</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">h</span><span class="o">,</span> <span class="nc">Format</span><span class="o">.</span><span class="na">RGBA8888</span><span class="o">);</span>
+		<span class="nc">ByteBuffer</span> <span class="n">pixels</span> <span class="o">=</span> <span class="n">pixmap</span><span class="o">.</span><span class="na">getPixels</span><span class="o">();</span>
+		<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glReadPixels</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">w</span><span class="o">,</span> <span class="n">h</span><span class="o">,</span> <span class="no">GL10</span><span class="o">.</span><span class="na">GL_RGBA</span><span class="o">,</span> <span class="no">GL10</span><span class="o">.</span><span class="na">GL_UNSIGNED_BYTE</span><span class="o">,</span> <span class="n">pixels</span><span class="o">);</span>
+
+		<span class="kd">final</span> <span class="kt">int</span> <span class="n">numBytes</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="mi">4</span><span class="o">;</span>
+		<span class="kt">byte</span><span class="o">[]</span> <span class="n">lines</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">numBytes</span><span class="o">];</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">flipY</span><span class="o">)</span> <span class="o">{</span>
+			<span class="kd">final</span> <span class="kt">int</span> <span class="n">numBytesPerLine</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="mi">4</span><span class="o">;</span>
+			<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">h</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+				<span class="n">pixels</span><span class="o">.</span><span class="na">position</span><span class="o">((</span><span class="n">h</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">*</span> <span class="n">numBytesPerLine</span><span class="o">);</span>
+				<span class="n">pixels</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">lines</span><span class="o">,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">numBytesPerLine</span><span class="o">,</span> <span class="n">numBytesPerLine</span><span class="o">);</span>
+			<span class="o">}</span>
+			<span class="n">pixels</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+			<span class="n">pixels</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">lines</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+			<span class="n">pixels</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+			<span class="n">pixels</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">lines</span><span class="o">);</span>
+		<span class="o">}</span>
+
+		<span class="k">return</span> <span class="n">pixmap</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">resize</span><span class="o">(</span><span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">camera</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PerspectiveCamera</span><span class="o">(</span><span class="mf">67.0f</span><span class="o">,</span> <span class="mf">2.0f</span> <span class="o">*</span> <span class="n">width</span> <span class="o">/</span> <span class="n">height</span><span class="o">,</span> <span class="mf">2.0f</span><span class="o">);</span>
+		<span class="n">camera</span><span class="o">.</span><span class="na">far</span> <span class="o">=</span> <span class="mf">100.0f</span><span class="o">;</span>
+		<span class="n">camera</span><span class="o">.</span><span class="na">near</span> <span class="o">=</span> <span class="mf">0.1f</span><span class="o">;</span>
+		<span class="n">camera</span><span class="o">.</span><span class="na">position</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="mf">2.0f</span><span class="o">,</span><span class="mf">2.0f</span><span class="o">,</span><span class="mf">2.0f</span><span class="o">);</span>
+        <span class="n">camera</span><span class="o">.</span><span class="na">lookAt</span><span class="o">(</span><span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">);</span>
+
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">pause</span><span class="o">()</span> <span class="o">{</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">resume</span><span class="o">()</span> <span class="o">{</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

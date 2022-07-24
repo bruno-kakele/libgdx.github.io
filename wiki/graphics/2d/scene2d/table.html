@@ -1,0 +1,820 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Table - libGDX</title>
+
+  <meta name="description" content="Overview Table is a WidgetGroup that sets the position and size of its children using a logical table, similar to HTML tables. Tables are intended to be used extensively in...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Table">
+<meta property="og:url" content="https://libgdx.com/wiki/graphics/2d/scene2d/table">
+
+
+  <meta property="og:description" content="Overview Table is a WidgetGroup that sets the position and size of its children using a logical table, similar to HTML tables. Tables are intended to be used extensively in...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/graphics/2d/scene2d/table">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Table
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/graphics/2d/scene2d/table.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/graphics/2d/scene2d/table.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <h2 id="overview">Overview</h2>
+
+<p>Table is a WidgetGroup that sets the position and size of its children using a logical table, similar to HTML tables. Tables are intended to be used extensively in scene2d.ui to layout widgets, as they are easy to use and much more powerful than manually sizing and positioning widgets. Table-based layouts don’t rely on absolute positioning and therefore automatically adjust to different widget sizes and screen resolutions.</p>
+
+<p>Table is a fork of <a href="https://github.com/EsotericSoftware/tablelayout">TableLayout</a> for libGDX (by the same author). TableLayout provides the same functionality as Table but for other UI toolkits (Swing, Android, etc).</p>
+
+<ul>
+  <li><a href="#quickstart">Quickstart</a></li>
+  <li><a href="#root-table">Root table</a></li>
+  <li><a href="#debugging">Debugging</a></li>
+  <li><a href="#adding-cells">Adding cells</a></li>
+  <li><a href="#logical-table">Logical table</a></li>
+  <li><a href="#cell-properties">Cell properties</a>
+    <ul>
+      <li><a href="#expand">Expand</a></li>
+      <li><a href="#alignment">Alignment</a></li>
+      <li><a href="#fill">Fill</a></li>
+      <li><a href="#widget-size">Widget size</a></li>
+      <li><a href="#padding">Padding</a></li>
+      <li><a href="#spacing">Spacing</a></li>
+      <li><a href="#colspan">Colspan</a></li>
+      <li><a href="#uniform">Uniform</a></li>
+    </ul>
+  </li>
+  <li><a href="#defaults">Defaults</a>
+    <ul>
+      <li><a href="#cell-defaults">Cell defaults</a></li>
+      <li><a href="#column-defaults">Column defaults</a></li>
+      <li><a href="#row-defaults">Row defaults</a></li>
+    </ul>
+  </li>
+  <li><a href="#values">Values</a></li>
+  <li><a href="#overlapping-widgets">Overlapping widgets</a></li>
+  <li><a href="#inserting-cells">Inserting cells</a></li>
+  <li><a href="#notes">Notes</a></li>
+</ul>
+
+<h2 id="quickstart">Quickstart</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nc">Label</span> <span class="n">nameLabel</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Label</span><span class="o">(</span><span class="s">"Name:"</span><span class="o">,</span> <span class="n">skin</span><span class="o">);</span>
+    <span class="nc">TextField</span> <span class="n">nameText</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TextField</span><span class="o">(</span><span class="s">""</span><span class="o">,</span> <span class="n">skin</span><span class="o">);</span>
+    <span class="nc">Label</span> <span class="n">addressLabel</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Label</span><span class="o">(</span><span class="s">"Address:"</span><span class="o">,</span> <span class="n">skin</span><span class="o">);</span>
+    <span class="nc">TextField</span> <span class="n">addressText</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TextField</span><span class="o">(</span><span class="s">""</span><span class="o">,</span> <span class="n">skin</span><span class="o">);</span>
+    
+    <span class="nc">Table</span> <span class="n">table</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Table</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameText</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">row</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressText</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><img src="/assets/wiki/images/quickstart.png" alt="images/quickstart.png" /></p>
+
+<p>This code adds 4 cells to the table which are arranged in two columns and two rows. The <code class="language-plaintext highlighter-rouge">add</code> method returns a Cell, which has methods to control layout. The table sizes and positions its children, so setting the width of the text fields to 100 is done on the table cell, not on the text fields themselves.</p>
+
+<h2 id="root-table">Root table</h2>
+
+<p>When doing UI layout, a UI widget does not set its own size. Instead, it provides a minimum, preferred, and maximum size. The widget’s parent uses its own size along with these hints to size the widget. Many layouts will use a single table at the root which has a fixed size, often the whole screen. Widgets and nested tables are added to the root table, resulting in a responsive layout that doesn’t rely on fixed positions or fixed sizes.</p>
+
+<p>In libgdx the <code class="language-plaintext highlighter-rouge">setFillParent</code> method can be used to easily size the root table to the stage (but should generally only be used on the root table):</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nc">Table</span> <span class="n">table</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Table</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">setFillParent</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+    <span class="n">stage</span><span class="o">.</span><span class="na">addActor</span><span class="o">(</span><span class="n">table</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h2 id="debugging">Debugging</h2>
+
+<p>Table can draw debug lines to visualize what is happening in the layout. It is enabled following way:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">table</span><span class="o">.</span><span class="na">setDebug</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span> <span class="c1">// turn on all debug lines (table, cell, and widget)</span>
+</code></pre></div></div>
+
+<h2 id="adding-cells">Adding cells</h2>
+
+<p>Widgets are added to a table with the <code class="language-plaintext highlighter-rouge">add</code> method. This adds a cell to the current row. To move to the next row, call the <code class="language-plaintext highlighter-rouge">row</code> method.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameText</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">row</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressText</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">add</code> method returns a Cell, which has properties that control the layout. Every method on the cell returns the cell, allowing calls to be chained.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameText</span><span class="o">).</span><span class="na">padLeft</span><span class="o">(</span><span class="mi">10</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h2 id="logical-table">Logical table</h2>
+
+<p>The cells make up a logical table, but it is not sized to the table widget.</p>
+
+<p><img src="/assets/wiki/images/logicaltable.png" alt="images/logicaltable.png" /></p>
+
+<p>The outer blue rectangle shows the size of the table widget. The inner blue rectangle shows the size of the logical table, which is aligned to center by default. The alignment can be changed using methods on the table. The table methods return the table, so can be chained just like the cell methods.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">table</span><span class="o">.</span><span class="na">right</span><span class="o">().</span><span class="na">bottom</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p><img src="/assets/wiki/images/tablealign.png" alt="images/tablealign.png" /></p>
+
+<h2 id="cell-properties">Cell properties</h2>
+
+<h3 id="expand">Expand</h3>
+
+<p>To make the logical table take up the entire size of the table widget, TableLayout needs to be told which <strong>cells will receive the extra space</strong>.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameLabel</span><span class="o">).</span><span class="na">expandX</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameText</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">row</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressText</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><img src="/assets/wiki/images/expand.png" alt="images/expand.png" /></p>
+
+<p>The red lines show the cell bounds and the green lines show the widget bounds. Note that the left column has received all of the extra space in the x direction. Only one cell needs to have expand to cause the entire column or row to expand. If multiple columns expand, the extra space is distributed evenly.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameLabel</span><span class="o">).</span><span class="na">expandX</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameText</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">100</span><span class="o">).</span><span class="na">expandX</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">row</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressText</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><img src="/assets/wiki/images/expandmultiple.png" alt="images/expandmultiple.png" /></p>
+
+<p>Expand also works in the y direction via the <code class="language-plaintext highlighter-rouge">expandY</code> method. The <code class="language-plaintext highlighter-rouge">expand</code> method causes expand to happen in both directions.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameLabel</span><span class="o">).</span><span class="na">expand</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameText</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">row</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressText</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><img src="/assets/wiki/images/expandboth.png" alt="images/expandboth.png" /></p>
+
+<h3 id="alignment">Alignment</h3>
+
+<p>Similar to aligning the logical table, a widget can be aligned inside the cell.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameLabel</span><span class="o">).</span><span class="na">expand</span><span class="o">().</span><span class="na">bottom</span><span class="o">().</span><span class="na">right</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameText</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">100</span><span class="o">).</span><span class="na">top</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">row</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressText</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><img src="/assets/wiki/images/align.png" alt="images/align.png" /></p>
+
+<h3 id="fill">Fill</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">fill</code> method causes a <strong>widget to be sized to the cell</strong>. Like expand, there are also <code class="language-plaintext highlighter-rouge">fillX</code> and <code class="language-plaintext highlighter-rouge">fillY</code> methods.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameLabel</span><span class="o">).</span><span class="na">expand</span><span class="o">().</span><span class="na">bottom</span><span class="o">().</span><span class="na">fillX</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameText</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">100</span><span class="o">).</span><span class="na">top</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">row</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressText</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><img src="/assets/wiki/images/fill.png" alt="images/fill.png" /></p>
+
+<p>Note the red cell lines are drawn on top of the green widget lines.</p>
+
+<h2 id="widget-size">Widget size</h2>
+
+<p>By default, the table attempts to size widgets to their preferred size. If the widgets don’t fit, they are sized between their preferred size and their minimum size, with widgets that have a larger preferred size receiving more space. If the widgets don’t fit at their minimum size then the layout is broken and widgets may overlap. The <code class="language-plaintext highlighter-rouge">fill</code> methods won’t make a widget larger than the widget’s maximum size.</p>
+
+<p>It is a common beginner’s mistake to attempt to size or position a widget in a table by setting the size on the widget. The table sizes and positions its children using their preferred, minimum, or maximum size, so the table will overwrite any size or position set previously.</p>
+
+<p>Widgets do not provide setters for their preferred, minimum, or maximum size. These values are typically computed by the widget, so would be confusing if they could also be set explicitly. Also, it is not advised to subclass a widget to change these values. Instead, set the <strong>preferred, minimum, or maximum size</strong> on the cell containing the widget and your value will be used instead of the widget’s value.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameText</span><span class="o">).</span><span class="na">minWidth</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">row</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressText</span><span class="o">).</span><span class="na">prefWidth</span><span class="o">(</span><span class="mi">999</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><img src="/assets/wiki/images/size.png" alt="images/size.png" /></p>
+
+<p>Here the <code class="language-plaintext highlighter-rouge">prefWidth</code> of 999 is larger than the table, so it is sized down to fit.</p>
+
+<p><code class="language-plaintext highlighter-rouge">width</code> is a shortcut method for setting <code class="language-plaintext highlighter-rouge">minWidth</code>, <code class="language-plaintext highlighter-rouge">prefWidth</code>, and <code class="language-plaintext highlighter-rouge">maxWidth</code> to the same value. <code class="language-plaintext highlighter-rouge">height</code> is a shortcut method for setting <code class="language-plaintext highlighter-rouge">minHeight</code>, <code class="language-plaintext highlighter-rouge">prefHeight</code>, and <code class="language-plaintext highlighter-rouge">maxHeight</code> to the same value. The <code class="language-plaintext highlighter-rouge">size</code> method takes a width and a height and sets all six properties.</p>
+
+<h3 id="padding">Padding</h3>
+
+<p>Padding is <strong>extra space around the edges</strong> of a cell.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameText</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">100</span><span class="o">).</span><span class="na">padBottom</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">row</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressText</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">100</span><span class="o">).</span><span class="na">pad</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><img src="/assets/wiki/images/pad.png" alt="images/pad.png" /></p>
+
+<p>Note that padding between cells combines, so there are 20 pixels between the text fields. The debug lines don’t necessarily show which cell the padding comes from, since it is not important for the layout of the table.</p>
+
+<p>Padding can also be applied to the edges of the table.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">table</span><span class="o">.</span><span class="na">pad</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h3 id="spacing">Spacing</h3>
+
+<p>Like padding, spacing is extra space around the edges of a cell. However, <strong>spacing between cells does not combine</strong>, instead the larger of the two is used. Also, spacing is not applied at the edge of the table. Spacing makes it easy to have consistent space between cells, eg for forms.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameText</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">100</span><span class="o">).</span><span class="na">spaceBottom</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">row</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressText</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">100</span><span class="o">).</span><span class="na">space</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><img src="/assets/wiki/images/space.png" alt="images/space.png" /></p>
+
+<p>Note that the spacing between cells doesn’t combine, so there are 10 pixels between the text fields. Also note that there is no spacing under the bottom text field because spacing isn’t applied around the edge of the table.</p>
+
+<h3 id="colspan">Colspan</h3>
+
+<p><strong>A cell can span multiple columns</strong>.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameText</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">100</span><span class="o">).</span><span class="na">spaceBottom</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">row</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressLabel</span><span class="o">).</span><span class="na">colspan</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><img src="/assets/wiki/images/colspan.png" alt="images/colspan.png" /></p>
+
+<p>Note that there is no rowspan. To acheive this, use a nested table.</p>
+
+<h3 id="uniform">Uniform</h3>
+
+<p>Cells with <code class="language-plaintext highlighter-rouge">uniform</code> set to true will be the same size.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameLabel</span><span class="o">).</span><span class="na">uniform</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameText</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">100</span><span class="o">).</span><span class="na">uniform</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">row</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressText</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><img src="/assets/wiki/images/uniform.png" alt="images/uniform.png" /></p>
+
+<h2 id="defaults">Defaults</h2>
+
+<h3 id="cell-defaults">Cell defaults</h3>
+
+<p>Often many cells have the same properties, so setting the default properties for all cells can greatly reduce the code needed for a layout. The <code class="language-plaintext highlighter-rouge">defaults</code> method on the table returns a cell whose properties are the <strong>defaults for all cells</strong>.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">table</span><span class="o">.</span><span class="na">defaults</span><span class="o">().</span><span class="na">width</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameText</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">row</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressText</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><img src="/assets/wiki/images/defaults.png" alt="images/defaults.png" /></p>
+
+<h3 id="column-defaults">Column defaults</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">columnDefaults</code> method on the table returns a cell whose properties are the <strong>defaults for all cells in that column</strong>. Any properties set here will override the cell default properties. Columns are indexed starting at 0.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">table</span><span class="o">.</span><span class="na">columnDefaults</span><span class="o">(</span><span class="mi">1</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="mi">150</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameText</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">row</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressText</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><img src="/assets/wiki/images/columndefaults.png" alt="images/columndefaults.png" /></p>
+
+<h3 id="row-defaults">Row defaults</h3>
+
+<p>When the <code class="language-plaintext highlighter-rouge">row</code> method is called, it returns a cell whose properties are the defaults for all cells in that row. Any properties set here will override both the cell default properties and the column default properties. Note it is allowed to call <code class="language-plaintext highlighter-rouge">row</code> before any cells are added. This allows the first row to have row default properties.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">table</span><span class="o">.</span><span class="na">row</span><span class="o">().</span><span class="na">height</span><span class="o">(</span><span class="mi">50</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameText</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">row</span><span class="o">().</span><span class="na">height</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressText</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><img src="/assets/wiki/images/rowdefaults.png" alt="images/rowdefaults.png" /></p>
+
+<h2 id="values">Values</h2>
+
+<p>All values for sizes, padding, etc are actually <code class="language-plaintext highlighter-rouge">Value</code> instances. When numeric values are used, <code class="language-plaintext highlighter-rouge">Value.Fixed</code> is used. <code class="language-plaintext highlighter-rouge">Value</code> allows for more flexibility, eg to base a size or padding on another widget.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameLabel</span><span class="o">);</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameText</span><span class="o">).</span><span class="na">pad</span><span class="o">(</span><span class="k">new</span> <span class="nc">Value</span><span class="o">.</span><span class="na">Fixed</span><span class="o">(</span><span class="mi">10</span><span class="o">));</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">row</span><span class="o">();</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressLabel</span><span class="o">).</span><span class="na">width</span><span class="o">(</span><span class="nc">Value</span><span class="o">.</span><span class="na">percentWidth</span><span class="o">(</span><span class="mf">0.33f</span><span class="o">));</span>
+    <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addressText</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h2 id="overlapping-widgets">Overlapping widgets</h2>
+
+<p>Table excels at sizing and positioning widgets that do not overlap. To layer widgets on top of each other, a <a href="/wiki/graphics/2d/scene2d/scene2d-ui#stack">Stack</a> can be used.</p>
+
+<h2 id="inserting-cells">Inserting cells</h2>
+
+<p>Table allows a cell’s widget to be changed or removed (by setting it to null), but Table currently does not allow cells to be inserted in the middle or removed. To do that, the Table needs to be rebuilt: call <code class="language-plaintext highlighter-rouge">clearChildren</code> to remove all children and cells, then add them all to the Table again.</p>
+
+<p>If inserting or removing cells is needed, <a href="/wiki/graphics/2d/scene2d/scene2d-ui#verticalgroup">VerticalGroup</a> or <a href="/wiki/graphics/2d/scene2d/scene2d-ui#horizontalgroup">HorizontalGroup</a> can be used.</p>
+
+<h1 id="notes">Notes</h1>
+
+<ul>
+  <li>By default, positions and sizes are rounded to integers. This may cause problems when using small values.
+Use <a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java#L669">Table#setRound(false)</a> to change it.</li>
+</ul>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

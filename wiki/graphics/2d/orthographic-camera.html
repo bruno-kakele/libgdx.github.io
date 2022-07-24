@@ -1,0 +1,876 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Orthographic camera - libGDX</title>
+
+  <meta name="description" content="This page presents the OrthographicCamera class and usage. The orthographic camera is to be used in 2D environments only as it implements a parallel (orthographic) projection and there will be...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Orthographic camera">
+<meta property="og:url" content="https://libgdx.com/wiki/graphics/2d/orthographic-camera">
+
+
+  <meta property="og:description" content="This page presents the OrthographicCamera class and usage. The orthographic camera is to be used in 2D environments only as it implements a parallel (orthographic) projection and there will be...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/graphics/2d/orthographic-camera">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Orthographic camera
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/graphics/2d/orthographic-camera.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/graphics/2d/orthographic-camera.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <p>This page presents the <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/OrthographicCamera.html">OrthographicCamera</a> class and usage.
+The orthographic camera is to be used in 2D environments only as it implements a parallel (orthographic) projection and there will be no scale factor for the final image regardless where the objects are placed in the world.</p>
+
+<p>Code for a simple example of a Camera zooming and moving is available on <a href="https://libgdxinfo.wordpress.com/basic_camera/">LibGDX.info here</a></p>
+
+<h1 id="description">Description</h1>
+
+<p>The Camera class operates as a very simple real world camera. It is possible to</p>
+<ul>
+  <li>move and rotate the camera around,</li>
+  <li>zoom in and out,</li>
+  <li>change the viewport,</li>
+  <li>project/unproject points to and from window coordinate/ world space</li>
+</ul>
+
+<p>Using the camera is the easy way to move around a game world without having to manually operate on the matrices. All the projection and view matrix operations are hidden in the implementation.</p>
+
+<p>The position field referes to the position of the center of the camera.
+The camera extends the selected viewport of the world so this matches the screen size of the device.</p>
+
+<p>The following little app demonstrates the use of a simple <code class="language-plaintext highlighter-rouge">OrthographicCamera</code> to move around a flat world.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.badlogic.gdx.ApplicationListener</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.Gdx</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.Input</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.backends.lwjgl.LwjglApplication</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.GL20</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.OrthographicCamera</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.Texture</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.g2d.Sprite</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.g2d.SpriteBatch</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.math.MathUtils</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrthographicCameraExample</span> <span class="kd">implements</span> <span class="nc">ApplicationListener</span> <span class="o">{</span>
+
+	<span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">WORLD_WIDTH</span> <span class="o">=</span> <span class="mi">100</span><span class="o">;</span>
+	<span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">WORLD_HEIGHT</span> <span class="o">=</span> <span class="mi">100</span><span class="o">;</span>
+
+	<span class="kd">private</span> <span class="nc">OrthographicCamera</span> <span class="n">cam</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">SpriteBatch</span> <span class="n">batch</span><span class="o">;</span>
+
+	<span class="kd">private</span> <span class="nc">Sprite</span> <span class="n">mapSprite</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">float</span> <span class="n">rotationSpeed</span><span class="o">;</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">create</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">rotationSpeed</span> <span class="o">=</span> <span class="mf">0.5f</span><span class="o">;</span>
+
+		<span class="n">mapSprite</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Sprite</span><span class="o">(</span><span class="k">new</span> <span class="nc">Texture</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"sc_map.png"</span><span class="o">)));</span>
+		<span class="n">mapSprite</span><span class="o">.</span><span class="na">setPosition</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+		<span class="n">mapSprite</span><span class="o">.</span><span class="na">setSize</span><span class="o">(</span><span class="no">WORLD_WIDTH</span><span class="o">,</span> <span class="no">WORLD_HEIGHT</span><span class="o">);</span>
+
+		<span class="kt">float</span> <span class="n">w</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getWidth</span><span class="o">();</span>
+		<span class="kt">float</span> <span class="n">h</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getHeight</span><span class="o">();</span>
+
+		<span class="c1">// Constructs a new OrthographicCamera, using the given viewport width and height</span>
+		<span class="c1">// Height is multiplied by aspect ratio.</span>
+		<span class="n">cam</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OrthographicCamera</span><span class="o">(</span><span class="mi">30</span><span class="o">,</span> <span class="mi">30</span> <span class="o">*</span> <span class="o">(</span><span class="n">h</span> <span class="o">/</span> <span class="n">w</span><span class="o">));</span>
+
+		<span class="n">cam</span><span class="o">.</span><span class="na">position</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">cam</span><span class="o">.</span><span class="na">viewportWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">,</span> <span class="n">cam</span><span class="o">.</span><span class="na">viewportHeight</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+		<span class="n">cam</span><span class="o">.</span><span class="na">update</span><span class="o">();</span>
+
+		<span class="n">batch</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SpriteBatch</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">render</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">handleInput</span><span class="o">();</span>
+		<span class="n">cam</span><span class="o">.</span><span class="na">update</span><span class="o">();</span>
+		<span class="n">batch</span><span class="o">.</span><span class="na">setProjectionMatrix</span><span class="o">(</span><span class="n">cam</span><span class="o">.</span><span class="na">combined</span><span class="o">);</span>
+
+		<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glClear</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_COLOR_BUFFER_BIT</span><span class="o">);</span>
+
+		<span class="n">batch</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+		<span class="n">mapSprite</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">batch</span><span class="o">);</span>
+		<span class="n">batch</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">handleInput</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isKeyPressed</span><span class="o">(</span><span class="nc">Input</span><span class="o">.</span><span class="na">Keys</span><span class="o">.</span><span class="na">A</span><span class="o">))</span> <span class="o">{</span>
+			<span class="n">cam</span><span class="o">.</span><span class="na">zoom</span> <span class="o">+=</span> <span class="mf">0.02</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isKeyPressed</span><span class="o">(</span><span class="nc">Input</span><span class="o">.</span><span class="na">Keys</span><span class="o">.</span><span class="na">Q</span><span class="o">))</span> <span class="o">{</span>
+			<span class="n">cam</span><span class="o">.</span><span class="na">zoom</span> <span class="o">-=</span> <span class="mf">0.02</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isKeyPressed</span><span class="o">(</span><span class="nc">Input</span><span class="o">.</span><span class="na">Keys</span><span class="o">.</span><span class="na">LEFT</span><span class="o">))</span> <span class="o">{</span>
+			<span class="n">cam</span><span class="o">.</span><span class="na">translate</span><span class="o">(-</span><span class="mi">3</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isKeyPressed</span><span class="o">(</span><span class="nc">Input</span><span class="o">.</span><span class="na">Keys</span><span class="o">.</span><span class="na">RIGHT</span><span class="o">))</span> <span class="o">{</span>
+			<span class="n">cam</span><span class="o">.</span><span class="na">translate</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isKeyPressed</span><span class="o">(</span><span class="nc">Input</span><span class="o">.</span><span class="na">Keys</span><span class="o">.</span><span class="na">DOWN</span><span class="o">))</span> <span class="o">{</span>
+			<span class="n">cam</span><span class="o">.</span><span class="na">translate</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="o">-</span><span class="mi">3</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isKeyPressed</span><span class="o">(</span><span class="nc">Input</span><span class="o">.</span><span class="na">Keys</span><span class="o">.</span><span class="na">UP</span><span class="o">))</span> <span class="o">{</span>
+			<span class="n">cam</span><span class="o">.</span><span class="na">translate</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isKeyPressed</span><span class="o">(</span><span class="nc">Input</span><span class="o">.</span><span class="na">Keys</span><span class="o">.</span><span class="na">W</span><span class="o">))</span> <span class="o">{</span>
+			<span class="n">cam</span><span class="o">.</span><span class="na">rotate</span><span class="o">(-</span><span class="n">rotationSpeed</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isKeyPressed</span><span class="o">(</span><span class="nc">Input</span><span class="o">.</span><span class="na">Keys</span><span class="o">.</span><span class="na">E</span><span class="o">))</span> <span class="o">{</span>
+			<span class="n">cam</span><span class="o">.</span><span class="na">rotate</span><span class="o">(</span><span class="n">rotationSpeed</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+		<span class="o">}</span>
+
+		<span class="n">cam</span><span class="o">.</span><span class="na">zoom</span> <span class="o">=</span> <span class="nc">MathUtils</span><span class="o">.</span><span class="na">clamp</span><span class="o">(</span><span class="n">cam</span><span class="o">.</span><span class="na">zoom</span><span class="o">,</span> <span class="mf">0.1f</span><span class="o">,</span> <span class="mi">100</span><span class="o">/</span><span class="n">cam</span><span class="o">.</span><span class="na">viewportWidth</span><span class="o">);</span>
+
+		<span class="kt">float</span> <span class="n">effectiveViewportWidth</span> <span class="o">=</span> <span class="n">cam</span><span class="o">.</span><span class="na">viewportWidth</span> <span class="o">*</span> <span class="n">cam</span><span class="o">.</span><span class="na">zoom</span><span class="o">;</span>
+		<span class="kt">float</span> <span class="n">effectiveViewportHeight</span> <span class="o">=</span> <span class="n">cam</span><span class="o">.</span><span class="na">viewportHeight</span> <span class="o">*</span> <span class="n">cam</span><span class="o">.</span><span class="na">zoom</span><span class="o">;</span>
+
+		<span class="n">cam</span><span class="o">.</span><span class="na">position</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="nc">MathUtils</span><span class="o">.</span><span class="na">clamp</span><span class="o">(</span><span class="n">cam</span><span class="o">.</span><span class="na">position</span><span class="o">.</span><span class="na">x</span><span class="o">,</span> <span class="n">effectiveViewportWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">,</span> <span class="mi">100</span> <span class="o">-</span> <span class="n">effectiveViewportWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">);</span>
+		<span class="n">cam</span><span class="o">.</span><span class="na">position</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="nc">MathUtils</span><span class="o">.</span><span class="na">clamp</span><span class="o">(</span><span class="n">cam</span><span class="o">.</span><span class="na">position</span><span class="o">.</span><span class="na">y</span><span class="o">,</span> <span class="n">effectiveViewportHeight</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">,</span> <span class="mi">100</span> <span class="o">-</span> <span class="n">effectiveViewportHeight</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">resize</span><span class="o">(</span><span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">cam</span><span class="o">.</span><span class="na">viewportWidth</span> <span class="o">=</span> <span class="mi">30</span><span class="n">f</span><span class="o">;</span>
+		<span class="n">cam</span><span class="o">.</span><span class="na">viewportHeight</span> <span class="o">=</span> <span class="mi">30</span><span class="n">f</span> <span class="o">*</span> <span class="n">height</span><span class="o">/</span><span class="n">width</span><span class="o">;</span>
+		<span class="n">cam</span><span class="o">.</span><span class="na">update</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">resume</span><span class="o">()</span> <span class="o">{</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">dispose</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">mapSprite</span><span class="o">.</span><span class="na">getTexture</span><span class="o">().</span><span class="na">dispose</span><span class="o">();</span>
+		<span class="n">batch</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">pause</span><span class="o">()</span> <span class="o">{</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">new</span> <span class="nf">LwjglApplication</span><span class="o">(</span><span class="k">new</span> <span class="nc">OrthographicCameraExample</span><span class="o">());</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p>The above class is the libGDX application that will use the orthographic camera to move around the world. Our world size is in arbitrary units that we can define however we want to. In this specific case, our world is 100x100 units.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">WORLD_WIDTH</span> <span class="o">=</span> <span class="mi">100</span><span class="o">;</span>
+    <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">WORLD_HEIGHT</span> <span class="o">=</span> <span class="mi">100</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p>Many people make the mistake of thinking in pixels when it comes to their world, and this is something that you should avoid doing. It leads to unnecessary multiplying and dividing by constants, having weird “Pixel per unit” ratios dotted around your code, poor understanding of the pipeline and it confuses you!  There are many other problems, which can be easily avoided when you stop “thinking” in pixels.</p>
+
+<p>What are these units though? What do they mean? How will I know what size to make objects? How many units are displayed on the screen?  We will get to that shortly! Stick tight.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">private</span> <span class="nc">OrthographicCamera</span> <span class="n">cam</span><span class="o">;</span>  <span class="err">#</span><span class="mi">1</span>
+	<span class="kd">private</span> <span class="nc">SpriteBatch</span> <span class="n">batch</span><span class="o">;</span>       <span class="err">#</span><span class="mi">2</span>
+
+	<span class="kd">private</span> <span class="nc">Sprite</span> <span class="n">mapSprite</span><span class="o">;</span>        <span class="err">#</span><span class="mi">3</span>
+	<span class="kd">private</span> <span class="kt">float</span> <span class="n">rotationSpeed</span><span class="o">;</span>     <span class="err">#</span><span class="mi">4</span>
+</code></pre></div></div>
+
+<p><strong>#1</strong> - The <code class="language-plaintext highlighter-rouge">OrthographicCamera</code> instance we will control to look at the world.</p>
+
+<p><strong>#2</strong> - The <code class="language-plaintext highlighter-rouge">SpriteBatch</code> instance we will use to render our world</p>
+
+<p><strong>#3</strong> - A <code class="language-plaintext highlighter-rouge">Sprite</code> that we will use to draw our world map</p>
+
+<p><strong>#4</strong> - Rotation speed for rotating our camera</p>
+
+<hr />
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">create</span><span class="o">()</span> <span class="o">{</span>
+	<span class="n">rotationSpeed</span> <span class="o">=</span> <span class="mf">0.5f</span><span class="o">;</span>                                                    <span class="err">#</span><span class="mi">1</span>
+
+	<span class="n">mapSprite</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Sprite</span><span class="o">(</span><span class="k">new</span> <span class="nc">Texture</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"sc_map.png"</span><span class="o">)));</span>   <span class="err">#</span><span class="mi">2</span>
+	<span class="n">mapSprite</span><span class="o">.</span><span class="na">setPosition</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>                                             <span class="err">#</span><span class="mi">3</span>
+	<span class="n">mapSprite</span><span class="o">.</span><span class="na">setSize</span><span class="o">(</span><span class="no">WORLD_WIDTH</span><span class="o">,</span> <span class="no">WORLD_HEIGHT</span><span class="o">);</span>                            <span class="err">#</span><span class="mi">4</span>
+
+	<span class="kt">float</span> <span class="n">w</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getWidth</span><span class="o">();</span>                                       <span class="err">#</span><span class="mi">5</span>
+	<span class="kt">float</span> <span class="n">h</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getHeight</span><span class="o">();</span>                                      <span class="err">#</span><span class="mi">6</span>
+	<span class="n">cam</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OrthographicCamera</span><span class="o">(</span><span class="mi">30</span><span class="o">,</span> <span class="mi">30</span> <span class="o">*</span> <span class="o">(</span><span class="n">h</span> <span class="o">/</span> <span class="n">w</span><span class="o">));</span>                          <span class="err">#</span><span class="mi">7</span>
+	<span class="n">cam</span><span class="o">.</span><span class="na">position</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">cam</span><span class="o">.</span><span class="na">viewportWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">,</span> <span class="n">cam</span><span class="o">.</span><span class="na">viewportHeight</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>    <span class="err">#</span><span class="mi">8</span>
+	<span class="n">cam</span><span class="o">.</span><span class="na">update</span><span class="o">();</span>                                                            <span class="err">#</span><span class="mi">9</span>
+
+	<span class="n">batch</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SpriteBatch</span><span class="o">();</span>                                               <span class="err">#</span><span class="mi">10</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">create</code> method is called when we create a new instance of our ApplicationListener, and it is where we initialize our variables</p>
+
+<p><strong>#1</strong> - Sets the current rotation speed to 0.5 degree.</p>
+
+<p><strong>#2</strong> - Creates our <code class="language-plaintext highlighter-rouge">Sprite</code>, from a new Texture that uses the file: <code class="language-plaintext highlighter-rouge">sc_map.png</code> Download the file <a href="https://user-images.githubusercontent.com/12996613/34653163-6a5c206c-f3e8-11e7-8913-87738e62bc81.png">here</a>, rename it to <code class="language-plaintext highlighter-rouge">sc_map.png</code> and place it in the <code class="language-plaintext highlighter-rouge">assets/</code> directory.</p>
+
+<p><strong>#3</strong> - We set the position of our <code class="language-plaintext highlighter-rouge">mapSprite</code> to <code class="language-plaintext highlighter-rouge">0,0</code>.(This isn’t strictly required as the Sprite has default x,y of <code class="language-plaintext highlighter-rouge">0,0</code> anyway.)</p>
+
+<p><strong>#4</strong> - We set the size of <code class="language-plaintext highlighter-rouge">mapSprite</code>, with width of <code class="language-plaintext highlighter-rouge">WORLD_WIDTH</code> and height of <code class="language-plaintext highlighter-rouge">WORLD_HEIGHT</code>. So our sprite now has dimensions of 100x100, or the size of our world.</p>
+
+<p><strong>#5</strong> - We create a local variable that has the value of the current <code class="language-plaintext highlighter-rouge">width</code> of our application display. (This is in pixels)</p>
+
+<p><strong>#6</strong> - We create a local variable that has the value of the current <code class="language-plaintext highlighter-rouge">height</code> of our application display. (This is in pixels)</p>
+
+<p><strong>#7</strong> - We Create the <code class="language-plaintext highlighter-rouge">OrthographicCamera</code>. The 2 parameters specify the width and height of the viewport that will be created. These values determine how much of our world we can see in each axis.</p>
+
+<p>In our example, we use <code class="language-plaintext highlighter-rouge">30</code> for our viewport width, and <code class="language-plaintext highlighter-rouge">30 * (h / w)</code> for our viewport height. The width is trivial, we can see 30 units in the X axis. For the viewport height we use <code class="language-plaintext highlighter-rouge">30</code> multiplied by the <code class="language-plaintext highlighter-rouge">aspect ratio</code> of our display. This is so we see objects we draw in correct proportions. Imagine if we ignored the aspect ratio, and just went with viewport width and height of 30,  unless we have a square display, which we most likely don’t, when we render an object that has dimensions of 30x30 for example, it would show as a squished rectangle with the same shape as our display. How can an object that is 30x30 not be a square?  This is because we assumed 30 viewport width and 30 viewport height, which doesn’t match the aspect ratio of our device.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Some examples -
+
+If we created our camera with viewport width of 100 and viewport height of 100 ('new OrthographicCamera(100, 100)') and centered it correctly, we would be able to see the 'whole' map, our 'whole' world at once.
+
+If we created our camera with viewport width of 100 and viewport height of 50 ('new OrthographicCamera(100, 50)') we would be able to see 'half' of the map at any given time
+
+If we created our camera with viewport width of 50 and viewport height of 50 ('new OrthographicCamera(50, 50)') we would be able to see a 'quarter' of the map at any given time
+</code></pre></div></div>
+
+<p><strong>#8</strong> - Setting the camera’s initial position to the bottom left of the map. But… the camera’s position is in the center of the camera.</p>
+
+<p>So we need to offset the camera’s position by +half viewport width and +half viewport height so that the bottom left of our camera is actually at 0,0.</p>
+
+<p><strong>#9</strong> - Update our camera! This step is vital to call whenever we have manipulated our camera as it updates all the matrices under the hood.</p>
+
+<p><strong>#10</strong> - Create our <code class="language-plaintext highlighter-rouge">SpriteBatch</code> instance.</p>
+
+<p>And we are setup! So let’s get rendering and manipulating the camera.</p>
+
+<hr />
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">render</span><span class="o">()</span> <span class="o">{</span>
+	<span class="n">handleInput</span><span class="o">();</span>                             <span class="err">#</span><span class="mi">1</span>
+	<span class="n">cam</span><span class="o">.</span><span class="na">update</span><span class="o">();</span>                              <span class="err">#</span><span class="mi">2</span>                             
+	<span class="n">batch</span><span class="o">.</span><span class="na">setProjectionMatrix</span><span class="o">(</span><span class="n">cam</span><span class="o">.</span><span class="na">combined</span><span class="o">);</span>   <span class="err">#</span><span class="mi">3</span>
+
+	<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glClear</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_COLOR_BUFFER_BIT</span><span class="o">);</span>  <span class="err">#</span><span class="mi">4</span>
+
+	<span class="n">batch</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>                             <span class="err">#</span><span class="mi">5</span>
+	<span class="n">mapSprite</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">batch</span><span class="o">);</span>                     <span class="err">#</span><span class="mi">6</span>
+	<span class="n">batch</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>                               <span class="err">#</span><span class="mi">7</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>#1</strong> - Controls the camera by updating its position, zooming, rotation based on different keys being pressed.</p>
+
+<p><strong>#2</strong> - Updates our <code class="language-plaintext highlighter-rouge">OrthographicCamera</code>, we have just manipulated it with <code class="language-plaintext highlighter-rouge">handleInput()</code> method, so we must remember to call the <code class="language-plaintext highlighter-rouge">update()</code> method.</p>
+
+<p><strong>#3</strong> - Updates our <code class="language-plaintext highlighter-rouge">SpriteBatch</code> instance with our Camera’s view and projection matrices.</p>
+
+<p><strong>#4</strong> - Clears the screen (actually the colour buffer).</p>
+
+<p><strong>#5</strong> - Begin our <code class="language-plaintext highlighter-rouge">SpriteBatch</code></p>
+
+<p><strong>#6</strong> - Draw our mapSprite!</p>
+
+<p><strong>#7</strong> - End our <code class="language-plaintext highlighter-rouge">SpriteBatch</code></p>
+
+<hr />
+
+<p>Let’s take a deeper look at controlling our camera, which is all handled in our <code class="language-plaintext highlighter-rouge">handleInput()</code> method.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">handleInput</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isKeyPressed</span><span class="o">(</span><span class="nc">Input</span><span class="o">.</span><span class="na">Keys</span><span class="o">.</span><span class="na">A</span><span class="o">))</span> <span class="o">{</span>
+			<span class="n">cam</span><span class="o">.</span><span class="na">zoom</span> <span class="o">+=</span> <span class="mf">0.02</span><span class="o">;</span>
+			<span class="c1">//If the A Key is pressed, add 0.02 to the Camera's Zoom</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isKeyPressed</span><span class="o">(</span><span class="nc">Input</span><span class="o">.</span><span class="na">Keys</span><span class="o">.</span><span class="na">Q</span><span class="o">))</span> <span class="o">{</span>
+			<span class="n">cam</span><span class="o">.</span><span class="na">zoom</span> <span class="o">-=</span> <span class="mf">0.02</span><span class="o">;</span>
+			<span class="c1">//If the Q Key is pressed, subtract 0.02 from the Camera's Zoom</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isKeyPressed</span><span class="o">(</span><span class="nc">Input</span><span class="o">.</span><span class="na">Keys</span><span class="o">.</span><span class="na">LEFT</span><span class="o">))</span> <span class="o">{</span>
+			<span class="n">cam</span><span class="o">.</span><span class="na">translate</span><span class="o">(-</span><span class="mi">3</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+			<span class="c1">//If the LEFT Key is pressed, translate the camera -3 units in the X-Axis</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isKeyPressed</span><span class="o">(</span><span class="nc">Input</span><span class="o">.</span><span class="na">Keys</span><span class="o">.</span><span class="na">RIGHT</span><span class="o">))</span> <span class="o">{</span>
+			<span class="n">cam</span><span class="o">.</span><span class="na">translate</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+			<span class="c1">//If the RIGHT Key is pressed, translate the camera 3 units in the X-Axis</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isKeyPressed</span><span class="o">(</span><span class="nc">Input</span><span class="o">.</span><span class="na">Keys</span><span class="o">.</span><span class="na">DOWN</span><span class="o">))</span> <span class="o">{</span>
+			<span class="n">cam</span><span class="o">.</span><span class="na">translate</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="o">-</span><span class="mi">3</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+			<span class="c1">//If the DOWN Key is pressed, translate the camera -3 units in the Y-Axis</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isKeyPressed</span><span class="o">(</span><span class="nc">Input</span><span class="o">.</span><span class="na">Keys</span><span class="o">.</span><span class="na">UP</span><span class="o">))</span> <span class="o">{</span>
+			<span class="n">cam</span><span class="o">.</span><span class="na">translate</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+			<span class="c1">//If the UP Key is pressed, translate the camera 3 units in the Y-Axis</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isKeyPressed</span><span class="o">(</span><span class="nc">Input</span><span class="o">.</span><span class="na">Keys</span><span class="o">.</span><span class="na">W</span><span class="o">))</span> <span class="o">{</span>
+			<span class="n">cam</span><span class="o">.</span><span class="na">rotate</span><span class="o">(-</span><span class="n">rotationSpeed</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+			<span class="c1">//If the W Key is pressed, rotate the camera by -rotationSpeed around the Z-Axis</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isKeyPressed</span><span class="o">(</span><span class="nc">Input</span><span class="o">.</span><span class="na">Keys</span><span class="o">.</span><span class="na">E</span><span class="o">))</span> <span class="o">{</span>
+			<span class="n">cam</span><span class="o">.</span><span class="na">rotate</span><span class="o">(</span><span class="n">rotationSpeed</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+			<span class="c1">//If the E Key is pressed, rotate the camera by rotationSpeed around the Z-Axis</span>
+		<span class="o">}</span>
+
+		<span class="n">cam</span><span class="o">.</span><span class="na">zoom</span> <span class="o">=</span> <span class="nc">MathUtils</span><span class="o">.</span><span class="na">clamp</span><span class="o">(</span><span class="n">cam</span><span class="o">.</span><span class="na">zoom</span><span class="o">,</span> <span class="mf">0.1f</span><span class="o">,</span> <span class="mi">100</span><span class="o">/</span><span class="n">cam</span><span class="o">.</span><span class="na">viewportWidth</span><span class="o">);</span>
+
+		<span class="kt">float</span> <span class="n">effectiveViewportWidth</span> <span class="o">=</span> <span class="n">cam</span><span class="o">.</span><span class="na">viewportWidth</span> <span class="o">*</span> <span class="n">cam</span><span class="o">.</span><span class="na">zoom</span><span class="o">;</span>
+		<span class="kt">float</span> <span class="n">effectiveViewportHeight</span> <span class="o">=</span> <span class="n">cam</span><span class="o">.</span><span class="na">viewportHeight</span> <span class="o">*</span> <span class="n">cam</span><span class="o">.</span><span class="na">zoom</span><span class="o">;</span>
+
+		<span class="n">cam</span><span class="o">.</span><span class="na">position</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="nc">MathUtils</span><span class="o">.</span><span class="na">clamp</span><span class="o">(</span><span class="n">cam</span><span class="o">.</span><span class="na">position</span><span class="o">.</span><span class="na">x</span><span class="o">,</span> <span class="n">effectiveViewportWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">,</span> <span class="mi">100</span> <span class="o">-</span> <span class="n">effectiveViewportWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">);</span>
+		<span class="n">cam</span><span class="o">.</span><span class="na">position</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="nc">MathUtils</span><span class="o">.</span><span class="na">clamp</span><span class="o">(</span><span class="n">cam</span><span class="o">.</span><span class="na">position</span><span class="o">.</span><span class="na">y</span><span class="o">,</span> <span class="n">effectiveViewportHeight</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">,</span> <span class="mi">100</span> <span class="o">-</span> <span class="n">effectiveViewportHeight</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">);</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<p>So we can see that this method polls Keys, if a certain key is pressed, we do something to the camera.</p>
+
+<p>The last 5 lines are responsible for keeping the camera within the bounds of our world.</p>
+
+<p>We need to make sure the camera’s zoom does not grow or shrink to values that would invert our world, or show too much of our world. To do this, we can calculate the <code class="language-plaintext highlighter-rouge">effectiveViewportWidth</code> and <code class="language-plaintext highlighter-rouge">effectiveViewportHeight</code>, which are just the viewportWidth/height * zoom (this gives us what we can see in the world given the current zoom). We can then <code class="language-plaintext highlighter-rouge">clamp</code> the value of the camera’s zoom to values we require. <code class="language-plaintext highlighter-rouge">0.1f</code> to prevent being too zoomed in. <code class="language-plaintext highlighter-rouge">100/cam.viewportWidth</code> to prevent us being able to see more than the world’s entire width.</p>
+
+<p>The last two lines are responsible for making sure we can’t translate out of the world boundaries. &lt; 0, or more than 100 in either Axis.</p>
+
+<hr />
+
+<p>What to do when the application changes size?  This is when you implement different strategies for handling devices with different resolutions/aspect ratios. I will include a few basic strategies to give you the basic idea.</p>
+
+<p>If you want a slightly higher level method of handling this, you should use viewports -&gt; <a href="/wiki/graphics/viewports">Wiki Article on Viewports</a></p>
+
+<p><em>The following resize strategy will ensure that you will always see 30 units in the x axis no matter what pixel-width your device has.</em></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">resize</span><span class="o">(</span><span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">cam</span><span class="o">.</span><span class="na">viewportWidth</span> <span class="o">=</span> <span class="mi">30</span><span class="n">f</span><span class="o">;</span>                 <span class="c1">// Viewport of 30 units!</span>
+		<span class="n">cam</span><span class="o">.</span><span class="na">viewportHeight</span> <span class="o">=</span> <span class="mi">30</span><span class="n">f</span> <span class="o">*</span> <span class="n">height</span><span class="o">/</span><span class="n">width</span><span class="o">;</span> <span class="c1">// Lets keep things in proportion.</span>
+		<span class="n">cam</span><span class="o">.</span><span class="na">update</span><span class="o">();</span>
+	<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p><em>The following resize strategy will show less/more of the world depending on the resolution</em></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">resize</span><span class="o">(</span><span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">cam</span><span class="o">.</span><span class="na">viewportWidth</span> <span class="o">=</span> <span class="n">width</span><span class="o">/</span><span class="mi">32</span><span class="n">f</span><span class="o">;</span>  <span class="c1">//We will see width/32f units!</span>
+		<span class="n">cam</span><span class="o">.</span><span class="na">viewportHeight</span> <span class="o">=</span> <span class="n">cam</span><span class="o">.</span><span class="na">viewportWidth</span> <span class="o">*</span> <span class="n">height</span><span class="o">/</span><span class="n">width</span><span class="o">;</span>
+		<span class="n">cam</span><span class="o">.</span><span class="na">update</span><span class="o">();</span>
+	<span class="o">}</span>
+
+</code></pre></div></div>
+
+<hr />
+
+<p>The main application to bootstrap the listener is a simple LWJGL application.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">new</span> <span class="nf">LwjglApplication</span><span class="o">(</span><span class="k">new</span> <span class="nc">OrthographicCameraExample</span><span class="o">());</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>The result is the following application:</p>
+
+<p><img src="/assets/wiki/images/orthographic-camera.png" alt="images/orthographic-camera.png" /></p>
+
+<p>Most of the time, one should not need to access the internals of a camera as the most common use-cases are covered by the following methods:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><em>Method</em></th>
+      <th style="text-align: left"><em>Description</em></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">lookAt(float x, float y, float z)</code></td>
+      <td style="text-align: left">Recalculates the direction of the camera to look at the point defined by the coordinates on all axes. - The z axis is ignored for 2D</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">translate(float x, float y, float z)</code></td>
+      <td style="text-align: left">Moves the camera by the given amount on each axis. - Note that z is ignored for the OrthographicCamera</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">rotate(float angle, float axisX, float axisY, float axisZ)</code></td>
+      <td style="text-align: left">Rotates the direction and up vector of this camera by the given angle around the given axis. The direction and up vector will not be orthogonalized. The angle is persisted so the camera will be rotated by <code class="language-plaintext highlighter-rouge">angle</code> relative to its previous rotation.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">update()</code></td>
+      <td style="text-align: left">Recalculates the projection and view matrix of the camera and the frustum planes</td>
+    </tr>
+  </tbody>
+</table>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

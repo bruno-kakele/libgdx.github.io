@@ -1,0 +1,773 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Tile maps - libGDX</title>
+
+  <meta name="description" content="Maps libGDX features a generic maps API. All map related classes can be found in the com.badlogic.gdx.maps (code) package. The root package contains the base classes, sub-packages contain specialized implementations...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Tile maps">
+<meta property="og:url" content="https://libgdx.com/wiki/graphics/2d/tile-maps">
+
+
+  <meta property="og:description" content="Maps libGDX features a generic maps API. All map related classes can be found in the com.badlogic.gdx.maps (code) package. The root package contains the base classes, sub-packages contain specialized implementations...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/graphics/2d/tile-maps">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Tile maps
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/graphics/2d/tile-maps.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/graphics/2d/tile-maps.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <h1 id="maps">Maps</h1>
+
+<p>libGDX features a generic maps API. All map related classes can be found in the <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/maps/package-use.html">com.badlogic.gdx.maps</a> <a href="https://github.com/libgdx/libgdx/tree/master/gdx/src/com/badlogic/gdx/maps">(code)</a> package. The root package contains the base classes, sub-packages contain specialized implementations for tile maps and other forms of maps.</p>
+
+<h2 id="base-classes">Base Classes</h2>
+<p>The set of base classes is meant to be generic so we can support not only tiled maps, but any 2D map format.</p>
+
+<p>A map is a set of layers. A layer contains a set of objects. Maps, layers and objects have properties, that depend on the format they’ve been loaded from. For some formats there are specialized map, layer and object implementations, more on that later. The class hierarchy of the base classes looks as follows:</p>
+
+<p><img src="/assets/wiki/images/maps-api.png" alt="images/maps-api.png" /></p>
+
+<h3 id="properties">Properties</h3>
+
+<p>Properties of maps, layers or objects are represented by 
+<a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/maps/MapProperties.html">MapProperties</a>
+<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/maps/MapProperties.java">(source)</a>. This class is essentially a hash map, with string keys and arbitrary values.</p>
+
+<p>Which key/value pairs are available for a map, layer or object depends on the format from which it was loaded. To access properties, you can simply do the following:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">map</span><span class="o">.</span><span class="na">getProperties</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"custom-property"</span><span class="o">,</span> <span class="nc">String</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="n">layer</span><span class="o">.</span><span class="na">getProperties</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"another-property"</span><span class="o">,</span> <span class="nc">Float</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="n">object</span><span class="o">.</span><span class="na">getProperties</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"foo"</span><span class="o">,</span> <span class="nc">Boolean</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Many of the supported editors allow you to specify such properties on maps, layers and objects. What specific type these properties have is format specific. When in doubt, load up your map in your libGDX application, with one of the map loaders, and inspect the properties of the objects you are interested in.</p>
+
+<h3 id="map-layers">Map Layers</h3>
+
+<p>Layers within a map are ordered and indexed, starting by index 0. You can access the layers of a map like this:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">MapLayer</span> <span class="n">layer</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="na">getLayers</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>You can also search a layer by name</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">MapLayer</span> <span class="n">layer</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="na">getLayers</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"my-layer"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>These getter methods will always return a MapLayer. Some layers may be specialized and offer more functionality, in which case you can simply cast:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">TiledMapTileLayer</span> <span class="n">tiledLayer</span> <span class="o">=</span> <span class="o">(</span><span class="nc">TiledMapTileLayer</span><span class="o">)</span><span class="n">map</span><span class="o">.</span><span class="na">getLayers</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>A layer has a few attribute that we try to normalize for every supported map format:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
+<span class="kt">float</span> <span class="n">opacity</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="na">getOpacity</span><span class="o">();</span>
+<span class="kt">boolean</span> <span class="n">isVisible</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="na">isVisible</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>You can also modify these which may have an effect on how the layer is rendered.</p>
+
+<p>In addition to these normalized attributes, you can also access the more generic properties, as described above.</p>
+
+<p>To get the objects within the layer, simply call the following:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">MapObjects</span> <span class="n">objects</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="na">getObjects</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>The <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/maps/MapObjects.html">MapObjects</a> <a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/maps/MapObjects.java">(code)</a> instance allows you to retrieve objects by name, index or type. You can also insert and remove objects on the fly.</p>
+
+<h3 id="map-objects">Map Objects</h3>
+
+<p>The API already provides a handful of specialized map objects, such as 
+<a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/maps/objects/CircleMapObject.html">CircleMapObject</a> <a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/maps/objects/CircleMapObject.java">(code)</a>,
+<a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/maps/objects/PolygonMapObject.html">PolygonMapObject</a> <a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/maps/objects/PolygonMapObject.java">(code)</a> 
+ and so on.</p>
+
+<p>The loader of a map format will parse these objects and put them in their respective 
+<a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/maps/MapLayer.html">MapLayer</a>
+<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/maps/MapLayer.java">(code)</a>.</p>
+
+<p>For all supported formats, we try to extract the following normalized attributes for every object:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">object</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
+<span class="kt">float</span> <span class="n">opacity</span> <span class="o">=</span> <span class="n">object</span><span class="o">.</span><span class="na">getOpacity</span><span class="o">();</span>
+<span class="kt">boolean</span> <span class="n">isVisible</span> <span class="o">=</span> <span class="n">object</span><span class="o">.</span><span class="na">isVisible</span><span class="o">();</span>
+<span class="nc">Color</span> <span class="n">color</span> <span class="o">=</span> <span class="n">object</span><span class="o">.</span><span class="na">getColor</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>The specialized map objects, like <code class="language-plaintext highlighter-rouge">PolygonMapObject</code> may also have aditional attributes, e.g.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Polygon</span> <span class="n">poly</span> <span class="o">=</span> <span class="n">polyObject</span><span class="o">.</span><span class="na">getPolygon</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>Changing any of these attributes may have an effect on how the object is rendered.</p>
+
+<p>As in the case of maps and layers, you can also access the more generic properties, as described above.</p>
+
+<p><em>Note:</em> tiles of a tiled map are not stored as map objects. There are specialized layer implementations that store these kind of objects more efficiently, see below. Objects as described above are generally used to define trigger areas, spawn points, collision shapes and so on.</p>
+
+<h3 id="map-renderer">Map Renderer</h3>
+
+<p>The <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/maps/MapRenderer.html">MapRenderer</a>
+<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/maps/MapRenderer.java">(code)</a> interface defines methods that allow you to render the layers and objects of a map.</p>
+
+<p>Before you can start rendering, you have to set the view on your map. Think of the view as window through which you look. The easiest way to achieve this, is to tell the map renderer about an OrthographicCamera it should use:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mapRenderer</span><span class="o">.</span><span class="na">setView</span><span class="o">(</span><span class="n">camera</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Alternatively you can also specify a projection matrix and the view boundaries manually:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mapRenderer</span><span class="o">.</span><span class="na">setView</span><span class="o">(</span><span class="n">projectionMatrix</span><span class="o">,</span> <span class="n">startX</span><span class="o">,</span> <span class="n">startY</span><span class="o">,</span> <span class="n">endx</span><span class="o">,</span> <span class="n">endY</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>The view boundaries are given in the x/y plane, with the y-axis pointing upwards. The units used are specific to the map and format it was loaded from.</p>
+
+<p>To render all layers of the map you can then simply call:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mapRenderer</span><span class="o">.</span><span class="na">render</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>If you need more control over which layers should be rendered, you can specify the indices of layers you want to render. Assuming you have 3 layers, two background layers and a foreground layer, and you want to render your custom sprites between the foreground and background layer, you can do this:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="o">[]</span> <span class="n">backgroundLayers</span> <span class="o">=</span> <span class="o">{</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span> <span class="o">};</span> <span class="c1">// don't allocate every frame!</span>
+<span class="kt">int</span><span class="o">[]</span> <span class="n">foregroundLayers</span> <span class="o">=</span> <span class="o">{</span> <span class="mi">2</span> <span class="o">};</span>    <span class="c1">// don't allocate every frame!</span>
+<span class="n">mapRenderer</span><span class="o">.</span><span class="na">render</span><span class="o">(</span><span class="n">backgroundLayers</span><span class="o">);</span>
+<span class="n">renderMyCustomSprites</span><span class="o">();</span>
+<span class="n">mapRenderer</span><span class="o">.</span><span class="na">render</span><span class="o">(</span><span class="n">foregroundLayers</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>By rendering each layer separately and modifying the view for every layer, you can also achieve a parallax effect.</p>
+
+<h2 id="tiled-maps">Tiled Maps</h2>
+<p>Maps that contain layers with tiles are handled by the classes in the <a href="https://github.com/libgdx/libgdx/tree/master/gdx/src/com/badlogic/gdx/maps/tiled">com.badlogic.gdx.maps.tiled</a> package. The package contains loaders for different formats.</p>
+
+<p>Tile maps are loaded into 
+<a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/maps/tiled/TiledMap.html">TiledMap</a>
+<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/maps/tiled/TiledMap.java">(code)</a> instances. TiledMap is a subclass of the generic Map class, with additional methods and attributes.</p>
+
+<h3 id="tiled-map-layers">Tiled Map Layers</h3>
+<p>Layers with tiles in them are stored in 
+<a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/maps/tiled/TiledMapTileLayer.html">TiledMapTileLayer</a>
+<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/maps/tiled/TiledMapTileLayer.java">(code)</a> instances. In order to get access to the tiles, you will have to cast:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">TiledMap</span> <span class="n">tiledMap</span> <span class="o">=</span> <span class="n">loadMap</span><span class="o">();</span> <span class="c1">// see below for this</span>
+<span class="nc">TiledMapTileLayer</span> <span class="n">layer</span> <span class="o">=</span> <span class="o">(</span><span class="nc">TiledMapTileLayer</span><span class="o">)</span><span class="n">tiledMap</span><span class="o">.</span><span class="na">getLayers</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span> <span class="c1">// assuming the layer at index on contains tiles</span>
+</code></pre></div></div>
+
+<p>A TiledMapTileLayer has all the same attributes as the generic MapLayer, e.g. properties, objects and so on.</p>
+
+<p>In addition to those, the TiledMapTileLayer also has a two dimensional array of <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/maps/tiled/TiledMapTileLayer.Cell.html">TiledMapTileLayer.Cell</a> <a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/maps/tiled/TiledMapTileLayer.java#L89">(code)</a> instances.</p>
+
+<p>To access a cell, you can ask the tile layer to hand it out like this:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Cell</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">tileLayer</span><span class="o">.</span><span class="na">getCell</span><span class="o">(</span><span class="n">column</span><span class="o">,</span> <span class="n">row</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Where column and row specify the location of the cell. These are integer indices. The tiles are supposed to be in a y-up coordinate system. The bottom left tile of a map would thus be located at (0,0), the top right tile at (tileLayer.getWidth()-1, tileLayer.getHeight()-1).</p>
+
+<p>If no tile exists at that position, or if the column/row arguments are out of bounds, null will be returned.</p>
+
+<p>You can query the number of horizontal and vertical tiles in a layer by:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">tileLayer</span><span class="o">.</span><span class="na">getWidth</span><span class="o">();</span>
+<span class="kt">int</span> <span class="n">rows</span> <span class="o">=</span> <span class="n">tileLayer</span><span class="o">.</span><span class="na">getHeight</span><span class="o">();</span>
+</code></pre></div></div>
+
+<h3 id="cells">Cells</h3>
+<p>A cell is a container for a 
+<a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/maps/tiled/TiledMapTile.html">TiledMapTile</a>
+<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/maps/tiled/TiledMapTile.java">(code)</a>. The cell itself stores a reference to a tile in addition to attributes that specify if the tile should be rotated or flipped when rendering it.</p>
+
+<p>Tiles are usually shared by multiple cells.</p>
+
+<h3 id="tilesets--tiles">Tilesets &amp; Tiles</h3>
+<p>A TiledMap contains one or more 
+<a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/maps/tiled/TiledMapTileSet.html">TiledMapTileSet</a>
+<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/maps/tiled/TiledMapTileSet.java">(code)</a> instances. A tile set contains a number of <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/maps/tiled/TiledMapTile.html">TiledMapTile</a>
+<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/maps/tiled/TiledMapTile.java">(code)</a> instances. There are <a href="https://github.com/libgdx/libgdx/tree/master/gdx/src/com/badlogic/gdx/maps/tiled/tiles">multiple implementations</a> of tiles, e.g. static tiles, animated tiles etc. You can also create your own implementation for special purposes.</p>
+
+<p>Cells in a tile layer reference these tiles. Cells within a layer can reference tiles of multiple tile sets. It is however recommended to stick to a single tile set per layer to reduce texture switches.</p>
+
+<h3 id="rendering-tiled-maps">Rendering Tiled Maps</h3>
+<p>To render a TiledMap and its layers, you will need one of the <a href="https://github.com/libgdx/libgdx/tree/master/gdx/src/com/badlogic/gdx/maps/tiled/renderers">specialized MapRenderer implementations</a>. For orthogonal or top down maps, use 
+<a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/maps/tiled/renderers/OrthogonalTiledMapRenderer.html">OrthogonalTiledMapRenderer</a>
+<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/maps/tiled/renderers/OrthogonalTiledMapRenderer.java">(code)</a>, for isometric maps use 
+<a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/maps/tiled/renderers/IsometricTiledMapRenderer.html">IsometricTiledMapRenderer</a>
+<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/maps/tiled/renderers/IsometricTiledMapRenderer.java">(code)</a>. Other renderers in this package are experimental, we do not advise to use them at this point.</p>
+
+<p>Creating such a renderer works like this:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">float</span> <span class="n">unitScale</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">16</span><span class="n">f</span><span class="o">;</span>
+<span class="nc">OrthogonalTiledMapRenderer</span> <span class="n">renderer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OrthogonalTiledMapRenderer</span><span class="o">(</span><span class="n">map</span><span class="o">,</span> <span class="n">unitScale</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>The renderer will only ever be able to render the map you pass to it in the constructor. This coupling allows the renderer to perform optimizations for this specific map, and cache them.</p>
+
+<p>The unit scale tells the renderer how many pixels map to a single world unit. In the above case 16 pixels would equal one unit. If you want a pixel to map to a unit, unitScale would have to be one, and so on.</p>
+
+<p>The unit scale is a way to couple your rendering coordinate system with your logical or world coordinate system.</p>
+
+<p>A small example: assume you have a tile map, where tiles are 32x32 pixels wide. In your logical representation of the world, you want these to map to 1x1 unit squares. You’d specify 1/32f as your unit scale. You can now setup your camera to also operate on that unit scale. Say you want to view 30x20 tiles of your map on screen, then you can create your camera like this:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">OrthographicCamera</span> <span class="n">camera</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OrthographicCamera</span><span class="o">();</span>
+<span class="n">camera</span><span class="o">.</span><span class="na">setToOrtho</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="mi">20</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Working with isometric maps is analogous, just create an IsometricTiledMapRenderer:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>renderer = new IsometricTiledMapRenderer(isoMap, 1 / 32f);
+</code></pre></div></div>
+
+<p>Again, you have to specify the map (which should be an isometric tiled map) and a unit scale.</p>
+
+<p><em>Note:</em> the isometric renderer is experimental, use at your own risk and please report any issues you find. From a performance perspective, rendering isometric maps on mobile devices is very costly, as every tile must have blending on.</p>
+
+<h3 id="loading-tmxtiled-maps">Loading TMX/Tiled maps</h3>
+<p><img src="/assets/wiki/images/tile-maps2.png" alt="images/tile-maps2.png" /></p>
+
+<p><a href="https://www.mapeditor.org/">Tiled</a> is a generic tile map editor for Windows/Linux/Mac OS X that allows you to create tile layers as well as object layers, containing arbitrary shapes for trigger areas and other purposes. libGDX provides a loader to read files generated by Tiled.</p>
+
+<p>To load a Tiled map you have two options: either load it directly or via the AssetManager. The first option works like this:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">TiledMap</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TmxMapLoader</span><span class="o">().</span><span class="na">load</span><span class="o">(</span><span class="s">"level1.tmx"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>This will load the file called <code class="language-plaintext highlighter-rouge">level1.tmx</code> from the internal file storage (the assets directory). If you want to load a file using a different file type, you have to supply a FileHandleResolver in the constructor of the TmxMapLoader.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">TiledMap</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TmxMapLoader</span><span class="o">(</span><span class="k">new</span> <span class="nc">ExternalFileHandleResolver</span><span class="o">()).</span><span class="na">load</span><span class="o">(</span><span class="s">"level1.tmx"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>We chose this mechanism as the TmxMapLoader can also be used with the AssetManager class, where FileHandleResolvers rule the earth. To load a TMX map via the AssetManager, you can do the following:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// only needed once</span>
+<span class="n">assetManager</span><span class="o">.</span><span class="na">setLoader</span><span class="o">(</span><span class="nc">TiledMap</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="k">new</span> <span class="nc">TmxMapLoader</span><span class="o">(</span><span class="k">new</span> <span class="nc">InternalFileHandleResolver</span><span class="o">()));</span>
+<span class="n">assetManager</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="s">"level1.tmx"</span><span class="o">,</span> <span class="nc">TiledMap</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+<span class="c1">// once the asset manager is done loading</span>
+<span class="nc">TiledMap</span> <span class="n">map</span> <span class="o">=</span> <span class="n">assetManager</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"level1.tmx"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Once loaded you can treat the map just like an other TiledMap.</p>
+
+<p><em>Note</em> if you load your TMX map directly, you are responsible for calling <code class="language-plaintext highlighter-rouge">TiledMap#dispose()</code> once you no longer need it. This call will dispose of any textures loaded for the map.</p>
+
+<p><em>Note</em>: if you want to use TMX maps with the GWT backend, you need to make sure the map is saved with pure base64 encoding. The compressed TMX formats will not work due to limitations in GWT.</p>
+
+<h3 id="loading-tide-maps">Loading Tide maps</h3>
+<p><img src="/assets/wiki/images/tile-maps3.png" alt="images/tile-maps3.png" /></p>
+
+<p><a href="https://colinvella.github.io/tIDE/">Tide</a> is another general purpose tile map editor, available for Windows only. libGDX provides a loader for the format output by Tide.</p>
+
+<p>As with TMX files, you can either load a Tide map directly or through the asset manager:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// direct loading</span>
+<span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TideMapLoader</span><span class="o">().</span><span class="na">load</span><span class="o">(</span><span class="s">"level1.tide"</span><span class="o">);</span>
+
+<span class="c1">// asset manager loading</span>
+<span class="n">assetManager</span><span class="o">.</span><span class="na">setLoader</span><span class="o">(</span><span class="nc">TiledMap</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="k">new</span> <span class="nc">TideMapLoader</span><span class="o">(</span><span class="k">new</span> <span class="nc">InternalFileHandleResolver</span><span class="o">()));</span>
+<span class="n">assetManager</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="s">"level1.tide"</span><span class="o">,</span> <span class="nc">TiledMap</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><em>Note</em> if you load your Tide map directly, you are responsible for calling TiledMap#dispose() once you no longer need it. This call will dispose of any textures loaded for the map.</p>
+
+<h2 id="performance-considerations">Performance considerations</h2>
+<p>While we try to make the renderers as fast as possible, there are a few things you can consider to boost rendering performance.</p>
+
+<ul>
+  <li>Only use tiles from a single tile set in a layer. This will reduce texture binding.</li>
+  <li>Mark tiles that do not need blending as opaque. At the moment you can only do this programmatically, we will provide ways to do it in the editor or automatically.</li>
+  <li>Do not go overboard with the number of layers.</li>
+</ul>
+
+<h2 id="examples">Examples</h2>
+<ul>
+  <li><a href="https://github.com/libgdx/libgdx/blob/master/tests/gdx-tests/src/com/badlogic/gdx/tests/superkoalio/SuperKoalio.java">Simple platformer using a TMX map</a></li>
+  <li><a href="https://github.com/libgdx/libgdx/blob/master/tests/gdx-tests/src/com/badlogic/gdx/tests/bench/TiledMapBench.java">Programmatic creation of a TiledMap</a></li>
+  <li><a href="https://github.com/libgdx/libgdx/blob/master/tests/gdx-tests/src/com/badlogic/gdx/tests/TiledMapAssetManagerTest.java">Tile map asset manager loading/rendering</a></li>
+  <li><a href="https://github.com/libgdx/libgdx/blob/master/tests/gdx-tests/src/com/badlogic/gdx/tests/TiledMapDirectLoaderTest.java">Tile map direct loading/rendering</a></li>
+  <li><a href="https://github.com/libgdx/libgdx/blob/master/tests/gdx-tests/src/com/badlogic/gdx/tests/TideMapAssetManagerTest.java">Tide map asset manager loading/rendering</a></li>
+  <li><a href="https://github.com/libgdx/libgdx/blob/master/tests/gdx-tests/src/com/badlogic/gdx/tests/TideMapDirectLoaderTest.java">Tide map direct loading/rendering</a></li>
+</ul>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

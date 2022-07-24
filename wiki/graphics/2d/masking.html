@@ -1,0 +1,1350 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Masking - libGDX</title>
+
+  <meta name="description" content="Masking is the technique of hiding portions of an image using the pixel information of another to decide whether a pixel of the original should or should not be shown....">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Masking">
+<meta property="og:url" content="https://libgdx.com/wiki/graphics/2d/masking">
+
+
+  <meta property="og:description" content="Masking is the technique of hiding portions of an image using the pixel information of another to decide whether a pixel of the original should or should not be shown....">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/graphics/2d/masking">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Masking
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/graphics/2d/masking.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/graphics/2d/masking.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <p>Masking is the technique of hiding portions of an image using the pixel information of another to decide whether a pixel of the original should or should not be shown. There’s more than one way to achieve this effect in libGDX.</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+  <li><a href="/wiki/graphics/2d/masking#1-masking-using-glScissor-rectangle">Masking using glScissor</a></li>
+  <li><a href="/wiki/graphics/2d/masking#2-masking-using-the-scissorstack-rectangles">Masking using the ScissorStack</a></li>
+  <li><a href="/wiki/graphics/2d/masking#3-masking-using-the-depth-buffer-shapes">Masking using the Depth Buffer</a></li>
+  <li><a href="/wiki/graphics/2d/masking#4-masking-using-blending-function-shapes-or-textures">Masking using Blending Function</a></li>
+  <li><a href="/wiki/graphics/2d/masking#5-masking-using-pixmaps-shapes-or-textures">Masking using Pixmaps</a></li>
+  <li><a href="/wiki/graphics/2d/masking#6-masking-using-shaders-textures">Masking using Shaders</a></li>
+  <li><a href="/wiki/graphics/2d/masking#7-masking-using-blendfuncseparate-removal">Masking using the BlendFuncSeparate</a></li>
+  <li><a href="/wiki/graphics/2d/masking#8-masking-using-blending-function-tinting">Masking using Blending Function (Tinting)</a></li>
+</ol>
+
+<h2 id="1-masking-using-glscissor-rectangle">1. Masking using glScissor (Rectangle)</h2>
+
+<p>For the simplest of masking needs here’s a technique that allows us to create and apply a single rectangular mask using OpenGL’s Scissor Test. The Scissor Test is a Per-Sample Processing operation that discards Fragments that fall outside of a certain rectangular portion of the screen.</p>
+
+<h3 id="step-1---preparations">Step 1 - Preparations</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">ShapeRenderer</span> <span class="n">shapeRenderer</span><span class="o">;</span>
+
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">create</span><span class="o">()</span> <span class="o">{</span>
+    <span class="cm">/* We can use a SpriteBatch or a ShapeRenderer to draw our masked elements. */</span>
+    <span class="n">shapeRenderer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ShapeRenderer</span><span class="o">();</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setAutoShapeType</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+
+    <span class="cm">/* Increase the OpenGL line thickness for better visualization. */</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glLineWidth</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="step-2---drawing-our-masked-elements">Step 2 - Drawing our masked elements</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">drawMasked</span><span class="o">()</span> <span class="o">{</span>
+    <span class="cm">/* To activate the scissor test, first enable the GL_SCISSOR_TEST enumerator.
+     * Once enabled, pixels outside of the scissor box will be discarded. */</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glEnable</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_SCISSOR_TEST</span><span class="o">);</span>
+
+    <span class="cm">/* To define the scissor box, use this function: */</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glScissor</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">200</span><span class="o">);</span>
+    <span class="cm">/* The x and y is the window-space lower-left position of the scissor box,
+     * and width and height define the size of the rectangle. */</span>
+
+    <span class="cm">/* Draw our circle to be masked, we could also draw sprites with a SpriteBatch. */</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="nc">ShapeType</span><span class="o">.</span><span class="na">Filled</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">circle</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+
+    <span class="cm">/* Remember to flush before changing GL states again. */</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+
+    <span class="cm">/* Deactivate the scissor test before continuing with further rendering operations. */</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glDisable</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_SCISSOR_TEST</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="step-3---drawing-the-contours-for-debugging-purposes">Step 3 - Drawing the contours for debugging purposes</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">drawContours</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="nc">ShapeType</span><span class="o">.</span><span class="na">Line</span><span class="o">);</span>
+
+    <span class="cm">/* Draw the circle's contour for comparison. */</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">GREEN</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">circle</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+
+    <span class="cm">/* Draw the clipped area contour for comparison. */</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">CYAN</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">rect</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">200</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="result">Result</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">render</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+
+    <span class="n">drawMasked</span><span class="o">();</span>
+    <span class="n">drawContours</span><span class="o">();</span>
+
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="https://i.imgur.com/3VHdLDS.png" alt="Circle masked by a rectangle" /></p>
+
+<h2 id="2-masking-using-the-scissorstack-rectangles">2. Masking using the ScissorStack (Rectangles)</h2>
+
+<p>A single rectangle could easily not be enough, here’s a technique that allows us to create and apply multiple rectangular masks using libGDX’s ScissorStack.</p>
+
+<h3 id="step-1---preparations-1">Step 1 - Preparations</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Some attributes we're gonna need. */</span>
+<span class="kd">private</span> <span class="nc">ShapeRenderer</span> <span class="n">shapeRenderer</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">Rectangle</span> <span class="n">scissors1</span><span class="o">,</span> <span class="n">scissors2</span><span class="o">;</span>
+
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">create</span><span class="o">()</span> <span class="o">{</span>
+    <span class="cm">/* The ScissorStack needs a camera to transform the clipping rectangles. */</span>
+    <span class="nc">OrthographicCamera</span> <span class="n">camera</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OrthographicCamera</span><span class="o">();</span>
+    <span class="n">camera</span><span class="o">.</span><span class="na">setToOrtho</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="no">CAMERA_WIDTH</span><span class="o">,</span> <span class="no">CAMERA_HEIGHT</span><span class="o">);</span>
+
+    <span class="cm">/* We can use a SpriteBatch or a ShapeRenderer to draw our masked elements. */</span>
+    <span class="n">shapeRenderer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ShapeRenderer</span><span class="o">();</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setAutoShapeType</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setProjectionMatrix</span><span class="o">(</span><span class="n">camera</span><span class="o">.</span><span class="na">combined</span><span class="o">);</span>
+
+    <span class="cm">/* Increase the OpenGL line thickness for better visualization. */</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glLineWidth</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+
+    <span class="cm">/* scissors1 and scissors2 store the results of calculateScissors(...).
+     * clipBounds is used to define the x, y, width and height of the clipping rectangles. */</span>
+    <span class="n">scissors1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Rectangle</span><span class="o">();</span>
+    <span class="nc">Rectangle</span> <span class="n">clipBounds</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Rectangle</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">200</span><span class="o">);</span>
+    <span class="nc">ScissorStack</span><span class="o">.</span><span class="na">calculateScissors</span><span class="o">(</span><span class="n">camera</span><span class="o">,</span> <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">getTransformMatrix</span><span class="o">(),</span> <span class="n">clipBounds</span><span class="o">,</span> <span class="n">scissors1</span><span class="o">);</span>
+
+    <span class="n">scissors2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Rectangle</span><span class="o">();</span>
+    <span class="n">clipBounds</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="mi">50</span><span class="n">f</span><span class="o">,</span> <span class="mi">50</span><span class="n">f</span><span class="o">,</span> <span class="mi">100</span><span class="n">f</span><span class="o">,</span> <span class="mi">100</span><span class="n">f</span><span class="o">);</span>
+    <span class="nc">ScissorStack</span><span class="o">.</span><span class="na">calculateScissors</span><span class="o">(</span><span class="n">camera</span><span class="o">,</span> <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">getTransformMatrix</span><span class="o">(),</span> <span class="n">clipBounds</span><span class="o">,</span> <span class="n">scissors2</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="step-2---drawing-our-masked-elements-1">Step 2 - Drawing our masked elements</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">drawMasked</span><span class="o">()</span> <span class="o">{</span>
+    <span class="cm">/* Feed the ScissorStack and store whether it could push the scissors or not. */</span>
+    <span class="kt">boolean</span> <span class="n">pop1</span> <span class="o">=</span> <span class="nc">ScissorStack</span><span class="o">.</span><span class="na">pushScissors</span><span class="o">(</span><span class="n">scissors1</span><span class="o">);</span>
+    <span class="kt">boolean</span> <span class="n">pop2</span> <span class="o">=</span> <span class="nc">ScissorStack</span><span class="o">.</span><span class="na">pushScissors</span><span class="o">(</span><span class="n">scissors2</span><span class="o">);</span>
+
+    <span class="cm">/* Draw the elements to be constrained to an area,
+     * without masking this would render a red filled circle. */</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="nc">ShapeType</span><span class="o">.</span><span class="na">Filled</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">circle</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+
+    <span class="cm">/* Safety check for the situations the scissor fails to be pushed to the stack
+     * (happens for example when the window is minimized on desktop or the clipping
+     * area is &lt;= 0). */</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">pop1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">ScissorStack</span><span class="o">.</span><span class="na">popScissors</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">pop2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">ScissorStack</span><span class="o">.</span><span class="na">popScissors</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><em>It is also possible to push multiple rectangles. Only the pixels of the sprites or shapes that are within <b>all</b> of the rectangles will be rendered.</em></p>
+
+<p><em>Also, if your camera moves, you’ll need to recalculate the scissor area afterwards.</em></p>
+
+<h3 id="step-3---drawing-the-contours-for-debugging-purposes-1">Step 3 - Drawing the contours for debugging purposes</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">drawContours</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="nc">ShapeType</span><span class="o">.</span><span class="na">Line</span><span class="o">);</span>
+
+    <span class="cm">/* The rectangular mask. */</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">CYAN</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">rect</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">200</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">rect</span><span class="o">(</span><span class="mi">50</span><span class="o">,</span> <span class="mi">50</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+
+    <span class="cm">/* The masked circle. */</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">GREEN</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">circle</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="result-1">Result</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">render</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">ScreenUtils</span><span class="o">.</span><span class="na">clear</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">BLACK</span><span class="o">);</span>
+
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+
+    <span class="n">drawMasked</span><span class="o">();</span>
+    <span class="n">drawContours</span><span class="o">();</span>
+
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="https://i.imgur.com/HEa7EQK.png" alt="Circle masked by 2 rectangles" /></p>
+
+<h2 id="3-masking-using-the-depth-buffer-shapes">3. Masking using the Depth Buffer (Shapes)</h2>
+
+<p>Alright rectangles are great but our needs are greater what now. This upcoming technique allows us to create more diversely shaped masks using libGDX’s ShapeRenderer. You can use a SpriteBatch, but because the masks are built from the geometry of what you’re drawing it will not work as you expect. Texture regions will render as rectangles no matter what the image looks like.</p>
+
+<h3 id="step-1---preparations-2">Step 1 - Preparations</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">ShapeRenderer</span> <span class="n">shapeRenderer</span><span class="o">;</span>
+
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">create</span><span class="o">()</span> <span class="o">{</span>
+    <span class="cm">/* We can use a SpriteBatch or a ShapeRenderer to draw our masked elements. */</span>
+    <span class="n">shapeRenderer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ShapeRenderer</span><span class="o">();</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setAutoShapeType</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+
+    <span class="cm">/* Increase the OpenGL line thickness for better visualization. */</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glLineWidth</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="step-2---draw-the-mask-elements-to-the-depth-buffer">Step 2 - Draw the mask elements to the depth buffer</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">drawMasks</span><span class="o">()</span> <span class="o">{</span>
+    <span class="cm">/* Clear our depth buffer info from previous frame. */</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glClear</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_DEPTH_BUFFER_BIT</span><span class="o">);</span>
+
+    <span class="cm">/* Set the depth function to LESS. */</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glDepthFunc</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_LESS</span><span class="o">);</span>
+
+    <span class="cm">/* Enable depth writing. */</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glEnable</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_DEPTH_TEST</span><span class="o">);</span>
+
+    <span class="cm">/* Disable RGBA color writing. */</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glColorMask</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+
+    <span class="cm">/* Render mask elements. */</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="nc">ShapeType</span><span class="o">.</span><span class="na">Filled</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">circle</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">triangle</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>When using a SpriteBatch write this line right after <code class="language-plaintext highlighter-rouge">SpriteBatch.begin()</code> : <code class="language-plaintext highlighter-rouge">Gdx.gl.glDepthMask(true);</code></p>
+
+<h3 id="step-3---draw-the-masked-elements">Step 3 - Draw the masked elements</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">drawMasked</span><span class="o">()</span> <span class="o">{</span>
+    <span class="cm">/* Enable RGBA color writing. */</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glColorMask</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+
+    <span class="cm">/* Set the depth function to LESS. */</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glDepthFunc</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_EQUAL</span><span class="o">);</span>
+
+    <span class="cm">/* Render masked elements. */</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">circle</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="step-4---draw-the-contours-for-debugging-purposes">Step 4 - Draw the contours for debugging purposes</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">drawContours</span><span class="o">()</span> <span class="o">{</span>
+    <span class="cm">/* Disable depth writing. */</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glDisable</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_DEPTH_TEST</span><span class="o">);</span>
+
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="nc">ShapeType</span><span class="o">.</span><span class="na">Line</span><span class="o">);</span>
+
+    <span class="cm">/* The circle and triangle masks. */</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">CYAN</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">circle</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">triangle</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+
+    <span class="cm">/* The masked circle. */</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">GREEN</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">circle</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="result-2">Result</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">render</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">ScreenUtils</span><span class="o">.</span><span class="na">clear</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">BLACK</span><span class="o">);</span>
+
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+
+    <span class="n">drawMasks</span><span class="o">();</span>
+    <span class="n">drawMasked</span><span class="o">();</span>
+    <span class="n">drawContours</span><span class="o">();</span>
+
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="https://imgur.com/Pmlfn7M.png" alt="Circle masked by another circle and a triangle" /></p>
+
+<h2 id="4-masking-using-blending-function-shapes-or-textures">4. Masking using Blending Function (Shapes or Textures)</h2>
+
+<p>For the demanding GDXer with complex masking needs, this technique allows us to have any mask imaginable and take the alpha channel into account for the first time! For this we’ll be using libGDX’s SpriteBatch.</p>
+
+<h3 id="step-1---preparations-3">Step 1 - Preparations</h3>
+
+<p>These are the images we’re gonna use:
+| <img src="https://imgur.com/WPHeXdB.png" alt="The mask" /> | <img src="https://imgur.com/Gf2pQYJ.png" alt="The sprite" /> |
+| :-: | :-: |
+| <a href="https://imgur.com/J8dkKVI">The mask</a> | <a href="https://imgur.com/JjMCVTh">The sprite to mask</a> |</p>
+
+<p>The images in a black background for clarity:
+| <img src="https://imgur.com/rm13HUV.png" alt="The mask" /> | <img src="https://imgur.com/eGoidRi.png" alt="The sprite" /> |
+| :-: | :-: |
+| The mask | The sprite to mask |</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Some attributes we're gonna need. */</span>
+<span class="kd">private</span> <span class="nc">SpriteBatch</span> <span class="n">spriteBatch</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">Sprite</span> <span class="n">mask</span><span class="o">,</span> <span class="n">maskedSprite</span><span class="o">;</span>
+
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">create</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">spriteBatch</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SpriteBatch</span><span class="o">();</span>
+
+    <span class="cm">/* Load the mask containing the alpha information. */</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Sprite</span><span class="o">(</span><span class="k">new</span> <span class="nc">Texture</span><span class="o">(</span><span class="s">"mask.png"</span><span class="o">));</span>
+
+    <span class="cm">/* Load the sprite which will be masked. */</span>
+    <span class="n">maskedSprite</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Sprite</span><span class="o">(</span><span class="k">new</span> <span class="nc">Texture</span><span class="o">(</span><span class="s">"sprite.png"</span><span class="o">));</span>
+    <span class="n">maskedSprite</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="step-2---draw-the-mask-elements-to-the-frame-buffer">Step 2 - Draw the mask elements to the frame buffer</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">drawMasks</span><span class="o">()</span> <span class="o">{</span>
+    <span class="cm">/* Disable RGB color writing, enable alpha writing to the frame buffer. */</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glColorMask</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+
+    <span class="cm">/* Change the blending function for our alpha map. */</span>
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">setBlendFunction</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_ONE</span><span class="o">,</span> <span class="no">GL20</span><span class="o">.</span><span class="na">GL_ZERO</span><span class="o">);</span>
+
+    <span class="cm">/* Draw alpha masks. */</span>
+    <span class="n">mask</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">spriteBatch</span><span class="o">);</span>
+
+    <span class="cm">/* This blending function makes it so we subtract instead of adding to the alpha map. */</span>
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">setBlendFunction</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_ZERO</span><span class="o">,</span> <span class="no">GL20</span><span class="o">.</span><span class="na">GL_SRC_ALPHA</span><span class="o">);</span>
+
+    <span class="cm">/* Remove the masked sprite's inverse alpha from the map. */</span>
+    <span class="n">maskedSprite</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">spriteBatch</span><span class="o">);</span>
+
+    <span class="cm">/* Flush the batch to the GPU. */</span>
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="step-3---draw-the-masked-elements-1">Step 3 - Draw the masked elements</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">drawMasked</span><span class="o">()</span> <span class="o">{</span>
+    <span class="cm">/* Now that the buffer has our alpha, we simply draw the sprite with the mask applied. */</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glColorMask</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+
+    <span class="cm">/* Change the blending function so the rendered pixels alpha blend with our alpha map. */</span>
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">setBlendFunction</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_DST_ALPHA</span><span class="o">,</span> <span class="no">GL20</span><span class="o">.</span><span class="na">GL_ONE_MINUS_DST_ALPHA</span><span class="o">);</span>
+
+    <span class="cm">/* Draw our sprite to be masked. */</span>
+    <span class="n">maskedSprite</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">spriteBatch</span><span class="o">);</span>
+
+    <span class="cm">/* Remember to flush before changing GL states again. */</span>
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="step-4---draw-the-original-sprites-for-debugging-purposes">Step 4 - Draw the original sprites for debugging purposes</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">drawOriginals</span><span class="o">()</span> <span class="o">{</span>
+    <span class="cm">/* Switch to the default blend function */</span>
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">setBlendFunction</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_SRC_ALPHA</span><span class="o">,</span> <span class="no">GL20</span><span class="o">.</span><span class="na">GL_ONE_MINUS_SRC_ALPHA</span><span class="o">);</span>
+
+    <span class="cm">/* Draw the source images separately */</span>
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">mask</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">256</span><span class="o">);</span>
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">maskedSprite</span><span class="o">,</span> <span class="mi">256</span><span class="o">,</span> <span class="mi">256</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="result-3">Result</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">render</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">ScreenUtils</span><span class="o">.</span><span class="na">clear</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">BLACK</span><span class="o">);</span>
+
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+
+    <span class="n">drawMasks</span><span class="o">();</span>
+    <span class="n">drawMasked</span><span class="o">();</span>
+    <span class="n">drawOriginals</span><span class="o">();</span>
+
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="https://imgur.com/Lmqecgk.png" alt="Masked sprite and original sprites" /></p>
+
+<h2 id="5-masking-using-pixmaps-shapes-or-textures">5. Masking using Pixmaps (Shapes or Textures)</h2>
+
+<p>This technique allows the mask to be any image or shape and takes the alpha channel into account. This time we’ll be using the libGDX’s Pixmap class.</p>
+
+<h3 id="step-1---preparations-4">Step 1 - Preparations</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">ShapeRenderer</span> <span class="n">shapeRenderer</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">SpriteBatch</span> <span class="n">spriteBatch</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">Texture</span> <span class="n">masked</span><span class="o">,</span> <span class="n">original</span><span class="o">;</span>
+<span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">256</span><span class="o">;</span>
+
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">create</span><span class="o">()</span> <span class="o">{</span>
+    <span class="cm">/* The ShapeRenderer will only be used to draw the mask contours */</span>
+    <span class="n">shapeRenderer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ShapeRenderer</span><span class="o">();</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setAutoShapeType</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl20</span><span class="o">.</span><span class="na">glLineWidth</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+
+    <span class="cm">/* Needed to render our textures, a ShapeRenderer won't work with this technique. */</span>
+    <span class="n">spriteBatch</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SpriteBatch</span><span class="o">();</span>
+
+    <span class="cm">/* The path to the image to mask. */</span>
+    <span class="nc">FileHandle</span> <span class="n">imagePath</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileHandle</span><span class="o">(</span><span class="s">"images/shared/weirdShape.png"</span><span class="o">);</span>
+
+    <span class="cm">/* Load the pixels of our image into a Pixmap. */</span>
+    <span class="nc">Pixmap</span> <span class="n">pixmap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Pixmap</span><span class="o">(</span><span class="n">imagePath</span><span class="o">);</span>
+
+    <span class="cm">/* Have an unaltered version for comparison. */</span>
+    <span class="n">original</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Texture</span><span class="o">(</span><span class="n">imagePath</span><span class="o">);</span>
+
+    <span class="cm">/* Apply the mask to our Pixmap. */</span>
+    <span class="n">pixmap</span> <span class="o">=</span> <span class="n">applyMask</span><span class="o">(</span><span class="n">pixmap</span><span class="o">);</span>
+
+    <span class="cm">/* Load the pixel information of the Pixmap into a Texture for drawing. */</span>
+    <span class="n">masked</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Texture</span><span class="o">(</span><span class="n">pixmap</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="step-2---applying-the-mask">Step 2 - Applying the mask</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">Pixmap</span> <span class="nf">applyMask</span><span class="o">(</span><span class="nc">Pixmap</span> <span class="n">source</span><span class="o">)</span> <span class="o">{</span>
+    <span class="cm">/* Create a Pixmap to store the mask information, at the end it will
+     * contain the result. */</span>
+    <span class="nc">Pixmap</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Pixmap</span><span class="o">(</span><span class="n">source</span><span class="o">.</span><span class="na">getWidth</span><span class="o">(),</span> <span class="n">source</span><span class="o">.</span><span class="na">getHeight</span><span class="o">(),</span> <span class="nc">Pixmap</span><span class="o">.</span><span class="na">Format</span><span class="o">.</span><span class="na">RGBA8888</span><span class="o">);</span>
+
+    <span class="cm">/* This setting lets us overwrite the pixels' transparency. */</span>
+    <span class="n">result</span><span class="o">.</span><span class="na">setBlending</span><span class="o">(</span><span class="nc">None</span><span class="o">);</span>
+
+    <span class="cm">/* Ignore RGB values unless you want funky results, alpha is for the mask. */</span>
+    <span class="n">result</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="k">new</span> <span class="nc">Color</span><span class="o">(</span><span class="mi">1</span><span class="n">f</span><span class="o">,</span> <span class="mi">1</span><span class="n">f</span><span class="o">,</span> <span class="mi">1</span><span class="n">f</span><span class="o">,</span> <span class="mi">1</span><span class="n">f</span><span class="o">));</span>
+
+    <span class="cm">/* Draw a circle to our mask, any shape is possible since
+     * you can draw individual pixels to the Pixmap. */</span>
+    <span class="n">result</span><span class="o">.</span><span class="na">fillCircle</span><span class="o">(</span><span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="o">,</span> <span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="o">,</span> <span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="o">);</span>
+
+    <span class="cm">/* Draw a rectangle with little alpha to our mask, this will turn
+    * a corner of the original image transparent. */</span>
+    <span class="n">result</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="mi">1</span><span class="n">f</span><span class="o">,</span> <span class="mi">1</span><span class="n">f</span><span class="o">,</span> <span class="mi">1</span><span class="n">f</span><span class="o">,</span> <span class="mf">0.25f</span><span class="o">);</span>
+    <span class="n">result</span><span class="o">.</span><span class="na">fillRectangle</span><span class="o">(</span><span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="o">,</span> <span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="o">,</span> <span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="o">,</span> <span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="o">);</span>
+
+    <span class="cm">/* We can also define the mask by loading an image:
+     * result = new Pixmap(new FileHandle("image.png")); */</span>
+
+    <span class="cm">/* Decide the color of each pixel using the AND bitwise operator. */</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">result</span><span class="o">.</span><span class="na">getWidth</span><span class="o">();</span> <span class="n">x</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">result</span><span class="o">.</span><span class="na">getHeight</span><span class="o">();</span> <span class="n">y</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">result</span><span class="o">.</span><span class="na">drawPixel</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">source</span><span class="o">.</span><span class="na">getPixel</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">&amp;</span> <span class="n">result</span><span class="o">.</span><span class="na">getPixel</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">));</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="step-3---drawing-the-original-and-masked-images">Step 3 - Drawing the original and masked images</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">drawImages</span><span class="o">()</span> <span class="o">{</span>
+    <span class="cm">/* Draw the original image for comparison. */</span>
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">WHITE</span><span class="o">);</span>
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">original</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">size</span><span class="o">);</span>
+
+    <span class="cm">/* Draw the masked image in red. */</span>
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">);</span>
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">masked</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">size</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="step-4---drawing-the-contours-of-the-mask-for-debugging-purposes">Step 4 - Drawing the contours of the mask for debugging purposes</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">drawContours</span><span class="o">()</span> <span class="o">{</span>
+    <span class="cm">/* Draw the contour of the circle and rectangle used as masks. */</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">CYAN</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">circle</span><span class="o">(</span><span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">,</span> <span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">,</span> <span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">rect</span><span class="o">(</span><span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">,</span> <span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="result-4">Result</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">render</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">ScreenUtils</span><span class="o">.</span><span class="na">clear</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">BLACK</span><span class="o">);</span>
+
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+    <span class="n">drawImages</span><span class="o">();</span>
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+    <span class="n">drawContours</span><span class="o">();</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="https://imgur.com/NWR32Oj.png" alt="Original and masked images + contours" /></p>
+
+<h2 id="6-masking-using-shaders-textures">6. Masking using Shaders (Textures)</h2>
+
+<p>This technique allows the mask to be any image or shape and takes alpha channel into account. This time we’ll be using the libGDX’s ShaderProgram class in conjunction with the Texture class.</p>
+
+<h3 id="step-1---preparations-5">Step 1 - Preparations</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">300</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">Texture</span> <span class="n">texture</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">SpriteBatch</span> <span class="n">spriteBatch1</span><span class="o">,</span> <span class="n">spriteBatch2</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">ShapeRenderer</span> <span class="n">shapeRenderer</span><span class="o">;</span>
+
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">create</span><span class="o">()</span> <span class="o">{</span>
+    <span class="cm">/* We'll be using a pixmap to define the mask this time. */</span>
+    <span class="n">defineMask</span><span class="o">();</span>
+
+    <span class="cm">/* Some regular textures to draw on the screen. */</span>
+    <span class="n">texture</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Texture</span><span class="o">(</span><span class="no">WEIRD_SHAPE_PATH</span><span class="o">);</span>
+    <span class="n">texture</span><span class="o">.</span><span class="na">setFilter</span><span class="o">(</span><span class="nc">Linear</span><span class="o">,</span> <span class="nc">Linear</span><span class="o">);</span>
+
+    <span class="n">setupShader</span><span class="o">();</span>
+
+    <span class="cm">/* An unmodified SpriteBatch to draw the original image as reference
+     * we could also change the shader of spriteBatch1 back to the default. */</span>
+    <span class="n">spriteBatch2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SpriteBatch</span><span class="o">();</span>
+
+    <span class="cm">/* Construct a simple ShapeRenderer to draw reference contours. */</span>
+    <span class="n">shapeRenderer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ShapeRenderer</span><span class="o">();</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setAutoShapeType</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glLineWidth</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="step-2---defining-our-mask">Step 2 - Defining our mask</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">defineMask</span><span class="o">()</span> <span class="o">{</span>
+    <span class="cm">/* The fragment shader simply multiplies the fragment's usual alpha with
+     * our mask alpha, since we only care about the alpha channel, the Alpha
+     * Pixmap format is just what we need. */</span>
+    <span class="nc">Pixmap</span> <span class="n">pixmap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Pixmap</span><span class="o">(</span><span class="n">size</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="nc">Alpha</span><span class="o">);</span>
+
+    <span class="cm">/* Pixmap blending can result in some funky looking lines when
+     * drawing. You may need to disable it. */</span>
+    <span class="n">pixmap</span><span class="o">.</span><span class="na">setBlending</span><span class="o">(</span><span class="nc">None</span><span class="o">);</span>
+
+    <span class="cm">/* The default color of a newly created Pixmap has an alpha value of 0
+     * play with different alpha values for different levels of transparency. */</span>
+    <span class="n">pixmap</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+
+    <span class="cm">/* This setting will let us see some portions of the masked image. */</span>
+    <span class="n">pixmap</span><span class="o">.</span><span class="na">fillCircle</span><span class="o">(</span><span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="o">,</span> <span class="n">size</span> <span class="o">/</span> <span class="mi">4</span><span class="o">,</span> <span class="n">size</span> <span class="o">/</span> <span class="mi">4</span><span class="o">);</span>
+    <span class="n">pixmap</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mf">0.25f</span><span class="o">);</span>
+    <span class="n">pixmap</span><span class="o">.</span><span class="na">fillRectangle</span><span class="o">(</span><span class="n">size</span> <span class="o">/</span> <span class="mi">4</span><span class="o">,</span> <span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="o">,</span> <span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="o">,</span> <span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="o">);</span>
+
+    <span class="cm">/* Create a Texture based on the pixmap.
+     * IMPORTANT: How we create the texture doesn't matter, this technique
+     * also allows, for example, to create it out of any supported format image */</span>
+    <span class="nc">Texture</span> <span class="n">pixmapTex</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Texture</span><span class="o">(</span><span class="n">pixmap</span><span class="o">);</span>
+
+    <span class="cm">/* Bind the mask texture to TEXTURE&lt;N&gt; (TEXTURE1 for our purposes),
+     * which also sets the currently active texture unit. */</span>
+    <span class="n">pixmapTex</span><span class="o">.</span><span class="na">bind</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+
+    <span class="cm">/* However SpriteBatch will auto-bind to the current active texture,
+     * so we must now reset it to TEXTURE0 or else our mask will be
+     * overwritten. */</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glActiveTexture</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_TEXTURE0</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="step-3---setting-up-the-shader">Step 3 - Setting up the shader</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">setupShader</span><span class="o">()</span> <span class="o">{</span>
+    <span class="cm">/* It's nicer to keep shader programs as text files in the assets
+     * directory rather than dealing with horrid Java string formatting. */</span>
+    <span class="nc">FileHandle</span> <span class="n">vertexShader</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"shaders/shared/vertex.glsl"</span><span class="o">);</span>
+    <span class="nc">FileHandle</span> <span class="n">fragmentShader</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"shaders/masking/fragment.glsl"</span><span class="o">);</span>
+
+    <span class="cm">/* Bonus: you can set `pedantic = false` while tinkering with your
+     * shaders. This will stop it from crashing if you have unused variables
+     * and so on. */</span>
+    <span class="nc">ShaderProgram</span><span class="o">.</span><span class="na">pedantic</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="cm">/* Construct our shader program. Spit out a log and quit if the shaders
+     * fail to compile. */</span>
+    <span class="nc">ShaderProgram</span> <span class="n">shader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ShaderProgram</span><span class="o">(</span><span class="n">vertexShader</span><span class="o">,</span> <span class="n">fragmentShader</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(!</span><span class="n">shader</span><span class="o">.</span><span class="na">isCompiled</span><span class="o">())</span> <span class="o">{</span>
+        <span class="nc">Gdx</span><span class="o">.</span><span class="na">app</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="s">"Shader"</span><span class="o">,</span> <span class="n">shader</span><span class="o">.</span><span class="na">getLog</span><span class="o">());</span>
+        <span class="nc">Gdx</span><span class="o">.</span><span class="na">app</span><span class="o">.</span><span class="na">exit</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="cm">/* Tell our shader that u_texture will be in the TEXTURE0 spot and
+     * u_mask will be in the TEXTURE1 spot. We can set these now since
+     * they'll never change; we don't have to send them every render frame. */</span>
+    <span class="n">shader</span><span class="o">.</span><span class="na">bind</span><span class="o">();</span>
+    <span class="n">shader</span><span class="o">.</span><span class="na">setUniformi</span><span class="o">(</span><span class="s">"u_texture"</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+    <span class="n">shader</span><span class="o">.</span><span class="na">setUniformi</span><span class="o">(</span><span class="s">"u_mask"</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+
+    <span class="cm">/* Construct a simple SpriteBatch using our shader program. */</span>
+    <span class="n">spriteBatch1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SpriteBatch</span><span class="o">();</span>
+    <span class="n">spriteBatch1</span><span class="o">.</span><span class="na">setShader</span><span class="o">(</span><span class="n">shader</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>The vertex.glsl shader file:</strong></p>
+
+<div class="language-glsl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">uniform</span> <span class="kt">mat4</span> <span class="n">u_projTrans</span><span class="p">;</span>
+
+<span class="k">attribute</span> <span class="kt">vec4</span> <span class="n">a_position</span><span class="p">;</span>
+<span class="k">attribute</span> <span class="kt">vec4</span> <span class="n">a_color</span><span class="p">;</span>
+<span class="k">attribute</span> <span class="kt">vec2</span> <span class="n">a_texCoord0</span><span class="p">;</span>
+
+<span class="k">varying</span> <span class="kt">vec4</span> <span class="n">v_color</span><span class="p">;</span>
+<span class="k">varying</span> <span class="kt">vec2</span> <span class="n">v_texCoord0</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">v_color</span> <span class="o">=</span> <span class="n">a_color</span><span class="p">;</span>
+    <span class="n">v_texCoord0</span> <span class="o">=</span> <span class="n">a_texCoord0</span><span class="p">;</span>
+    <span class="nb">gl_Position</span> <span class="o">=</span> <span class="n">u_projTrans</span> <span class="o">*</span> <span class="n">a_position</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>The fragment.glsl shader file:</strong></p>
+
+<div class="language-glsl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifdef GL_ES
+</span><span class="k">precision</span> <span class="kt">mediump</span> <span class="kt">float</span><span class="p">;</span>
+<span class="cp">#endif
+</span>
+<span class="k">uniform</span> <span class="kt">sampler2D</span> <span class="n">u_texture</span><span class="p">;</span>
+<span class="k">uniform</span> <span class="kt">sampler2D</span> <span class="n">u_mask</span><span class="p">;</span>
+
+<span class="k">varying</span> <span class="kt">vec4</span> <span class="n">v_color</span><span class="p">;</span>
+<span class="k">varying</span> <span class="kt">vec2</span> <span class="n">v_texCoord0</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">vec4</span> <span class="n">texColor</span> <span class="o">=</span> <span class="n">texture2D</span><span class="p">(</span><span class="n">u_texture</span><span class="p">,</span> <span class="n">v_texCoord0</span><span class="p">);</span>
+    <span class="kt">vec4</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">texture2D</span><span class="p">(</span><span class="n">u_mask</span><span class="p">,</span> <span class="n">v_texCoord0</span><span class="p">);</span>
+    <span class="n">texColor</span><span class="p">.</span><span class="n">a</span> <span class="o">*=</span> <span class="n">mask</span><span class="p">.</span><span class="n">a</span><span class="p">;</span>
+    <span class="nb">gl_FragColor</span> <span class="o">=</span> <span class="n">v_color</span> <span class="o">*</span> <span class="n">texColor</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="step-4---drawing-the-contours-of-the-mask-for-debugging-purposes-1">Step 4 - Drawing the contours of the mask for debugging purposes</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">drawContours</span><span class="o">()</span> <span class="o">{</span>
+    <span class="cm">/* Draw the contour of the masks. */</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">CYAN</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">rect</span><span class="o">(</span><span class="n">size</span> <span class="o">/</span> <span class="mi">4</span><span class="n">f</span><span class="o">,</span> <span class="mi">0</span><span class="n">f</span><span class="o">,</span> <span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">,</span> <span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">circle</span><span class="o">(</span><span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">,</span> <span class="n">size</span> <span class="o">*</span> <span class="mf">0.75f</span><span class="o">,</span> <span class="n">size</span> <span class="o">/</span> <span class="mi">4</span><span class="n">f</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="result-5">Result</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">render</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">ScreenUtils</span><span class="o">.</span><span class="na">clear</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">BLACK</span><span class="o">);</span>
+
+    <span class="cm">/* Draw our masked image. */</span>
+    <span class="n">spriteBatch1</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+    <span class="n">spriteBatch1</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">);</span>
+    <span class="n">spriteBatch1</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">texture</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">size</span><span class="o">);</span>
+    <span class="n">spriteBatch1</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+
+    <span class="cm">/* Draw the original image unmasked for comparison. */</span>
+    <span class="n">spriteBatch2</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+    <span class="n">spriteBatch2</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">texture</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">size</span><span class="o">);</span>
+    <span class="n">spriteBatch2</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+    <span class="n">drawContours</span><span class="o">();</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="https://imgur.com/h7fgM3Z.png" alt="Masked sprite and original sprites" /></p>
+
+<h2 id="7-masking-using-blendfuncseparate-removal">7. Masking using BlendFuncSeparate (Removal)</h2>
+
+<p>Ideal if you wanna use the mask to hide portions of the masked elements.</p>
+
+<h3 id="step-1---preparations-6">Step 1 - Preparations</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">ShapeRenderer</span> <span class="n">shapeRenderer</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">FrameBuffer</span> <span class="n">frameBuffer</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">SpriteBatch</span> <span class="n">spriteBatch</span><span class="o">;</span>
+
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">create</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">shapeRenderer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ShapeRenderer</span><span class="o">();</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setAutoShapeType</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl20</span><span class="o">.</span><span class="na">glLineWidth</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+
+    <span class="n">frameBuffer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FrameBuffer</span><span class="o">(</span><span class="nc">Pixmap</span><span class="o">.</span><span class="na">Format</span><span class="o">.</span><span class="na">RGBA8888</span><span class="o">,</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getWidth</span><span class="o">(),</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getHeight</span><span class="o">(),</span> <span class="kc">false</span><span class="o">);</span>
+
+    <span class="n">spriteBatch</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SpriteBatch</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="step-2---drawing-the-masked-elements-and-the-mask-elements">Step 2 - Drawing the masked elements and the mask elements</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">drawCircles</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="nc">ShapeType</span><span class="o">.</span><span class="na">Filled</span><span class="o">);</span>
+
+    <span class="cm">/* An example circle, remember to flush before changing the blending function */</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">circle</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+
+    <span class="cm">/* We'll need blending enabled for the technique to work*/</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glEnable</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_BLEND</span><span class="o">);</span>
+
+    <span class="cm">/* With this blending function, wherever we draw pixels next
+     * we will actually remove previously drawn pixels. */</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glBlendFuncSeparate</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_ZERO</span><span class="o">,</span> <span class="no">GL20</span><span class="o">.</span><span class="na">GL_ZERO</span><span class="o">,</span> <span class="no">GL20</span><span class="o">.</span><span class="na">GL_ONE_MINUS_SRC_ALPHA</span><span class="o">,</span> <span class="no">GL20</span><span class="o">.</span><span class="na">GL_ONE_MINUS_DST_ALPHA</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">circle</span><span class="o">(</span><span class="mi">300</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">70</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">circle</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">35</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+
+    <span class="cm">/* Restore defaults. */</span>
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glDisable</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_BLEND</span><span class="o">);</span>
+
+    <span class="cm">/* The default blend function in case we need standard blending elsewhere.
+     * Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA); */</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="step-3---drawing-the-contours-for-debugging-purposes-2">Step 3 - Drawing the contours for debugging purposes</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">drawContours</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="nc">ShapeType</span><span class="o">.</span><span class="na">Line</span><span class="o">);</span>
+
+    <span class="cm">/* Contour of the masked circle */</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">GREEN</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">circle</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+
+    <span class="cm">/* Contour of the masks */</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">CYAN</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">circle</span><span class="o">(</span><span class="mi">300</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">70</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">circle</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">35</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="result-6">Result</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">render</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">ScreenUtils</span><span class="o">.</span><span class="na">clear</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">GRAY</span><span class="o">);</span>
+
+    <span class="n">frameBuffer</span><span class="o">.</span><span class="na">bind</span><span class="o">();</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+    <span class="n">drawCircles</span><span class="o">();</span>
+    <span class="n">drawContours</span><span class="o">();</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+    <span class="n">frameBuffer</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+
+    <span class="nc">Texture</span> <span class="n">texture</span> <span class="o">=</span> <span class="n">frameBuffer</span><span class="o">.</span><span class="na">getColorBufferTexture</span><span class="o">();</span>
+    <span class="nc">Sprite</span> <span class="n">sprite</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Sprite</span><span class="o">(</span><span class="n">texture</span><span class="o">);</span>
+    <span class="n">sprite</span><span class="o">.</span><span class="na">flip</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+    <span class="n">sprite</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">spriteBatch</span><span class="o">);</span>
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="https://imgur.com/ZsA3PRq.png" alt="Masked sprite and original sprites" /></p>
+
+<h2 id="8-masking-using-blending-function-tinting">8. Masking using Blending Function (Tinting)</h2>
+
+<p>Ideal if you wanna use the mask to tint or texture portions of the masked elements.</p>
+
+<h3 id="step-1---preparations-7">Step 1 - Preparations</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">ShapeRenderer</span> <span class="n">shapeRenderer</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">SpriteBatch</span> <span class="n">spriteBatch</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">BitmapFont</span> <span class="n">menuItemFont</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">FrameBuffer</span> <span class="n">frameBuffer</span><span class="o">;</span>
+<span class="kd">private</span> <span class="kt">float</span> <span class="n">textWidth</span><span class="o">,</span> <span class="n">textHeight</span><span class="o">,</span> <span class="n">textX</span><span class="o">,</span> <span class="n">textY</span><span class="o">;</span>
+
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">create</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">shapeRenderer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ShapeRenderer</span><span class="o">();</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">setAutoShapeType</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+
+    <span class="n">spriteBatch</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SpriteBatch</span><span class="o">();</span>
+
+    <span class="n">menuItemFont</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BitmapFont</span><span class="o">();</span>
+    <span class="n">menuItemFont</span><span class="o">.</span><span class="na">getData</span><span class="o">().</span><span class="na">setScale</span><span class="o">(</span><span class="mi">6</span><span class="n">f</span><span class="o">);</span>
+
+    <span class="kt">int</span> <span class="n">screenWidth</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getWidth</span><span class="o">();</span>
+    <span class="kt">int</span> <span class="n">screenHeight</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getHeight</span><span class="o">();</span>
+
+    <span class="nc">GlyphLayout</span> <span class="n">glyphLayout</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GlyphLayout</span><span class="o">();</span>
+    <span class="n">glyphLayout</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">menuItemFont</span><span class="o">,</span> <span class="s">"ONE PLAYER"</span><span class="o">);</span>
+
+    <span class="n">textWidth</span> <span class="o">=</span> <span class="n">glyphLayout</span><span class="o">.</span><span class="na">width</span><span class="o">;</span>
+    <span class="n">textHeight</span> <span class="o">=</span> <span class="n">glyphLayout</span><span class="o">.</span><span class="na">height</span><span class="o">;</span>
+    <span class="n">textX</span> <span class="o">=</span> <span class="n">screenWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span> <span class="o">-</span> <span class="n">textWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">;</span>
+    <span class="n">textY</span> <span class="o">=</span> <span class="n">screenHeight</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span> <span class="o">+</span> <span class="n">textHeight</span> <span class="o">/</span> <span class="mi">2</span><span class="n">f</span><span class="o">;</span>
+
+    <span class="n">frameBuffer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FrameBuffer</span><span class="o">(</span><span class="nc">Pixmap</span><span class="o">.</span><span class="na">Format</span><span class="o">.</span><span class="na">RGBA8888</span><span class="o">,</span> <span class="n">screenWidth</span><span class="o">,</span> <span class="n">screenHeight</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="step-2---drawing-the-mask-and-masked-elements">Step 2 - Drawing the mask and masked elements</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+    <span class="n">menuItemFont</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">spriteBatch</span><span class="o">,</span> <span class="s">"ONE PLAYER"</span><span class="o">,</span> <span class="n">textX</span><span class="o">,</span> <span class="n">textY</span><span class="o">);</span>
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glEnable</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_BLEND</span><span class="o">);</span>
+
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glBlendFunc</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_DST_COLOR</span><span class="o">,</span> <span class="no">GL20</span><span class="o">.</span><span class="na">GL_ZERO</span><span class="o">);</span>
+
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="nc">ShapeType</span><span class="o">.</span><span class="na">Filled</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">rect</span><span class="o">(</span><span class="n">textX</span> <span class="o">-</span> <span class="mi">10</span><span class="o">,</span> <span class="n">textY</span> <span class="o">+</span> <span class="mi">10</span><span class="o">,</span> <span class="n">textWidth</span> <span class="o">+</span> <span class="mi">20</span><span class="o">,</span> <span class="o">-(</span><span class="n">textHeight</span> <span class="o">+</span> <span class="mi">20</span><span class="o">),</span>
+            <span class="nc">Color</span><span class="o">.</span><span class="na">LIME</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">LIME</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">BLACK</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">BLACK</span><span class="o">);</span>
+    <span class="n">shapeRenderer</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+
+    <span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glDisable</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_BLEND</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="result-7">Result</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">render</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">ScreenUtils</span><span class="o">.</span><span class="na">clear</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">);</span>
+
+    <span class="n">frameBuffer</span><span class="o">.</span><span class="na">bind</span><span class="o">();</span>
+    <span class="n">draw</span><span class="o">();</span>
+    <span class="n">frameBuffer</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+
+    <span class="nc">Texture</span> <span class="n">texture</span> <span class="o">=</span> <span class="n">frameBuffer</span><span class="o">.</span><span class="na">getColorBufferTexture</span><span class="o">();</span>
+    <span class="nc">Sprite</span> <span class="n">sprite</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Sprite</span><span class="o">(</span><span class="n">texture</span><span class="o">);</span>
+    <span class="n">sprite</span><span class="o">.</span><span class="na">flip</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+    <span class="n">sprite</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">spriteBatch</span><span class="o">);</span>
+    <span class="n">spriteBatch</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="https://imgur.com/YsX0Rre.png" alt="Masked sprite and original sprites" /></p>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

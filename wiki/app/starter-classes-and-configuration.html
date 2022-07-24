@@ -1,0 +1,962 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Starter classes and configuration - libGDX</title>
+
+  <meta name="description" content="Desktop (LWJGL3) Desktop (LWJGL) Android Game Activity Game Fragment Manifest configuration Live Wallpapers Screen Savers (aka Daydreams) iOS/Robovm HTML5/GWT For each target platform, a starter class has to be written....">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Starter classes and configuration">
+<meta property="og:url" content="https://libgdx.com/wiki/app/starter-classes-and-configuration">
+
+
+  <meta property="og:description" content="Desktop (LWJGL3) Desktop (LWJGL) Android Game Activity Game Fragment Manifest configuration Live Wallpapers Screen Savers (aka Daydreams) iOS/Robovm HTML5/GWT For each target platform, a starter class has to be written....">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/app/starter-classes-and-configuration">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Starter classes and configuration
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/app/starter-classes-and-configuration.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/app/starter-classes-and-configuration.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <ul>
+  <li><a href="#desktop-lwjgl3">Desktop (LWJGL3)</a></li>
+  <li><a href="#desktop-lwjgl">Desktop (LWJGL)</a></li>
+  <li><a href="#android">Android</a>
+    <ul>
+      <li><a href="#game-activity">Game Activity</a></li>
+      <li><a href="#game-fragment">Game Fragment</a></li>
+      <li><a href="#manifest-configuration">Manifest configuration</a></li>
+      <li><a href="#live-wallpapers">Live Wallpapers</a></li>
+      <li><a href="#screen-savers-aka-daydreams">Screen Savers (aka Daydreams)</a></li>
+    </ul>
+  </li>
+  <li><a href="#iosrobovm">iOS/Robovm</a></li>
+  <li><a href="#html5gwt">HTML5/GWT</a></li>
+</ul>
+
+<p>For each target platform, a starter class has to be written. This class instantiates a back-end specific <code class="language-plaintext highlighter-rouge">Application</code> implementation and the <code class="language-plaintext highlighter-rouge">ApplicationListener</code> that implements the application logic. The starter classes are platform-dependent, so let’s have a look at how to instantiate and configure these for each backend.</p>
+
+<p class="notice--info">This article assumes you have followed the instructions in <a href="/wiki/start/project-generation">Project Setup</a> as well as <a href="/wiki/start/import-and-running">Importing &amp; Running a Project</a> and you therefore have already set up the project in your IDE.</p>
+
+<h1 id="desktop-lwjgl3">Desktop (LWJGL3)</h1>
+
+<p class="notice--info">Since libGDX version 1.10.1, this has been the default desktop backend. You can find more information <a href="/news/2021/07/devlog-7-lwjgl3">here</a>.</p>
+
+<p>Opening the <code class="language-plaintext highlighter-rouge">DesktopLauncher.java</code> class in <code class="language-plaintext highlighter-rouge">my-gdx-game</code> shows the following:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.me.mygdxgame</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DesktopLauncher</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">Lwjgl3ApplicationConfiguration</span> <span class="n">config</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Lwjgl3ApplicationConfiguration</span><span class="o">();</span>
+      <span class="n">config</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span><span class="s">"my-gdx-game"</span><span class="o">);</span>
+      <span class="n">config</span><span class="o">.</span><span class="na">setWindowedMode</span><span class="o">(</span><span class="mi">480</span><span class="o">,</span> <span class="mi">320</span><span class="o">);</span>
+
+      <span class="k">new</span> <span class="nf">Lwjgl3Application</span><span class="o">(</span><span class="k">new</span> <span class="nc">MyGdxGame</span><span class="o">(),</span> <span class="n">config</span><span class="o">);</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>First an <a href="https://github.com/libgdx/libgdx/blob/master/backends/gdx-backend-lwjgl3/src/com/badlogic/gdx/backends/lwjgl3/Lwjgl3ApplicationConfiguration.java">Lwjgl3ApplicationConfiguration</a> is instantiated. This class lets one specify various configuration settings, such as the initial screen resolution, whether to use OpenGL ES 2.0 or 3.0 and so on. Refer to the Javadocs of this class for more information.</p>
+
+<p>Once the configuration object is set, an <code class="language-plaintext highlighter-rouge">Lwjgl3Application</code> is instantiated. The <code class="language-plaintext highlighter-rouge">MyGdxGame()</code> class is the ApplicationListener implementing the game logic.</p>
+
+<p>From there on a window is created and the ApplicationListener is invoked as described in <a href="/wiki/app/the-life-cycle">The Life-Cycle</a></p>
+
+<h4 id="common-issues">Common issues:</h4>
+
+<ol>
+  <li>On <strong>macOS</strong>, there is another step required to get LWJGL 3 apps running. Either add the <code class="language-plaintext highlighter-rouge">com.badlogicgames.gdx:gdx-lwjgl3-glfw-awt-macos</code> dependency to your desktop project set the VM Options to <code class="language-plaintext highlighter-rouge">-XstartOnFirstThread</code>. The latter can typically be done in the Launch/Run Configurations of your IDE, as is described <a href="/wiki/start/import-and-running">here</a>. Alternatively, if you’re starting your project via Gradle, add this line to <code class="language-plaintext highlighter-rouge">run</code> task of the desktop Gradle file:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> jvmArgs = ['-XstartOnFirstThread']
+</code></pre></div>    </div>
+    <p>A fourth approach is to just programatically restart the JVM if the argument is not present (see <a href="https://github.com/crykn/guacamole/blob/master/gdx-desktop/src/main/java/de/damios/guacamole/gdx/StartOnFirstThreadHelper.java#L69">here</a> for a simple example). Lastly, if you want to deploy your game by packaging a JRE with it (which is the recommended way to distribute your later game), jpackage or packr allow you to set the JVM arguments.</p>
+  </li>
+  <li>If you are using <strong>gdx-tools</strong> and the lwjgl3 backend in the same project, you need to modify your gdx-tools dependency like this:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>compile ("com.badlogicgames.gdx:gdx-tools:$gdxVersion") {
+   exclude group: 'com.badlogicgames.gdx', module: 'gdx-backend-lwjgl'
+}
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h1 id="desktop-lwjgl">Desktop (LWJGL)</h1>
+
+<p class="notice--warning">In version 1.10.1, libGDX switched its default desktop backend to LWJGL 3. If you want to upgrade, please take a look <a href="/news/2021/07/devlog-7-lwjgl3#how-can-i-migrate">here</a>.</p>
+
+<p>Opening the <code class="language-plaintext highlighter-rouge">DesktopLauncher.java</code> class in <code class="language-plaintext highlighter-rouge">my-gdx-game</code> shows the following:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.me.mygdxgame</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.backends.lwjgl.LwjglApplication</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DesktopLauncher</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">LwjglApplicationConfiguration</span> <span class="n">cfg</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LwjglApplicationConfiguration</span><span class="o">();</span>
+      <span class="n">cfg</span><span class="o">.</span><span class="na">title</span> <span class="o">=</span> <span class="s">"my-gdx-game"</span><span class="o">;</span>
+      <span class="n">cfg</span><span class="o">.</span><span class="na">useGL30</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+      <span class="n">cfg</span><span class="o">.</span><span class="na">width</span> <span class="o">=</span> <span class="mi">480</span><span class="o">;</span>
+      <span class="n">cfg</span><span class="o">.</span><span class="na">height</span> <span class="o">=</span> <span class="mi">320</span><span class="o">;</span>
+
+      <span class="k">new</span> <span class="nf">LwjglApplication</span><span class="o">(</span><span class="k">new</span> <span class="nc">MyGdxGame</span><span class="o">(),</span> <span class="n">cfg</span><span class="o">);</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>First an <a href="https://github.com/libgdx/libgdx/tree/master/backends/gdx-backend-lwjgl/src/com/badlogic/gdx/backends/lwjgl/LwjglApplicationConfiguration.java">LwjglApplicationConfiguration</a> is instantiated. This class lets one specify various configuration settings, such as the initial screen resolution, whether to use OpenGL ES 2.0 or 3.0 and so on. Refer to the <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/backends/lwjgl/LwjglApplicationConfiguration.html">Javadocs</a> of this class for more information.</p>
+
+<p>Once the configuration object is set, an <code class="language-plaintext highlighter-rouge">LwjglApplication</code> is instantiated. The <code class="language-plaintext highlighter-rouge">MyGdxGame()</code> class is the ApplicationListener implementing the game logic.</p>
+
+<p>From there on a window is created and the ApplicationListener is invoked as described in <a href="/wiki/app/the-life-cycle">The Life-Cycle</a></p>
+
+<h3 id="common-issues-1">Common issues:</h3>
+
+<ul>
+  <li>
+    <p>When using a JDK of version 8 or later, an <strong>“illegal reflective access”</strong> warning is shown. This is nothing to be worried about. If it bothers you, downgrade the used JDK or switch to the LWJGL 3 backend.</p>
+  </li>
+  <li>
+    <p>If an error like <strong><code class="language-plaintext highlighter-rouge">Process 'command 'C:/.../java.exe'' finished with non-zero exit value -1</code></strong> is shown, this can safely be ignored. A workaround is disabling forceExit: <code class="language-plaintext highlighter-rouge">config.forceExit = false;</code>.</p>
+  </li>
+</ul>
+
+<h1 id="android">Android</h1>
+
+<h2 id="game-activity">Game Activity</h2>
+
+<p>Android applications do not use a <code class="language-plaintext highlighter-rouge">main()</code> method as the entry-point, but instead require an Activity. Open the <code class="language-plaintext highlighter-rouge">MainActivity.java</code> class in the <code class="language-plaintext highlighter-rouge">my-gdx-game-android</code> project:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.me.mygdxgame</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">android.os.Bundle</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.backends.android.AndroidApplication</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.backends.android.AndroidApplicationConfiguration</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainActivity</span> <span class="kd">extends</span> <span class="nc">AndroidApplication</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="nc">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+
+        <span class="nc">AndroidApplicationConfiguration</span> <span class="n">cfg</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AndroidApplicationConfiguration</span><span class="o">();</span>
+
+        <span class="n">initialize</span><span class="o">(</span><span class="k">new</span> <span class="nc">MyGdxGame</span><span class="o">(),</span> <span class="n">cfg</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The main entry-point method is the Activity’s <code class="language-plaintext highlighter-rouge">onCreate()</code> method. Note that <code class="language-plaintext highlighter-rouge">MainActivity</code> derives from <code class="language-plaintext highlighter-rouge">AndroidApplication</code>, which itself derives from <code class="language-plaintext highlighter-rouge">Activity</code>. As in the desktop starter class, a configuration instance is created (<a href="https://github.com/libgdx/libgdx/tree/master/backends/gdx-backend-android/src/com/badlogic/gdx/backends/android/AndroidApplicationConfiguration.java">AndroidApplicationConfiguration</a>). Once configured, the <code class="language-plaintext highlighter-rouge">AndroidApplication.initialize()</code> method is called, passing in the <code class="language-plaintext highlighter-rouge">ApplicationListener</code> (<code class="language-plaintext highlighter-rouge">MyGdxGame</code>) as well as the configuration. Refer to the <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/backends/android/AndroidApplicationConfiguration.html">AndroidApplicationConfiguration Javadocs</a> for more information on what configuration settings are available.</p>
+
+<p>Android applications can have multiple activities. libGDX games should usually only consist of a single activity. Different screens of the game are implemented within libGDX, not as separate activities. The reason for this is that creating a new <code class="language-plaintext highlighter-rouge">Activity</code> also implies creating a new OpenGL context, which is time consuming and also means that all graphical resources have to be reloaded.</p>
+
+<h2 id="game-fragment">Game Fragment</h2>
+
+<p>A libGDX game can be hosted in an Android <a href="https://developer.android.com/guide/fragments">Fragment</a> instead of using a complete Activity. This allows it to take up a portion of the screen in an Activity or be moved between layouts. To create a libGDX fragment, subclass <code class="language-plaintext highlighter-rouge">AndroidFragmentApplication</code> and implement the <code class="language-plaintext highlighter-rouge">onCreateView()</code> with the following initialization:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">View</span> <span class="nf">onCreateView</span><span class="o">(</span><span class="nc">LayoutInflater</span> <span class="n">inflater</span><span class="o">,</span> <span class="nc">ViewGroup</span> <span class="n">container</span><span class="o">,</span> <span class="nc">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">initializeForView</span><span class="o">(</span><span class="k">new</span> <span class="nc">MyGdxGame</span><span class="o">());</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>That code depends on some other changes to the -android project:</p>
+<ol>
+  <li><a href="https://developer.android.com/jetpack/androidx/releases/fragment">Add AndroidX Fragment Library to the -android project and its build path</a> if you haven’t already added it. This is needed in order to extend FragmentActivity later.</li>
+  <li>Change the AndroidLauncher Activity to extend FragmentActivity, not AndroidApplication.</li>
+  <li>Implement AndroidFragmentApplication.Callbacks on the AndroidLauncher Activity.</li>
+  <li>Create a class that extends AndroidFragmentApplication which is the Fragment implementation for libGDX.</li>
+  <li>Add the <code class="language-plaintext highlighter-rouge">initializeForView()</code> code in the Fragment’s <code class="language-plaintext highlighter-rouge">onCreateView</code> method.</li>
+  <li>Finally, replace the AndroidLauncher activity content with the libGDX Fragment.</li>
+</ol>
+
+<p>For example:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 2. Change AndroidLauncher activity to extend FragmentActivity, not AndroidApplication</span>
+<span class="c1">// 3. Implement AndroidFragmentApplication.Callbacks on the AndroidLauncher activity</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AndroidLauncher</span> <span class="kd">extends</span> <span class="nc">FragmentActivity</span> <span class="kd">implements</span> <span class="nc">AndroidFragmentApplication</span><span class="o">.</span><span class="na">Callbacks</span>
+<span class="o">{</span>
+   <span class="nd">@Override</span>
+   <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span> <span class="o">(</span><span class="nc">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span>
+   <span class="o">{</span>
+      <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+
+      <span class="c1">// 6. Finally, replace the AndroidLauncher activity content with the libGDX Fragment.</span>
+      <span class="nc">GameFragment</span> <span class="n">fragment</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GameFragment</span><span class="o">();</span>
+      <span class="nc">FragmentTransaction</span> <span class="n">trans</span> <span class="o">=</span> <span class="n">getSupportFragmentManager</span><span class="o">().</span><span class="na">beginTransaction</span><span class="o">();</span>
+      <span class="n">trans</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="n">android</span><span class="o">.</span><span class="na">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">content</span><span class="o">,</span> <span class="n">fragment</span><span class="o">);</span>
+      <span class="n">trans</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
+   <span class="o">}</span>
+
+   <span class="c1">// 4. Create a Class that extends AndroidFragmentApplication which is the Fragment implementation for libGDX.</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">GameFragment</span> <span class="kd">extends</span> <span class="nc">AndroidFragmentApplication</span>
+   <span class="o">{</span>
+      <span class="c1">// 5. Add the initializeForView() code in the Fragment's onCreateView method.</span>
+      <span class="nd">@Override</span>
+      <span class="kd">public</span> <span class="nc">View</span> <span class="nf">onCreateView</span><span class="o">(</span><span class="nc">LayoutInflater</span> <span class="n">inflater</span><span class="o">,</span> <span class="nc">ViewGroup</span> <span class="n">container</span><span class="o">,</span> <span class="nc">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span>
+      <span class="o">{</span>  <span class="k">return</span> <span class="n">initializeForView</span><span class="o">(</span><span class="k">new</span> <span class="nc">MyGdxGame</span><span class="o">());</span>   <span class="o">}</span>
+   <span class="o">}</span>
+
+   <span class="nd">@Override</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">exit</span><span class="o">()</span> <span class="o">{}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="manifest-configuration">Manifest configuration</h2>
+<p>Besides the <code class="language-plaintext highlighter-rouge">AndroidApplicationConfiguration</code>, an Android application is also configured via the <code class="language-plaintext highlighter-rouge">AndroidManifest.xml</code> file, found in the root directory of the Android project. This might look something like this:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;manifest</span> <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="na">package=</span><span class="s">"com.me.mygdxgame"</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;application</span>
+        <span class="na">android:icon=</span><span class="s">"@drawable/ic_launcher"</span>
+        <span class="na">android:label=</span><span class="s">"@string/app_name"</span> <span class="nt">&gt;</span>
+        <span class="nt">&lt;activity</span>
+            <span class="na">android:name=</span><span class="s">".MainActivity"</span>
+            <span class="na">android:label=</span><span class="s">"@string/app_name"</span>
+            <span class="na">android:screenOrientation=</span><span class="s">"landscape"</span>
+            <span class="na">android:configChanges=</span><span class="s">"keyboard|keyboardHidden|orientation"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;intent-filter&gt;</span>
+                <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">"android.intent.action.MAIN"</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">"android.intent.category.LAUNCHER"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/intent-filter&gt;</span>
+        <span class="nt">&lt;/activity&gt;</span>
+    <span class="nt">&lt;/application&gt;</span>
+
+<span class="nt">&lt;/manifest&gt;</span>
+</code></pre></div></div>
+
+<h4 id="screen-orientation--configuration-changes">Screen Orientation &amp; Configuration Changes</h4>
+<p>In addition to the targetSdkVersion, the <code class="language-plaintext highlighter-rouge">screenOrientation</code> and <code class="language-plaintext highlighter-rouge">configChanges</code> attributes of the activity element should always be set.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">screenOrientation</code> attribute specifies a fixed orientation for the application. One may omit this if the application can work with both landscape and portrait mode.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">configChanges</code> attribute is <em>crucial</em> and should always have the values shown above. Omitting this attribute means that the application will be restarted every time a physical keyboard is slid out/in or if the orientation of the device changes. If the <code class="language-plaintext highlighter-rouge">screenOrientation</code> attribute is omitted, a libGDX application will receive calls to <code class="language-plaintext highlighter-rouge">ApplicationListener.resize()</code> to indicate the orientation change. API clients can then re-layout the application accordingly.</p>
+
+<h4 id="permissions">Permissions</h4>
+<p>If an application needs to be able to write to the external storage of a device (e.g. SD-card), needs internet access, uses the vibrator or wants to record audio, the following permissions need to be added to the <code class="language-plaintext highlighter-rouge">AndroidManifest.xml</code> file:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.RECORD_AUDIO"</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.WRITE_EXTERNAL_STORAGE"</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.VIBRATE"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>Users are generally suspicious of applications with many permissions, so choose these wisely.</p>
+
+<p>For wake locking to work, <code class="language-plaintext highlighter-rouge">AndroidApplicationConfiguration.useWakeLock</code> needs to be set to true.</p>
+
+<p>If a game doesn’t need accelerometer or compass access, it is advised to disable these by setting the
+<code class="language-plaintext highlighter-rouge">useAccelerometer</code> and <code class="language-plaintext highlighter-rouge">useCompass</code> fields of <code class="language-plaintext highlighter-rouge">AndroidApplicationConfiguration</code> to false.</p>
+
+<p>If your game needs the gyroscope sensor, you have to set <code class="language-plaintext highlighter-rouge">useGyroscope</code> to true in <code class="language-plaintext highlighter-rouge">AndroidApplicationConfiguration</code> (It’s disabled by default, to save energy).</p>
+
+<p>Please refer to the <a href="https://developer.android.com/guide">Android Developer’s Guide</a> for more information on how to set other attributes like icons for your application.</p>
+
+<h2 id="live-wallpapers">Live Wallpapers</h2>
+<p>A libGDX core application can also be used as an Android <a href="https://android-developers.googleblog.com/2010/02/live-wallpapers.html">Live Wallpaper</a>.
+The project setup is very similar to an Android game, but <code class="language-plaintext highlighter-rouge">AndroidLiveWallpaperService</code> is used in
+place of <code class="language-plaintext highlighter-rouge">AndroidApplication</code>. Live Wallpapers are Android <a href="https://developer.android.com/guide/components/services">Services</a>,
+not Activities.</p>
+
+<p><strong>Note: Due to synchronization issues, you cannot combine games and live wallpapers in the same app. However, Live
+Wallpapers and Screen Savers can safely coexist in the same app.</strong></p>
+
+<p>First, extend <code class="language-plaintext highlighter-rouge">AndroidLiveWallpaperService</code> and override <code class="language-plaintext highlighter-rouge">onCreateApplication()</code> (instead of <code class="language-plaintext highlighter-rouge">onCreate()</code>
+like you would do with a game <code class="language-plaintext highlighter-rouge">Activity</code>):</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyLiveWallpaper</span> <span class="kd">extends</span> <span class="nc">AndroidLiveWallpaperService</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreateApplication</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">AndroidApplicationConfiguration</span> <span class="n">cfg</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AndroidApplicationConfiguration</span><span class="o">();</span>
+
+        <span class="n">initialize</span><span class="o">(</span><span class="k">new</span> <span class="nc">MyGdxGame</span><span class="o">(),</span> <span class="n">cfg</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>You can optionally subscribe to Live Wallpaper-specific events by implementing <code class="language-plaintext highlighter-rouge">AndroidWallpaperListener</code> with your
+<code class="language-plaintext highlighter-rouge">ApplicationListener</code> class. <code class="language-plaintext highlighter-rouge">AndroidWallpaperListener</code> is not available from the <code class="language-plaintext highlighter-rouge">core</code> module, so you can either
+follow the strategy outlined in <a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing With Platform-Specific Code</a>, or you can manage it just from the <code class="language-plaintext highlighter-rouge">android</code>
+module by subclassing your <code class="language-plaintext highlighter-rouge">ApplicationListener</code> like this:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyLiveWallpaper</span> <span class="kd">extends</span> <span class="nc">AndroidLiveWallpaperService</span> <span class="o">{</span>
+
+    <span class="kd">static</span> <span class="kd">class</span> <span class="nc">MyLiveWallpaperListener</span> <span class="kd">extends</span> <span class="nc">MyGdxGame</span> <span class="kd">implements</span> <span class="nc">AndroidWallpaperListener</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">offsetChange</span> <span class="o">(</span><span class="kt">float</span> <span class="n">xOffset</span><span class="o">,</span> <span class="kt">float</span> <span class="n">yOffset</span><span class="o">,</span> <span class="kt">float</span> <span class="n">xOffsetStep</span><span class="o">,</span>
+                                  <span class="kt">float</span> <span class="n">yOffsetStep</span><span class="o">,</span> <span class="kt">int</span> <span class="n">xPixelOffset</span><span class="o">,</span> <span class="kt">int</span> <span class="n">yPixelOffset</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// Called when the home screen is scrolled. Not all launchers support this.</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">previewStateChange</span> <span class="o">(</span><span class="kt">boolean</span> <span class="n">isPreview</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// Called when switched between being previewed and running as the wallpaper.</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">iconDropped</span> <span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// Called when an icon is dropped on the home screen.</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreateApplication</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">AndroidApplicationConfiguration</span> <span class="n">cfg</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AndroidApplicationConfiguration</span><span class="o">();</span>
+
+        <span class="n">initialize</span><span class="o">(</span><span class="k">new</span> <span class="nc">MyLiveWallpaperListener</span><span class="o">(),</span> <span class="n">cfg</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Since libGDX 1.9.12, you can also report the dominant colors of the wallpaper to
+the OS. Starting with Android 8.1, this is used by some Android launchers and lock screens for styling, such as changing
+the text color of the clock. You can create a method like this to report the colors, and access it from the core module
+using the strategy from <a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing With Platform-Specific Code</a>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">notifyColorsChanged</span> <span class="o">(</span><span class="nc">Color</span> <span class="n">primaryColor</span><span class="o">,</span> <span class="nc">Color</span> <span class="n">secondaryColor</span><span class="o">,</span> <span class="nc">Color</span> <span class="n">tertiaryColor</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Application</span> <span class="n">app</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">app</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="nc">Build</span><span class="o">.</span><span class="na">VERSION</span><span class="o">.</span><span class="na">SDK_INT</span> <span class="o">&gt;=</span> <span class="mi">27</span> <span class="o">&amp;&amp;</span> <span class="n">app</span> <span class="k">instanceof</span> <span class="nc">AndroidLiveWallpaper</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">((</span><span class="nc">AndroidLiveWallpaper</span><span class="o">)</span> <span class="n">app</span><span class="o">).</span><span class="na">notifyColorsChanged</span><span class="o">(</span><span class="n">primaryColor</span><span class="o">,</span> <span class="n">secondaryColor</span><span class="o">,</span> <span class="n">tertiaryColor</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>In additional to the service class, you must also create an <code class="language-plaintext highlighter-rouge">xml</code> file in the Android <code class="language-plaintext highlighter-rouge">res/xml</code> directory to define
+some Live Wallpaper properties: its thumbnail and description shown in the wallpaper picker, and an optional settings
+Activity. Let’s call this file <code class="language-plaintext highlighter-rouge">livewallpaper.xml</code>.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;wallpaper</span>
+    <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>  
+    <span class="na">android:thumbnail=</span><span class="s">"@drawable/ic_launcher"</span>
+    <span class="na">android:description=</span><span class="s">"@string/description"</span>
+    <span class="na">android:settingsActivity=</span><span class="s">"com.mypackage.MyLiveWallpaperSettingsActivity"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>Finally, you’ll need to add things to your <code class="language-plaintext highlighter-rouge">AndroidManifest.xml</code> files. Here’s an example for a Live Wallpaper with a simple
+settings Activity. The key elements here are the <code class="language-plaintext highlighter-rouge">uses-feature</code> and <code class="language-plaintext highlighter-rouge">service</code> blocks. The label and icon set on the
+service appear in the Android application settings. The settings Activity and the Live Wallpaper service must both be set
+with <code class="language-plaintext highlighter-rouge">exported</code> true so they can be accessed by the Live Wallpaper picker.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;manifest</span> <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+        <span class="na">package=</span><span class="s">"com.mypackage"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;uses-feature</span> <span class="na">android:name=</span><span class="s">"android.software.live_wallpaper"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;application</span> <span class="na">android:icon=</span><span class="s">"@drawable/icon"</span> <span class="na">android:label=</span><span class="s">"@string/app_name"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;activity</span> <span class="na">android:name=</span><span class="s">".MyLiveWallpaperSettingsActivity"</span>
+            <span class="na">android:label=</span><span class="s">"@string/app_name"</span>
+            <span class="na">android:exported=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">android:name=</span><span class="s">".LiveWallpaper"</span>
+            <span class="na">android:label=</span><span class="s">"@string/app_name"</span>
+            <span class="na">android:icon=</span><span class="s">"@drawable/icon"</span>
+            <span class="na">android:exported=</span><span class="s">"true"</span>
+            <span class="na">android:permission=</span><span class="s">"android.permission.BIND_WALLPAPER"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;intent-filter&gt;</span>
+                <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">"android.service.wallpaper.WallpaperService"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/intent-filter&gt;</span>
+            <span class="nt">&lt;meta-data</span> <span class="na">android:name=</span><span class="s">"android.service.wallpaper"</span>
+                <span class="na">android:resource=</span><span class="s">"@xml/livewallpaper"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>				  	
+    <span class="nt">&lt;/application&gt;</span>
+<span class="nt">&lt;/manifest&gt;</span>
+</code></pre></div></div>
+
+<p>Live Wallpapers have some limitations concerning touch input. In general only one pointer will be reported. If you want
+full multi-touch events you can set the <code class="language-plaintext highlighter-rouge">AndroidApplicationConfiguration.getTouchEventsForLiveWallpaper</code> field to true.</p>
+
+<h2 id="screen-savers-aka-daydreams">Screen Savers (aka Daydreams)</h2>
+<p>A libGDX core application can also be used as an Android <a href="https://developer.android.com/about/versions/android-4.2#Daydream">Screen Saver</a>.
+Screen Savers were once known as Daydreams, so many of the related classes have the term “Daydream” in their names. Screen
+Savers have no relation to Google’s Daydream VR platform.</p>
+
+<p>The project setup is very similar to an Android game, but <code class="language-plaintext highlighter-rouge">AndroidDaydream</code> is used in  place of <code class="language-plaintext highlighter-rouge">AndroidApplication</code>.
+Screen Savers are Android <a href="https://developer.android.com/guide/components/services">Services</a>, not Activities.</p>
+
+<p>First, extend <code class="language-plaintext highlighter-rouge">AndroidDaydream</code> and override <code class="language-plaintext highlighter-rouge">onAttachedToWindow()</code> (instead of <code class="language-plaintext highlighter-rouge">onCreate()</code> like you
+would do with a game <code class="language-plaintext highlighter-rouge">Activity</code>). It must call through to <code class="language-plaintext highlighter-rouge">super</code>. You can also call <code class="language-plaintext highlighter-rouge">setInteractive()</code> from this method
+to enable/disable touch. A non-interactive Screen Saver immediately closes when the screen is touched.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyScreenSaver</span> <span class="kd">extends</span> <span class="nc">AndroidDaydream</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAttachedToWindow</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onAttachedToWindow</span><span class="o">();</span>
+        <span class="n">setInteractive</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+
+        <span class="nc">AndroidApplicationConfiguration</span> <span class="n">cfg</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AndroidApplicationConfiguration</span><span class="o">();</span>
+        <span class="n">initialize</span><span class="o">(</span><span class="k">new</span> <span class="nc">MyGdxGame</span><span class="o">(),</span> <span class="n">cfg</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>In additional to the service class, you must also create an <code class="language-plaintext highlighter-rouge">xml</code> file in the Android <code class="language-plaintext highlighter-rouge">res/xml</code> directory to define
+the only Screensaver setting: an optional settings Activity. Let’s call this file <code class="language-plaintext highlighter-rouge">screensaver.xml</code>.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;dream</span> <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="na">android:settingsActivity=</span><span class="s">"com.badlogic.gdx.tests.android/.MyScreenSaverSettingsActivity"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>Finally, you’ll need to add things to your <code class="language-plaintext highlighter-rouge">AndroidManifest.xml</code> files. Here’s an example for a Screen Saver with a simple
+settings Activity. Note that a settings Activity is optional. The key element is the <code class="language-plaintext highlighter-rouge">service</code> block. The settings Activity
+and the Screen Saver service must both be set with <code class="language-plaintext highlighter-rouge">exported</code> true so they can be accessed by the Screen Saver picker.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;manifest</span> <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+        <span class="na">package=</span><span class="s">"com.mypackage"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;application</span> <span class="na">android:icon=</span><span class="s">"@drawable/icon"</span> <span class="na">android:label=</span><span class="s">"@string/app_name"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;activity</span> <span class="na">android:name=</span><span class="s">".MyScreenSaverSettingsActivity"</span>
+            <span class="na">android:label=</span><span class="s">"@string/app_name"</span>
+            <span class="na">android:exported=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">android:name=</span><span class="s">".MyScreenSaver"</span>
+            <span class="na">android:label=</span><span class="s">"@string/app_name"</span>
+            <span class="na">android:icon=</span><span class="s">"@drawable/icon"</span>
+            <span class="na">android:exported=</span><span class="s">"true"</span> <span class="nt">&gt;</span>
+            <span class="nt">&lt;intent-filter&gt;</span>
+                <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">"android.service.dreams.DreamService"</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">"android.intent.category.DEFAULT"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/intent-filter&gt;</span>
+            <span class="nt">&lt;meta-data</span> <span class="na">android:name=</span><span class="s">"android.service.dream"</span>
+                <span class="na">android:resource=</span><span class="s">"@xml/screensaver"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>			  	
+    <span class="nt">&lt;/application&gt;</span>
+<span class="nt">&lt;/manifest&gt;</span>
+</code></pre></div></div>
+
+<h1 id="iosrobovm">iOS/Robovm</h1>
+
+<p>[ToDo]</p>
+
+<h1 id="html5gwt">HTML5/GWT</h1>
+<p>The main entry-point for an HTML5/GWT application is a <code class="language-plaintext highlighter-rouge">GwtApplication</code>. Open <code class="language-plaintext highlighter-rouge">GwtLauncher.java</code> in the my-gdx-game-html5 project:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.me.mygdxgame.client</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.me.mygdxgame.MyGdxGame</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.ApplicationListener</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.backends.gwt.GwtApplication</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GwtLauncher</span> <span class="kd">extends</span> <span class="nc">GwtApplication</span> <span class="o">{</span>
+   <span class="nd">@Override</span>
+   <span class="kd">public</span> <span class="nc">GwtApplicationConfiguration</span> <span class="nf">getConfig</span> <span class="o">()</span> <span class="o">{</span>
+      <span class="nc">GwtApplicationConfiguration</span> <span class="n">cfg</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GwtApplicationConfiguration</span><span class="o">(</span><span class="mi">480</span><span class="o">,</span> <span class="mi">320</span><span class="o">);</span>
+      <span class="k">return</span> <span class="n">cfg</span><span class="o">;</span>
+   <span class="o">}</span>
+
+   <span class="nd">@Override</span>
+   <span class="kd">public</span> <span class="nc">ApplicationListener</span> <span class="nf">createApplicationListener</span> <span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nf">MyGdxGame</span><span class="o">();</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The main entry-point is composed of two methods, <code class="language-plaintext highlighter-rouge">GwtApplication.getConfig()</code> and <code class="language-plaintext highlighter-rouge">GwtApplication.createApplicationListener()</code>. The former has to return a <a href="https://github.com/libgdx/libgdx/tree/master/backends/gdx-backends-gwt/src/com/badlogic/gdx/backends/gwt/GwtApplicationConfiguration.java">GwtApplicationConfiguration</a> instance, which specifies various configuration settings for the HTML5 application. The <code class="language-plaintext highlighter-rouge">GwtApplication.createApplicatonListener()</code> method returns the <code class="language-plaintext highlighter-rouge">ApplicationListener</code> to run.</p>
+
+<h3 id="module-files">Module Files</h3>
+<p>GWT needs the actual Java code for each jar/project that is referenced. Additionally, each of these jars/projects needs to have one module definition file, having the suffix gwt.xml.</p>
+
+<p>In the example project setup, the module file of the html5 project looks like this:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit trunk//EN" "http://google-web-toolkit.googlecode.com/svn/trunk/distro-source/core/src/gwt-module.dtd"&gt;</span>
+<span class="nt">&lt;module&gt;</span>
+   <span class="nt">&lt;inherits</span> <span class="na">name=</span><span class="s">'com.badlogic.gdx.backends.gdx_backends_gwt'</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;inherits</span> <span class="na">name=</span><span class="s">'MyGdxGame'</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;entry-point</span> <span class="na">class=</span><span class="s">'com.me.mygdxgame.client.GwtLauncher'</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;set-configuration-property</span> <span class="na">name=</span><span class="s">"gdx.assetpath"</span> <span class="na">value=</span><span class="s">"../my-gdx-game-android/assets"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/module&gt;</span>
+</code></pre></div></div>
+
+<p>This specifies two other modules to inherit from (gdx-backends-gwt and the core project) as well as the entry-point class (<code class="language-plaintext highlighter-rouge">GwtLauncher</code> above) and a path relative to the html5 project’s root directory, pointing to the assets directory.</p>
+
+<p>Both the gdx-backend-gwt jar and the core project have a similar module file, specifying other dependencies. <em>You cannot use jars/projects which do not contain a module file and source!</em></p>
+
+<p>For more information on modules and dependencies refer to the <a href="https://developers.google.com/web-toolkit/doc/1.6/DevGuide">GWT Developer Guide</a>.</p>
+
+<h3 id="gwt-specifics">GWT Specifics</h3>
+
+<p class="notice--warning">The HTML backend has a number of caveats. Be sure to check out the  comprehensive <a href="/wiki/html5-backend-and-gwt-specifics#differences-between-gwt-and-desktop-java">HTML Backend Guide</a>!</p>
+
+<p>GWT does not support Java <strong>reflection</strong> for various reasons. libGDX has an internal emulation layer that will generate reflection information for a select few internal classes. This means that if you use the <a href="/wiki/utils/reading-and-writing-json">Json serialization</a> capabilities of libGDX, you’ll run into issues. You can fix this by specifying for which packages and classes reflection information should be generated for. To do so, take a look at the <a href="/wiki/utils/reflection#gwt">Reflection Guide</a>.</p>
+
+<p>A libGDX HTML5 application preloads all assets found in the <code class="language-plaintext highlighter-rouge">gdx.assetpath</code>. During this loading process, a <strong>loading screen</strong> is displayed which is implemented via GWT widget. If you want to customize this loading screen, you can simply overwrite the <code class="language-plaintext highlighter-rouge">GwtApplication.getPreloaderCallback()</code> method (in <code class="language-plaintext highlighter-rouge">GwtLauncher</code> in the above example). An example can be found <a href="/wiki/html5-backend-and-gwt-specifics#changing-the-load-screen-progress-bar">here</a>.</p>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

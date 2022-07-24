@@ -1,0 +1,851 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Getting ready for #libGDXJAM - libGDX</title>
+
+  <meta name="description" content="The #libGDXJAM was organized by the libGDX community and took place in December 2015. You can find all the entries here. This article will take you through the rules and...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Getting ready for #libGDXJAM">
+<meta property="og:url" content="https://libgdx.com/wiki/misc/getting-ready-for-libgdxjam">
+
+
+  <meta property="og:description" content="The #libGDXJAM was organized by the libGDX community and took place in December 2015. You can find all the entries here. This article will take you through the rules and...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/misc/getting-ready-for-libgdxjam">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Getting ready for #libGDXJAM
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/misc/getting-ready-for-libgdxjam.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/misc/getting-ready-for-libgdxjam.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <p class="notice--info">The <a href="https://twitter.com/hashtag/libGDXJam?src=hash">#libGDXJAM</a> was organized by the libGDX community and took place in December 2015. You can find all the entries <a href="https://itch.io/jam/libgdxjam">here</a>.</p>
+
+<p>This article will take you through the rules and help you get ready to jam!</p>
+
+<h2 id="the-10-rules-of-jamming">The 10 Rules of Jamming</h2>
+
+<p>The jam will be held from December 18th to January 18th. Here are the rules:</p>
+
+<ol>
+  <li>You must use libGDX to create a game that fits the theme.</li>
+  <li>You may work alone or in a team. Only one submission per person/team is allowed.</li>
+  <li>You may use pre-existing code, e.g. libraries like Ashley, or your own code libraries.</li>
+  <li>You may use pre-existing art, e.g. assets from OpenGameArt, or your own art.</li>
+  <li>You may use external tools like Tiled or Overlap2D.</li>
+  <li>You must not re-skin an already existing game or prototype!</li>
+  <li>You must submit your game before the end of the 18th of January via the jam’s site on itch.io (to be made public).</li>
+  <li>You must publish the source of your game, e.g. to GitHub.</li>
+  <li>You must submit your game to the itch.io libGDX Jam page before the end of day January 18th, UTC-12!</li>
+  <li>If you want to win one of the sponsored prizes, you must tweet about your game and document its development, using the hashtag <a href="https://twitter.com/search?f=tweets&amp;vertical=default&amp;q=%23libGDXJam&amp;src=tyah">#libGDXJam</a> and the handles <a href="https://twitter.com/robovm">@robovm</a> and <a href="https://twitter.com/robotality">@robotality</a>.</li>
+</ol>
+
+<p>First of all, you can participate in the jam without following these rules! In that case, you will not qualify for the prizes though.</p>
+
+<p>Documenting your progress is a great way of sharing your experience, and an invaluable tool for others to learn. Making a bit of noise on Twitter is also a great way to give back to our sponsors. Chaining those 2 things together via rule 9 is my evil overlord plan to make everyone happy.</p>
+
+<p>Here are a few examples of tweets:</p>
+
+<blockquote>
+  <p>Progress screenshot of my #libGDXJam entry <url> @robovm @robotality</url></p>
+</blockquote>
+
+<blockquote>
+  <p>New dev log entry for my #libGDXJam game <url> @robovm @robotality</url></p>
+</blockquote>
+
+<p>For the dev logs, we want quality first and foremost! Progress screenshots, descriptions of problems you ran into and their solutions, streaming and so on is what we want to see! Just mindless spamming will not get you anywhere.</p>
+
+<h2 id="prizes--judging">Prizes &amp; Judging</h2>
+
+<p>We are happy to have <a href="https://robovm.com/">RoboVM</a> and <a href="http://robotality.com/blog/">Robotality</a> as sponsors for the following prizes:</p>
+
+<ul>
+  <li>Grand Prize: Mac Mini, sponsored by RoboVM.</li>
+  <li>Silver: iPad, sponsored by RoboVM.</li>
+  <li>Bronze: iPod Touch, sponsored by RoboVM.</li>
+  <li>For 20 random submissions: Steam keys for Halfway, sponsored by Robotality.</li>
+  <li>For another 5 random submissions: libGDX Jam t-shirt.</li>
+</ul>
+
+<p>To qualify for any of the prizes, you’ll need to follow rule 10 as outlined above. Judging works as follows:</p>
+
+<ul>
+  <li>The community can vote on itch.io from the 19th of January to the 2nd of February.</li>
+  <li>The Grand Prize will be awarded to the entry with the highest community votes on itch.io. This way the highest quality entry will win!</li>
+  <li>The Silver and Bronze prizes will be awarded to the entries with the best mixture of dev logs and tweets and community votes. * Our sponsors and the libGDX core team will pick these entries. This should motivate people to make some noise on the web and document their progress for the greater good of the community!</li>
+  <li>The random awards guarantee that everyone has a chance to win a prize!</li>
+  <li>The winners will be announced on the 3rd of February!</li>
+</ul>
+
+<h2 id="timetable">Timetable</h2>
+
+<ul>
+  <li>Theme Voting round 1: Nov. 22nd – Dec. 11th</li>
+  <li>Final Theme Voting: Dec. 11th – Dec. 18th</li>
+  <li>Jam: Dec. 18th – Jan. 18th</li>
+  <li>Judging: Jan 19th – Feb. 2nd</li>
+</ul>
+
+<h2 id="survival-guide">Survival guide</h2>
+
+<p>All hail ye who are brave enough to take up on the #libGDXJam challenge, have you done all the preparations prior the competition?</p>
+
+<blockquote>
+  <p>What preparation?</p>
+</blockquote>
+
+<p>Make sure you have decided on:</p>
+
+<ul>
+  <li>Libraries: obviously Libgdx, but… Are you using any extensions or third party libraries?</li>
+  <li>Programming language and IDE: Java, Kotlin, Clojure or Scala? Eclipse, Intellij, Netbeans, Sublime, Vim, Emacs?</li>
+  <li>Graphic editors</li>
+  <li>Level editors</li>
+  <li>Sound generators and editors</li>
+</ul>
+
+<p><strong>Golden advice</strong>: use what you already know. If you experiment too much, you will most likely not finish a game on time!</p>
+
+<h3 id="tools--resources">Tools &amp; Resources</h3>
+
+<h4 id="audio">Audio</h4>
+
+<p><a href="https://www.bfxr.net/">BFXR</a>: web based sound effect generator.</p>
+
+<p><img src="/assets/wiki/images/bfxr.png" alt="images/bfxr.png" /></p>
+
+<p><a href="https://www.audiotool.com/">Audiotool</a>: web based music synthesizer.</p>
+
+<p><img src="/assets/wiki/images/audiotool.png" alt="images/audiotool.png" /></p>
+
+<p><a href="https://www.audacityteam.org/">Audacity</a>: open source audio editor.</p>
+
+<p><img src="/assets/wiki/images/audacity.png" alt="images/audacity.png" /></p>
+
+<p>Free sound effects and music:</p>
+
+<ul>
+  <li><a href="https://www.freesound.org/">FreeSound</a></li>
+  <li><a href="https://soundcloud.com/">SoundCloud</a></li>
+  <li><a href="http://openmusicarchive.org/">Open Music Archive</a></li>
+  <li><a href="http://dig.ccmixter.org/">CC Mixter</a></li>
+</ul>
+
+<h4 id="graphics">Graphics</h4>
+
+<p><a href="https://www.gimp.org/">Gimp</a>: open source image editor.</p>
+
+<p><img src="/assets/wiki/images/gimp.png" alt="images/gimp.png" /></p>
+
+<p><a href="https://www.getpaint.net/index.html">Paint.NET</a>: open source image editor.</p>
+
+<p><img src="/assets/wiki/images/paint.net.jpg" alt="images/paint.net.jpg" /></p>
+
+<p><a href="https://inkscape.org/en//">Inkscape</a>: open source vector editor.</p>
+
+<p><img src="/assets/wiki/images/inkscape.png" alt="images/inkscape.png" /></p>
+
+<p><a href="http://esotericsoftware.com/">Spine</a>: skeletal 2D animation tool.</p>
+
+<p><img src="/assets/wiki/images/spine.png" alt="images/spine.png" /></p>
+
+<p><a href="https://www.blender.org/">Blender</a>: open source 3D editor.</p>
+
+<p><img src="/assets/wiki/images/blender.jpg" alt="images/blender.jpg" /></p>
+
+<p>Free game art:</p>
+
+<ul>
+  <li><a href="https://opengameart.org/">Open Game Art</a></li>
+  <li><a href="https://kenney.nl/">Kenney</a></li>
+  <li><a href="https://pixabay.com/">Pixabay</a></li>
+  <li><a href="https://www.gameart2d.com/">Game Art 2D</a></li>
+</ul>
+
+<h4 id="map-editors">Map editors</h4>
+
+<p><a href="http://www.mapeditor.org/">Tiled Map Editor</a>: open source tile based editor.</p>
+
+<p><img src="/assets/wiki/images/tiled.png" alt="images/tiled.png" /></p>
+
+<p><a href="https://github.com/UnderwaterApps/overlap2d">Overlap2D</a>: open source game editor. Make sure to check the <a href="/wiki/misc/overlap2d-survival-guide-for-libgdxjam">Overlap2D survival guide for #libGDXJAM</a>.</p>
+
+<p><img src="/assets/wiki/images/overlap2d.png" alt="images/overlap2d.png" /></p>
+
+<p><a href="https://github.com/GoranM/bdx/wiki">BDX</a>: Open source 3D game engine integrated with Blender.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-66Li4J9maL4/VP8ICZcGAxI/AAAAAAAABIo/Mth2R1Qo81w/w1038-h586-no/BlenderWithBDX2.png" alt="" /></p>
+
+<h3 id="team-structure">Team structure</h3>
+
+<p>Gather your quest party and put your specialist hats on!</p>
+
+<h4 id="programmers">Programmers</h4>
+
+<ul>
+  <li>Do the programmy bits</li>
+  <li>Split tasks among them: graphics, controls, physics, UI</li>
+  <li>The less code overlap, the easier!</li>
+  <li>Need to tell the artists what formats they need</li>
+  <li>Need to define how level designers create content</li>
+</ul>
+
+<h4 id="graphics-and-audio-artists">Graphics and audio artists</h4>
+
+<ul>
+  <li>Do the artsy bits</li>
+  <li>Need to spit up tasks among them: UI, background, characters, effects…</li>
+  <li>Agree on a consistent style</li>
+  <li>May need to create placeholder art early on</li>
+</ul>
+
+<h4 id="game-and-level-designer">Game and Level designer</h4>
+
+<ul>
+  <li>Does the content bits</li>
+  <li>Needs to define the game mechanics</li>
+  <li>Needs to define the game progression</li>
+  <li>Needs to create levels</li>
+  <li>Needs to playtest and give feedback to programmers and artists</li>
+</ul>
+
+<h4 id="coordinator">Coordinator</h4>
+
+<ul>
+  <li>Makes sure everyone knows what to do</li>
+  <li>Keeps track of things to be done</li>
+  <li>Keeps track of dependencies between members</li>
+  <li>Keeps track of time</li>
+  <li>Keeps track of human needs (food, sleep)</li>
+</ul>
+
+<p><strong>Note</strong>: depending on your actual team, some roles could be blurred or shared.</p>
+<ul>
+  <li>No artists? Use pre-existing art.</li>
+  <li>No designers? Everybody becomes a games designer.</li>
+  <li>No coordinator? Pick one person.</li>
+  <li>Alone? You do everything!</li>
+</ul>
+
+<h3 id="the-5-phases-of-jamming">The 5 phases of Jamming</h3>
+
+<p>Now let’s get onto it!</p>
+
+<h4 id="brainstorming">Brainstorming</h4>
+
+<p>Goals:</p>
+<ul>
+  <li>Consider the set theme.</li>
+  <li>Get a high-level understanding of your game: genre, mechanics, setting, story, art style…</li>
+  <li>Take time limits into account. FPS, MMO and RTS games might not be your best choices.</li>
+  <li>Think outside the box.</li>
+</ul>
+
+<p>To-do:</p>
+<ol>
+  <li>Gather ideas from everyone.</li>
+  <li>Pick the most promising ones via vote.</li>
+  <li>Define genre and mechanics using pen and paper.</li>
+  <li>Define setting and story.</li>
+  <li>Define art style, artist could draw quick mockups.</li>
+</ol>
+
+<h4 id="setup">Setup</h4>
+
+<p>Goals:</p>
+<ul>
+  <li>Get a detailed understanding of your game:
+    <ul>
+      <li>What will programmers have to do?</li>
+      <li>What will artists have to do?</li>
+      <li>What will game designers have to do?</li>
+    </ul>
+  </li>
+  <li>Define interfaces between all team members
+    <ul>
+      <li>How do programmers work with each other?</li>
+      <li>How do artists get their art into the game?</li>
+      <li>How do game designers create game content?</li>
+    </ul>
+  </li>
+  <li>Define tasks and their order for every team member!
+    <ul>
+      <li>The coordinator is responsible for keeping track of tasks</li>
+    </ul>
+  </li>
+</ul>
+
+<p>To-do</p>
+<ol>
+  <li>Programmers agree on platform and tools</li>
+  <li>Artists agree on style</li>
+  <li>Programmers and artists agree on how to get art into the game</li>
+  <li>Programmers and game designers agree on how to create content</li>
+  <li>Each subteam defines their initial task</li>
+  <li>Coodinator keeps track of things</li>
+</ol>
+
+<p>A super lightweight <a href="https://en.wikipedia.org/wiki/Kanban">Kanban</a>-like board can help, such as <a href="https://trello.com/">Trello</a>.</p>
+
+<h4 id="implementation">Implementation</h4>
+
+<p>Goals:</p>
+<ul>
+  <li>Get the damned game done!</li>
+  <li>Ensure to have a playable prototype early
+    <ul>
+      <li>Prioritize tasks accordingly</li>
+      <li>Game mechanics first to see if they are fun!</li>
+    </ul>
+  </li>
+  <li>Realize you’ll likely not get everything done!
+    <ul>
+      <li>Which is why you should have something playable at all times</li>
+      <li>Cut corners, kill features, focus on the core of your game</li>
+    </ul>
+  </li>
+</ul>
+
+<p>To-do</p>
+<ol>
+  <li>Every sub-team works on their task</li>
+  <li>Coordinator keeps track of progress</li>
+  <li>Sub-teams talk whenever they need to re-define or prioritize new tasks</li>
+  <li>Goto 1</li>
+</ol>
+
+<p><strong>Have something playable early on</strong></p>
+
+<h5 id="tips-for-programmers">Tips for programmers:</h5>
+<ul>
+  <li>Use source control (git, SVN…), do not use shared drives, zip files nor e-mail</li>
+  <li>Don’t code for re-use</li>
+  <li>Don’t optimize</li>
+  <li>Try to create a modular-design so people don’t depend on each other too much</li>
+  <li>Make sure the game designer can create content as early as possible</li>
+  <li>Make sure artists export to easy to use formats</li>
+  <li>Make sure artists and game designers understand limitations</li>
+</ul>
+
+<h5 id="tips-for-artists">Tips for artists:</h5>
+<ul>
+  <li>Make it easy to export your art into the proper format</li>
+  <li>Make sure everyone uses the same coordinate system/resolution</li>
+  <li>Use descriptive names for files</li>
+  <li>Have one shared folder (Dropbox, Google Drive) containing assets ready to integrate into the game
+    <ul>
+      <li>Don’t put multiple versions of the same thing there</li>
+      <li>Have whatever local folder structure for work in progress assets</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="tips-for-game-designers">Tips for game designers</h5>
+<ul>
+  <li>Talk to the developers about what’s possible and what not</li>
+  <li>Focus on simple mechanics but try to put in a twist</li>
+  <li>Favor simple level-design over brainy or complex levels, they take too long to design!</li>
+  <li>If you have down-time, try to help or be the coordinator</li>
+</ul>
+
+<h5 id="tips-for-coordinators">Tips for coordinators</h5>
+<ul>
+  <li>Ensure that everyone can stay busy, gather them to discuss/re-prioritize current tasks</li>
+  <li>Check on progress regularly, if something takes too long, ask the team to kill the feature</li>
+  <li>Make sure everybody is reminded they are human. They need to take breaks, sleep and eat</li>
+  <li>If you have down time, pick a task you can do!</li>
+</ul>
+
+<h4 id="finishing-up">Finishing up!</h4>
+
+<p>Goals:</p>
+<ul>
+  <li>Submit a playable game before the deadline!</li>
+</ul>
+
+<p>To-do:</p>
+<ol>
+  <li>Feature freeze 2-3 hours before the deadline</li>
+  <li>Create a build for submission</li>
+  <li>Get the team together and decide what to polish in the remaining hours</li>
+  <li>If polish works out, create a new build for submission</li>
+</ol>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

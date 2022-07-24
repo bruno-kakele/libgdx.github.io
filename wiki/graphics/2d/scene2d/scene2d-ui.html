@@ -1,0 +1,836 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Scene2d.ui - libGDX</title>
+
+  <meta name="description" content="Overview scene2d is libGDX’s 2D scene graph. At its core, it provides basic 2D scene graph functionality: actors, groups, drawing, events, and actions. This is a lot of utility that...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Scene2d.ui">
+<meta property="og:url" content="https://libgdx.com/wiki/graphics/2d/scene2d/scene2d-ui">
+
+
+  <meta property="og:description" content="Overview scene2d is libGDX’s 2D scene graph. At its core, it provides basic 2D scene graph functionality: actors, groups, drawing, events, and actions. This is a lot of utility that...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/graphics/2d/scene2d/scene2d-ui">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Scene2d.ui
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/graphics/2d/scene2d/scene2d-ui.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/graphics/2d/scene2d/scene2d-ui.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <h2 id="overview">Overview</h2>
+
+<p>scene2d is libGDX’s 2D scene graph. At its core, it provides basic 2D scene graph functionality: actors, groups, drawing, events, and actions. This is a lot of utility that applications can leverage, but it is reasonably low level. For games this is fine because most actors are application specific. For building UIs, the scene2d.ui package provides common UI widgets and other classes built on top of scene2d.</p>
+
+<p>It is highly recommended to read or least skim the <a href="/wiki/graphics/2d/scene2d/scene2d">scene2d documentation</a> before continuing.</p>
+
+<p>Check out <a href="https://libgdxinfo.wordpress.com/">libGDX.info</a> for examples showcasing Scene2d actors, scenes, Stages Images etc..</p>
+
+<ul>
+  <li><a href="#widget-and-widgetgroup">Widget and WidgetGroup</a></li>
+  <li><a href="#layout">Layout</a></li>
+  <li><a href="#stage-setup">Stage setup</a></li>
+  <li><a href="#skin">Skin</a></li>
+  <li><a href="#drawable">Drawable</a></li>
+  <li><a href="#changeevents">ChangeEvents</a></li>
+  <li><a href="#clipping">Clipping</a></li>
+  <li><a href="#rotation-and-scale">Rotation and scale</a></li>
+  <li><a href="#layout-widgets">Layout widgets</a>
+    <ul>
+      <li><a href="#table">Table</a></li>
+      <li><a href="#container">Container</a></li>
+      <li><a href="#stack">Stack</a></li>
+      <li><a href="#scrollpane">ScrollPane</a></li>
+      <li><a href="#splitpane">SplitPane</a></li>
+      <li><a href="#tree">Tree</a></li>
+      <li><a href="#verticalgroup">VerticalGroup</a></li>
+      <li><a href="#horizontalgroup">HorizontalGroup</a></li>
+    </ul>
+  </li>
+  <li><a href="#widgets">Widgets</a>
+    <ul>
+      <li><a href="#label">Label</a></li>
+      <li><a href="#image">Image</a></li>
+      <li><a href="#button">Button</a></li>
+      <li><a href="#textbutton">TextButton</a></li>
+      <li><a href="#imagebutton">ImageButton</a></li>
+      <li><a href="#checkbox">CheckBox</a></li>
+      <li><a href="#buttongroup">ButtonGroup</a></li>
+      <li><a href="#textfield">TextField</a></li>
+      <li><a href="#textarea">TextArea</a></li>
+      <li><a href="#list">List</a></li>
+      <li><a href="#selectbox">SelectBox</a></li>
+      <li><a href="#progressbar">ProgressBar</a></li>
+      <li><a href="#slider">Slider</a></li>
+      <li><a href="#window">Window</a></li>
+      <li><a href="#touchpad">Touchpad</a></li>
+      <li><a href="#dialog">Dialog</a></li>
+    </ul>
+  </li>
+  <li><a href="#widgets-without-scene2dui">Widgets without scene2d.ui</a></li>
+  <li><a href="#drag-and-drop-draganddrop-class">Drag and Drop</a></li>
+  <li><a href="#Keycontrol">Usage without touch or mouse</a></li>
+  <li><a href="#examples">Examples</a></li>
+</ul>
+
+<h1 id="widget-and-widgetgroup">Widget and WidgetGroup</h1>
+
+<p>UIs often have many UI widgets to be sized and positioned on the screen. Doing this manually is time consuming, makes code difficult to read and maintain, and doesn’t easily adapt to different screen sizes. The Layout interface defines methods that allow for more intelligent layout for actors.</p>
+
+<p>The Widget and WidgetGroup classes extend Actor and Group respectively, and they both implement Layout. These two classes are the basis for actors that will participate in layout. UI widgets should extend WidgetGroup if they have child actors, otherwise they should extend Widget.</p>
+
+<h2 id="layout">Layout</h2>
+
+<p>UI widgets do not set their own size and position. Instead, the parent widget sets the size and position of each child. Widgets provide a minimum, preferred, and maximum size that the parent can use as hints. Some parent widgets, such as Table and Container, can be given constraints on how to size and position the children. To give a widget a specific size in a layout, the widget’s minimum, preferred, and maximum size are left alone and size constraints are set in the parent.</p>
+
+<p>Before each widget is drawn, it first calls <code class="language-plaintext highlighter-rouge">validate</code>. If the widget’s layout is invalid, its <code class="language-plaintext highlighter-rouge">layout</code> method will be called so that the widget (and any child widgets) can cache information needed for drawing at their current size. The <code class="language-plaintext highlighter-rouge">invalidate</code> and <code class="language-plaintext highlighter-rouge">invalidateHierarchy</code> methods both invalidate the layout for a widget.</p>
+
+<p><code class="language-plaintext highlighter-rouge">invalidate</code> should be called when the widget’s state has changed and the cached layout information needs to be recalculated, but the widget’s minimum, preferred, and maximum size are unaffected. This means that the widget needs to be laid out again, but the widget’s desired size hasn’t changed so the parent is unaffected.</p>
+
+<p><code class="language-plaintext highlighter-rouge">invalidateHierarchy</code> should be called when the widget’s state has changed that affects the widget’s minimum, preferred, or maximum size. This means that the parent’s layout may be affected by the widget’s new desired size. <code class="language-plaintext highlighter-rouge">invalidateHierarchy</code> calls <code class="language-plaintext highlighter-rouge">invalidate</code> on the widget and every parent up to the root.</p>
+
+<h2 id="stage-setup">Stage setup</h2>
+
+<p>Most scene2d.ui layouts will use a <a href="/wiki/graphics/2d/scene2d/table">table</a> that is the size of the stage. All other widgets and nested tables are placed in this table.</p>
+
+<p>Here is an example of the most basic scene2d.ui application with a root table:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">Stage</span> <span class="n">stage</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">Table</span> <span class="n">table</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">create</span> <span class="o">()</span> <span class="o">{</span>
+	<span class="n">stage</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stage</span><span class="o">();</span>
+	<span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">setInputProcessor</span><span class="o">(</span><span class="n">stage</span><span class="o">);</span>
+
+	<span class="n">table</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Table</span><span class="o">();</span>
+	<span class="n">table</span><span class="o">.</span><span class="na">setFillParent</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+	<span class="n">stage</span><span class="o">.</span><span class="na">addActor</span><span class="o">(</span><span class="n">table</span><span class="o">);</span>
+
+	<span class="n">table</span><span class="o">.</span><span class="na">setDebug</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span> <span class="c1">// This is optional, but enables debug lines for tables.</span>
+
+	<span class="c1">// Add widgets to the table here.</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">resize</span> <span class="o">(</span><span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
+	<span class="n">stage</span><span class="o">.</span><span class="na">getViewport</span><span class="o">().</span><span class="na">update</span><span class="o">(</span><span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">render</span> <span class="o">()</span> <span class="o">{</span>
+	<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glClear</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_COLOR_BUFFER_BIT</span><span class="o">);</span>
+	<span class="n">stage</span><span class="o">.</span><span class="na">act</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getDeltaTime</span><span class="o">());</span>
+	<span class="n">stage</span><span class="o">.</span><span class="na">draw</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">dispose</span><span class="o">()</span> <span class="o">{</span>
+	<span class="n">stage</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Note that <code class="language-plaintext highlighter-rouge">setFillParent</code> is used on the root table, causing it to be sized to its parent (in this case, the stage) when validated. Normally a widget’s size is set by its parent and <code class="language-plaintext highlighter-rouge">setFillParent</code> must not be used. <code class="language-plaintext highlighter-rouge">setFillParent</code> is for convenience only when the widget’s parent does not set the size of its children (such as the stage).</p>
+
+<p>Tables automatically adapt to various screen resolutions, so this sets up a stage that uses pixel coordinates. See <a href="/wiki/graphics/2d/scene2d/scene2d#viewport">stage viewport setup</a> for setting up a stage that scales.</p>
+
+<h2 id="skin">Skin</h2>
+
+<p>Most UI widgets are made up of a few configurable resources: images, fonts, colors, etc. All the resources needed to render a widget is called a “style”. Each widget defines its own style class (usually a static member class) and has constructors for setting the initial style and a <code class="language-plaintext highlighter-rouge">setStyle</code> method for changing the style later.</p>
+
+<p>Skin files from the <a href="https://github.com/libgdx/libgdx/tree/master/tests/gdx-tests-android/assets/data">libGDX tests</a> can be used as a starting point. You will need: uiskin.png, uiskin.atlas, uiskin.json, and default.fnt. This enables you to quickly get started using scene2d.ui and replace the skin assets later.</p>
+
+<p>Styles can be configured using JSON or with code:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">TextureRegion</span> <span class="n">upRegion</span> <span class="o">=</span> <span class="o">...</span>
+<span class="nc">TextureRegion</span> <span class="n">downRegion</span> <span class="o">=</span> <span class="o">...</span>
+<span class="nc">BitmapFont</span> <span class="n">buttonFont</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="nc">TextButtonStyle</span> <span class="n">style</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TextButtonStyle</span><span class="o">();</span>
+<span class="n">style</span><span class="o">.</span><span class="na">up</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TextureRegionDrawable</span><span class="o">(</span><span class="n">upRegion</span><span class="o">);</span>
+<span class="n">style</span><span class="o">.</span><span class="na">down</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TextureRegionDrawable</span><span class="o">(</span><span class="n">downRegion</span><span class="o">);</span>
+<span class="n">style</span><span class="o">.</span><span class="na">font</span> <span class="o">=</span> <span class="n">buttonFont</span><span class="o">;</span>
+
+<span class="nc">TextButton</span> <span class="n">button1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TextButton</span><span class="o">(</span><span class="s">"Button 1"</span><span class="o">,</span> <span class="n">style</span><span class="o">);</span>
+<span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">button1</span><span class="o">);</span>
+
+<span class="nc">TextButton</span> <span class="n">button2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TextButton</span><span class="o">(</span><span class="s">"Button 2"</span><span class="o">,</span> <span class="n">style</span><span class="o">);</span>
+<span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">button2</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Note the same style can be used for multiple widgets. Also note that all images needed by UI widgets are actually implementations of the Drawable interface.</p>
+
+<p>The Skin class can be used to more conveniently define the styles and other resources for UI widgets. See the <a href="/wiki/graphics/2d/scene2d/skin">Skin documentation</a> for more information. It is very strongly recommended to use Skin for convenience, even if not defining styles via JSON.</p>
+
+<h2 id="drawable">Drawable</h2>
+
+<p>The Drawable interface provides a draw method that takes a SpriteBatch, position, and size. The implementation can draw anything it wants: texture regions, sprites, animations, etc. Drawables are used extensively for all images that make up widgets. Implementations are provided to draw texture regions, sprites, nine patches, and to tile a texture region. Custom implementations can draw anything they like.</p>
+
+<p>Drawable provides a minimum size, which can be used as a hint for the smallest it should be drawn. It also provides top, right, bottom, and left sizes, which can be used as a hint for how much padding should be around content drawn on top of the drawable.</p>
+
+<p>By default, NinePatchDrawable uses the top, right, bottom, and left sizes of the corresponding nine patch texture regions. However, the drawable sizes are separate from the nine patch sizes. The drawable sizes can be changed to draw content on the nine patch with more or less padding than the actual nine patch regions.</p>
+
+<p>Creating drawables is very common and somewhat tedious. It is recommended to use the <a href="/wiki/graphics/2d/scene2d/skin#wiki-Conversions">skin methods</a> to automatically obtain a drawable of the appropriate type.</p>
+
+<h3 id="changeevents">ChangeEvents</h3>
+
+<p>Most widgets fire a ChangeEvent when something changes. This is a generic event, what actually changed depends on each widget. Eg, for a button the change is that the button was pressed, for a slider the change is the slider position, etc.</p>
+
+<p>ChangeListener should be used to detect these events:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">actor</span><span class="o">.</span><span class="na">addListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChangeListener</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">changed</span> <span class="o">(</span><span class="nc">ChangeEvent</span> <span class="n">event</span><span class="o">,</span> <span class="nc">Actor</span> <span class="n">actor</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Changed!"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">});</span>
+</code></pre></div></div>
+
+<p>ChangeListener should be used when possible instead of ClickListener, eg on buttons. ClickListener reacts to input events on the widget and only knows if the widget has been clicked. The click will still be detected if the widget is disabled and doesn’t handle the widget being changed by a key press or programmatically. Also, for most widgets the ChangeEvent can be cancelled, allowing the widget to revert the change.</p>
+
+<h3 id="clipping">Clipping</h3>
+
+<p>Clipping is most easily done using <code class="language-plaintext highlighter-rouge">setClip(true)</code> on a Table. Actors in the table will be clipped to the table’s bounds. Culling is done so actors completely outside of the table’s bounds are not drawn at all.</p>
+
+<p>Actors added to a table using the <code class="language-plaintext highlighter-rouge">add</code> Table methods get a table cell and will be sized and positioned by the table. Like any group, actors can still be added to a table using the <code class="language-plaintext highlighter-rouge">addActor</code> method. The table will not size and position actors added this way. This can be useful when using a table solely for clipping.</p>
+
+<h2 id="rotation-and-scale">Rotation and scale</h2>
+
+<p>As <a href="/wiki/graphics/2d/scene2d/scene2d#wiki-group-transform">described previously</a>, a scene2d group that has transform enabled causes a SpriteBatch flush before drawing its children. A UI often has dozens, if not hundreds, of groups. Flushing for each group would severely limit performance, so most scene2d.ui groups have transform set to false by default. Rotation and scale is ignored when the group’s transform is disabled.</p>
+
+<p>Transforms can be enabled as needed, with some caveats. Not all widgets support all features when rotation or scaling is applied. Eg, transform can be enabled for a Table and then it can be rotated and scaled. Children will be drawn rotated and scaled, input is routed correctly, etc. However, other widgets may perform drawing without taking rotation and/or scale into account. A workaround for this problem is to wrap a widget in a table or container with transform enabled and set the rotation and scale on the table or container, not on the widget:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">TextButton</span> <span class="n">button</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TextButton</span><span class="o">(</span><span class="s">"Text Button"</span><span class="o">,</span> <span class="n">skin</span><span class="o">);</span>
+<span class="nc">Container</span> <span class="n">wrapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Container</span><span class="o">(</span><span class="n">button</span><span class="o">);</span>
+<span class="n">wrapper</span><span class="o">.</span><span class="na">setTransform</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="n">wrapper</span><span class="o">.</span><span class="na">setOrigin</span><span class="o">(</span><span class="n">wrapper</span><span class="o">.</span><span class="na">getPrefWidth</span><span class="o">()</span> <span class="o">/</span> <span class="mi">2</span><span class="o">,</span> <span class="n">wrapper</span><span class="o">.</span><span class="na">getPrefHeight</span><span class="o">()</span> <span class="o">/</span> <span class="mi">2</span><span class="o">);</span>
+<span class="n">wrapper</span><span class="o">.</span><span class="na">setRotation</span><span class="o">(</span><span class="mi">45</span><span class="o">);</span>
+<span class="n">wrapper</span><span class="o">.</span><span class="na">setScaleX</span><span class="o">(</span><span class="mf">1.5f</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Note that scene2d.ui groups that perform layout, such as Table, will use the unscaled and unrotated bounds of a transformed widget when computing the layout.</p>
+
+<p>Widgets that perform clipping, such as ScrollPane, use <code class="language-plaintext highlighter-rouge">glScissor</code> which uses a screen aligned rectangle. These widgets cannot be rotated.</p>
+
+<p>If excessive batch flushes are occurring due to transform being enabled on many groups, <code class="language-plaintext highlighter-rouge">CpuSpriteBatch</code> can be used for the stage. This does transformations using the CPU to avoid flushing the batch.</p>
+
+<h2 id="layout-widgets">Layout widgets</h2>
+
+<h3 id="table">Table</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/Table.html">The Table class</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Table.java">code</a>) sizes and positions its children using a logical table, similar to HTML tables. Tables are intended to be used extensively in scene2d.ui to layout widgets, as they are easy to use and much more powerful than manually sizing and positioning widgets. Table-based layouts don’t rely on absolute positioning and therefore automatically adjust to different widget sizes and screen resolutions.</p>
+
+<p>It is highly recommended to read the <a href="/wiki/graphics/2d/scene2d/table">Table documentation</a> before building a UI using scene2d.ui.</p>
+
+<h3 id="container">Container</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/Container.html">The Container class</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Container.java">code</a>) is equivalent to a Table with only a single child, but is more lightweight. Container has all of the constraints of a table cell and is useful for setting the size and alignment of a single widget. If you implement with Scene2D, Container presents to you a much better personal development experience if you encounter trouble adjusting values for alignments and sizes for whatever an object holds and supports. While the advantages of this class generally work best within a Table object, you may still find a benefit in certain scenarios even outside of such code.</p>
+
+<h3 id="stack">Stack</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/Stack.html">Stack</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Stack.java">code</a>) is a WidgetGroup that lays out each child to be the size of the stack. This is useful when it is necessary to have widgets stacked on top of each other. The first widget added to the stack is drawn on the bottom, and the last widget added is drawn on the top.</p>
+
+<h3 id="scrollpane">ScrollPane</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/ScrollPane.html">ScrollPane</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/ScrollPane.java">code</a>) scrolls a child widget using scrollbars and/or mouse or touch dragging. Scrolling is automatically enabled when the widget is larger than the scroll pane. If the widget is smaller than the scroll pane in one direction, it is sized to the scroll pane in that direction. ScrollPane has many settings for if and how touches control scrolling, fading scrollbars, etc. ScrollPane has drawables for the background, horizontal scrollbar and knob, and vertical scrollbar and knob. If touches are enabled (the default), all the drawables are optional.</p>
+
+<p>Note: ScrollPane doesn’t support well children that dynamically change their size or move while dragging them. Having a children in your scrollpane that move while being dragged will make the ScrollPane flicker.</p>
+
+<h3 id="splitpane">SplitPane</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/SplitPane.html">SplitPane</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/SplitPane.java">code</a>) contains two widgets and is divided in two either horizontally or vertically. The user may resize the widgets with a draggable splitter. The child widgets are always sized to fill their half of the splitpane. SplitPane has a drawable for the draggable splitter.</p>
+
+<h3 id="tree">Tree</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/Tree.html">Tree</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Tree.java">code</a>) displays a hierarchy of nodes. Each node may have child nodes and can be expanded or collapsed. Each node has an actor, allowing complete flexibility over how each item is displayed. Tree has drawables for the plus and minus icons next to each node’s actor.</p>
+
+<h3 id="verticalgroup">VerticalGroup</h3>
+
+<p>A <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/VerticalGroup.html">VerticalGroup</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/VerticalGroup.java">code</a>) is equivalent to a Table with only a single column, but is more lightweight. VerticalGroup allows widgets to be inserted in the middle and removed, while Table does not.</p>
+
+<h3 id="horizontalgroup">HorizontalGroup</h3>
+
+<p>A <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/HorizontalGroup.html">HorizontalGroup</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/HorizontalGroup.java">code</a>) is equivalent to a Table with only a single row, but is more lightweight. HorizontalGroup allows widgets to be inserted in the middle and removed, while Table does not.</p>
+
+<h2 id="widgets">Widgets</h2>
+
+<h3 id="label">Label</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/Label.html">Label</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Label.java">code</a>) displays text using a bitmap font and a color. The text may contain newlines. Word wrap may be enabled, in which case the width of the label should be set by the parent. The lines of text can be aligned relative to each other, and also all of the text aligned within the label widget.</p>
+
+<p>The labels that use the same font will be the same size, though they may have different colors. Bitmap fonts don’t typical scale well, especially at small sizes. It is suggested to use a separate bitmap font for each font size. The bitmap font image should be packed into the skin’s atlas to reduce texture binds.</p>
+
+<p>To create a label which contain text with different colors, the <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/g2d/BitmapFont.html">BitmapFont</a> used to create the label should have markup enabled by setting it in the <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/g2d/BitmapFont.BitmapFontData.html">BitmapFont.BitmapFontData</a> object passed via the constructor. If you’re using the <a href="/wiki/managing-your-assets">AssetManager</a>, you can pass this data by passing an appropriate <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/assets/loaders/BitmapFontLoader.BitmapFontParameter.html">BitmapFontParameter</a> object when you call <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/assets/AssetManager.html#load-java.lang.String-java.lang.Class-com.badlogic.gdx.assets.AssetLoaderParameters-">load</a>.</p>
+
+<h3 id="image">Image</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/Image.html">Image</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Image.java">code</a>) simply displays a drawable. The drawable can be a texture, texture region, ninepatch, sprite, etc. The drawable may be scaled and aligned within the image widget bounds in various ways.</p>
+
+<p>For a tutorial on using Image (Create, rotate, resize and creating images with repeating texture <a href="https://libgdxinfo.wordpress.com/basic_image/">see this Image tutorial</a>)</p>
+
+<h3 id="button">Button</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/Button.html">Button</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Button.java">code</a>) by itself it is just an empty button, but it extends table so other widgets can be added to it. It has an <code class="language-plaintext highlighter-rouge">up</code> background that is normally displayed, and a <code class="language-plaintext highlighter-rouge">down</code> background that is displayed when pressed. It has a checked state which is toggled each time it is clicked, and when checked it will use the <code class="language-plaintext highlighter-rouge">checked</code> background instead of <code class="language-plaintext highlighter-rouge">up</code>, if defined. It also has pressed/unpressed offsets, which offset the entire button contents when pressed/unpressed.</p>
+
+<h3 id="textbutton">TextButton</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/TextButton.html">TextButton</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/TextButton.java">code</a>) extends Button and contains a label. TextButton adds to Button a bitmap font and a colors for the text in the up, down, and checked states.</p>
+
+<p>TextButton extends Button which extends Table, so widgets can be added to the TextButton using the Table methods.</p>
+
+<h3 id="imagebutton">ImageButton</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/ImageButton.html">ImageButton</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/ImageButton.java">code</a>) extends Button and contains an image widget. ImageButton adds to Button a drawables for the image widget in the up, down, and checked states.</p>
+
+<p>Note that ImageButton extends Button, which already has a background drawable for the up, down, and checked states. ImageButton is only needed when it is desired to have a drawable (such as an icon) on top of the button background.</p>
+
+<p>ImageButton extends Button which extends Table, so widgets can be added to the ImageButton using the Table methods.</p>
+
+<h3 id="checkbox">CheckBox</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/CheckBox.html">CheckBox</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/CheckBox.java">code</a>) extends TextButton and adds an image widget to the left of the label. It has a drawable for the image widget for the checked and unchecked states.</p>
+
+<h3 id="buttongroup">ButtonGroup</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/ButtonGroup.html">ButtonGroup</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/ButtonGroup.java">code</a>) is not an actor and has no visuals. Buttons are added to it and it enforces a minimum and maximum number of checked buttons. This allows for buttons (button, text button, checkbox, etc) to be used as “radio” buttons.</p>
+
+<h3 id="textfield">TextField</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/TextField.html">TextField</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/TextField.java">code</a>) is a single line text entry field. It has drawables for the background, text cursor, and text selection, a font and font color for the entered text, and a font and font color for the message displayed when the text field is empty. Password mode can be enabled, where it will display asterisks instead of the entered text.</p>
+
+<h3 id="textarea">TextArea</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/TextArea.html">TextArea</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/TextArea.java">code</a>) is similiar to a TextField, but allows multiple line text entry.</p>
+
+<h3 id="list">List</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/List.html">List</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/List.java">code</a>) is a list box that displays textual items and highlights the selected item. List has a font, selected item background drawable, and a font color for selected and unselected items. A list does not scroll on its own, but is often put in a scrollpane.</p>
+
+<h3 id="selectbox">SelectBox</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/SelectBox.html">SelectBox</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/SelectBox.java">code</a>) is a drop-down list, it allows one of a number of values to be chosen from a list. When inactive, the selected value is displayed. When activated, it shows the list of values that may be selected. SelectBox has drawables for the background, list background, and selected item background, a font and font color, and a setting for how much spacing is used between items.</p>
+
+<h3 id="progressbar">ProgressBar</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/ProgressBar.html">ProgressBar</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/ProgressBar.java">code</a>) is a widget that visually displays the progress of some activity or a variable value within a given range. The progress bar has a range (min, max) and a stepping between each value it represents. The percentage of completeness typically starts out as an empty progress bar and gradually becomes filled in as the task or value increases towards upper limit.</p>
+
+<p>A progress bar can be setup to be of horizontal or vertical orientation, although the increment direction is always the same. For horizontal progress bar, is grows to the right, for vertical, upwards. Animation for changes to the progress bar value can be enabled to make the bar fill more smoothly over time.</p>
+
+<h3 id="slider">Slider</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/Slider.html">Slider</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Slider.java">code</a>) is a horizontal indicator that allows a user to set a value. The slider has a range (min, max) and a stepping between each value the slider represents. Slider has drawables for the background, the slider knob, and for the portion of the slider before and after the knob.</p>
+
+<p>A slider with touches disabled, a drawable before the knob, and without the knob can be used as a substitute for progress bar, as both widgets share the same codebase and use same visual style. Animation for changes to the slider value can be enabled to make the progress bar fill more smoothly.</p>
+
+<h3 id="window">Window</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/Window.html">Window</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Window.java">code</a>) is a table with a title bar area above the contents that displays a title. It can optionally act as a modal dialog, preventing touch events to widgets below. Window has a background drawable and a font and font color for the title.</p>
+
+<h3 id="touchpad">Touchpad</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/Touchpad.html">Touchpad</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Touchpad.java">code</a>) is an onscreen joystick that moves in a circular area. It has a background drawable and a drawable for the knob that the user drags around. If you want to implement a “follow mode” for your joystick element, check out the example <a href="https://github.com/libgdx/libgdx/issues/6688#issuecomment-962640273">here</a>.</p>
+
+<h3 id="dialog">Dialog</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/ui/Dialog.html">Dialog</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/scenes/scene2d/ui/Dialog.java">code</a>) is a window with a content table and a button table underneath. Anything can be added to the dialog, but convenience methods are provided to add a label to the content table and buttons to the button table.</p>
+
+<h2 id="widgets-without-scene2dui">Widgets without scene2d.ui</h2>
+
+<p>Widgets can be used as simple actors in scene2d, without using tables or the rest of scene2d.ui. Widgets have a default size and can be positioned absolutely, the same as any actor. If a widget’s size is changed, the <code class="language-plaintext highlighter-rouge">invalidate</code> Widget method must be called so the widget will relayout at the new size.</p>
+
+<p>Some widgets, such as Table, don’t have a default size after construction because their preferred size is based on the widgets they will contain. After the widgets have been added, the <code class="language-plaintext highlighter-rouge">pack</code> method can be used to set the width and height of the widget to its preferred width and height. This method also calls <code class="language-plaintext highlighter-rouge">invalidate</code> if the widget’s size was changed, and then calls <code class="language-plaintext highlighter-rouge">validate</code> so that the widget adjusts itself to the new size.</p>
+
+<h2 id="drag-and-drop-draganddrop-class">Drag and Drop (DragAndDrop class)</h2>
+<p>It should be noted that to make a drag start/source actor, a table and to have that table and all of its contents trigger a drag, one must enable Table.setTouchable(Enabled). It is set to ChildrenOnly by default.</p>
+
+<h2 id="usage-without-touch-or-mouse">Usage without touch or mouse</h2>
+
+<p>Scene2d.ui is mainly designed with touch or mouse control in mind. Stage has a <code class="language-plaintext highlighter-rouge">setKeyboardFocus</code> and a <code class="language-plaintext highlighter-rouge">setScrollFocus</code> methods to set the Actor receiving scroll and key events. However, it does not support a full type focus and is therefore not operable with keys only.
+A focusing system is needed for games designed with controller-only or keyboard-only interface. <a href="https://github.com/MrStahlfelge/gdx-controllerutils">gdx-controllerutils project</a>’s scene2d module includes a <code class="language-plaintext highlighter-rouge">ControllerMenuStage</code> adding this to scene2d.ui. <a href="https://github.com/MrStahlfelge/gdx-controllerutils/wiki/Button-operable-Scene2d">View the documentation</a>.</p>
+
+<h2 id="examples">Examples</h2>
+
+<p>For now, please see these test programs:</p>
+
+<ul>
+  <li><a href="https://github.com/libgdx/libgdx/blob/master/tests/gdx-tests/src/com/badlogic/gdx/tests/UISimpleTest.java#L37">UISimpleTest</a></li>
+  <li><a href="https://github.com/libgdx/libgdx/blob/master/tests/gdx-tests/src/com/badlogic/gdx/tests/TableLayoutTest.java#L35">TableLayoutTest</a></li>
+  <li><a href="https://github.com/libgdx/libgdx/blob/master/tests/gdx-tests/src/com/badlogic/gdx/tests/UITest.java#L50">UITest</a></li>
+  <li><a href="https://github.com/libgdx/libgdx/blob/master/tests/gdx-tests/src/com/badlogic/gdx/tests/ImageTest.java#L30">ImageTest</a></li>
+  <li><a href="https://github.com/libgdx/libgdx/blob/master/tests/gdx-tests/src/com/badlogic/gdx/tests/LabelTest.java#L34">LabelTest</a></li>
+  <li><a href="https://github.com/libgdx/libgdx/blob/master/tests/gdx-tests/src/com/badlogic/gdx/tests/ScrollPaneTest.java#L36">ScrollPaneTest</a></li>
+</ul>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

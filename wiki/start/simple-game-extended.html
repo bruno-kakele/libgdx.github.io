@@ -1,0 +1,797 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Extending the Simple Game - libGDX</title>
+
+  <meta name="description" content="In this tutorial we will be extending the simple game “Drop”, made in the previous tutorial. We will be adding a menu screen and a couple of features to make...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Extending the Simple Game">
+<meta property="og:url" content="https://libgdx.com/wiki/start/simple-game-extended">
+
+
+  <meta property="og:description" content="In this tutorial we will be extending the simple game “Drop”, made in the previous tutorial. We will be adding a menu screen and a couple of features to make...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/start/simple-game-extended">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Extending the Simple Game
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/start/simple-game-extended.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/start/simple-game-extended.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <p>In this tutorial we will be <strong>extending the simple game</strong> “Drop”, made in <a href="/wiki/start/a-simple-game">the previous tutorial</a>. We will be adding a menu screen and a couple of features to make this game a little more fully featured.</p>
+
+<p>Let’s get started with an introduction to a few more advanced classes in libGDX.</p>
+
+<h2 id="the-screen-interface">The Screen interface</h2>
+<p>Screens are <em>fundamental</em> to any game with multiple components. Screens contain many of the methods you are used to from ApplicationListener objects, and include a couple of new methods: <code class="language-plaintext highlighter-rouge">show</code> and <code class="language-plaintext highlighter-rouge">hide</code>, which are called when the Screen gains or loses focus, respectively. Screens are responsible for handling (i.e., processing and rendering) one aspect of your game: a menu screen, a settings screen, a game screen, etc.</p>
+
+<h2 id="the-game-class">The Game Class</h2>
+<p>The Game class is responsible for handling multiple screens and provides some helper methods for this purpose, alongside an implementation of ApplicationListener for you to use. Together, Screen and Game objects are used to create a simple and powerful structure for games.</p>
+
+<p>We will start by creating a <code class="language-plaintext highlighter-rouge">Drop</code> class, which extends Game and whose <code class="language-plaintext highlighter-rouge">create()</code> method will be the entry point to our game. Let’s take a look at some code:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.badlogic.drop</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.Game</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.g2d.BitmapFont</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.g2d.SpriteBatch</span><span class="o">;</span>
+
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Drop</span> <span class="kd">extends</span> <span class="nc">Game</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="nc">SpriteBatch</span> <span class="n">batch</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="nc">BitmapFont</span> <span class="n">font</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">create</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">batch</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SpriteBatch</span><span class="o">();</span>
+		<span class="n">font</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BitmapFont</span><span class="o">();</span> <span class="c1">// use libGDX's default Arial font</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">setScreen</span><span class="o">(</span><span class="k">new</span> <span class="nc">MainMenuScreen</span><span class="o">(</span><span class="k">this</span><span class="o">));</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">render</span><span class="o">()</span> <span class="o">{</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">render</span><span class="o">();</span> <span class="c1">// important!</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">dispose</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">batch</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
+		<span class="n">font</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>We start the application with instantiating a SpriteBatch and a BitmapFont. It is a bad practice to create multiple objects that can be shared instead (see <a href="https://en.wikipedia.org/wiki/Don't_repeat_yourself">DRY</a>). The SpriteBatch object is used to render objects onto the screen, such as textures; and the BitmapFont object is used, along with a SpriteBatch, to render text onto the screen. We will touch more on this in the Screen classes.</p>
+
+<p>Next, we set the Screen of the Game to a <code class="language-plaintext highlighter-rouge">MainMenuScreen</code> object, with a Drop instance as its first and only parameter.</p>
+
+<p class="notice--primary">A common mistake is to forget to call <code class="language-plaintext highlighter-rouge">super.render()</code> with a Game implementation. Without this call, the Screen that you set in the <code class="language-plaintext highlighter-rouge">create()</code> method will not be rendered if you override the render method in your Game class!</p>
+
+<p>Finally, another reminder to dispose of your (heavy) objects! Some further reading on this can be found <a href="/wiki/managing-your-assets">here</a>.</p>
+
+<h2 id="the-main-menu">The Main Menu</h2>
+<p>Now, let’s get into the nitty-gritty of the <code class="language-plaintext highlighter-rouge">MainMenuScreen</code> class.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.badlogic.drop</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.Gdx</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.Screen</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.OrthographicCamera</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainMenuScreen</span> <span class="kd">implements</span> <span class="nc">Screen</span> <span class="o">{</span>
+
+	<span class="kd">final</span> <span class="nc">Drop</span> <span class="n">game</span><span class="o">;</span>
+
+	<span class="nc">OrthographicCamera</span> <span class="n">camera</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nf">MainMenuScreen</span><span class="o">(</span><span class="kd">final</span> <span class="nc">Drop</span> <span class="n">game</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">game</span> <span class="o">=</span> <span class="n">game</span><span class="o">;</span>
+
+		<span class="n">camera</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OrthographicCamera</span><span class="o">();</span>
+		<span class="n">camera</span><span class="o">.</span><span class="na">setToOrtho</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="mi">800</span><span class="o">,</span> <span class="mi">480</span><span class="o">);</span>
+	<span class="o">}</span>
+
+
+        <span class="c1">//...Rest of class omitted for succinctness.</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>In this code snippet, we make the constructor for the <code class="language-plaintext highlighter-rouge">MainMenuScreen</code> class, which implements the Screen interface. The Screen interface does not provide any sort of <code class="language-plaintext highlighter-rouge">create()</code> method, so we instead use a constructor. The only parameter for the constructor necessary for this game is an instance of <code class="language-plaintext highlighter-rouge">Drop</code>, so that we can call upon its methods and fields if necessary.</p>
+
+<p>Next, the final “meaty” method in the <code class="language-plaintext highlighter-rouge">MainMenuScreen</code> class: <code class="language-plaintext highlighter-rouge">render(float)</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainMenuScreen</span> <span class="kd">implements</span> <span class="nc">Screen</span> <span class="o">{</span>
+
+        <span class="c1">//public MainMenuScreen(final Drop game)....</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">render</span><span class="o">(</span><span class="kt">float</span> <span class="n">delta</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">ScreenUtils</span><span class="o">.</span><span class="na">clear</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mf">0.2f</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+
+		<span class="n">camera</span><span class="o">.</span><span class="na">update</span><span class="o">();</span>
+		<span class="n">game</span><span class="o">.</span><span class="na">batch</span><span class="o">.</span><span class="na">setProjectionMatrix</span><span class="o">(</span><span class="n">camera</span><span class="o">.</span><span class="na">combined</span><span class="o">);</span>
+
+		<span class="n">game</span><span class="o">.</span><span class="na">batch</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+		<span class="n">game</span><span class="o">.</span><span class="na">font</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">game</span><span class="o">.</span><span class="na">batch</span><span class="o">,</span> <span class="s">"Welcome to Drop!!! "</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">150</span><span class="o">);</span>
+		<span class="n">game</span><span class="o">.</span><span class="na">font</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">game</span><span class="o">.</span><span class="na">batch</span><span class="o">,</span> <span class="s">"Tap anywhere to begin!"</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+		<span class="n">game</span><span class="o">.</span><span class="na">batch</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+
+		<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isTouched</span><span class="o">())</span> <span class="o">{</span>
+			<span class="n">game</span><span class="o">.</span><span class="na">setScreen</span><span class="o">(</span><span class="k">new</span> <span class="nc">GameScreen</span><span class="o">(</span><span class="n">game</span><span class="o">));</span>
+			<span class="n">dispose</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+        <span class="c1">// Rest of class still omitted...</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p>The code here is fairly straightforward, except for the fact that we need to call game’s SpriteBatch and BitmapFont instances instead of creating our own. <code class="language-plaintext highlighter-rouge">game.font.draw(SpriteBatch, String, float, float)</code>, is how text is rendered to the screen. libGDX comes with a pre-made font, Arial, so that you can use the default constructor and still get a font.</p>
+
+<p>We then check to see if the screen has been touched, if it has, then we check to set the games screen to a GameScreen instance, and then dispose of the current instance of MainMenuScreen. The rest of the methods that are needed to implement in the MainMenuScreen are left empty, so I’ll continue to omit them (there is nothing to dispose of in this class).</p>
+
+<h2 id="the-game-screen">The Game Screen</h2>
+<p>Now that we have our main menu finished, it’s time to finally get to making our game. We will be lifting most of the code from the <a href="/wiki/start/a-simple-game">original game</a> as to avoid redundancy, and avoid having to think of a different game idea to implement as simply as Drop is.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.badlogic.drop</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Iterator</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.Gdx</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.Input.Keys</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.Screen</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.audio.Music</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.audio.Sound</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.OrthographicCamera</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.graphics.Texture</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.math.MathUtils</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.math.Rectangle</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.math.Vector3</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.utils.Array</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.utils.ScreenUtils</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.utils.TimeUtils</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GameScreen</span> <span class="kd">implements</span> <span class="nc">Screen</span> <span class="o">{</span>
+	<span class="kd">final</span> <span class="nc">Drop</span> <span class="n">game</span><span class="o">;</span>
+
+	<span class="nc">Texture</span> <span class="n">dropImage</span><span class="o">;</span>
+	<span class="nc">Texture</span> <span class="n">bucketImage</span><span class="o">;</span>
+	<span class="nc">Sound</span> <span class="n">dropSound</span><span class="o">;</span>
+	<span class="nc">Music</span> <span class="n">rainMusic</span><span class="o">;</span>
+	<span class="nc">OrthographicCamera</span> <span class="n">camera</span><span class="o">;</span>
+	<span class="nc">Rectangle</span> <span class="n">bucket</span><span class="o">;</span>
+	<span class="nc">Array</span><span class="o">&lt;</span><span class="nc">Rectangle</span><span class="o">&gt;</span> <span class="n">raindrops</span><span class="o">;</span>
+	<span class="kt">long</span> <span class="n">lastDropTime</span><span class="o">;</span>
+	<span class="kt">int</span> <span class="n">dropsGathered</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nf">GameScreen</span><span class="o">(</span><span class="kd">final</span> <span class="nc">Drop</span> <span class="n">game</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">game</span> <span class="o">=</span> <span class="n">game</span><span class="o">;</span>
+
+		<span class="c1">// load the images for the droplet and the bucket, 64x64 pixels each</span>
+		<span class="n">dropImage</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Texture</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"droplet.png"</span><span class="o">));</span>
+		<span class="n">bucketImage</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Texture</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"bucket.png"</span><span class="o">));</span>
+
+		<span class="c1">// load the drop sound effect and the rain background "music"</span>
+		<span class="n">dropSound</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">audio</span><span class="o">.</span><span class="na">newSound</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"drop.wav"</span><span class="o">));</span>
+		<span class="n">rainMusic</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">audio</span><span class="o">.</span><span class="na">newMusic</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"rain.mp3"</span><span class="o">));</span>
+		<span class="n">rainMusic</span><span class="o">.</span><span class="na">setLooping</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+
+		<span class="c1">// create the camera and the SpriteBatch</span>
+		<span class="n">camera</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OrthographicCamera</span><span class="o">();</span>
+		<span class="n">camera</span><span class="o">.</span><span class="na">setToOrtho</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="mi">800</span><span class="o">,</span> <span class="mi">480</span><span class="o">);</span>
+
+		<span class="c1">// create a Rectangle to logically represent the bucket</span>
+		<span class="n">bucket</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Rectangle</span><span class="o">();</span>
+		<span class="n">bucket</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="mi">800</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">64</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span> <span class="c1">// center the bucket horizontally</span>
+		<span class="n">bucket</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="mi">20</span><span class="o">;</span> <span class="c1">// bottom left corner of the bucket is 20 pixels above</span>
+						<span class="c1">// the bottom screen edge</span>
+		<span class="n">bucket</span><span class="o">.</span><span class="na">width</span> <span class="o">=</span> <span class="mi">64</span><span class="o">;</span>
+		<span class="n">bucket</span><span class="o">.</span><span class="na">height</span> <span class="o">=</span> <span class="mi">64</span><span class="o">;</span>
+
+		<span class="c1">// create the raindrops array and spawn the first raindrop</span>
+		<span class="n">raindrops</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Array</span><span class="o">&lt;</span><span class="nc">Rectangle</span><span class="o">&gt;();</span>
+		<span class="n">spawnRaindrop</span><span class="o">();</span>
+
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">spawnRaindrop</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">Rectangle</span> <span class="n">raindrop</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Rectangle</span><span class="o">();</span>
+		<span class="n">raindrop</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="nc">MathUtils</span><span class="o">.</span><span class="na">random</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">800</span> <span class="o">-</span> <span class="mi">64</span><span class="o">);</span>
+		<span class="n">raindrop</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="mi">480</span><span class="o">;</span>
+		<span class="n">raindrop</span><span class="o">.</span><span class="na">width</span> <span class="o">=</span> <span class="mi">64</span><span class="o">;</span>
+		<span class="n">raindrop</span><span class="o">.</span><span class="na">height</span> <span class="o">=</span> <span class="mi">64</span><span class="o">;</span>
+		<span class="n">raindrops</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">raindrop</span><span class="o">);</span>
+		<span class="n">lastDropTime</span> <span class="o">=</span> <span class="nc">TimeUtils</span><span class="o">.</span><span class="na">nanoTime</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">render</span><span class="o">(</span><span class="kt">float</span> <span class="n">delta</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// clear the screen with a dark blue color. The</span>
+		<span class="c1">// arguments to clear are the red, green</span>
+		<span class="c1">// blue and alpha component in the range [0,1]</span>
+		<span class="c1">// of the color to be used to clear the screen.</span>
+		<span class="nc">ScreenUtils</span><span class="o">.</span><span class="na">clear</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mf">0.2f</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+
+		<span class="c1">// tell the camera to update its matrices.</span>
+		<span class="n">camera</span><span class="o">.</span><span class="na">update</span><span class="o">();</span>
+
+		<span class="c1">// tell the SpriteBatch to render in the</span>
+		<span class="c1">// coordinate system specified by the camera.</span>
+		<span class="n">game</span><span class="o">.</span><span class="na">batch</span><span class="o">.</span><span class="na">setProjectionMatrix</span><span class="o">(</span><span class="n">camera</span><span class="o">.</span><span class="na">combined</span><span class="o">);</span>
+
+		<span class="c1">// begin a new batch and draw the bucket and</span>
+		<span class="c1">// all drops</span>
+		<span class="n">game</span><span class="o">.</span><span class="na">batch</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+		<span class="n">game</span><span class="o">.</span><span class="na">font</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">game</span><span class="o">.</span><span class="na">batch</span><span class="o">,</span> <span class="s">"Drops Collected: "</span> <span class="o">+</span> <span class="n">dropsGathered</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">480</span><span class="o">);</span>
+		<span class="n">game</span><span class="o">.</span><span class="na">batch</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">bucketImage</span><span class="o">,</span> <span class="n">bucket</span><span class="o">.</span><span class="na">x</span><span class="o">,</span> <span class="n">bucket</span><span class="o">.</span><span class="na">y</span><span class="o">,</span> <span class="n">bucket</span><span class="o">.</span><span class="na">width</span><span class="o">,</span> <span class="n">bucket</span><span class="o">.</span><span class="na">height</span><span class="o">);</span>
+		<span class="k">for</span> <span class="o">(</span><span class="nc">Rectangle</span> <span class="n">raindrop</span> <span class="o">:</span> <span class="n">raindrops</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">game</span><span class="o">.</span><span class="na">batch</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">dropImage</span><span class="o">,</span> <span class="n">raindrop</span><span class="o">.</span><span class="na">x</span><span class="o">,</span> <span class="n">raindrop</span><span class="o">.</span><span class="na">y</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="n">game</span><span class="o">.</span><span class="na">batch</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+
+		<span class="c1">// process user input</span>
+		<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isTouched</span><span class="o">())</span> <span class="o">{</span>
+			<span class="nc">Vector3</span> <span class="n">touchPos</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Vector3</span><span class="o">();</span>
+			<span class="n">touchPos</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">getY</span><span class="o">(),</span> <span class="mi">0</span><span class="o">);</span>
+			<span class="n">camera</span><span class="o">.</span><span class="na">unproject</span><span class="o">(</span><span class="n">touchPos</span><span class="o">);</span>
+			<span class="n">bucket</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">touchPos</span><span class="o">.</span><span class="na">x</span> <span class="o">-</span> <span class="mi">64</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isKeyPressed</span><span class="o">(</span><span class="nc">Keys</span><span class="o">.</span><span class="na">LEFT</span><span class="o">))</span>
+			<span class="n">bucket</span><span class="o">.</span><span class="na">x</span> <span class="o">-=</span> <span class="mi">200</span> <span class="o">*</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getDeltaTime</span><span class="o">();</span>
+		<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isKeyPressed</span><span class="o">(</span><span class="nc">Keys</span><span class="o">.</span><span class="na">RIGHT</span><span class="o">))</span>
+			<span class="n">bucket</span><span class="o">.</span><span class="na">x</span> <span class="o">+=</span> <span class="mi">200</span> <span class="o">*</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getDeltaTime</span><span class="o">();</span>
+
+		<span class="c1">// make sure the bucket stays within the screen bounds</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">bucket</span><span class="o">.</span><span class="na">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span>
+			<span class="n">bucket</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">bucket</span><span class="o">.</span><span class="na">x</span> <span class="o">&gt;</span> <span class="mi">800</span> <span class="o">-</span> <span class="mi">64</span><span class="o">)</span>
+			<span class="n">bucket</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="mi">800</span> <span class="o">-</span> <span class="mi">64</span><span class="o">;</span>
+
+		<span class="c1">// check if we need to create a new raindrop</span>
+		<span class="k">if</span> <span class="o">(</span><span class="nc">TimeUtils</span><span class="o">.</span><span class="na">nanoTime</span><span class="o">()</span> <span class="o">-</span> <span class="n">lastDropTime</span> <span class="o">&gt;</span> <span class="mi">1000000000</span><span class="o">)</span>
+			<span class="n">spawnRaindrop</span><span class="o">();</span>
+
+		<span class="c1">// move the raindrops, remove any that are beneath the bottom edge of</span>
+		<span class="c1">// the screen or that hit the bucket. In the later case we increase the</span>
+		<span class="c1">// value our drops counter and add a sound effect.</span>
+		<span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">Rectangle</span><span class="o">&gt;</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">raindrops</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+		<span class="k">while</span> <span class="o">(</span><span class="n">iter</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+			<span class="nc">Rectangle</span> <span class="n">raindrop</span> <span class="o">=</span> <span class="n">iter</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+			<span class="n">raindrop</span><span class="o">.</span><span class="na">y</span> <span class="o">-=</span> <span class="mi">200</span> <span class="o">*</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getDeltaTime</span><span class="o">();</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">raindrop</span><span class="o">.</span><span class="na">y</span> <span class="o">+</span> <span class="mi">64</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span>
+				<span class="n">iter</span><span class="o">.</span><span class="na">remove</span><span class="o">();</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">raindrop</span><span class="o">.</span><span class="na">overlaps</span><span class="o">(</span><span class="n">bucket</span><span class="o">))</span> <span class="o">{</span>
+				<span class="n">dropsGathered</span><span class="o">++;</span>
+				<span class="n">dropSound</span><span class="o">.</span><span class="na">play</span><span class="o">();</span>
+				<span class="n">iter</span><span class="o">.</span><span class="na">remove</span><span class="o">();</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">resize</span><span class="o">(</span><span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">show</span><span class="o">()</span> <span class="o">{</span>
+		<span class="c1">// start the playback of the background music</span>
+		<span class="c1">// when the screen is shown</span>
+		<span class="n">rainMusic</span><span class="o">.</span><span class="na">play</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">hide</span><span class="o">()</span> <span class="o">{</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">pause</span><span class="o">()</span> <span class="o">{</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">resume</span><span class="o">()</span> <span class="o">{</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">dispose</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">dropImage</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
+		<span class="n">bucketImage</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
+		<span class="n">dropSound</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
+		<span class="n">rainMusic</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This code is almost 95% the same as the original implementation, except now we use a constructor instead of the <code class="language-plaintext highlighter-rouge">create()</code> method of the <code class="language-plaintext highlighter-rouge">ApplicationListener</code>, and pass in a <code class="language-plaintext highlighter-rouge">Drop</code> object, like in the <code class="language-plaintext highlighter-rouge">MainMenuScreen</code> class. We also start playing the music as soon as the Screen is set to <code class="language-plaintext highlighter-rouge">GameScreen</code>. Moreover, we added a string to the top left corner of the game, which tracks the number of raindrops collected.</p>
+
+<p>Note that the <code class="language-plaintext highlighter-rouge">dispose()</code> method of the <code class="language-plaintext highlighter-rouge">GameScreen</code> class is not called automatically, see the <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/Screen.html">Screen API</a>. It is your responsibility to take care of that. You can call this method from the <code class="language-plaintext highlighter-rouge">dispose()</code> method of the <code class="language-plaintext highlighter-rouge">Game</code> class, if the <code class="language-plaintext highlighter-rouge">GameScreen</code> class passes a reference to itself to the <code class="language-plaintext highlighter-rouge">Game</code> class. It is important to do this, else <code class="language-plaintext highlighter-rouge">GameScreen</code> assets might persist and occupy memory even after exiting the application.</p>
+
+<p>And that’s it, you have the complete game finished. That is all there is to know about the Screen interface and abstract Game Class, and all there is to creating multifaceted games with multiple states. The <strong>full Java code</strong> can be found <a href="https://github.com/libgdx/libgdx.github.io/tree/master/assets/downloads/tutorials/extended-game-java">here</a>. If you are developing in <strong>Kotlin</strong>, take a look <a href="https://github.com/libgdx/libgdx.github.io/tree/master/assets/downloads/tutorials/extended-game-kotlin">here</a> for the full code.</p>
+
+<h2 id="the-future">The Future</h2>
+<p>After this tutorial you should have a basic understanding how libGDX works and what to expect going forward. Some things can still be improved, like using the <a href="/wiki/articles/memory-management#object-pooling">Memory Management</a> classes to recycle all the Rectangles we have the garbage collector clean up each time we delete a raindrop. OpenGL is also not too fond if we hand it too many different images in a batch (in our case it’s OK as we only had two images). Usually one would put all those images into a single <code class="language-plaintext highlighter-rouge">Texture</code>, also known as a <code class="language-plaintext highlighter-rouge">TextureAtlas</code>. In addition, taking a look at <a href="/wiki/graphics/viewports">Viewports</a> will most certainly prove useful. Viewports help dealing with different screen sizes/resolutions and decide, whether the screen’s content needs to be stretched/should keep its aspect ratio, etc.</p>
+
+<p>To continue learning about libGDX we highly <strong>recommend reading our <a href="/wiki/">wiki</a></strong> and checking out the demos and tests in our main GitHub repository. If you have any questions, <strong>join our official <a href="/community/">Discord server</a></strong>, we are always glad to help!</p>
+
+<p>The best practice is to get out there and do it, so farewell and happy coding!</p>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

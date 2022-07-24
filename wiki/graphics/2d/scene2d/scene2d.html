@@ -1,0 +1,836 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Scene2d - libGDX</title>
+
+  <meta name="description" content="Overview scene2d is a 2D scene graph for building applications and UIs using a hierarchy of actors. If you’re looking for the UI component of scene2d, see Scene2d.ui Check out...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Scene2d">
+<meta property="og:url" content="https://libgdx.com/wiki/graphics/2d/scene2d/scene2d">
+
+
+  <meta property="og:description" content="Overview scene2d is a 2D scene graph for building applications and UIs using a hierarchy of actors. If you’re looking for the UI component of scene2d, see Scene2d.ui Check out...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/graphics/2d/scene2d/scene2d">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Scene2d
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/graphics/2d/scene2d/scene2d.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/graphics/2d/scene2d/scene2d.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <h2 id="overview">Overview</h2>
+
+<p>scene2d is a 2D scene graph for building applications and UIs using a hierarchy of actors. If you’re looking for the UI component of scene2d, see <a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></p>
+
+<p>Check out <a href="https://libgdxinfo.wordpress.com/basic_action/">LibGDX.info</a> for Scene2d examples (Image, Label etc…)</p>
+
+<p>It provides the following features:</p>
+
+<ul>
+  <li>
+    <p>Rotation and scale of a group is applied to all child actors. Child actors always work in their own coordinate system, parent transformations are applied transparently.</p>
+  </li>
+  <li>
+    <p>Simplified 2D drawing via <a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">SpriteBatch</a>. Each actor draws in its own un-rotated and unscaled coordinate system where 0,0 is the bottom left corner of the actor.</p>
+  </li>
+  <li>
+    <p>Hit detection of rotated and scaled actors. Each actor determines if it is hit using its own un-rotated and unscaled coordinate system.</p>
+  </li>
+  <li>
+    <p>Routing of input and other events to the appropriate actor. The event system is flexible, enabling parent actors to handle events before or after children.</p>
+  </li>
+  <li>
+    <p>Action system for easy manipulation of actors over time. Actions can be chained and combined for complex effects.</p>
+  </li>
+</ul>
+
+<p>scene2d is well equipped for laying out, drawing, and handling input for game menus, HUD overlays, tools, and other UIs. The <a href="/wiki/graphics/2d/scene2d/scene2d-ui">scene2d.ui</a> package provides many actors and other utilities specifically for building UIs.</p>
+
+<p>Scene graphs have the drawback that they couple model and view. Actors store data that is often considered model data in games, such as their size and position. Actors are also the view, as they know how to draw themselves. This coupling makes MVC separation difficult. When used solely for UIs or for apps that don’t care about MVC, the coupling is not an issue.</p>
+
+<p>scene2d has three classes at its core:</p>
+
+<ol>
+  <li>
+    <p>The Actor class is a node in the graph which has a position, rectangular size, origin, scale, rotation, and color.</p>
+  </li>
+  <li>
+    <p>The Group class is an actor that may have child actors.</p>
+  </li>
+  <li>
+    <p>The Stage class has a camera, SpriteBatch, and a root group and handles drawing the actors and distributing input events.</p>
+  </li>
+</ol>
+
+<h3 id="stage">Stage</h3>
+
+<p>Stage is an InputProcessor. When it receives input events, it fires them on the appropriate actors. If the stage is being used as a UI on top of other content (eg, a HUD), an InputMultiplexer can be used to first give the stage a chance to handle an event. If an actor in the stage handles an event, stage’s InputProcessor methods will return true, indicating the event has been handled and should not continue on to the next InputProcessor.</p>
+
+<p>Stage has an <code class="language-plaintext highlighter-rouge">act</code> method that takes a delta time since last frame. This causes the <code class="language-plaintext highlighter-rouge">act</code> method on every actor in the scene to be called, allowing the actors to take some action based on time. By default, the Actor <code class="language-plaintext highlighter-rouge">act</code> method updates all actions on the actor. Calling <code class="language-plaintext highlighter-rouge">act</code> on the stage is optional, but actor actions and enter/exit events will not occur if it is omitted.</p>
+
+<h3 id="viewport">Viewport</h3>
+
+<p>The stage’s viewport is determined by a <a href="/wiki/graphics/viewports">Viewport</a> instance. The viewport manages a <code class="language-plaintext highlighter-rouge">Camera</code> and controls how the stage is displayed on the screen, the stage’s aspect ratio (whether it is stretched) and whether black bars appear (letterboxing). The viewport also converts screen coordinates to and from stage coordinates.</p>
+
+<p>The viewport is specified in the stage constructor or by using <code class="language-plaintext highlighter-rouge">setViewport</code>. If running where the application window can be resized (eg, on the desktop), the stage’s viewport should be set when the application window is resized.</p>
+
+<p>Here is an example of the most basic scene2d application with no actors, using a <code class="language-plaintext highlighter-rouge">ScreenViewport</code>. With this viewport, each unit in the stage corresponds to 1 pixel. This means the stage is never stretched, but more or less of the stage is visible depending on the size of the screen or window. This is often useful for UI applications.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">Stage</span> <span class="n">stage</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">create</span> <span class="o">()</span> <span class="o">{</span>
+	<span class="n">stage</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stage</span><span class="o">(</span><span class="k">new</span> <span class="nc">ScreenViewport</span><span class="o">());</span>
+	<span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">setInputProcessor</span><span class="o">(</span><span class="n">stage</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">resize</span> <span class="o">(</span><span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
+	<span class="c1">// See below for what true means.</span>
+	<span class="n">stage</span><span class="o">.</span><span class="na">getViewport</span><span class="o">().</span><span class="na">update</span><span class="o">(</span><span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">render</span> <span class="o">()</span> <span class="o">{</span>
+	<span class="kt">float</span> <span class="n">delta</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getDeltaTime</span><span class="o">();</span>
+	<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glClear</span><span class="o">(</span><span class="no">GL20</span><span class="o">.</span><span class="na">GL_COLOR_BUFFER_BIT</span><span class="o">);</span>
+	<span class="n">stage</span><span class="o">.</span><span class="na">act</span><span class="o">(</span><span class="n">delta</span><span class="o">);</span>
+	<span class="n">stage</span><span class="o">.</span><span class="na">draw</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">dispose</span> <span class="o">()</span> <span class="o">{</span>
+	<span class="n">stage</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Passing <code class="language-plaintext highlighter-rouge">true</code> when updating the viewport changes the camera position so it is centered on the stage, making 0,0 the bottom left corner. This is useful for UIs, where the camera position is not usually changed. When managing the camera position yourself, pass false or omit the boolean. If the stage position is not set, by default 0,0 will be in the center of the screen.</p>
+
+<p>Here is an example of using <code class="language-plaintext highlighter-rouge">StretchViewport</code>. The stage’s size of 640x480 will be stretched to the screen size, potentially changing the stage’s aspect ratio.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="n">stage</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stage</span><span class="o">(</span><span class="k">new</span> <span class="nc">StretchViewport</span><span class="o">(</span><span class="mi">640</span><span class="o">,</span> <span class="mi">480</span><span class="o">));</span>
+</code></pre></div></div>
+
+<p>Here is an example of using <code class="language-plaintext highlighter-rouge">FitViewport</code>. The stage’s size of 640x480 is scaled to fit the screen without changing the aspect ratio, then black bars are added on either side to take up the remaining space (letterboxing).</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="n">stage</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stage</span><span class="o">(</span><span class="k">new</span> <span class="nc">FitViewport</span><span class="o">(</span><span class="mi">640</span><span class="o">,</span> <span class="mi">480</span><span class="o">));</span>
+</code></pre></div></div>
+
+<p>Here is an example of using <code class="language-plaintext highlighter-rouge">ExtendViewport</code>. The stage’s size of 640x480 is first scaled to fit without changing the aspect ratio, then the stage’s shorter dimension is increased to fill the screen. The aspect ratio is not changed and there are no black bars, but the stage may be longer in one direction.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="n">stage</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stage</span><span class="o">(</span><span class="k">new</span> <span class="nc">ExtendViewport</span><span class="o">(</span><span class="mi">640</span><span class="o">,</span> <span class="mi">480</span><span class="o">));</span>
+</code></pre></div></div>
+
+<p>Here is an example of using <code class="language-plaintext highlighter-rouge">ExtendViewport</code> with a maximum size. As before, the stage’s size of 640x480 is first scaled to fit without changing the aspect ratio, then the stage’s shorter dimension is increased to fill the screen. However, the stage’s size won’t be increased beyond the maximum size of 800x480. This approach allows you to show more of the world to support many different aspect ratios without showing black bars.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="n">stage</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stage</span><span class="o">(</span><span class="k">new</span> <span class="nc">ExtendViewport</span><span class="o">(</span><span class="mi">640</span><span class="o">,</span> <span class="mi">480</span><span class="o">,</span> <span class="mi">800</span><span class="o">,</span> <span class="mi">480</span><span class="o">));</span>
+</code></pre></div></div>
+
+<p>Most viewports that show black bars use <code class="language-plaintext highlighter-rouge">glViewport</code>, so the stage cannot draw within the black bars. The <code class="language-plaintext highlighter-rouge">glViewport</code> can be set to the full screen to draw in the black bars outside of the stage.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Set the viewport to the whole screen.</span>
+<span class="nc">Gdx</span><span class="o">.</span><span class="na">gl</span><span class="o">.</span><span class="na">glViewport</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getWidth</span><span class="o">(),</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getHeight</span><span class="o">());</span>
+
+<span class="c1">// Draw anywhere on the screen.</span>
+
+<span class="c1">// Restore the stage's viewport.</span>
+<span class="n">stage</span><span class="o">.</span><span class="na">getViewport</span><span class="o">().</span><span class="na">update</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getWidth</span><span class="o">(),</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getHeight</span><span class="o">(),</span> <span class="kc">true</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>See <a href="/wiki/graphics/viewports">Viewport</a> for more information.</p>
+
+<h2 id="drawing">Drawing</h2>
+
+<p>When <code class="language-plaintext highlighter-rouge">draw</code> is called on the stage, it calls draw on every actor in the stage. Actors’ <code class="language-plaintext highlighter-rouge">draw</code> method can be overridden to perform drawing:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyActor</span> <span class="kd">extends</span> <span class="nc">Actor</span> <span class="o">{</span>
+	<span class="nc">TextureRegion</span> <span class="n">region</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nf">MyActor</span> <span class="o">()</span> <span class="o">{</span>
+		<span class="n">region</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TextureRegion</span><span class="o">(...);</span>
+                <span class="n">setBounds</span><span class="o">(</span><span class="n">region</span><span class="o">.</span><span class="na">getRegionX</span><span class="o">(),</span> <span class="n">region</span><span class="o">.</span><span class="na">getRegionY</span><span class="o">(),</span>
+			<span class="n">region</span><span class="o">.</span><span class="na">getRegionWidth</span><span class="o">(),</span> <span class="n">region</span><span class="o">.</span><span class="na">getRegionHeight</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">draw</span> <span class="o">(</span><span class="nc">Batch</span> <span class="n">batch</span><span class="o">,</span> <span class="kt">float</span> <span class="n">parentAlpha</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Color</span> <span class="n">color</span> <span class="o">=</span> <span class="n">getColor</span><span class="o">();</span>
+		<span class="n">batch</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="n">color</span><span class="o">.</span><span class="na">r</span><span class="o">,</span> <span class="n">color</span><span class="o">.</span><span class="na">g</span><span class="o">,</span> <span class="n">color</span><span class="o">.</span><span class="na">b</span><span class="o">,</span> <span class="n">color</span><span class="o">.</span><span class="na">a</span> <span class="o">*</span> <span class="n">parentAlpha</span><span class="o">);</span>
+		<span class="n">batch</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">region</span><span class="o">,</span> <span class="n">getX</span><span class="o">(),</span> <span class="n">getY</span><span class="o">(),</span> <span class="n">getOriginX</span><span class="o">(),</span> <span class="n">getOriginY</span><span class="o">(),</span>
+			<span class="n">getWidth</span><span class="o">(),</span> <span class="n">getHeight</span><span class="o">(),</span> <span class="n">getScaleX</span><span class="o">(),</span> <span class="n">getScaleY</span><span class="o">(),</span> <span class="n">getRotation</span><span class="o">());</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This <code class="language-plaintext highlighter-rouge">draw</code> method draws a region using the position, origin, size, scale, and rotation of the actor. The Batch passed to draw is configured to draw in the parent’s coordinates, so 0,0 is the bottom left corner of the parent. This makes drawing simple, even if the parent is rotated and scaled. Batch begin has already been called. If the <code class="language-plaintext highlighter-rouge">parentAlpha</code> is combined with this actor’s alpha as shown, child actors will be influenced by the parent’s translucency. Note the color of the Batch may be changed by other actors and should be set by each actor before it draws.</p>
+
+<p>If <code class="language-plaintext highlighter-rouge">setVisible(false)</code> is called on an actor, its draw method will not be called. It will also not receive input events.</p>
+
+<p>If an actor needs to perform drawing differently, such as with a 
+<code class="language-plaintext highlighter-rouge">ShapeRenderer</code>, the Batch should be ended and then begun again at the end of the method. Of course, this causes the batch to be flushed, so should be used judiciously. The transformation and projection matrices from the Batch can be used:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">ShapeRenderer</span> <span class="n">renderer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ShapeRenderer</span><span class="o">();</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">draw</span> <span class="o">(</span><span class="nc">Batch</span> <span class="n">batch</span><span class="o">,</span> <span class="kt">float</span> <span class="n">parentAlpha</span><span class="o">)</span> <span class="o">{</span>
+	<span class="n">batch</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+
+	<span class="n">renderer</span><span class="o">.</span><span class="na">setProjectionMatrix</span><span class="o">(</span><span class="n">batch</span><span class="o">.</span><span class="na">getProjectionMatrix</span><span class="o">());</span>
+	<span class="n">renderer</span><span class="o">.</span><span class="na">setTransformMatrix</span><span class="o">(</span><span class="n">batch</span><span class="o">.</span><span class="na">getTransformMatrix</span><span class="o">());</span>
+	<span class="n">renderer</span><span class="o">.</span><span class="na">translate</span><span class="o">(</span><span class="n">getX</span><span class="o">(),</span> <span class="n">getY</span><span class="o">(),</span> <span class="mi">0</span><span class="o">);</span>
+
+	<span class="n">renderer</span><span class="o">.</span><span class="na">begin</span><span class="o">(</span><span class="nc">ShapeType</span><span class="o">.</span><span class="na">Filled</span><span class="o">);</span>
+	<span class="n">renderer</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">BLUE</span><span class="o">);</span>
+	<span class="n">renderer</span><span class="o">.</span><span class="na">rect</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">getWidth</span><span class="o">(),</span> <span class="n">getHeight</span><span class="o">());</span>
+	<span class="n">renderer</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+
+	<span class="n">batch</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="group-transform">Group transform</h3>
+
+<p>When a group is rotated or scaled, the children draw as normal and the Batch’s transform draws them correctly rotated or scaled. Before a group draws, the Batch is flushed so the transform can be set. This flush may become a performance bottleneck if there are many dozens of groups. If the actors in a group are not rotated or scaled, then <code class="language-plaintext highlighter-rouge">setTransform(false)</code> can be used for the group. When this is done, each child’s position will be offset by the group’s position for drawing, causing the children to appear in the correct location even though the Batch has not been transformed. This cannot be used for a group that has rotation or scale.</p>
+
+<h2 id="hit-detection">Hit detection</h2>
+
+<p>The Actor <code class="language-plaintext highlighter-rouge">hit</code> method receives a point and returns the deepest actor at that point, or null if no actor was hit. Here is the default <code class="language-plaintext highlighter-rouge">hit</code> method:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">Actor</span> <span class="nf">hit</span> <span class="o">(</span><span class="kt">float</span> <span class="n">x</span><span class="o">,</span> <span class="kt">float</span> <span class="n">y</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">touchable</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">if</span> <span class="o">(</span><span class="n">touchable</span> <span class="o">&amp;&amp;</span> <span class="n">getTouchable</span><span class="o">()</span> <span class="o">!=</span> <span class="nc">Touchable</span><span class="o">.</span><span class="na">enabled</span><span class="o">)</span> <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+	<span class="k">return</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">width</span> <span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">height</span> <span class="o">?</span> <span class="k">this</span> <span class="o">:</span> <span class="kc">null</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The coordinates are given in the actor’s coordinate system. This simply returns the actor if the point is inside the actor’s bounds. More sophisticated checks could be used, eg if the actor was round. The <code class="language-plaintext highlighter-rouge">touchable</code> boolean parameter indicates if the actor’s touchability should be respected. This enables hit detection for purposes other than touch on actors that are not touchable.</p>
+
+<p>When <code class="language-plaintext highlighter-rouge">hit</code> is called on the stage, <code class="language-plaintext highlighter-rouge">hit</code> is called on the stage’s root group, which in turn calls <code class="language-plaintext highlighter-rouge">hit</code> on each child. The first non-null actor found is returned as the actor deepest in the hierarchy that contains the given point.</p>
+
+<h2 id="event-system">Event system</h2>
+
+<p>scene2d uses a generic event system. Each actor has a list of listeners that are notified for events on that actor. Events are propagated in two phases. First, during the “capture” phase an event is given to each actor from the root down to the target actor. Only capture listeners are notified during this phase. This gives parents a chance to intercept and potentially cancel events before children see them. Next, during the “normal” phase the event is given to each actor from the target up to the root. Only normal listeners are notified during this phase. This allows actors to handle an event themselves or let the parent have a try at it.</p>
+
+<p>The event provided to each actor when it is notified contains state about the event. The target is the actor that the event originated on. The listener actor is the actor that the listener is attached to. The event also has a few important methods. If <code class="language-plaintext highlighter-rouge">stop</code> is called on the event, any remaining listeners for the current actor are still notified, but after those no other actors will receive the event. This can be used to prevent children (during the capture phase) or parents (during the normal phase) from seeing the event. If <code class="language-plaintext highlighter-rouge">cancel</code> is called on the event, it stops propagation the same as stop and also prevents any default action that would have been taken by the code that fired the event. E.g., if the event is for a check-box being checked, cancelling the event could prevent the check-box from being checked.</p>
+
+<p>For example, imagine a group (a button) which has a child (a label). When the label is clicked, capture listeners are fired. Usually there are none. Next, the label’s normal listeners are notified. The label is both the target and the listener actor. If the event was not stopped, the button gets the event and its normal listeners are notified. The label is the target and the button is the listener actor. This continues up to the root. This system allows a single listener on a parent to handle events on its children.</p>
+
+<h3 id="inputlistener">InputListener</h3>
+
+<p>EventListeners are added to actors to be notified about events. EventListener is an interface with a <code class="language-plaintext highlighter-rouge">handle(Event)</code> method. Classes that implement the EventListener interface use <code class="language-plaintext highlighter-rouge">instanceof</code> to determine whether they should handle the event. For most types of events, specific listener classes are provided for convenience. For example, <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/scenes/scene2d/InputListener.html">InputListener</a> is provided for receiving and handling InputEvents. An actor just needs to add an InputListener to start receiving input events. InputListener has several methods that may be overridden, and two are shown below:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">actor</span><span class="o">.</span><span class="na">setBounds</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">texture</span><span class="o">.</span><span class="na">getWidth</span><span class="o">(),</span> <span class="n">texture</span><span class="o">.</span><span class="na">getHeight</span><span class="o">());</span>
+
+<span class="n">actor</span><span class="o">.</span><span class="na">addListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">InputListener</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">touchDown</span> <span class="o">(</span><span class="nc">InputEvent</span> <span class="n">event</span><span class="o">,</span> <span class="kt">float</span> <span class="n">x</span><span class="o">,</span> <span class="kt">float</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">pointer</span><span class="o">,</span> <span class="kt">int</span> <span class="n">button</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"down"</span><span class="o">);</span>
+		<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">touchUp</span> <span class="o">(</span><span class="nc">InputEvent</span> <span class="n">event</span><span class="o">,</span> <span class="kt">float</span> <span class="n">x</span><span class="o">,</span> <span class="kt">float</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">pointer</span><span class="o">,</span> <span class="kt">int</span> <span class="n">button</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"up"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">});</span>
+</code></pre></div></div>
+
+<p>Note that the actor must specify its bounds in order to receive input events within those bounds.</p>
+
+<p>To handle touch and mouse events, override <code class="language-plaintext highlighter-rouge">touchDown</code>, <code class="language-plaintext highlighter-rouge">touchDragged</code>, and <code class="language-plaintext highlighter-rouge">touchUp</code>. The touchDragged and touchUp events will only be received if touchDown returns true. Also, the touchDragged and touchUp events will be received even if they do not occur over the actor. This simplifies the most common touch event use cases.</p>
+
+<p>To handle enter and exit events when a touch and or the mouse enters or exits an actor, override <code class="language-plaintext highlighter-rouge">enter</code> or <code class="language-plaintext highlighter-rouge">exit</code>.</p>
+
+<p>To handle mouse movement when no mouse button is down (which only occurs on the desktop), override the <code class="language-plaintext highlighter-rouge">mouseMoved</code> method.</p>
+
+<p>To handle mouse scrolling (which only occurs on the desktop), override the <code class="language-plaintext highlighter-rouge">scrolled</code> method. This will only be called on the actor with scroll focus, which is set and cleared by calling setScrollFocus on the stage.</p>
+
+<p>To handle key input, override the <code class="language-plaintext highlighter-rouge">keyDown</code>, <code class="language-plaintext highlighter-rouge">keyUp</code>, and <code class="language-plaintext highlighter-rouge">keyTyped</code> methods. These will only be called on the actor with keyboard focus, which is set and cleared by calling <code class="language-plaintext highlighter-rouge">setKeyboardFocus</code> on the stage.</p>
+
+<p>If <code class="language-plaintext highlighter-rouge">setTouchable(false)</code> or <code class="language-plaintext highlighter-rouge">setVisible(false)</code> is called on an actor, it will not receive input events.</p>
+
+<h3 id="other-listeners">Other listeners</h3>
+
+<p>Other listeners are provided for common handling of input events. ClickListener has a boolean that is true when a touch or mouse button is pressed over the actor and a <code class="language-plaintext highlighter-rouge">clicked</code> method that is called when the actor is clicked. ActorGestureListener detects tap, longPress, fling, pan, zoom, and pinch gestures on an actor.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">actor</span><span class="o">.</span><span class="na">addListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">ActorGestureListener</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">longPress</span> <span class="o">(</span><span class="nc">Actor</span> <span class="n">actor</span><span class="o">,</span> <span class="kt">float</span> <span class="n">x</span><span class="o">,</span> <span class="kt">float</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"long press "</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="s">", "</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
+		<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">fling</span> <span class="o">(</span><span class="nc">InputEvent</span> <span class="n">event</span><span class="o">,</span> <span class="kt">float</span> <span class="n">velocityX</span><span class="o">,</span> <span class="kt">float</span> <span class="n">velocityY</span><span class="o">,</span> <span class="kt">int</span> <span class="n">button</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"fling "</span> <span class="o">+</span> <span class="n">velocityX</span> <span class="o">+</span> <span class="s">", "</span> <span class="o">+</span> <span class="n">velocityY</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">zoom</span> <span class="o">(</span><span class="nc">InputEvent</span> <span class="n">event</span><span class="o">,</span> <span class="kt">float</span> <span class="n">initialDistance</span><span class="o">,</span> <span class="kt">float</span> <span class="n">distance</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"zoom "</span> <span class="o">+</span> <span class="n">initialDistance</span> <span class="o">+</span> <span class="s">", "</span> <span class="o">+</span> <span class="n">distance</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">});</span>
+</code></pre></div></div>
+
+<h2 id="actions">Actions</h2>
+
+<p>Each actor has a list of actions. These are updated each frame by the Actor <code class="language-plaintext highlighter-rouge">act</code> method. Many types of actions are included with libgdx. These can be instantiated, configured, and added to an actor. When the action is complete, it will automatically be removed from the actor.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">MoveToAction</span> <span class="n">action</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MoveToAction</span><span class="o">();</span>
+<span class="n">action</span><span class="o">.</span><span class="na">setPosition</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
+<span class="n">action</span><span class="o">.</span><span class="na">setDuration</span><span class="o">(</span><span class="n">duration</span><span class="o">);</span>
+<span class="n">actor</span><span class="o">.</span><span class="na">addAction</span><span class="o">(</span><span class="n">action</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Check out <a href="https://libgdxinfo.wordpress.com/basic_action/">LibGDX.info</a> for a tutorial on Actions</p>
+
+<h3 id="action-pooling">Action pooling</h3>
+
+<p>To avoid allocating a new action each time it is needed, a pool can be used:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Pool</span><span class="o">&lt;</span><span class="nc">MoveToAction</span><span class="o">&gt;</span> <span class="n">pool</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Pool</span><span class="o">&lt;</span><span class="nc">MoveToAction</span><span class="o">&gt;()</span> <span class="o">{</span>
+	<span class="kd">protected</span> <span class="nc">MoveToAction</span> <span class="nf">newObject</span> <span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">MoveToAction</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">};</span>
+<span class="nc">MoveToAction</span> <span class="n">action</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="na">obtain</span><span class="o">();</span>
+<span class="n">action</span><span class="o">.</span><span class="na">setPool</span><span class="o">(</span><span class="n">pool</span><span class="o">);</span>
+<span class="n">action</span><span class="o">.</span><span class="na">setPosition</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
+<span class="n">action</span><span class="o">.</span><span class="na">setDuration</span><span class="o">(</span><span class="n">duration</span><span class="o">);</span>
+<span class="n">actor</span><span class="o">.</span><span class="na">addAction</span><span class="o">(</span><span class="n">action</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>When the action is complete, it is removed from the actor and put back in the pool for reuse. The above code is quite verbose though. The Actions class (note the plural) provides convenience methods. It can provide pooled actions:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">MoveToAction</span> <span class="n">action</span> <span class="o">=</span> <span class="nc">Actions</span><span class="o">.</span><span class="na">action</span><span class="o">(</span><span class="nc">MoveToAction</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="n">action</span><span class="o">.</span><span class="na">setPosition</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
+<span class="n">action</span><span class="o">.</span><span class="na">setDuration</span><span class="o">(</span><span class="n">duration</span><span class="o">);</span>
+<span class="n">actor</span><span class="o">.</span><span class="na">addAction</span><span class="o">(</span><span class="n">action</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Even better, the Actions class has methods that return a pooled and configured action.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">actor</span><span class="o">.</span><span class="na">addAction</span><span class="o">(</span><span class="nc">Actions</span><span class="o">.</span><span class="na">moveTo</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">duration</span><span class="o">));</span>
+</code></pre></div></div>
+
+<p>The Actions class has many of these convenience methods for completely configuring any of the built in actions using a single method call. This can be made even simpler by using a static import, which allows the static methods to be referenced on Actions without specifying “Actions.” each time. Note that Eclipse will not add a static import for you, you must add it yourself.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span class="n">com</span><span class="o">.</span><span class="na">badlogic</span><span class="o">.</span><span class="na">gdx</span><span class="o">.</span><span class="na">scenes</span><span class="o">.</span><span class="na">scene2d</span><span class="o">.</span><span class="na">actions</span><span class="o">.</span><span class="na">Actions</span><span class="o">.*;</span>
+<span class="o">...</span>
+<span class="n">actor</span><span class="o">.</span><span class="na">addAction</span><span class="o">(</span><span class="n">moveTo</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">duration</span><span class="o">));</span>
+</code></pre></div></div>
+
+<h3 id="complex-actions">Complex actions</h3>
+
+<p>More complex actions can be built by running actions at the same time or in sequence. ParallelAction has a list of actions and runs them at the same time. SequenceAction has a list of actions and runs them one after another. Use of the static import for the Actions class makes defining complex actions very easy:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">actor</span><span class="o">.</span><span class="na">addAction</span><span class="o">(</span><span class="n">sequence</span><span class="o">(</span><span class="n">moveTo</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">2</span><span class="o">),</span> <span class="n">color</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">,</span> <span class="mi">6</span><span class="o">),</span> <span class="n">delay</span><span class="o">(</span><span class="mf">0.5f</span><span class="o">),</span> <span class="n">rotateTo</span><span class="o">(</span><span class="mi">180</span><span class="o">,</span> <span class="mi">5</span><span class="o">)));</span>
+</code></pre></div></div>
+
+<h3 id="action-completion">Action completion</h3>
+
+<p>To run code when an action is complete, a sequence with a RunnableAction can be used:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">actor</span><span class="o">.</span><span class="na">addAction</span><span class="o">(</span><span class="n">sequence</span><span class="o">(</span><span class="n">fadeIn</span><span class="o">(</span><span class="mi">2</span><span class="o">),</span> <span class="n">run</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span> <span class="o">()</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Action complete!"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">})));</span>
+</code></pre></div></div>
+
+<h3 id="interpolation">Interpolation</h3>
+
+<p>The tweening curve can be set for actions that manipulate an actor over time. This is done by giving the action an instance of Interpolation. The Interpolation class has many static fields for convenience, or you can write your own. See <a href="https://github.com/libgdx/libgdx/blob/master/tests/gdx-tests/src/com/badlogic/gdx/tests/InterpolationTest.java">InterpolationTest</a> for an interactive demo of each interpolation.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">MoveToAction</span> <span class="n">action</span> <span class="o">=</span> <span class="nc">Actions</span><span class="o">.</span><span class="na">action</span><span class="o">(</span><span class="nc">MoveToAction</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="n">action</span><span class="o">.</span><span class="na">setPosition</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
+<span class="n">action</span><span class="o">.</span><span class="na">setDuration</span><span class="o">(</span><span class="n">duration</span><span class="o">);</span>
+<span class="n">action</span><span class="o">.</span><span class="na">setInterpolation</span><span class="o">(</span><span class="nc">Interpolation</span><span class="o">.</span><span class="na">bounceOut</span><span class="o">);</span>
+<span class="n">actor</span><span class="o">.</span><span class="na">addAction</span><span class="o">(</span><span class="n">action</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>The Actions class has methods that can take an interpolation and a static import can be used to more easily access the Interpolation static fields. Here the <code class="language-plaintext highlighter-rouge">bounceOut</code> and <code class="language-plaintext highlighter-rouge">swing</code> interpolations are used:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span class="n">com</span><span class="o">.</span><span class="na">badlogic</span><span class="o">.</span><span class="na">gdx</span><span class="o">.</span><span class="na">scenes</span><span class="o">.</span><span class="na">scene2d</span><span class="o">.</span><span class="na">actions</span><span class="o">.</span><span class="na">Actions</span><span class="o">.*;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">com</span><span class="o">.</span><span class="na">badlogic</span><span class="o">.</span><span class="na">gdx</span><span class="o">.</span><span class="na">math</span><span class="o">.</span><span class="na">Interpolation</span><span class="o">.*;</span>
+<span class="o">...</span>
+<span class="n">actor</span><span class="o">.</span><span class="na">addAction</span><span class="o">(</span><span class="n">parallel</span><span class="o">(</span><span class="n">moveTo</span><span class="o">(</span><span class="mi">250</span><span class="o">,</span> <span class="mi">250</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="n">bounceOut</span><span class="o">),</span> <span class="n">color</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">,</span> <span class="mi">6</span><span class="o">),</span> <span class="n">delay</span><span class="o">(</span><span class="mf">0.5f</span><span class="o">),</span> <span class="n">rotateTo</span><span class="o">(</span><span class="mi">180</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="n">swing</span><span class="o">)));</span>
+<span class="n">actor</span><span class="o">.</span><span class="na">addAction</span><span class="o">(</span><span class="n">forever</span><span class="o">(</span><span class="n">sequence</span><span class="o">(</span><span class="n">scaleTo</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mf">0.5f</span><span class="o">),</span> <span class="n">scaleTo</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mf">0.5f</span><span class="o">),</span> <span class="n">delay</span><span class="o">(</span><span class="mf">0.5f</span><span class="o">))));</span>
+</code></pre></div></div>
+
+<h3 id="external-links">External Links</h3>
+
+<ul>
+  <li><a href="https://www.netthreads.co.uk/2012/01/31/libgdx-example-of-using-scene2d-actions-and-event-handling/">netthreads</a> A fully documented scene2d example game.</li>
+  <li><a href="https://github.com/broken-e/gdx-ui-app">gdx-ui-app</a> A library on top of scene2d for easier development.</li>
+  <li><a href="https://jvm-gaming.org/t/libgdx-actor-to-use-or-not-to-use-or-when-to-use/41938/7">Should I use scene2d for my game?</a></li>
+  <li><a href="https://theinvader360.blogspot.co.uk/2013/05/street-race-swipe-libgdx-scene2d.html">Street Race game tutorial</a></li>
+</ul>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

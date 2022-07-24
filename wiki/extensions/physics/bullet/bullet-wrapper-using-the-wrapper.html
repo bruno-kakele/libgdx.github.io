@@ -1,0 +1,642 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Bullet Wrapper Using the wrapper - libGDX</title>
+
+  <meta name="description" content="Initializing Bullet Before you can use Bullet, you’ll need to load the libraries. This can be done by adding the following line in your create method: Bullet.init(); Be aware not...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Bullet Wrapper Using the wrapper">
+<meta property="og:url" content="https://libgdx.com/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">
+
+
+  <meta property="og:description" content="Initializing Bullet Before you can use Bullet, you’ll need to load the libraries. This can be done by adding the following line in your create method: Bullet.init(); Be aware not...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Bullet Wrapper Using the wrapper
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <h2 id="initializing-bullet">Initializing Bullet</h2>
+
+<p>Before you can use Bullet, you’ll need to load the libraries. This can be done by adding the following line in your create method:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Bullet</span><span class="o">.</span><span class="na">init</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>Be aware not to use bullet before it is initialized. For example, the following will result in an error because the <code class="language-plaintext highlighter-rouge">btGhostPairCallback</code> is created before the library is loaded.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">InvokeRuntimeExceptionTest</span> <span class="o">{</span>
+  <span class="kd">final</span> <span class="kd">static</span> <span class="n">btGhostPairCallback</span> <span class="n">ghostPairCallback</span> <span class="o">=</span> <span class="k">new</span> <span class="n">btGhostPairCallback</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="working-with-bullet-wrapper">Working with Bullet wrapper</h2>
+<p>The wrapper tends to follow the original bullet class names. Meaning that most classes are prefixed with “bt”. There are a few exceptions on this, which are mostly nested structs. These are custom implemented directly into the <code class="language-plaintext highlighter-rouge">com.badlogic.gdx.physics.bullet</code> package. Unfortunately some nested structs and some base classes are not suitable for a one on one translation. See the custom classes section for more information on that. If you find a class that is missing you can post it on the forums or issue tracker (https://github.com/libgdx/libgdx/issues), so it can be added to the wrapper.</p>
+
+<h2 id="callbacks">Callbacks</h2>
+
+<p>Callbacks require some special attention. By default the wrapper only supports a one way interaction (from Java to C++). Callback interfaces, where C++ needs to call Java code are custom implemented. If you find a callback interface that isn’t implemented yet, you can post it on the forums so it can be added to the wrapper.</p>
+
+<p>List of callback interfaces (might not be complete):</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">LocalShapeInfo</code></li>
+  <li><code class="language-plaintext highlighter-rouge">LocalRayResult</code></li>
+  <li><code class="language-plaintext highlighter-rouge">RayResultCallback</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ClosestRayResultCallback</code></li>
+  <li><code class="language-plaintext highlighter-rouge">AllHitsRayResultCallback</code></li>
+  <li><code class="language-plaintext highlighter-rouge">LocalConvexResult</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ConvexResultCallback</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ClosestConvexResultCallback</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ContactResultCallback</code></li>
+  <li><code class="language-plaintext highlighter-rouge">btMotionState</code></li>
+  <li><code class="language-plaintext highlighter-rouge">btIDebugDraw</code></li>
+  <li><code class="language-plaintext highlighter-rouge">InternalTickCallback</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ContactListener</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ContactCache</code></li>
+</ul>
+
+<h2 id="properties">Properties</h2>
+<p>Properties are encapsulated by getter and setter methods. The naming of the getter and setter methods omits the <code class="language-plaintext highlighter-rouge">m_</code> prefix. For example, the <code class="language-plaintext highlighter-rouge">m_collisionObject</code> member of the native class <code class="language-plaintext highlighter-rouge">btCollisionObjectWrapper</code> is implemented as <code class="language-plaintext highlighter-rouge">getCollisionObject()</code> and <code class="language-plaintext highlighter-rouge">setCollisionObject(...)</code>.</p>
+
+<h2 id="creating-and-destroying-objects">Creating and destroying objects</h2>
+<p>Every time you create a bullet class in Java it also creates the corresponding class in C++. While the Java object is maintained by the garbage collector, the C++ object isn’t. To avoid having orphaned C++ objects resulting in memory leaks, the C++ object is by default automatically destroyed when the Java object is destroyed by the garbage collector.</p>
+
+<p>While this might be useful in some cases, it’s merely a fail-safe and you shouldn’t rely on it. Since you can’t control the garbage collector, you can’t control <em>if</em>, <em>when</em> and <em>in which order</em> the objects are actually being destroyed. Therefore the wrapper logs an error when an object is automatically destroyed by the garbage collector. You can disable this error logging using the second argument of the <code class="language-plaintext highlighter-rouge">Bullet.init()</code> method, but you should preferably use the method in the following paragraph.</p>
+
+<p>In order to ensure correct garbage collection you should keep a reference to every object you create until it’s not needed anymore and then destroy it yourself. You can destroy the C++ object by calling the <code class="language-plaintext highlighter-rouge">.dispose()</code> method on the Java object, after which you should remove all references to the Java object since it’s unusable after that.</p>
+
+<p>The above is only true for the objects you are responsible of, which are all Bullet classes you create with the <code class="language-plaintext highlighter-rouge">new</code> keyword as well as classes you create using helper methods. You don’t have to dispose objects that are returned by regular methods or provided to you in callback methods.</p>
+
+<h2 id="referencing-objects">Referencing objects</h2>
+<p>As stated above, you should keep a reference to every Bullet class and call the dispose method when it’s no longer needed. When your application becomes more complex and objects are shared amongst multiple other objects, it can become difficult to keep track of references. Therefore the bullet wrapper support reference counting.</p>
+
+<p>Reference counting is disabled by default. To enable it, call <code class="language-plaintext highlighter-rouge">Bullet.init();</code> with the first argument set to true:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Bullet</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>When using reference counting, you must call the <code class="language-plaintext highlighter-rouge">obtain()</code> method on each object you need to reference. When you no longer need to reference an object, you must call the <code class="language-plaintext highlighter-rouge">release()</code> method. The release method will dispose the object if it’s doesn’t have any more references to it.</p>
+
+<p>Some wrapper classes help you in managing references. For example the <code class="language-plaintext highlighter-rouge">btCompoundShape</code> class obtains a reference to all its child shapes and releases them when it is disposed.</p>
+
+<h2 id="extending-classes">Extending classes</h2>
+<p>You can extend the bullet classes, but it’s recommended not to do so except for callback classes (in which case you should only override the intended methods). The information you add to a class is not available in C++. Furthermore the result of any method of the bullet wrapper that returns a class you’ve overridden will not implement that class. For example:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">btCollisionShape</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">collisionObjectA</span><span class="o">.</span><span class="na">getCollisionShape</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>This will create a new Java btCollisionShape class which doesn’t implement any extended class.</p>
+
+<p>There is one exception to this for btCollisionObject, where the wrapper tries to reuse the same Java class. Furthermore the Java implementation of the btCollisionObject class adds a <code class="language-plaintext highlighter-rouge">userData</code> member which can be used to attach additional data to the object. To accomplish this the wrapper maintains an array with references to all btCollisionObject instances. You can access that array using the static field <code class="language-plaintext highlighter-rouge">btCollisionObject.instances</code>. Check the btCollisionObject <code class="language-plaintext highlighter-rouge">./Bullet Wrapper: Custom classes#btcollisionobject</code> section for detailed information on this.</p>
+
+<p>The upcast methods are not present because of a <a href="https://code.google.com/archive/p/libgdx/issues/1453">issue</a>. There is no need for them for classes that are created in java. These classes can directly be casted.</p>
+
+<h2 id="comparing-classes">Comparing classes</h2>
+<p>You can compare wrapper classes using the <code class="language-plaintext highlighter-rouge">equals()</code> method, which checks if the classes both wrap the same native class. To get the pointer to the underlying C++ class you can use the <code class="language-plaintext highlighter-rouge">getCPointer</code> method of the specific object. You can also compare these pointers to check whether the Java classes wrap the same C++ class.</p>
+
+<h2 id="common-classes">Common classes</h2>
+<p>Bullet uses some classes also available in the libGDX core. While these bullet classes are available for you to use, the wrapper tries to use the libGDX class where possible. Currently these are implemented for:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><em>Bullet</em></th>
+      <th style="text-align: center"><em>Libgdx</em></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">btVector3</td>
+      <td style="text-align: center">Vector3</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">btQuaternion</td>
+      <td style="text-align: center">Quaternion</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">btMatrix3x3</td>
+      <td style="text-align: center">Matrix3</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">btTransform</td>
+      <td style="text-align: center">Matrix4</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">btScalar</td>
+      <td style="text-align: center">float</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><sub>Note that the conversion from Matrix4 to btTransform might lose some information, because btTransform only contains an origin and rotation. In addition, note that btScalar is synonym for the primitive type float.</sub></p>
+
+<p>To avoid creating objects for these common classes, the wrapper reuses the same instances. Therefore, be aware of the following two cases:</p>
+
+<ol>
+  <li>The result of wrapper methods that return such a class are overwritten by the next method that returns the same type:
+```java
+// Wrong method:
+Matrix4 transformA = collisionObjectA.getWorldTransform();
+// transformA now holds the worldTransform of collisionObjectA
+Matrix4 transformB = collisionObjectB.getWorldTransform();
+// transformA and transformB are the same object and now holds the worldTransform of collsionObjectB</li>
+</ol>
+
+<p>// Correct method:
+transformA.set(collisionObjectA.getWorldTransform());
+transformB.set(collisionObjectB.getWorldTransform());</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 2. The arguments of interface callbacks with arguments of such a class are unusable after the call:
+```java
+// Wrong method:
+@Override
+public void setWorldTransform (final Matrix4 worldTrans) {
+	transform = worldTrans;
+}
+// Correct method:
+@Override
+public void setWorldTransform (final Matrix4 worldTrans) {
+	transform.set(worldTrans);
+}
+</code></pre></div></div>
+
+<h2 id="using-arrays">Using arrays</h2>
+<p>Where possible the wrapper uses direct ByteBuffer objects to pass arrays from Java to C++. This avoids copying the array on the call and allows you to share the same byte buffer for both OpenGL ES and Bullet. If needed you can create a new ByteByffer using <code class="language-plaintext highlighter-rouge">BufferUtils.newUnsafeByteBuffer</code>, which you should manually delete using <code class="language-plaintext highlighter-rouge">BufferUtils.disposeUnsafeByteBuffer</code>.</p>
+
+<p>In cases where ByteBuffer can’t be used or is unwanted, a normal array is used. By default this means that the array is copied using iteration from Java to C++ at start of the method and copied back at the end of the method. To avoid this overhead the wrapper tries to use the Java array directly from within C++ where possible using critical arrays. During such method Java garbage collecting is blocked. An example of such method is <code class="language-plaintext highlighter-rouge">btBroadphasePairArray.getCollisionObjects</code>.</p>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

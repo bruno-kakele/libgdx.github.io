@@ -1,0 +1,700 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>libGDX 1.11.0 - libGDX</title>
+
+  <meta name="description" content="We are proud to present a new major release of libGDX: version 1.11.0!">
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="libGDX 1.11.0">
+<meta property="og:url" content="https://libgdx.com/news/2022/05/gdx-1-11">
+
+
+  <meta property="og:description" content="We are proud to present a new major release of libGDX: version 1.11.0!">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/update.jpeg">
+
+
+
+
+
+  <meta property="article:published_time" content="2022-05-11T00:00:00+00:00">
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/news/2022/05/gdx-1-11">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single wide2">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/news/">News</a>
+            </li><li class="masthead__menu-item">
+              <a href="/features/">Features</a>
+            </li><li class="masthead__menu-item">
+              <a href="/showcase/">Showcase</a>
+            </li><li class="masthead__menu-item">
+              <a href="/dev/">Documentation</a>
+            </li><li class="masthead__menu-item">
+              <a href="/community/">Community</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: #000; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/update.jpeg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          libGDX 1.11.0
+
+        
+      </h1>
+      
+        <p class="page__lead">We are proud to present a new major release of libGDX: version 1.11.0!
+</p>
+      
+      
+
+
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-05-11T00:00:00+00:00">May 11, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+        
+        
+        <a href="https://github.com/crykn"><img class="avatar avatar-small" alt="crykn" width="20" height="20" data-proofer-ignore="true" src="https://avatars1.githubusercontent.com/crykn?v=3&s=20" srcset="https://avatars1.githubusercontent.com/crykn?v=3&s=20 1x, https://avatars1.githubusercontent.com/crykn?v=3&s=40 2x, https://avatars1.githubusercontent.com/crykn?v=3&s=60 3x, https://avatars1.githubusercontent.com/crykn?v=3&s=80 4x" /></a>
+        damios
+    
+
+    
+
+    
+  </p>
+
+
+      
+      
+    </div>
+  
+  
+    <span class="page__hero-caption">Photo credit: <a href="https://unsplash.com/photos/cxoR55-bels"><strong>Markus Winkler</strong></a>
+</span>
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="libGDX 1.11.0">
+    <meta itemprop="description" content="We are proud to present a new major release of libGDX: version 1.11.0!">
+    <meta itemprop="datePublished" content="2022-05-11T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p class="notice--primary no-top-margin">If you are looking for past changelogs, check out <a href="/news/changelog/">this</a> page.</p>
+
+<p>Since our last release a little over a year ago, a great deal of work has been done! libGDX 1.11.0 brings improvements and new features in various areas – take a look below to find out more! If you are upgrading from an older version, be sure to also check out the <a href="/news/2021/04/the-ultimate-migration-guide">Ultimate Migration Guide (1.9.10 to 1.10.0)</a>.</p>
+
+<h3 id="lwjgl-3">LWJGL 3!</h3>
+<p>As announced in <a href="/news/2021/07/devlog-7-lwjgl3">Status Report #7</a>, the LWJGL 3 backend is now the default desktop backend. This ensures continued support for newer hardware and JVMs and includes a few other nifty features. Check out the Status Report to see how to <a href="/news/2021/07/devlog-7-lwjgl3#how-can-i-migrate">update your projects</a>, if you haven’t already! We also updated from LWJGL 3.2.3 to <a href="https://github.com/LWJGL/lwjgl3/releases/tag/3.3.1">3.3.1</a>, which adds the long awaited <strong>M1 Mac support</strong>!</p>
+
+<p>Another cool new feature is the <strong><code class="language-plaintext highlighter-rouge">gdx-lwjgl3-glfw-awt-macos</code> extension</strong>. If you add it as a dependency to your desktop project (<code class="language-plaintext highlighter-rouge">api "com.badlogicgames.gdx:gdx-lwjgl3-glfw-awt-macos:$gdxVersion"</code>), LWJGL 3/libGDX must no longer run on the main thread in macOS, which allows AWT to work in parallel, i.e. file dialogs, JFrames, ImageIO, etc. can be used. Moreover, you no longer need to pass the <code class="language-plaintext highlighter-rouge">-XstartOnFirstThread</code> argument when starting a LWJGL 3 app on macOS. See <code class="language-plaintext highlighter-rouge">AwtTestLWJGL</code> in gdx-tests-lwjgl3 for an example. For more information, take a look at <a href="https://github.com/libgdx/libgdx/pull/6772">#6772</a>.</p>
+
+<p>In addition, legacy LWJGL 3 projects must update their <code class="language-plaintext highlighter-rouge">sourceCompatibility</code> to <code class="language-plaintext highlighter-rouge">1.8</code> or higher! Otherwise an error similar to the one below will appear:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Execution failed <span class="k">for </span>task <span class="s1">':desktop:compileJava'</span><span class="nb">.</span>
+<span class="o">&gt;</span> Could not resolve all files <span class="k">for </span>configuration <span class="s1">':desktop:compileClasspath'</span><span class="nb">.</span>
+   <span class="o">&gt;</span> Could not resolve com.badlogicgames.gdx:gdx-backend-lwjgl3:1.11.0.
+     Required by:
+         project :desktop
+      <span class="o">&gt;</span> No matching variant of com.badlogicgames.gdx:gdx-backend-lwjgl3:1.11.0 was found. The consumer was configured to find an API of a library compatible with Java 7, preferably <span class="k">in </span>the form of class files, and its dependencies declared externally but:
+          - Variant <span class="s1">'apiElements'</span> capability com.badlogicgames.gdx:gdx-backend-lwjgl3:1.11.0 declares an API of a library, packaged as a jar, and its dependencies declared externally:
+              - Incompatible because this component declares a component compatible with Java 8 and the consumer needed a component compatible with Java 7
+      <span class="o">[</span>...]
+</code></pre></div></div>
+
+<p>Furthermore:</p>
+<ul>
+  <li>Please note that <code class="language-plaintext highlighter-rouge">Lwjgl3ApplicationConfiguration#useOpenGL3</code> was replaced by <code class="language-plaintext highlighter-rouge">#setOpenGLEmulation</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">LWJGL3Net#openURI</code> does now work on macOS &amp; JDK &gt;= 16; we also added a fallback to <code class="language-plaintext highlighter-rouge">xdg-open</code> on Linux if <code class="language-plaintext highlighter-rouge">Desktop.BROWSE</code> is unavailable</li>
+  <li>Issues with LWJGL 3 and borderless fullscreen were resolved</li>
+  <li>The <code class="language-plaintext highlighter-rouge">AL_DIRECT_CHANNELS_SOFT</code> option is now enabled by default for Sounds and AudioDevices as well; see <a href="https://github.com/libgdx/libgdx/pull/6527">#6527</a></li>
+</ul>
+
+<h3 id="lwjgl-3-angle-extension">LWJGL 3 ANGLE Extension</h3>
+<p><a href="https://twitter.com/badlogicgames">Mario</a> also recently added a LWJGL3 <a href="https://github.com/google/angle">ANGLE</a> extension. It emulates OpenGL ES 2.0 through DirectX (Windows), desktop OpenGL (Linux), and Metal (macOS) and may become the preferred method of rendering on macOS if Apple removes OpenGL support entirely.</p>
+
+<p>To use it, add the <code class="language-plaintext highlighter-rouge">gdx-lwjgl3-angle</code> extension to your <code class="language-plaintext highlighter-rouge">gdx-lwjgl3</code> desktop project. Then call <code class="language-plaintext highlighter-rouge">config.setOpenGLEmulation(GLEmulation.ANGLE_GLES20, 0, 0)</code> on your <code class="language-plaintext highlighter-rouge">Lwjgl3ApplicationConfiguration</code> instance before creating your <code class="language-plaintext highlighter-rouge">Lwjgl3Application</code>. Check out <a href="https://github.com/libgdx/libgdx/pull/6672">#6672</a> for more information.</p>
+
+<p><strong>Pros:</strong></p>
+<ul>
+  <li>Better compatibility with systems that don’t support OpenGL 2 by using DirectX on Windows and Metal on macOS.</li>
+  <li>May fix some OpenGL driver issues.</li>
+</ul>
+
+<p><strong>Cons:</strong></p>
+<ul>
+  <li>Does only support OpenGL ES 2.0, as the macOS ANGLE Metal backend <a href="https://github.com/google/angle#level-of-opengl-es-support-via-backing-renderers">only supports OpenGL ES 2.0</a> at this point in time.</li>
+  <li>Currently contains non-working 32-bit Windows natives (see <a href="https://github.com/libgdx/libgdx/issues/6806">#6806</a>).</li>
+  <li>Doesn’t support window transparency on macOS/Linux.</li>
+  <li>And a few other <a href="https://github.com/libgdx/libgdx/issues?q=is%3Aissue+is%3Aopen+label%3Aangle">bugs</a>, that will need to be ironed out.</li>
+</ul>
+
+<h2 id="a-few-notable-changes">A few notable changes</h2>
+<ul>
+  <li>Updated to <a href="https://github.com/MobiVM/robovm/wiki/Changelog#2316-apr-2022">MobiVM 2.3.16</a> from 2.3.12. This adds iOS 15.4 bindings, native M1 support as well as other fixes and improvements, including Gradle 7 support.</li>
+  <li>The GWT reflection cache was split into two generated classes, which doubles its size! (<a href="https://github.com/libgdx/libgdx/pull/6386">#6386</a>)</li>
+  <li>An octree structure was added; see <a href="https://github.com/libgdx/libgdx/pull/6229">#6229</a></li>
+  <li>Added <code class="language-plaintext highlighter-rouge">NWSEResize</code>, <code class="language-plaintext highlighter-rouge">NESWResize</code>, <code class="language-plaintext highlighter-rouge">AllResize</code>, <code class="language-plaintext highlighter-rouge">NotAllowed</code> and <code class="language-plaintext highlighter-rouge">None</code> system cursors; see <a href="https://github.com/libgdx/libgdx/pull/6756">#6756</a> &amp; <a href="https://github.com/libgdx/libgdx/pull/6822">#6822</a>; and <code class="language-plaintext highlighter-rouge">Graphics#setSystemCursor()</code> now works on Android as well</li>
+  <li>GWT assets can now be hosted on a different URL than the Javascript files themselves (<a href="https://github.com/libgdx/libgdx/pull/6851">#6851</a>)</li>
+</ul>
+
+<h3 id="other-breaking-changes">Other breaking changes</h3>
+<ul>
+  <li>We increased the minimum supported iOS version to 9.0. Update your <code class="language-plaintext highlighter-rouge">Info.plist</code> file if necessary.</li>
+  <li>On Android, we moved the natives loading out of static init block (see <a href="https://github.com/libgdx/libgdx/issues/5795">#5795</a>); this allows users to run code before the initialisation of the natives</li>
+  <li>Shared libraries are now built on Ubuntu 18.04 (up from Ubuntu 16.04) to match the behaviour of LWJGL 3; this may make older Linux operating systems no longer compatible (see <a href="https://github.com/libgdx/libgdx/pull/6659">#6659</a>)</li>
+  <li>The built-in font files <code class="language-plaintext highlighter-rouge">arial-15.fnt</code> and <code class="language-plaintext highlighter-rouge">arial-15.png</code> have been replaced with <code class="language-plaintext highlighter-rouge">lsans-15.fnt</code> and <code class="language-plaintext highlighter-rouge">lsans-15.png</code>. The new files should match the old ones very closely, but there is the possibility that it may change some text layout that uses the built-in font. Code that expects arial-15 assets to be present must change to lsans-15! (<a href="https://github.com/libgdx/libgdx/pull/6727">#6727</a>)</li>
+  <li><code class="language-plaintext highlighter-rouge">AndroidApplicationConfiguration#hideStatusBar</code> was removed; see <a href="https://github.com/libgdx/libgdx/pull/6683">#6683</a></li>
+</ul>
+
+<h3 id="full-changelog">Full changelog</h3>
+<p class="notice--info">Updating your Gradle project is straight-forward: Check out the instructions <a href="/wiki/articles/updating-libgdx">on the wiki</a>! The latest version of dependencies can, as always, be found <a href="/dev/versions/">here</a>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- [BREAKING CHANGE] iOS: Increased min supported iOS version to 9.0. Update your Info.plist file if necessary.
+- [BREAKING CHANGE] Android Moved natives loading out of static init block, see #5795
+- [BREAKING CHANGE] Linux: Shared libraries are now built on Ubuntu 18.04 (up from Ubuntu 16.04)
+- [BREAKING CHANGE] The built-in font files arial-15.fnt and arial-15.png have been replaced with lsans-15.fnt and lsans-15.png; this may change some text layout that uses the built-in font, and code that expects arial-15 assets to be present must change to lsans-15.
+- [BREAKING CHANGE] Legacy LWJGL3 projects must update the sourceCompatibility to 1.8 or higher.
+- [BREAKING CHANGE] Android Removed hideStatusBar configuration, see #6683
+- [BREAKING CHANGE] Lwjgl3ApplicationConfiguration#useOpenGL3 was replaced by #setOpenGLEmulation
+- [CONTRIBUTING] Removed Maven and Ant build systems. libGDX is now solely built with Gradle. See https://libgdx.com/dev/from-source/ for updated build instructions.
+- [CONTRIBUTING] Gradle build now takes -PjavaVersion=7|8|9... to specify the Java version against which to compile libGDX. Default is Java 7 for everything, except the LWJGL3 backend, which is compiled for Java 8.
+- LWJGL3 extension: Added gdx-lwjgl3-glfw-awt-macos extension. Fixes GLFW in such a way, that the LWJGL3/libGDX must no longer run on the main thread in macOS, which allows AWT to work in parallel, i.e. file dialogs, JFrames, ImageIO, etc. You no longer need to pass `-XstartOnFirstThread` when starting an LWJGL3 app on macOS. See `AwtTestLWJGL` in gdx-tests-lwjgl3. For more information, see https://github.com/libgdx/libgdx/pull/6772
+- API Addition: Added LWJGL3 ANGLE support for x86_64 Windows, Linux, and macOS. Emulates OpenGL ES 2.0 through DirectX (Windows), desktop OpenGL (Linux), and Metal (macOS). May become the preferred method of rendering on macOS if Apple removes OpenGL support entirely. May fix some OpenGL driver issues. More information here: https://github.com/libgdx/libgdx/pull/6672
+- iOS: Update to MobiVM 2.3.16
+- Update to LWJGL 3.3.1; adds support for M1 Macs
+- API Addition: ObjLoader now supports ambientColor, ambientTexture, transparencyTexture, specularTexture and shininessTexture
+- API Addition: PointSpriteParticleBatch blending is now configurable.
+- TOOLS Features: Blending mode and sort mode can be changed in Flame particle 3D editor.
+- API Addition: Polygon methods setVertex, getVertex, getVertexCount, getCentroid.
+- API Addition: TMX built-in tile property "type" is now supported.
+- API Addition: Octree structure.
+- API Addition: Added StringBuilder#toStringAndClear() method.
+- FirstPersonCameraController keys mapping is now configurable
+- Fix: GlyphLayout: Several fixes for color markup runs with multi-line or wrapping texts
+- API change: GlyphLayout#GlyphRun is now one GlyphRun per line. "color" was removed from GlyphRun and is now handled by GlyphLayout.
+- Gdx Setup Tool: Target Android API 30 and update AGP plugin to 4.1.3
+- API Fix: Sound IDs are now properly removed; this prevents changes to music instances with the same ID
+- API Fix: LWJGL3Net#openURI does now work on macOS &amp; JDK &gt;= 16
+- API Fix: Fixed a possible deadlock with AssetManager#dispose() and #clear()
+- API Change: Enable the AL_DIRECT_CHANNELS_SOFT option for Sounds and AudioDevices as well to fix stereo sound
+- API Addition: CameraInputController#setInvertedControls(boolean)
+- API Removal: AnimatedTiledMapTile#frameCount
+- LWJGL 3 is now the default desktop backend. If you want to port your existing applications, take a look here: https://gist.github.com/crykn/eb37cb4f7a03d006b3a0ecad27292a2d
+- Brought the official and third-party extensions in gdx-setup up to date. Removed some unmaintained ones and added gdx-websockets &amp; jbump.
+- API Fix: Escaped characters in XML attributes are now properly un-escaped
+- Bug Fix: AssetManager backslash conversion removed - fixes use of filenames containing backslashes
+- gdx-setup now places the assets directory in project root instead of android or core. See advanced settings (UI) or arguments (command line) if you don't want it in root.
+- API Fix: Resolved issues with LWJGL 3 and borderless fullscreen
+- API Addition: GeometryUtils,polygons isCCW, ensureClockwise, reverseVertices
+- API Addition: Added FreeTypeFontGenerator#hasCharGlyph method.
+- API Fix: Pool discard method now resets object by default. This fixes the known issue about Pool in libGDX 1.10.0.
+- API Addition: Split GWT reflection cache into two generated classes
+- API Fix: Fix Box2D memory leak with ropes on GWT
+- API Fix: Fix NPE in Type#getDeclaredAnnotation
+- API Addition: Add pause/resume methods to AudioDevice
+- API Fix: Protection against NullPointerException in World#destroyBody()
+- API Fix: Prevent repeated mipmap generation in FileTextureArrayData
+- API Fix: Fix issue with camera reference in CameraGroupStrategy’s default sorter
+- API Fix: Move vertex array index buffer limit to backends to fix issue with numIndices parameter
+- API Fix: TexturePacker: Fix wrong Y value when using padding
+- API Fix: Lwjgl3Net: Add fallback to xdg-open on Linux if Desktop.BROWSE is unavailable
+- API Addition: Add NWSEResize, NESWResize, AllResize, and NotAllowed and None SystemCursors
+- API Addition: GWTApplication#getJavaHeap and getNativeHeap are now supported
+- API Addition: Box2D Shape now implements Disposable
+- API Addition: Added ChainShape#clear method
+- API Addition: Adds Tooltip#setTouchIndependent; see #6758
+- API Addition: Emulate Timer#isEmpty on GWT
+- API Addition: Bits add copy constructor public Bits (Bits bitsToCpy)
+- API Addition: Added List#drawSelection().
+- API Addition: GwtApplicationConfiguration#xrCompatible
+- API Fix: setSystemCursor() now works on Android
+- API Fix: getDisplayMode() is now more accurate on Android and GWT.
+- API Addition: JsonValue#iterator(String) to more easily iterate a child that may not exist.
+- API Addition: Added ExtendViewport#setScaling, eg for use with Scaling.contain.
+- API Addition: Added getBoundingRectangle() to Polyline
+- API Addition: ShapeRenderer#check() has now protected visibility
+- API Addition: Add ability to host GWT module on a different domain than the site, see #6851
+- Various minor Scene2D improvements
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+         
+
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-05-11T00:00:00+00:00">May 11, 2022</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=libGDX+1.11.0%20https%3A%2F%2Flibgdx.com%2Fnews%2F2022%2F05%2Fgdx-1-11" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flibgdx.com%2Fnews%2F2022%2F05%2Fgdx-1-11" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flibgdx.com%2Fnews%2F2022%2F05%2Fgdx-1-11" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/news/2022/02/jam-march-2022" class="pagination--pager" title="libGDX Jam March 2022
+">Previous</a>
+    
+    
+      <a href="/news/2022/06/jam-june-2022" class="pagination--pager" title="libGDX Jam June 2022
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You May Also Enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/posts/2022-06-01/header.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/news/2022/06/jam-june-2022" rel="permalink">libGDX Jam June 2022
+</a>
+      
+    </h2>
+    
+
+
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-06-01T00:00:00+00:00">June 1, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">With our 21st collaboration, the libGDX Jam continues the time honoured tradition of making awesome games using the best framework out there. We encourage ca...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/posts/2022-02-28/header.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/news/2022/02/jam-march-2022" rel="permalink">libGDX Jam March 2022
+</a>
+      
+    </h2>
+    
+
+
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-02-28T00:00:00+00:00">February 28, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">With our 20th collaboration, the libGDX Jam continues the time honoured tradition of making awesome games using the best framework out there. We encourage ca...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/jams.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/news/2022/01/2022-jam-dates" rel="permalink">Jam Schedule 2022
+</a>
+      
+    </h2>
+    
+
+
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-01-20T00:00:00+00:00">January 20, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">It’s time to announce our game jam schedule for 2022!
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/posts/2022-01-12/header.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/news/2022/01/devlog-8-wiki-migration" rel="permalink">Status Report #8: Wiki Migration
+</a>
+      
+    </h2>
+    
+
+
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-01-12T00:00:00+00:00">January 12, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">We moved our GitHub wiki to the libGDX website!
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/libgdx/libgdx" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="/community/discord/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-discord" aria-hidden="true"></i> Discord</a></li>
+        
+      
+        
+          <li><a href="/wiki/" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Wiki</a></li>
+        
+      
+        
+          <li><a href="https://www.patreon.com/libgdx" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-patreon" aria-hidden="true"></i> Patreon</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 libGDX &#8226; <a href="/legal/">Legal</a> &#8226; <a href="/history/">History</a> &#8226; <a href="/brand/">Branding Guidelines</a>
+</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

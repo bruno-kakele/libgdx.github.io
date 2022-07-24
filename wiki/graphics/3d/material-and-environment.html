@@ -1,0 +1,730 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Material and environment - libGDX</title>
+
+  <meta name="description" content="In practice, when rendering, you are specifying what (the shape) to render and how (the material) to render. The shape is specified using the Mesh (or more commonly the MeshPart),...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Material and environment">
+<meta property="og:url" content="https://libgdx.com/wiki/graphics/3d/material-and-environment">
+
+
+  <meta property="og:description" content="In practice, when rendering, you are specifying what (the shape) to render and how (the material) to render. The shape is specified using the Mesh (or more commonly the MeshPart),...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/graphics/3d/material-and-environment">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Material and environment
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/graphics/3d/material-and-environment.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/graphics/3d/material-and-environment.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <p>In practice, when rendering, you are specifying what (the shape) to render and how (the material) to render. The shape is specified using the Mesh (or more commonly the MeshPart), which defines the vertices attributes for the shader. The material is most commonly used to specify the uniform values for the shader.</p>
+
+<p>Uniforms can be grouped into model specific (e.g. the texture applied or whether or not to use blending) and environmental uniforms (e.g. the lights being applied or an environment cubemap). Likewise the 3D api allows you to specify a material and environment.</p>
+
+<h2 id="materials">Materials</h2>
+
+<p>Materials are model (or modelinstance) specific. You can access them by index <code class="language-plaintext highlighter-rouge">model.materials.get(0)</code>, by name <code class="language-plaintext highlighter-rouge">model.getMaterial("material3")</code> or by nodepart <code class="language-plaintext highlighter-rouge">model.nodes.get(0).parts(0).material</code>. Materials are copied when creating a ModelInstance, meaning that changing the material of a ModelInstance will not affect the original Model or other ModelInstances.</p>
+
+<p>The Material class extends the Attributes class, see below for more information about Attributes.</p>
+
+<h2 id="environment">Environment</h2>
+
+<p>An Environment contains the uniform values specific for a location. For example, the lights are part of the Environment. Simple applications might use only one Environment, while more complex applications might use multiple environments depending on the location of a ModelInstance. A ModelInstance (or Renderable) can only contain one Environment though.</p>
+
+<p>The Environment class extends the Attributes class, see below for more information about Attributes.</p>
+
+<h3 id="lights">Lights</h3>
+
+<p>Lights use attributes as well, which means that you can attach a light to either an environment or a material. Adding a light to an environment can be done using the <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/g3d/Environment.html#add-com.badlogic.gdx.graphics.g3d.environment.BaseLight-"><code class="language-plaintext highlighter-rouge">environment.add(light)</code></a> method. However, you can also use the <code class="language-plaintext highlighter-rouge">DirectionalLightsAttribute</code>, <code class="language-plaintext highlighter-rouge">PointLightsAttribute</code> and <code class="language-plaintext highlighter-rouge">SpotLightsAttribute</code> attributes (see below). Each of these attributes has an array which you can use to attach one or more lights to it. Note however that you typically can only use one of both. If you add a light to the <code class="language-plaintext highlighter-rouge">PointLightsAttribute</code> of the environment and then add another light to the <code class="language-plaintext highlighter-rouge">PointLightsAttribute</code> of the material, then the <code class="language-plaintext highlighter-rouge">DefaultShader</code> will ignore the point light(s) added to the environment. Lights are always used by reference.</p>
+
+<p>Lights should be sorted by importance. Usually this means that lights should be sorted on distance. The <code class="language-plaintext highlighter-rouge">DefaultShader</code> for example by default <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/g3d/shaders/DefaultShader.Config.html#numPointLights">(configurable)</a> only uses the first five point lights for shader lighting. Any remaining lights will be ignored.</p>
+
+<h2 id="attributes">Attributes</h2>
+
+<p>Both the Environment and Material classes extend the Attributes the class. Most commonly, the Attributes class is used to specify uniform values. For example a TextureAttribute can be used to specify an uniform to bound for a shader. However, attributes don’t have to be uniforms, for example DepthTestAttribute is used to alter the opengl state and doesn’t set an uniform.</p>
+
+<p>The Attributes class is most comparable with a Set. It can contain at most one value for each attribute, just like an uniform can only be set to one value. Theoretically both the Material and Environment can contain the same attribute, the actual behavior in this scenario depends on the shader used, but in most cases the Materials attribute will be used instead of the Environment attribute.</p>
+
+<h3 id="attribute-type">Attribute type</h3>
+
+<p>Every attribute has a <code class="language-plaintext highlighter-rouge">type</code> long value, which is a bitmask used to identify the attribute. Therefor a complete material or environment can be represented with a single long, where each bit represents an attribute. Some attribute classes are dedicated to a single type value (bit). Others can be used for multiple type values (bits), in which case you must specify the type on construction. For example:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Attribute</span> <span class="n">attribute</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ColorAttribute</span><span class="o">(</span><span class="nc">ColorAttribute</span><span class="o">.</span><span class="na">Diffuse</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>note that the ColorAttribute class contains a convenience method to do the same:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Attribute</span> <span class="n">attribute</span> <span class="o">=</span> <span class="nc">ColorAttribute</span><span class="o">.</span><span class="na">createDiffuse</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h3 id="using-attributes">Using attributes</h3>
+
+<p>The most common actions for attributes are <code class="language-plaintext highlighter-rouge">set</code>, <code class="language-plaintext highlighter-rouge">has</code>, <code class="language-plaintext highlighter-rouge">remove</code>, and <code class="language-plaintext highlighter-rouge">get</code>.</p>
+
+<p>You can use the <code class="language-plaintext highlighter-rouge">set</code> method to add or change an attribute. If there is already an attribute of the same type if will be first removed, after which the new attribute is added. For example: <code class="language-plaintext highlighter-rouge">material.set(FloatAttribute.createAlphaTest(0.25f));</code></p>
+
+<p>Using the <code class="language-plaintext highlighter-rouge">has</code> method it is possible to check if a specific attribute type is set. For example: <code class="language-plaintext highlighter-rouge">material.has(FloatAttribute.AlphaTest);</code>. It is also possible to check for multiple attributes, for example: <code class="language-plaintext highlighter-rouge">material.has(FloatAttribute.AlphaTest | ColorAttribute.Diffuse);</code>. In which case the <code class="language-plaintext highlighter-rouge">has</code> method will only return <code class="language-plaintext highlighter-rouge">true</code> if all attributes are set. Note that because the <code class="language-plaintext highlighter-rouge">has</code> method uses a bitwise check it is quite fast and can be used prior to e.g. a call to <code class="language-plaintext highlighter-rouge">remove</code> to ensure the attribute is actually set.</p>
+
+<p>With the <code class="language-plaintext highlighter-rouge">remove</code> method you can remove an attribute of a specific type, for example:
+<code class="language-plaintext highlighter-rouge">material.remove(FloatAttribute.AlphaTest);</code>. You can also remove multiple attributes at once, for example: <code class="language-plaintext highlighter-rouge">material.remove(FloatAttribute.AlphaTest | ColorAttribute.Diffuse);</code>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">get</code> method can be used to fetch an attribute of a specific type. For example: <code class="language-plaintext highlighter-rouge">material.get(FloatAttribute.AlphaTest);</code>. If the attribute isn’t set the <code class="language-plaintext highlighter-rouge">get</code> method will return <code class="language-plaintext highlighter-rouge">null</code>. Because the type implies the class, you can safely cast the result without checking: <code class="language-plaintext highlighter-rouge">(FloatAttribute)material.get(FloatAttribute.AlphaTest);</code>. For convenience there’s also a template method: <code class="language-plaintext highlighter-rouge">material.get(FloatAttribute.class, FloatAttribute.AlphaTest);</code>.</p>
+
+<p>Besides that you can also <code class="language-plaintext highlighter-rouge">clear</code> (to remove all attributes), iterate (it implements <code class="language-plaintext highlighter-rouge">Iterable&lt;Attribute&gt;</code>) and compare (it implements <code class="language-plaintext highlighter-rouge">Comparator&lt;Attribute&gt;</code>, however the <code class="language-plaintext highlighter-rouge">same</code> method provides additional options) attributes. The <code class="language-plaintext highlighter-rouge">getMask()</code> method provides access to the mask containing all attributes, for example <code class="language-plaintext highlighter-rouge">material.getMask() &amp; FloatAttribute.AlphaTest == FloatAttribute.AlphaTest</code> is the same as <code class="language-plaintext highlighter-rouge">material.has(FloatAttribute.AlphaTest)</code>.</p>
+
+<h3 id="custom-attribute-types">Custom attribute types</h3>
+
+<p>It is possible to use a standard attribute class for a new custom type. For example when you want to use the ColorAttribute class to specify a custom type of color. There are three things you must consider in that case:</p>
+
+<ol>
+  <li>Name your attribute type. Each attribute type must have an <em>unique</em> alias (name). You might want to (but don’t have to) use the uniform name for that. The alias will also be used for debugging, e.g. when calling <code class="language-plaintext highlighter-rouge">attribute.toString()</code>.</li>
+  <li>Register your attribute type. This is to make sure there is only one attribute type for each bit. This can be done only from within the Attribute class or a subclass.</li>
+  <li>Make ColorAttribute accept the custom type. The ColorAttribute class and most other attribute classes checks the type on construction, this allows you to cast attributes without having to check anything other then the type. For example <code class="language-plaintext highlighter-rouge">(ColorAttribute)material.get(ColorAttribute.Diffuse)</code> will always work because ColorAttribute is the only attribute accepting the <code class="language-plaintext highlighter-rouge">ColorAttribute.Diffuse</code> type.</li>
+</ol>
+
+<p>Because of step 2 and 3, you must extend the Attribute class to add a custom attribute type:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomColorTypes</span> <span class="kd">extends</span> <span class="nc">ColorAttribute</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nc">AlbedoColorAlias</span> <span class="o">=</span> <span class="s">"AlbedoColor"</span><span class="o">;</span> <span class="c1">// step 1: name the type</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="kd">static</span> <span class="kt">long</span> <span class="nc">AlbedoColor</span> <span class="o">=</span> <span class="n">register</span><span class="o">(</span><span class="nc">AlbedoColorAlias</span><span class="o">);</span> <span class="c1">// step 2: register the type</span>
+    <span class="kd">static</span> <span class="o">{</span>
+        <span class="nc">Mask</span> <span class="o">|=</span> <span class="nc">AlbedoColor</span><span class="o">;</span> <span class="c1">// step 3: Make ColorAttribute accept the type</span>
+    <span class="o">}</span>
+    <span class="cm">/** Prevent instantiating this class */</span>
+    <span class="kd">private</span> <span class="nf">CustomColorTypes</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>You can then create the custom attribute type using:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Attribute</span> <span class="n">attribute</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ColorAttribute</span><span class="o">(</span><span class="nc">CustomColorTypes</span><span class="o">.</span><span class="na">AlbedoColor</span><span class="o">,</span> <span class="nc">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h3 id="custom-attributes">Custom attributes</h3>
+<p>It is possible to create a custom attribute, in which case the process is not much different from above. You must extend the Attribute class, register at least one type and of course add some data to pass on to the shader. For example to add an attribute to pass a double value to the shader:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DoubleAttribute</span> <span class="kd">extends</span> <span class="nc">Attribute</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nc">MyDouble1Alias</span> <span class="o">=</span> <span class="s">"myDouble1"</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="kd">static</span> <span class="kt">long</span> <span class="nc">MyDouble1</span> <span class="o">=</span> <span class="n">register</span><span class="o">(</span><span class="nc">MyDouble1Alias</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nc">MyDouble2Alias</span> <span class="o">=</span> <span class="s">"myDouble2"</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="kd">static</span> <span class="kt">long</span> <span class="nc">MyDouble2</span> <span class="o">=</span> <span class="n">register</span><span class="o">(</span><span class="nc">MyDouble2Alias</span><span class="o">);</span>
+    <span class="kd">protected</span> <span class="kd">static</span> <span class="kt">long</span> <span class="nc">Mask</span> <span class="o">=</span> <span class="nc">MyDouble1</span> <span class="o">|</span> <span class="nc">MyDouble2</span><span class="o">;</span>
+    <span class="cm">/** Method to check whether the specified type is a valid DoubleAttribute type */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">Boolean</span> <span class="nf">is</span><span class="o">(</span><span class="kd">final</span> <span class="kt">long</span> <span class="n">type</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">type</span> <span class="o">&amp;</span> <span class="nc">Mask</span><span class="o">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">double</span> <span class="n">value</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">DoubleAttribute</span> <span class="o">(</span><span class="kd">final</span> <span class="kt">long</span> <span class="n">type</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">type</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">is</span><span class="o">(</span><span class="n">type</span><span class="o">))</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">GdxRuntimeException</span><span class="o">(</span><span class="s">"Invalid type specified"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nf">DoubleAttribute</span> <span class="o">(</span><span class="kd">final</span> <span class="kt">long</span> <span class="n">type</span><span class="o">,</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">(</span><span class="n">type</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/** copy constructor */</span>
+    <span class="kd">public</span> <span class="nf">DoubleAttribute</span> <span class="o">(</span><span class="nc">DoubleAttribute</span> <span class="n">other</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">(</span><span class="n">other</span><span class="o">.</span><span class="na">type</span><span class="o">,</span> <span class="n">other</span><span class="o">.</span><span class="na">value</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">Attribute</span> <span class="nf">copy</span> <span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">DoubleAttribute</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span> <span class="o">()</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="kt">int</span> <span class="n">prime</span> <span class="o">=</span> <span class="cm">/* pick a prime number and use it here */</span><span class="o">;</span>
+        <span class="kd">final</span> <span class="kt">long</span> <span class="n">v</span> <span class="o">=</span> <span class="nc">NumberUtils</span><span class="o">.</span><span class="na">doubleToLongBits</span><span class="o">(</span><span class="n">value</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">prime</span> <span class="o">*</span> <span class="kd">super</span><span class="o">.</span><span class="na">hashCode</span><span class="o">()</span> <span class="o">+</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="n">v</span><span class="o">^(</span><span class="n">v</span><span class="o">&gt;&gt;&gt;</span><span class="mi">32</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compareTo</span> <span class="o">(</span><span class="nc">Attribute</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">type</span> <span class="o">!=</span> <span class="n">o</span><span class="o">.</span><span class="na">type</span><span class="o">)</span> <span class="k">return</span> <span class="n">type</span> <span class="o">&lt;</span> <span class="n">o</span><span class="o">.</span><span class="na">type</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="kt">double</span> <span class="n">otherValue</span> <span class="o">=</span> <span class="o">((</span><span class="nc">DoubleAttribute</span><span class="o">)</span><span class="n">o</span><span class="o">).</span><span class="na">value</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">value</span> <span class="o">==</span> <span class="n">otherValue</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="o">(</span><span class="n">value</span> <span class="o">&lt;</span> <span class="n">otherValue</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Of course <code class="language-plaintext highlighter-rouge">MyDouble1Alias</code>, <code class="language-plaintext highlighter-rouge">MyDouble1</code>, <code class="language-plaintext highlighter-rouge">"myDouble1"</code>, <code class="language-plaintext highlighter-rouge">MyDouble2Alias</code>, <code class="language-plaintext highlighter-rouge">MyDouble2</code> and <code class="language-plaintext highlighter-rouge">"myDouble2"</code> should be replaced by a more meaningful description.</p>
+
+<p>Note that the <code class="language-plaintext highlighter-rouge">copy()</code> method is for example called when creating a <code class="language-plaintext highlighter-rouge">ModelInstance</code> of a <code class="language-plaintext highlighter-rouge">Model</code>. It should return an identical instance of the attribute which can be modified independently of the attribute being copied. While not required, a <em>copy constructor</em> is typically a good method to implement this.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">hashCode()</code> method should be implemented because it is used for comparing attributes and materials. For example, two materials are considered to be the same if they contain the same attributes (types) and the <code class="language-plaintext highlighter-rouge">equals()</code> method returns true for each pair of attribute types. By default, the <code class="language-plaintext highlighter-rouge">equals()</code> method of the <code class="language-plaintext highlighter-rouge">Attribute</code> class compares the <code class="language-plaintext highlighter-rouge">hashCode()</code> of both attributes for this.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">compareTo(Attribute)</code> method must be implemented for sorting render calls based on the material. This implementation should typically always start with the line:
+<code class="language-plaintext highlighter-rouge">if (type != o.type) return type &lt; o.type ? -1 : 1;</code> to assure that it’s comparing attributes of the same type.</p>
+
+<blockquote>
+  <p>Attribute classes should be kept small and self contained, therefore it is best to always directly extend the <code class="language-plaintext highlighter-rouge">Attribute</code> class. Try to avoid extending a subclass of the Attribute class to add additional information.</p>
+</blockquote>
+
+<h2 id="available-attributes">Available attributes</h2>
+<p>Like stated above its possible to create custom attributes. However, there are a few attributes already included, which are listed below.</p>
+
+<h3 id="blendingattribute">BlendingAttribute</h3>
+
+<p>By default the 3D api assumes everything is opaque. The <code class="language-plaintext highlighter-rouge">BlendingAttribute</code> is most commonly used for materials (in case of environment it will change the default behavior) and can be used to specify that the material is or is not blended. The <code class="language-plaintext highlighter-rouge">BlendingAttribute</code> doesn’t require you to specify a type on construction, its type is always <code class="language-plaintext highlighter-rouge">BlendingAttribute.Type</code>, unless it’s extended. It contains four properties which can be specified:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">blended</code> indicates whether or not the material should be treated as blended. This is primarily used for sorting, for example opaque objects are drawn prior to transparent objects.</li>
+  <li><code class="language-plaintext highlighter-rouge">sourceFunction</code> OpenGL enum which specifies how the (incoming) red, green, blue, and alpha source blending factors are computed, by default it is set to GL_SRC_ALPHA.</li>
+  <li><code class="language-plaintext highlighter-rouge">destFunction</code> OpenGL enum which specifies how the (existing) red, green, blue, and alpha destination blending factors are computed, by default it is set to GL_ONE_MINUS_SRC_ALPHA. For additive blending you might want to set it to GL_ONE.</li>
+  <li><code class="language-plaintext highlighter-rouge">opacity</code> The amount of opacity (the source alpha value), ranging from 0 (fully transparent) to 1 (fully opaque).</li>
+</ul>
+
+<h3 id="colorattribute">ColorAttribute</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">ColorAttribute</code> allows you to pass a color to the shader. For that it only contains one property: <code class="language-plaintext highlighter-rouge">.color</code>. You can set the color during construction (it will be set by value) or using the <code class="language-plaintext highlighter-rouge">.color.set(...)</code> method. The <code class="language-plaintext highlighter-rouge">ColorAttribute</code> requires an attribute type to be specified, by default the following types are available:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ColorAttribute.Diffuse</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ColorAttribute.Specular</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ColorAttribute.Ambient</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ColorAttribute.Emissive</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ColorAttribute.Reflection</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ColorAttribute.AmbientLight</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ColorAttribute.Fog</code></li>
+</ul>
+
+<p>Where the latter two are most commonly used for Environment, while the others or commonly used for Material.</p>
+
+<h3 id="cubemapattribute">CubemapAttribute</h3>
+<p>To pass a <code class="language-plaintext highlighter-rouge">Cubemap</code> to the shader the <code class="language-plaintext highlighter-rouge">CubemapAttribute</code> can be used. It’s value is the <code class="language-plaintext highlighter-rouge">textureDescription</code> member which can be used to specify the cubemap along with other texture related values. The <code class="language-plaintext highlighter-rouge">CubemapAttribute</code> requires an attribute type to be specified, by default the <code class="language-plaintext highlighter-rouge">CubemapAttribute.EnvironmentMap</code> is the only valid type.</p>
+
+<h3 id="depthtestattribute">DepthTestAttribute</h3>
+<p>Just like the <code class="language-plaintext highlighter-rouge">BlendingAttribute</code>, does the <code class="language-plaintext highlighter-rouge">DepthTestAttribute</code> not require an attribute type. It is always <code class="language-plaintext highlighter-rouge">DepthTestAttribute.Type</code>. The <code class="language-plaintext highlighter-rouge">DepthTestAttribute</code> can be used to specify depth testing and writing, using the following properties:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">depthFunc</code> The depth test function, or 0 (or GL_NONE) to disable depth test, by default it is GL20.GL_LEQUAL.</li>
+  <li><code class="language-plaintext highlighter-rouge">depthRangeNear</code> Mapping of near clipping plane to window coordinates, by default 0.0</li>
+  <li><code class="language-plaintext highlighter-rouge">depthRangeFar</code> Mapping of far clipping plane to window coordinates, by default 1.0</li>
+  <li><code class="language-plaintext highlighter-rouge">depthMask</code> Whether or not to write to the depth buffer, enabled by default.</li>
+</ul>
+
+<h3 id="directionallightsattribute">DirectionalLightsAttribute</h3>
+<p>The DirectionalLightsAttribute does not require an attribute type. It is always <code class="language-plaintext highlighter-rouge">DirectionalLightsAttribute.Type</code>. The ` DirectionalLightsAttribute<code class="language-plaintext highlighter-rouge"> can be used to specify an array of [</code>DirectionalLight`](https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/g3d/environment/DirectionalLight.html) instances, using the following property:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">lights</code> The array of lights, should be sorted on importance.</li>
+</ul>
+
+<h3 id="floatattribute">FloatAttribute</h3>
+<p>To pass a single floating point value to the shader, the <code class="language-plaintext highlighter-rouge">FloatAttribute</code> can be used. The value can be specified on construction or using the <code class="language-plaintext highlighter-rouge">.value</code> member. The <code class="language-plaintext highlighter-rouge">FloatAttribute</code> requires an attribute type, which by default can be:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">FloatAttribute.Shininess</code> Used for specular lighting.</li>
+  <li><code class="language-plaintext highlighter-rouge">FloatAttribute.AlphaTest</code> Used to discard pixels when the alpha value is equal or below the specified value.</li>
+</ul>
+
+<h3 id="intattribute">IntAttribute</h3>
+<p>Similar to the <code class="language-plaintext highlighter-rouge">FloatAttribute</code> class, the <code class="language-plaintext highlighter-rouge">IntAttribute</code> allows you to pass an integer value to the shader. Likewise the <code class="language-plaintext highlighter-rouge">.value</code> member can be used or the value can be set on construction. The <code class="language-plaintext highlighter-rouge">IntAttribute</code> requires an attribute type, which by default can be:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">IntAttribute.CullFace</code> OpenGL enum to specify face culling, either GL_NONE (no culling), GL_FRONT (only render back faces) or GL_BACK (only render front faces). The default depends on the shader, the default shader uses GL_BACK by default.</li>
+</ul>
+
+<h3 id="pointlightsattribute">PointLightsAttribute</h3>
+<p>The PointLightsAttribute does not require an attribute type. It is always <code class="language-plaintext highlighter-rouge">PointLightsAttribute.Type</code>. The <code class="language-plaintext highlighter-rouge">PointLightsAttribute</code> can be used to specify an array of <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/g3d/environment/PointLight.html"><code class="language-plaintext highlighter-rouge">PointLight</code></a> instances, using the following property:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">lights</code> The array of lights, should be sorted on importance.</li>
+</ul>
+
+<h3 id="spotlightsattribute">SpotLightsAttribute</h3>
+<p>Not supported by the default shader. The SpotLightsAttribute does not require an attribute type. It is always <code class="language-plaintext highlighter-rouge">SpotLightsAttribute.Type</code>. The <code class="language-plaintext highlighter-rouge">SpotLightsAttribute</code> can be used to specify an array of <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/g3d/environment/SpotLight.html"><code class="language-plaintext highlighter-rouge">SpotLight</code></a> instances, using the following property:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">lights</code> The array of lights, should be sorted on importance.</li>
+</ul>
+
+<h3 id="textureattribute">TextureAttribute</h3>
+<p><code class="language-plaintext highlighter-rouge">TextureAttribute</code> can be used to pass a <code class="language-plaintext highlighter-rouge">Texture</code> to the shader. Just like the <code class="language-plaintext highlighter-rouge">CubemapAttribute</code> it has a <code class="language-plaintext highlighter-rouge">textureDescription</code> member which allows you to set the <code class="language-plaintext highlighter-rouge">Texture</code> amongst some texture related values like repeat and filter. Additionally it contains the <code class="language-plaintext highlighter-rouge">offsetU</code>, <code class="language-plaintext highlighter-rouge">offsetV</code>, <code class="language-plaintext highlighter-rouge">scaleU</code> and <code class="language-plaintext highlighter-rouge">scaleY</code> members, which can be used to specify the region (texture coordinates transformation) of the texture to use. It also has an <code class="language-plaintext highlighter-rouge">uvIndex</code> member (defaults to 0) which can be used to specify which texture coordinates should be used. Note that the default shader currently ignores this uvIndex member and always uses the first texture coordinates.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">TextureAttribute</code> requires an attribute type, which by default can be one of the following:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">TextureAttribute.Diffuse</code></li>
+  <li><code class="language-plaintext highlighter-rouge">TextureAttribute.Specular</code></li>
+  <li><code class="language-plaintext highlighter-rouge">TextureAttribute.Bump</code></li>
+  <li><code class="language-plaintext highlighter-rouge">TextureAttribute.Normal</code></li>
+</ul>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

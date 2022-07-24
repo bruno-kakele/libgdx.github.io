@@ -1,0 +1,1027 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Box2d - libGDX</title>
+
+  <meta name="description" content="Setting up Box2D with libGDX Box2D is a 2D physics library. It is one of the most popular physics libraries for 2D games and has been ported to many languages...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Box2d">
+<meta property="og:url" content="https://libgdx.com/wiki/extensions/physics/box2d">
+
+
+  <meta property="og:description" content="Setting up Box2D with libGDX Box2D is a 2D physics library. It is one of the most popular physics libraries for 2D games and has been ported to many languages...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/extensions/physics/box2d">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Box2d
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/extensions/physics/box2d.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/extensions/physics/box2d.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <h1 id="setting-up-box2d-with-libgdx">Setting up Box2D with libGDX</h1>
+
+<p>Box2D is a 2D physics library. It is one of the most popular physics libraries for 2D games and has been ported to many languages and many different engines, including libGDX. The Box2D implementation in libGDX is a thin Java wrapper around the C++ engine. Therefore, their <a href="https://box2d.org/documentation/">documentation</a> may come in handy.</p>
+
+<p>Box2D is an extension and not included with libGDX by default. Thus a manual installation is required.</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+
+<ul>
+  <li><a href="/wiki/extensions/physics/box2d#initialization">Initialization</a></li>
+  <li><a href="/wiki/extensions/physics/box2d#creating-a-world">Creating a World</a></li>
+  <li><a href="/wiki/extensions/physics/box2d#debug-renderer">Debug Renderer</a></li>
+  <li><a href="/wiki/extensions/physics/box2d#stepping-the-simulation">Stepping the simulation</a></li>
+  <li><a href="/wiki/extensions/physics/box2d#rendering">Rendering</a></li>
+  <li><a href="/wiki/extensions/physics/box2d#objectsbodies">Objects/Bodies</a>
+    <ul>
+      <li><a href="/wiki/extensions/physics/box2d#dynamic-bodies">Dynamic Bodies</a></li>
+      <li><a href="/wiki/extensions/physics/box2d#static-bodies">Static Bodies</a></li>
+      <li><a href="/wiki/extensions/physics/box2d#kinematic-bodies">Kinematic Bodies</a></li>
+    </ul>
+  </li>
+  <li><a href="/wiki/extensions/physics/box2d#wiki-impulsesforces">Impulses/Forces</a></li>
+  <li><a href="/wiki/extensions/physics/box2d#joints-and-gears">Joints and Gears</a></li>
+  <li><a href="/wiki/extensions/physics/box2d#fixture-shapes">Fixture Shapes</a></li>
+  <li><a href="/wiki/extensions/physics/box2d#sprites-and-bodies">Sprites and Bodies</a></li>
+  <li><a href="/wiki/extensions/physics/box2d#sensors">Sensors</a></li>
+  <li><a href="/wiki/extensions/physics/box2d#contact-listeners">Contact Listeners</a></li>
+  <li><a href="/wiki/extensions/physics/box2d#resources">Resources</a></li>
+  <li><a href="/wiki/extensions/physics/box2d#tools">Tools</a></li>
+</ul>
+
+<h2 id="initialization">Initialization</h2>
+
+<p>To initialize Box2D it is necessary to call <code class="language-plaintext highlighter-rouge">Box2D.init()</code>. For backwards compatibility, creating a <code class="language-plaintext highlighter-rouge">World</code> for the first time will have the same effect, but using the <code class="language-plaintext highlighter-rouge">Box2D</code> class should be preferred.</p>
+
+<h2 id="creating-a-world">Creating a World</h2>
+
+<p>When setting up Box2D the first thing we need is a world. The world object is basically what holds all your physics objects/bodies and simulates the reactions between them. It does not however render the objects for you; for that you will use libGDX graphics functions. That said, libGDX does come with a Box2D debug renderer which is extremely handy for debugging your physics simulations, or even for testing your game-play before writing any rendering code.</p>
+
+<p>To create the world we use the following code:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">World</span> <span class="n">world</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">World</span><span class="o">(</span><span class="k">new</span> <span class="nc">Vector2</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="o">-</span><span class="mi">10</span><span class="o">),</span> <span class="kc">true</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>The first argument we supply is a 2D vector containing the gravity: 0 to indicate no gravity in the horizontal direction, and -10 is a downwards force like in real life (assuming your y axis points upwards). These values can be anything you like, but remember to stick to a constant scale. In Box2D 1 unit = 1 meter.</p>
+
+<p>The second value in the world creation is a boolean value which tells the world if we want objects to sleep or not. Generally we want objects to sleep as this conserves CPU usage, but there are situations where you might not want your objects to sleep.</p>
+
+<p>It is advised to use the same scale you use for Box2D to draw graphics. This means drawing a Sprite with a width/height in meters. To scale up the graphics to make them visible, you should use a camera with a viewportWidth / viewportHeight also in meters. E.g: drawing a Sprite with a width of 2.0f (2 meters) and using a camera viewportWidth of 20.0f, the Sprite will fill 1/10th of the width on the window.</p>
+
+<p><strong>A common mistake</strong> is measuring your world in pixels instead of meters. Box2D objects can only travel so fast. If pixels are used (such as 640 by 480) instead of meters (such as 12 by 9), objects will always move slowly no matter what you do.</p>
+
+<h2 id="debug-renderer">Debug Renderer</h2>
+
+<p>The next thing we are going to do is setup our debug renderer. You generally will not use this in a released version of your game, but for testing purposes we will set it up now like so:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Box2DDebugRenderer</span> <span class="n">debugRenderer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Box2DDebugRenderer</span><span class="o">();</span>
+</code></pre></div></div>
+
+<h2 id="stepping-the-simulation">Stepping the simulation</h2>
+
+<p>To update our simulation we need to tell our world to step. Stepping basically updates the world objects through time. The best place to call our step function is at the end of our <code class="language-plaintext highlighter-rouge">render()</code> loop. In a perfect world everyone’s frame rate is the same</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">world</span><span class="o">.</span><span class="na">step</span><span class="o">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">60</span><span class="n">f</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>The first argument is the time-step, or the amount of time you want your world to simulate. In most cases you want this to be a fixed time step. libGDX recommends using a value between <code class="language-plaintext highlighter-rouge">1/60f</code> (which is 1/60th of a second) and <code class="language-plaintext highlighter-rouge">1/240f</code> (1/240th of a second).</p>
+
+<p>The other two arguments are <code class="language-plaintext highlighter-rouge">velocityIterations</code> and <code class="language-plaintext highlighter-rouge">positionIterations</code>. For now we will leave these at <code class="language-plaintext highlighter-rouge">6</code> and <code class="language-plaintext highlighter-rouge">2</code>, but you can read more about them in the Box2D documentation.</p>
+
+<p>Stepping your simulation is a topic unto itself. See <a href="https://gafferongames.com/post/fix_your_timestep/">this article</a> for an excellent discussion on the use of variable time steps.</p>
+
+<p>The result might look similar to this:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">float</span> <span class="n">accumulator</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">doPhysicsStep</span><span class="o">(</span><span class="kt">float</span> <span class="n">deltaTime</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// fixed time step</span>
+    <span class="c1">// max frame time to avoid spiral of death (on slow devices)</span>
+    <span class="kt">float</span> <span class="n">frameTime</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">deltaTime</span><span class="o">,</span> <span class="mf">0.25f</span><span class="o">);</span>
+    <span class="n">accumulator</span> <span class="o">+=</span> <span class="n">frameTime</span><span class="o">;</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">accumulator</span> <span class="o">&gt;=</span> <span class="nc">Constants</span><span class="o">.</span><span class="na">TIME_STEP</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">WorldManager</span><span class="o">.</span><span class="na">world</span><span class="o">.</span><span class="na">step</span><span class="o">(</span><span class="nc">Constants</span><span class="o">.</span><span class="na">TIME_STEP</span><span class="o">,</span> <span class="nc">Constants</span><span class="o">.</span><span class="na">VELOCITY_ITERATIONS</span><span class="o">,</span> <span class="nc">Constants</span><span class="o">.</span><span class="na">POSITION_ITERATIONS</span><span class="o">);</span>
+        <span class="n">accumulator</span> <span class="o">-=</span> <span class="nc">Constants</span><span class="o">.</span><span class="na">TIME_STEP</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="rendering">Rendering</h2>
+
+<p>It is recommended that you render all your graphics before you do your physics step, otherwise it will be out of sync. To do this with our debug renderer we do the following:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">debugRenderer</span><span class="o">.</span><span class="na">render</span><span class="o">(</span><span class="n">world</span><span class="o">,</span> <span class="n">camera</span><span class="o">.</span><span class="na">combined</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>The first argument is our Box2D world and the second argument is our libGDX camera.</p>
+
+<h2 id="objectsbodies">Objects/Bodies</h2>
+
+<p>Now if you run your game it will be pretty boring as nothing happens. The world steps but we don’t see anything as we don’t have anything to interact with it. So now we’re going to add some objects.</p>
+
+<p>In Box2D our objects are called <em>bodies</em>, and each body is made up of one or more <em>fixtures</em>, which have a fixed position and orientation within the body. Our fixtures can be any shape you can imagine or you can combine a variety of different shaped fixtures to make the shape you want.</p>
+
+<p>A fixture has a shape, density, friction and restitution attached to it. Shape is obvious. Density is the mass per square metre: a bowling ball is very dense, yet a balloon isn’t very dense at all as it is mainly filled with air. Friction is the amount of opposing force when the object rubs/slides along something: a block of ice would have a very low friction but a rubber ball would have a high friction. Restitution is how bouncy something is: a rock would have a very low restitution but a basketball would have a fairly high restitution. A body with a restitution of 0 will come to a halt as soon as it hits the ground, whereas a body with a restitution of 1 would bounce to the same height forever.</p>
+
+<p>Bodies come in three different types: dynamic, kinematic and static. Each type is described below.</p>
+
+<h3 id="dynamic-bodies">Dynamic Bodies</h3>
+
+<p>Dynamic bodies are objects which move around and are affected by forces and other dynamic, kinematic and static objects. Dynamic bodies are suitable for any object which needs to move and be affected by forces.</p>
+
+<p>We have now learned about fixtures which make up our bodies, so let’s get dirty and start to create some bodies and add fixtures to them!</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// First we create a body definition</span>
+<span class="nc">BodyDef</span> <span class="n">bodyDef</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BodyDef</span><span class="o">();</span>
+<span class="c1">// We set our body to dynamic, for something like ground which doesn't move we would set it to StaticBody</span>
+<span class="n">bodyDef</span><span class="o">.</span><span class="na">type</span> <span class="o">=</span> <span class="nc">BodyType</span><span class="o">.</span><span class="na">DynamicBody</span><span class="o">;</span>
+<span class="c1">// Set our body's starting position in the world</span>
+<span class="n">bodyDef</span><span class="o">.</span><span class="na">position</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
+
+<span class="c1">// Create our body in the world using our body definition</span>
+<span class="nc">Body</span> <span class="n">body</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="na">createBody</span><span class="o">(</span><span class="n">bodyDef</span><span class="o">);</span>
+
+<span class="c1">// Create a circle shape and set its radius to 6</span>
+<span class="nc">CircleShape</span> <span class="n">circle</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CircleShape</span><span class="o">();</span>
+<span class="n">circle</span><span class="o">.</span><span class="na">setRadius</span><span class="o">(</span><span class="mi">6</span><span class="n">f</span><span class="o">);</span>
+
+<span class="c1">// Create a fixture definition to apply our shape to</span>
+<span class="nc">FixtureDef</span> <span class="n">fixtureDef</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FixtureDef</span><span class="o">();</span>
+<span class="n">fixtureDef</span><span class="o">.</span><span class="na">shape</span> <span class="o">=</span> <span class="n">circle</span><span class="o">;</span>
+<span class="n">fixtureDef</span><span class="o">.</span><span class="na">density</span> <span class="o">=</span> <span class="mf">0.5f</span><span class="o">;</span>
+<span class="n">fixtureDef</span><span class="o">.</span><span class="na">friction</span> <span class="o">=</span> <span class="mf">0.4f</span><span class="o">;</span>
+<span class="n">fixtureDef</span><span class="o">.</span><span class="na">restitution</span> <span class="o">=</span> <span class="mf">0.6f</span><span class="o">;</span> <span class="c1">// Make it bounce a little bit</span>
+
+<span class="c1">// Create our fixture and attach it to the body</span>
+<span class="nc">Fixture</span> <span class="n">fixture</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="na">createFixture</span><span class="o">(</span><span class="n">fixtureDef</span><span class="o">);</span>
+
+<span class="c1">// Remember to dispose of any shapes after you're done with them!</span>
+<span class="c1">// BodyDef and FixtureDef don't need disposing, but shapes do.</span>
+<span class="n">circle</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>Now we have created a ball like object and added it to our world. If you run the game now you should see a ball fall down the screen. This is still fairly boring though, as it has nothing to interact with. So let’s create a floor for our ball to bounce on.</p>
+
+<h3 id="static-bodies">Static Bodies</h3>
+
+<p>Static bodies are objects which do not move and are not affected by forces. Dynamic bodies are affected by static bodies. Static bodies are perfect for ground, walls, and any object which does not need to move. Static bodies require less computing power.</p>
+
+<p>Let’s go ahead and create our floor as a static body. This is much like creating our dynamic body earlier.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Create our body definition</span>
+<span class="nc">BodyDef</span> <span class="n">groundBodyDef</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BodyDef</span><span class="o">();</span>  
+<span class="c1">// Set its world position</span>
+<span class="n">groundBodyDef</span><span class="o">.</span><span class="na">position</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="k">new</span> <span class="nc">Vector2</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">10</span><span class="o">));</span>  
+
+<span class="c1">// Create a body from the definition and add it to the world</span>
+<span class="nc">Body</span> <span class="n">groundBody</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="na">createBody</span><span class="o">(</span><span class="n">groundBodyDef</span><span class="o">);</span>  
+
+<span class="c1">// Create a polygon shape</span>
+<span class="nc">PolygonShape</span> <span class="n">groundBox</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PolygonShape</span><span class="o">();</span>  
+<span class="c1">// Set the polygon shape as a box which is twice the size of our view port and 20 high</span>
+<span class="c1">// (setAsBox takes half-width and half-height as arguments)</span>
+<span class="n">groundBox</span><span class="o">.</span><span class="na">setAsBox</span><span class="o">(</span><span class="n">camera</span><span class="o">.</span><span class="na">viewportWidth</span><span class="o">,</span> <span class="mf">10.0f</span><span class="o">);</span>
+<span class="c1">// Create a fixture from our polygon shape and add it to our ground body  </span>
+<span class="n">groundBody</span><span class="o">.</span><span class="na">createFixture</span><span class="o">(</span><span class="n">groundBox</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">);</span>
+<span class="c1">// Clean up after ourselves</span>
+<span class="n">groundBox</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>See how we created a fixture without the need to define a <code class="language-plaintext highlighter-rouge">FixtureDef</code>? If all you need to specify is a shape and a density, the <code class="language-plaintext highlighter-rouge">createFixture</code> method has a useful overload for that.</p>
+
+<p>Now if you run the game you should see a ball fall and then bounce on our newly created ground. Play around with some of the different values for the ball like density and restitution and see what happens.</p>
+
+<h3 id="kinematic-bodies">Kinematic Bodies</h3>
+
+<p>Kinematic bodies are somewhat in between static and dynamic bodies. Like static bodies, they do not react to forces, but like dynamic bodies, they do have the ability to move. Kinematic bodies are great for things where you, the programmer, want to be in full control of a body’s motion, such as a moving platform in a platform game.</p>
+
+<p>It is possible to set the position on a kinematic body directly, but it’s usually better to set a velocity instead, and letting Box2D take care of position updates.</p>
+
+<p>You can create a kinematic body in much the same way as the dynamic and static bodies above. Once created, you can control the velocity like this:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Move upwards at a rate of 1 meter per second</span>
+<span class="n">kinematicBody</span><span class="o">.</span><span class="na">setLinearVelocity</span><span class="o">(</span><span class="mf">0.0f</span><span class="o">,</span> <span class="mf">1.0f</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h2 id="impulsesforces">Impulses/Forces</h2>
+
+<p>Impulses and Forces are used to move a body in addition to gravity and collision.</p>
+
+<p>Forces occur gradually over time to change the velocity of a body. For example, a rocket lifting off would slowly have forces applied as the rocket slowly begins to accelerate.</p>
+
+<p>Impulses on the other hand make immediate changes to the body’s velocity. For example, playing Pac-Man the character always moved at a constant speed and achieved instant velocity upon being moved.</p>
+
+<p>First you will need a Dynamic Body to apply forces/impulses to, see the <a href="#dynamic_bodies">Dynamic Bodies</a> section above.</p>
+
+<p><strong>Applying Force</strong></p>
+
+<p>Forces are applied in Newtons at a World Point. If the force is not applied to the center of mass, it will generate torque and affect the angular velocity.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Apply a force of 1 meter per second on the X-axis at pos.x/pos.y of the body slowly moving it right</span>
+<span class="n">dynamicBody</span><span class="o">.</span><span class="na">applyForce</span><span class="o">(</span><span class="mf">1.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="n">pos</span><span class="o">.</span><span class="na">x</span><span class="o">,</span> <span class="n">pos</span><span class="o">.</span><span class="na">y</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+
+<span class="c1">// If we always want to apply force at the center of the body, use the following</span>
+<span class="n">dynamicBody</span><span class="o">.</span><span class="na">applyForceToCenter</span><span class="o">(</span><span class="mf">1.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><strong>Applying Impulse</strong></p>
+
+<p>Impulses are just like Forces with the exception that they immediately modify the velocity of a body. As with forces, if the impulse is not applied at the center of a body, it will create torque which modifies angular velocity. Impulses are applied in Newton-seconds or kg-m/s.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Immediately set the X-velocity to 1 meter per second causing the body to move right quickly</span>
+<span class="n">dynamicBody</span><span class="o">.</span><span class="na">applyLinearImpulse</span><span class="o">(</span><span class="mf">1.0f</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">pos</span><span class="o">.</span><span class="na">x</span><span class="o">,</span> <span class="n">pos</span><span class="o">.</span><span class="na">y</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Keep in mind applying forces or impulses will wake the body. Sometimes this behavior is undesired. For example, you may be applying a steady force and want to allow the body to sleep to improve performance. In this case you can set the wake boolean value to false.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Apply impulse but don't wake the body</span>
+<span class="n">dynamicBody</span><span class="o">.</span><span class="na">applyLinearImpulse</span><span class="o">(</span><span class="mf">0.8f</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">pos</span><span class="o">.</span><span class="na">x</span><span class="o">,</span> <span class="n">pos</span><span class="o">.</span><span class="na">y</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><strong>Player Movement Example</strong></p>
+
+<p>In this example, we will make a player run left or right and accelerate to a maximum velocity, just like Sonic the Hedgehog. For this example we have already created a Dynamic Body named ‘player’. In addition we have defined a MAX_VELOCITY variable so our player won’t accelerate beyond this value. Now it’s just a matter of applying a linear impulse when a key is pressed.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Vector2</span> <span class="n">vel</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">player</span><span class="o">.</span><span class="na">body</span><span class="o">.</span><span class="na">getLinearVelocity</span><span class="o">();</span>
+<span class="nc">Vector2</span> <span class="n">pos</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">player</span><span class="o">.</span><span class="na">body</span><span class="o">.</span><span class="na">getPosition</span><span class="o">();</span>
+
+<span class="c1">// apply left impulse, but only if max velocity is not reached yet</span>
+<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isKeyPressed</span><span class="o">(</span><span class="nc">Keys</span><span class="o">.</span><span class="na">A</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">vel</span><span class="o">.</span><span class="na">x</span> <span class="o">&gt;</span> <span class="o">-</span><span class="no">MAX_VELOCITY</span><span class="o">)</span> <span class="o">{</span>			
+     <span class="k">this</span><span class="o">.</span><span class="na">player</span><span class="o">.</span><span class="na">body</span><span class="o">.</span><span class="na">applyLinearImpulse</span><span class="o">(-</span><span class="mf">0.80f</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">pos</span><span class="o">.</span><span class="na">x</span><span class="o">,</span> <span class="n">pos</span><span class="o">.</span><span class="na">y</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="c1">// apply right impulse, but only if max velocity is not reached yet</span>
+<span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">isKeyPressed</span><span class="o">(</span><span class="nc">Keys</span><span class="o">.</span><span class="na">D</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">vel</span><span class="o">.</span><span class="na">x</span> <span class="o">&lt;</span> <span class="no">MAX_VELOCITY</span><span class="o">)</span> <span class="o">{</span>
+     <span class="k">this</span><span class="o">.</span><span class="na">player</span><span class="o">.</span><span class="na">body</span><span class="o">.</span><span class="na">applyLinearImpulse</span><span class="o">(</span><span class="mf">0.80f</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">pos</span><span class="o">.</span><span class="na">x</span><span class="o">,</span> <span class="n">pos</span><span class="o">.</span><span class="na">y</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="joints-and-gears">Joints and Gears</h2>
+
+<p>Every joint requires to have definition set up before creating it by box2d world. Using <em>initialize</em> helps with ensuring that all joint parameters are set.</p>
+
+<p>Note that destroying the joint after the body will cause crash. Destroying the body also destroys joints connected to it.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">DistanceJointDef</span> <span class="n">defJoint</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DistanceJointDef</span> <span class="o">();</span>
+<span class="n">defJoint</span><span class="o">.</span><span class="na">length</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="n">defJoint</span><span class="o">.</span><span class="na">initialize</span><span class="o">(</span><span class="n">bodyA</span><span class="o">,</span> <span class="n">bodyB</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Vector2</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">),</span> <span class="k">new</span> <span class="nc">Vector2</span><span class="o">(</span><span class="mi">128</span><span class="o">,</span> <span class="mi">0</span><span class="o">));</span>
+
+<span class="nc">DistanceJoint</span> <span class="n">joint</span> <span class="o">=</span> <span class="o">(</span><span class="nc">DistanceJoint</span><span class="o">)</span> <span class="n">world</span><span class="o">.</span><span class="na">createJoint</span><span class="o">(</span><span class="n">defJoints</span><span class="o">);</span> <span class="c1">// Returns subclass Joint.</span>
+</code></pre></div></div>
+
+<h3 id="distancejoint">DistanceJoint</h3>
+
+<p>Distance joint makes length between bodies constant.</p>
+
+<p>Distance joint definition requires defining an anchor point on both bodies and the non-zero length of the distance joint.</p>
+
+<p>The definition uses local anchor points so that the initial configuration can violate the constraint slightly. This helps when saving and loading a game.</p>
+
+<p><strong>Do not use a zero or short length!</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// DistanceJointDef.initialize (Body bodyA, Body bodyB, Vector2 anchorA, Vector2 anchorB)</span>
+
+<span class="nc">DistanceJointDef</span> <span class="n">defJoint</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DistanceJointDef</span> <span class="o">();</span>
+<span class="n">defJoint</span><span class="o">.</span><span class="na">length</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="n">defJoint</span><span class="o">.</span><span class="na">initialize</span><span class="o">(</span><span class="n">bodyA</span><span class="o">,</span> <span class="n">bodyB</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Vector2</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">),</span> <span class="k">new</span> <span class="nc">Vector2</span><span class="o">(</span><span class="mi">128</span><span class="o">,</span> <span class="mi">0</span><span class="o">));</span>
+</code></pre></div></div>
+
+<h3 id="frictionjoint">FrictionJoint</h3>
+
+<p>Friction joint is used for top-down friction. It provides 2D translational friction and angular friction.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FrictionJointDef</span> <span class="n">jointDef</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FrictionJointDef</span> <span class="o">();</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">maxForce</span> <span class="o">=</span> <span class="mi">1</span><span class="n">f</span><span class="o">;</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">maxTorque</span> <span class="o">=</span> <span class="mi">1</span><span class="n">f</span><span class="o">;</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">initialize</span><span class="o">(</span><span class="n">bodyA</span><span class="o">,</span> <span class="n">bodyB</span><span class="o">,</span> <span class="n">anchor</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h3 id="gearjoint">GearJoint</h3>
+
+<p>A gear joint is used to connect two joints together. Either joint can be a revolute or prismatic joint. You specify a gear ratio to bind the motions together: coordinate1 + ratio * coordinate2 = constant The ratio can be negative or positive. If one joint is a revolute joint and the other joint is a prismatic joint, then the ratio will have units of length or units of 1/length.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">GearJointDef</span> <span class="n">jointDef</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GearJointDef</span> <span class="o">();</span> <span class="c1">// has no initialize</span>
+</code></pre></div></div>
+
+<h3 id="motorjoint">MotorJoint</h3>
+<p>A motor joint is used to control the relative motion between two bodies. A typical usage is to control the movement of a dynamic body with respect to the ground.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">MotorJointDef</span> <span class="n">jointDef</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MotorJointDef</span> <span class="o">();</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">angularOffset</span> <span class="o">=</span> <span class="mi">0</span><span class="n">f</span><span class="o">;</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">collideConnected</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">correctionFactor</span> <span class="o">=</span> <span class="mi">0</span><span class="n">f</span><span class="o">;</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">maxForce</span> <span class="o">=</span> <span class="mi">1</span><span class="n">f</span><span class="o">;</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">maxTorque</span> <span class="o">=</span> <span class="mi">1</span><span class="n">f</span><span class="o">;</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">initialize</span><span class="o">(</span><span class="n">bodyA</span><span class="o">,</span> <span class="n">bodyB</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h3 id="mousejoint">MouseJoint</h3>
+<p>The mouse joint is used in the testbed to manipulate bodies with the mouse. It attempts to drive a point on a body towards the current position of the cursor. There is no restriction on rotation.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">MouseJointDef</span> <span class="n">jointDef</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MouseJointDef</span><span class="o">();</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">target</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Vector2</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">getY</span><span class="o">());</span>
+
+<span class="nc">MouseJoint</span> <span class="n">joint</span> <span class="o">=</span> <span class="o">(</span><span class="nc">MouseJoint</span><span class="o">)</span> <span class="n">world</span><span class="o">.</span><span class="na">createJoint</span><span class="o">(</span><span class="n">jointDef</span><span class="o">);</span>
+<span class="n">joint</span><span class="o">.</span><span class="na">setTarget</span><span class="o">(</span><span class="k">new</span> <span class="nc">Vector2</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">getY</span><span class="o">()));</span>
+</code></pre></div></div>
+
+<h3 id="prismaticjoint">PrismaticJoint</h3>
+
+<p>A prismatic joint allows for relative translation of two bodies along a specified axis. A prismatic joint prevents relative rotation. Therefore, a prismatic joint has a single degree of freedom.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">PrismaticJointDef</span> <span class="n">jointDef</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PrismaticJointDef</span> <span class="o">();</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">lowerTranslation</span> <span class="o">=</span> <span class="o">-</span><span class="mf">5.0f</span><span class="o">;</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">upperTranslation</span> <span class="o">=</span> <span class="mf">2.5f</span><span class="o">;</span>
+
+<span class="n">jointDef</span><span class="o">.</span><span class="na">enableLimit</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">enableMotor</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+<span class="n">jointDef</span><span class="o">.</span><span class="na">maxMotorForce</span> <span class="o">=</span> <span class="mf">1.0f</span><span class="o">;</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">motorSpeed</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="o">;</span>
+</code></pre></div></div>
+
+<h3 id="pulleyjoint">PulleyJoint</h3>
+
+<p>A pulley is used to create an idealized pulley. The pulley connects two bodies to ground and to each other. As one body goes up, the other goes down. The total length of the pulley rope is conserved according to the initial configuration.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">JointDef</span> <span class="n">jointDef</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JointDef</span> <span class="o">();</span>
+<span class="kt">float</span> <span class="n">ratio</span> <span class="o">=</span> <span class="mf">1.0f</span><span class="o">;</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">Initialize</span><span class="o">(</span><span class="n">myBody1</span><span class="o">,</span> <span class="n">myBody2</span><span class="o">,</span> <span class="n">groundAnchor1</span><span class="o">,</span> <span class="n">groundAnchor2</span><span class="o">,</span> <span class="n">anchor1</span><span class="o">,</span> <span class="n">anchor2</span><span class="o">,</span> <span class="n">ratio</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h3 id="revolutejoint">RevoluteJoint</h3>
+
+<p>A revolute joint forces two bodies to share a common anchor point, often called a hinge point. The revolute joint has a single degree of freedom: the relative rotation of the two bodies. This is called the joint angle</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">RevoluteJointDef</span> <span class="n">jointDef</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RevoluteJoint</span><span class="o">();</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">initialize</span><span class="o">(</span><span class="n">bodyA</span><span class="o">,</span> <span class="n">bodyB</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Vector2</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">),</span> <span class="k">new</span> <span class="nc">Vector2</span><span class="o">(</span><span class="mi">128</span><span class="o">,</span> <span class="mi">0</span><span class="o">));</span>
+
+<span class="n">jointDef</span><span class="o">.</span><span class="na">lowerAngle</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5f</span> <span class="o">*</span> <span class="n">b2_pi</span><span class="o">;</span> <span class="c1">// -90 degrees</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">upperAngle</span> <span class="o">=</span> <span class="mf">0.25f</span> <span class="o">*</span> <span class="n">b2_pi</span><span class="o">;</span> <span class="c1">// 45 degrees</span>
+
+<span class="n">jointDef</span><span class="o">.</span><span class="na">enableLimit</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">enableMotor</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+<span class="n">jointDef</span><span class="o">.</span><span class="na">maxMotorTorque</span> <span class="o">=</span> <span class="mf">10.0f</span><span class="o">;</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">motorSpeed</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="o">;</span>
+</code></pre></div></div>
+
+<h3 id="ropejoint">RopeJoint</h3>
+
+<p>A rope joint enforces a maximum distance between two points on two bodies. It has no other effect. Warning: if you attempt to change the maximum length during the simulation you will get some non-physical behavior. A model that would allow you to dynamically modify the length would have some sponginess, so I chose not to implement it that way. See b2DistanceJoint if you want to dynamically control length.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">RopeJointDef</span> <span class="n">jointDef</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RopeJointDef</span> <span class="o">();</span> <span class="c1">// has no initialize</span>
+</code></pre></div></div>
+
+<h3 id="weldjoint">WeldJoint</h3>
+
+<p>A weld joint essentially glues two bodies together. A weld joint may distort somewhat because the island constraint solver is approximate.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">WeldJointDef</span> <span class="n">jointDef</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WeldJointDef</span> <span class="o">();</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">initialize</span><span class="o">(</span><span class="n">bodyA</span><span class="o">,</span> <span class="n">bodyB</span><span class="o">,</span> <span class="n">anchor</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h3 id="wheeljoint">WheelJoint</h3>
+
+<p>A wheel joint. This joint provides two degrees of freedom: translation along an axis fixed in bodyA and rotation in the plane. You can use a joint limit to restrict the range of motion and a joint motor to drive the rotation or to model rotational friction. This joint is designed for vehicle suspensions.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">WheelJointDef</span> <span class="n">jointDef</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WheelJointDef</span><span class="o">();</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">maxMotorTorque</span> <span class="o">=</span> <span class="mi">1</span><span class="n">f</span><span class="o">;</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">motorSpeed</span> <span class="o">=</span> <span class="mi">0</span><span class="n">f</span><span class="o">;</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">dampingRatio</span> <span class="o">=</span> <span class="mi">1</span><span class="n">f</span><span class="o">;</span>
+<span class="n">jointDef</span><span class="o">.</span><span class="na">initialize</span><span class="o">(</span><span class="n">bodyA</span><span class="o">,</span> <span class="n">bodyB</span><span class="o">,</span> <span class="n">anchor</span><span class="o">,</span> <span class="n">axis</span><span class="o">);</span> <span class="c1">// axis is Vector2(1,1)</span>
+
+<span class="nc">WheelJoint</span> <span class="n">joint</span> <span class="o">=</span> <span class="o">(</span><span class="nc">WheelJoint</span><span class="o">)</span> <span class="n">physics</span><span class="o">.</span><span class="na">createJoint</span><span class="o">(</span><span class="n">jointDef</span><span class="o">);</span>
+<span class="n">joint</span><span class="o">.</span><span class="na">setMotorSpeed</span><span class="o">(</span><span class="mi">1</span><span class="n">f</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h2 id="fixture-shapes">Fixture Shapes</h2>
+
+<p>As mentioned previously, a fixture has a shape, density, friction and restitution attached to it.
+Out of the box you can easily create boxes (as seen in the section <a href="/wiki/extensions/physics/box2d#static-bodies">Static Bodies</a> section) and circle shapes (as seen in the <a href="/wiki/extensions/physics/box2d#dynamic-bodies">Dynamic Bodies</a> section).</p>
+
+<p>You can programatically define more complex shapes using the following classes</p>
+<ul>
+  <li>ChainShape,</li>
+  <li>EdgeShape,</li>
+  <li>PolygonShape</li>
+</ul>
+
+<p>However using third party tools you can simply define your shapes and import them into your game.</p>
+
+<h3 id="importing-complex-shapes-using-box2d-editor">Importing Complex Shapes using box2d-editor</h3>
+
+<p><a href="https://github.com/julienvillegas/box2d-editor">box2d-editor</a> is a free open source tool to define complex shapes and load them into your game.
+An example of how to import a shape into your game using box2d-editor is available on <a href="https://libgdxinfo.wordpress.com/box2d-importing-complex-bodies/">Libgdx.info</a>.</p>
+
+<p>Check out the <a href="/wiki/extensions/physics/box2d#Tools">Tools section</a> for more tools.</p>
+
+<p>In a nutshell, if you are using Box2d-editor:</p>
+<ul>
+  <li>Create your shape within Box2d-editor.</li>
+  <li>Export your scene and copy the file into your asset folder.</li>
+  <li>Copy file BodyEditorLoader.java into your “core” module source folder.</li>
+</ul>
+
+<p>Then in your game you can do:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">BodyEditorLoader</span> <span class="n">loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BodyEditorLoader</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"box2d_scene.json"</span><span class="o">));</span>
+
+<span class="nc">BodyDef</span> <span class="n">bd</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BodyDef</span><span class="o">();</span>
+<span class="n">bd</span><span class="o">.</span><span class="na">type</span> <span class="o">=</span> <span class="nc">BodyDef</span><span class="o">.</span><span class="na">BodyType</span><span class="o">.</span><span class="na">KinematicBody</span><span class="o">;</span>
+<span class="n">body</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="na">createBody</span><span class="o">(</span><span class="n">bd</span><span class="o">);</span>
+
+<span class="c1">// 2. Create a FixtureDef, as usual.</span>
+<span class="nc">FixtureDef</span> <span class="n">fd</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FixtureDef</span><span class="o">();</span>
+<span class="n">fd</span><span class="o">.</span><span class="na">density</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="n">fd</span><span class="o">.</span><span class="na">friction</span> <span class="o">=</span> <span class="mf">0.5f</span><span class="o">;</span>
+<span class="n">fd</span><span class="o">.</span><span class="na">restitution</span> <span class="o">=</span> <span class="mf">0.3f</span><span class="o">;</span>
+
+<span class="c1">// 3. Create a Body, as usual.</span>
+<span class="n">loader</span><span class="o">.</span><span class="na">attachFixture</span><span class="o">(</span><span class="n">body</span><span class="o">,</span> <span class="s">"gear"</span><span class="o">,</span> <span class="n">fd</span><span class="o">,</span> <span class="n">scale</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h2 id="sprites-and-bodies">Sprites and Bodies</h2>
+
+<p>The easiest way to manage a link between your sprites or game objects and Box2D is with Box2D’s User Data. You can set the user data to your game object and then update the object’s position based on the Box2D body.</p>
+
+<p>Setting a body’s user data is easy</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">body</span><span class="o">.</span><span class="na">setUserData</span><span class="o">(</span><span class="nc">Object</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>This can be set to any Java object. It is also good to create your own game actor/object class which allows you to set a reference to its physics body.</p>
+
+<p>Fixtures can also have user data set to them in the same way.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fixture</span><span class="o">.</span><span class="na">setUserData</span><span class="o">(</span><span class="nc">Object</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>To update all your actors/sprites you can loop through all the world’s bodies easily in your game/render loop.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Create an array to be filled with the bodies</span>
+<span class="c1">// (better don't create a new one every time though)</span>
+<span class="nc">Array</span><span class="o">&lt;</span><span class="nc">Body</span><span class="o">&gt;</span> <span class="n">bodies</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Array</span><span class="o">&lt;</span><span class="nc">Body</span><span class="o">&gt;();</span>
+<span class="c1">// Now fill the array with all bodies</span>
+<span class="n">world</span><span class="o">.</span><span class="na">getBodies</span><span class="o">(</span><span class="n">bodies</span><span class="o">);</span>
+
+<span class="k">for</span> <span class="o">(</span><span class="nc">Body</span> <span class="n">b</span> <span class="o">:</span> <span class="n">bodies</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// Get the body's user data - in this example, our user</span>
+    <span class="c1">// data is an instance of the Entity class</span>
+    <span class="nc">Entity</span> <span class="n">e</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Entity</span><span class="o">)</span> <span class="n">b</span><span class="o">.</span><span class="na">getUserData</span><span class="o">();</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Update the entities/sprites position and angle</span>
+        <span class="n">e</span><span class="o">.</span><span class="na">setPosition</span><span class="o">(</span><span class="n">b</span><span class="o">.</span><span class="na">getPosition</span><span class="o">().</span><span class="na">x</span><span class="o">,</span> <span class="n">b</span><span class="o">.</span><span class="na">getPosition</span><span class="o">().</span><span class="na">y</span><span class="o">);</span>
+        <span class="c1">// We need to convert our angle from radians to degrees</span>
+        <span class="n">e</span><span class="o">.</span><span class="na">setRotation</span><span class="o">(</span><span class="nc">MathUtils</span><span class="o">.</span><span class="na">radiansToDegrees</span> <span class="o">*</span> <span class="n">b</span><span class="o">.</span><span class="na">getAngle</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Then render your sprites using a libGDX <code class="language-plaintext highlighter-rouge">SpriteBatch</code> as usual.</p>
+
+<h2 id="sensors">Sensors</h2>
+<p>Sensors are Bodies that do not produce automatic responses during a collision (such as applying force). This is useful when one needs to be in complete control of what happens when two shapes collide.
+For example, think of a drone that has some kind of circular distance of sight. This body should follow the drone but shouldn’t have a physical reaction to it, or any other bodies. It should detect when some target is inside it’s shape.</p>
+
+<p>To configure a body to be a sensor, set the ‘isSensor’ flag to true. An example would be:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//At the definition of the Fixture</span>
+<span class="n">fixtureDef</span><span class="o">.</span><span class="na">isSensor</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p>In order to listen to this sensor contact, we need to implement the ContactListener interface methods.</p>
+
+<h2 id="contact-listeners">Contact Listeners</h2>
+<p>The Contact Listeners listen for collisions events on a specific fixture. The methods are passed a Contact object, which contain information about the two bodies involved.
+The beginContact method is called when the object overlaps another. When the objects are no longer colliding, the endContact method is called.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ListenerClass</span> <span class="kd">implements</span> <span class="nc">ContactListener</span> <span class="o">{</span>
+		<span class="nd">@Override</span>
+		<span class="kd">public</span> <span class="kt">void</span> <span class="nf">endContact</span><span class="o">(</span><span class="nc">Contact</span> <span class="n">contact</span><span class="o">)</span> <span class="o">{</span>
+
+		<span class="o">}</span>
+
+		<span class="nd">@Override</span>
+		<span class="kd">public</span> <span class="kt">void</span> <span class="nf">beginContact</span><span class="o">(</span><span class="nc">Contact</span> <span class="n">contact</span><span class="o">)</span> <span class="o">{</span>
+
+		<span class="o">}</span>
+	<span class="o">};</span>
+</code></pre></div></div>
+
+<p>This class needs to be set as the world’s contact listener in the screen’s show() or init() method.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">world</span><span class="o">.</span><span class="na">setContactListener</span><span class="o">(</span><span class="nc">ListenerClass</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>We might get information about the bodies from the contact fixtures.
+Depending on the application design, the Entity class should be referenced in the Body or Fixture user data, so we can use it from the Contact and make some changes (e.g. change the player health).</p>
+
+<h2 id="resources">Resources</h2>
+
+<p>There are a lot of really good Box2D resources out there and most of the code can be easily converted to libgdx.</p>
+
+<ul>
+  <li>A basic implementation and code sample for Box2D with Scene2D is also available on <a href="https://libgdxinfo.wordpress.com/box2d-basic/">LibGDX.info</a>.</li>
+  <li><a href="https://box2d.org/documentation/">Box2D documentation</a> and <a href="https://discord.com/invite/NKYgCBP">Discord</a> are a great place to find help.</li>
+  <li>A really good <a href="https://www.iforce2d.net/b2dtut/">tutorial series on Box2D</a>. Covers a lot of different problems which you will more than likely run across in your game development.</li>
+</ul>
+
+<h2 id="tools">Tools</h2>
+
+<p>The following is a list of tools for use with box2d and libgdx:</p>
+
+<h3 id="free-open-source">Free Open Source</h3>
+
+<ul>
+  <li><a href="https://github.com/julienvillegas/box2d-editor">Physics Body Editor</a></li>
+</ul>
+
+<p>Code sample available on <a href="https://libgdxinfo.wordpress.com/box2d-importing-complex-bodies//">LibGDX.info</a></p>
+
+<h3 id="commercial">Commercial</h3>
+
+<ul>
+  <li><a href="https://www.iforce2d.net/rube/">RUBE</a> editor for creating box2d worlds. Use<a href="https://github.com/indiumindeed/RubeLoader">RubeLoader</a> for loading RUBE data into libgdx.</li>
+  <li><a href="https://www.codeandweb.com/physicseditor">PhysicsEditor</a></li>
+</ul>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

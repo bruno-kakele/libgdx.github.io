@@ -1,0 +1,750 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>File handling - libGDX</title>
+
+  <meta name="description" content="Introduction Platform Filesystems File (Storage) Types Checking Storage availability and paths Obtaining FileHandles Listing and Checking Properties of Files Error Handling Reading from a File Writing to a File Deleting,...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="File handling">
+<meta property="og:url" content="https://libgdx.com/wiki/file-handling">
+
+
+  <meta property="og:description" content="Introduction Platform Filesystems File (Storage) Types Checking Storage availability and paths Obtaining FileHandles Listing and Checking Properties of Files Error Handling Reading from a File Writing to a File Deleting,...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/file-handling">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">File handling
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/file-handling.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/file-handling.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <ul>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#platform-filesystems">Platform Filesystems</a></li>
+  <li><a href="#file-storage-types">File (Storage) Types</a></li>
+  <li><a href="#checking-storage-availability-and-paths">Checking Storage availability and paths</a></li>
+  <li><a href="#obtaining-filehandles">Obtaining FileHandles</a></li>
+  <li><a href="#listing-and-checking-properties-of-files">Listing and Checking Properties of Files</a></li>
+  <li><a href="#error-handling">Error Handling</a></li>
+  <li><a href="#reading-from-a-file">Reading from a File</a></li>
+  <li><a href="#writing-to-a-file">Writing to a File</a></li>
+  <li><a href="#deleting-copying-renaming-and-moving-filesdirectories">Deleting, Copying, Renaming and Moving Files/Directories</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+<p>libGDX applications run on four different platforms: desktop systems (Windows, Linux, macOS, headless), Android, iOS, and JavaScript/WebGL capable browsers. Each of these platforms handles file I/O a little differently. libGDX’s <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/Files.html">Files</a> <a href="https://github.com/libgdx/libgdx/tree/master/gdx/src/com/badlogic/gdx/Files.java">(code)</a> module provides a common interface for all these platforms with the ability to:</p>
+
+<ul>
+  <li>Read from a file</li>
+  <li>Write to a file</li>
+  <li>Copy a file</li>
+  <li>Move a file</li>
+  <li>Delete a file</li>
+  <li>List files and directories</li>
+  <li>Check whether a file/directory exists</li>
+</ul>
+
+<p>Before diving into the specifics of libGDX’s file handling, users should be aware of certain differences between the filesystems for all supported platforms:</p>
+
+<h2 id="platform-filesystems">Platform Filesystems</h2>
+<h3 id="desktop-windows-linux-mac-os-x-headless">Desktop (Windows, Linux, Mac OS X, Headless)</h3>
+<p>On a desktop OS, the filesystem is one big chunk of memory. Files can be referenced with paths relative to the current working directory (the directory the application was executed in) or absolute paths. Ignoring file permissions, files and directories are usually readable and writable by all applications.</p>
+
+<h3 id="android">Android</h3>
+<p>On Android the situation is a little bit more complex. Files can be stored inside the application’s <a href="https://en.wikipedia.org/wiki/APK_(file_format)">APK</a> either as resources or as assets. These files are read-only. libGDX only uses the <a href="https://developer.android.com/reference/android/content/res/AssetManager">assets mechanism</a>, as it provides raw access to the byte streams and more closely resembles a traditional filesystem. <a href="https://developer.android.com/guide/topics/resources/providing-resources">Resources</a> better lend themselves to normal Android applications but introduce problems when used in games. Android manipulates them at load time, e.g. it automatically resizes images.</p>
+
+<p>Assets are stored in your project’s <code class="language-plaintext highlighter-rouge">assets</code> directory and will be packaged with your APK automatically when you deploy your application. They are accessible via <code class="language-plaintext highlighter-rouge">Gdx.files.internal</code>, a read-only directory not to be confused with what the Android documentation refers to as “internal”. No other application on the Android system can access these files.</p>
+
+<p>Files can also be stored on what the Android documentation refers to as <a href="https://developer.android.com/training/data-storage">internal storage</a> (accessible via <code class="language-plaintext highlighter-rouge">Gdx.files.local</code> in LibGDX), where they are readable and writable. Each installed application has a dedicated internal storage directory. This directory is again only accessible by that application. One can think of this storage as a private working area for the application.</p>
+
+<p>Finally, files can be stored on the external storage, accessible via <code class="language-plaintext highlighter-rouge">Gdx.files.external</code> in LibGDX. The behaviour regarding external files was changed in Android over the times, hence in LibGDX:</p>
+
+<ul>
+  <li>libGDX up to 1.9.11 uses the Android external storage directory. That is up to Android 4.3 the sd card directory, which might not always be available, and a virtual emulated sd card directory on later versions. For accessing these files, you need to add a permission to your AndroidManifest.xml file, see <a href="/wiki/app/starter-classes-and-configuration#permissions">Permissions</a>. From Android 6 on, even a runtime permission is needed to use the directory and starting from Android 11, access is forbidden completely for normal apps (if you want to publish on the Play Store).</li>
+  <li>libGDX 1.9.12 or later uses the App external storage directory. This directory (located at Android/data/data/your_package_id/) is readable and writable from your app without any further permission and changes. Other apps (like file managers) can access the files up to Android 10, from Android 11 on the directory is only accessible via USB access. Note: If the user uninstalls the app, the data saved here will be deleted if not copied to another location before by the user.</li>
+</ul>
+
+<p>The App external storage is initialized at game start for you to use, therefore Android creates an empty directory. If you don’t use external files and want to suppress this behaviour, you can do so by overriding the instantiation of <code class="language-plaintext highlighter-rouge">AndroidFiles</code> in <code class="language-plaintext highlighter-rouge">AndroidApplication#createFiles</code> (1.9.14 and up):</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">protected</span> <span class="nc">AndroidFiles</span> <span class="nf">createFiles</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">getFilesDir</span><span class="o">();</span> <span class="c1">// workaround for Android bug #10515463</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">DefaultAndroidFiles</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">getAssets</span><span class="o">(),</span> <span class="k">this</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="ios">iOS</h3>
+<p>On iOS all file types are available.</p>
+
+<h3 id="javascriptwebgl">Javascript/WebGL</h3>
+<p>A raw Javascript/WebGL application doesn’t have a traditional filesystem concept. Instead, assets like images are referenced by URLs pointing to files on one or more servers. Modern browsers also support <a href="http://diveintohtml5.info/storage.html">Local Storage</a> which comes close to a traditional read/write filesystem. The problem with local storage is that the storage amount available by default is fairly small, not standardized, and there no (good) way to accurately query the quota. For this reason, the preferences API is currently the only way to write local data persistently on the JS platform.</p>
+
+<p>libGDX does some magic under the hood to provide you with a read-only filesystem abstraction.</p>
+
+<h2 id="file-storage-types">File (Storage) Types</h2>
+<p>A file in libGDX is represented by an instance of the <a href="https://github.com/libgdx/libgdx/tree/master/gdx/src/com/badlogic/gdx/files/FileHandle.java">FileHandle</a> class. A FileHandle has a type which defines where the file is located. The following table illustrates the availability and location of each file type for each platform.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><em>Type</em></th>
+      <th style="text-align: left"><em>Description, file path and features</em></th>
+      <th style="text-align: center"><em>Desktop</em></th>
+      <th style="text-align: center"><em>Android</em></th>
+      <th style="text-align: center"><em>HTML5</em></th>
+      <th style="text-align: center"><em>iOS</em></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Classpath</td>
+      <td style="text-align: left">Classpath files are directly stored in your source folders. These get packaged with your jars and are always <em>read-only</em>. They have their purpose, but should be avoided if possible.</td>
+      <td style="text-align: center">Yes</td>
+      <td style="text-align: center">Yes</td>
+      <td style="text-align: center">No</td>
+      <td style="text-align: center">Yes</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Internal</td>
+      <td style="text-align: left">Internal files are relative to the application’s <em>root</em> or <em>working</em> directory on desktops, relative to the <em>assets</em> directory on Android, and relative to the <code class="language-plaintext highlighter-rouge">core/assets/</code> directory of your GWT project. These files are <em>read-only</em>. If a file can’t be found on the internal storage, the file module falls back to searching the file on the classpath. This is necessary if one uses the asset folder linking mechanism of Eclipse, see <a href="/wiki/start/project-generation">Project Setup</a>. Relative paths (<code class="language-plaintext highlighter-rouge">./</code> or <code class="language-plaintext highlighter-rouge">../</code>) are not always supported and thus shouldn’t be used.</td>
+      <td style="text-align: center">Yes</td>
+      <td style="text-align: center">Yes</td>
+      <td style="text-align: center">Yes</td>
+      <td style="text-align: center">Yes</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Local</td>
+      <td style="text-align: left">Local files are stored relative to the application’s <em>root</em> or <em>working</em> directory on desktops and relative to the internal (private) storage of the application on Android. Note that Local and internal are mostly the same on the desktop.</td>
+      <td style="text-align: center">Yes</td>
+      <td style="text-align: center">Yes</td>
+      <td style="text-align: center">No</td>
+      <td style="text-align: center">Yes</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">External</td>
+      <td style="text-align: left">External files paths are relative to the <a href="https://www.roseindia.net/java/beginners/UserHomeExample.shtml">home directory</a> of the current user on desktop systems. On Android, the app-specific external storage is used.</td>
+      <td style="text-align: center">Yes</td>
+      <td style="text-align: center">Yes</td>
+      <td style="text-align: center">No</td>
+      <td style="text-align: center">Yes</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Absolute</td>
+      <td style="text-align: left">Absolute files need to have their fully qualified paths specified. <br /><em>Note</em>: For the sake of portability, this option must be used only when absolutely necessary</td>
+      <td style="text-align: center">Yes</td>
+      <td style="text-align: center">Yes</td>
+      <td style="text-align: center">No</td>
+      <td style="text-align: center">Yes</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Absolute and classpath files are mostly used for tools such as desktop editors, that have more complex file i/o requirements. For games these can be safely ignored. The order in which you should use the types is as follows:</p>
+
+<ul>
+  <li><strong>Internal Files</strong>: all the assets (images, audio files, etc.) that are packaged with your application are internal files. If you use the Setup UI, just drop them in your Android project’s <code class="language-plaintext highlighter-rouge">assets</code> folder.</li>
+  <li><strong>Local Files</strong>: if you need to write small files, e.g. save a game state, use local files. These are in general private to your application. If you want a key/value store instead, you can also look into <a href="/wiki/preferences">Preferences</a>.
+Note that Android’s app-specific cache can be accessed using ‘../cache’. Files stored there can be cleared by the user via the ‘clear cache’ button found in the app’s settings.</li>
+  <li><strong>External Files</strong>: if you need to write big files, e.g. screenshots, or download files from the web, they could go on the external storage. Note that the external storage is volatile, a user can remove it or delete the files you wrote. Because they are not cleaned up and volatile, it is usually simpler to use local file storage.</li>
+</ul>
+
+<h2 id="checking-storage-availability-and-paths">Checking Storage availability and paths</h2>
+<p>The different storage types might not be available depending on the platform your application runs on. You can query this kind of information via the Files module:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">boolean</span> <span class="n">isExtAvailable</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">isExternalStorageAvailable</span><span class="o">();</span>
+<span class="kt">boolean</span> <span class="n">isLocAvailable</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">isLocalStorageAvailable</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>You can also query the root paths for external and local storage:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">extRoot</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">getExternalStoragePath</span><span class="o">();</span>
+<span class="nc">String</span> <span class="n">locRoot</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">getLocalStoragePath</span><span class="o">();</span>
+</code></pre></div></div>
+
+<h2 id="obtaining-filehandles">Obtaining FileHandles</h2>
+<p>A <code class="language-plaintext highlighter-rouge">FileHandle</code> is obtained by using one of the aforementioned types directly from the <em>Files</em> module.
+The following code obtains a handle for the internal <code class="language-plaintext highlighter-rouge">myfile.txt file</code>.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FileHandle</span> <span class="n">handle</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"data/myfile.txt"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>If you used the <a href="/wiki/start/project-generation">gdx-setup tool</a>, this file will be contained in your project’s <code class="language-plaintext highlighter-rouge">assets</code> folder, <code class="language-plaintext highlighter-rouge">/assets/data</code> to be specific. Your desktop and html projects link to this folder in Eclipse, and will pick it up automatically when executed from within Eclipse.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FileHandle</span> <span class="n">handle</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">classpath</span><span class="o">(</span><span class="s">"myfile.txt"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">myfile.txt</code> file is located in the directory where the compiled classes reside or the included jar files.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FileHandle</span> <span class="n">handle</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">external</span><span class="o">(</span><span class="s">"myfile.txt"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>In this case, <code class="language-plaintext highlighter-rouge">myfile.txt</code> needs to be in the users’ <a href="https://en.wikipedia.org/wiki/Home_directory">home directory</a> (<code class="language-plaintext highlighter-rouge">/home/&lt;user&gt;/myfile.txt</code> on Linux, <code class="language-plaintext highlighter-rouge">/Users/&lt;user&gt;/myfile.txt</code> on macOS and <code class="language-plaintext highlighter-rouge">C:\Users\&lt;user&gt;\myfile.txt</code> on Windows) on desktop, and in the root of the SD card on Android.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FileHandle</span> <span class="n">handle</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">absolute</span><span class="o">(</span><span class="s">"/some_dir/subdir/myfile.txt"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>In the case of absolute file handle, the file has to be exactly where the full path points. In <code class="language-plaintext highlighter-rouge">/some_dir/subdir/</code> of the current drive on Windows or the exact path on linux, macOS and Android.</p>
+
+<p>FileHandle instances are passed to methods of classes they are responsible for reading and writing data. E.g. a FileHandle needs to be specified when loading an image via the Texture class, or when loading an audio file via the Audio module.</p>
+
+<h2 id="listing-and-checking-properties-of-files">Listing and Checking Properties of Files</h2>
+<p>Sometimes it is necessary to check for the existence of a specific file or list the contents of a directory. FileHandle provides methods to do just that in a concise way.</p>
+
+<p>Here’s an example that checks whether a specific file exists and whether a file is actually a directory or not.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">boolean</span> <span class="n">exists</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">external</span><span class="o">(</span><span class="s">"doitexist.txt"</span><span class="o">).</span><span class="na">exists</span><span class="o">();</span>
+<span class="kt">boolean</span> <span class="n">isDirectory</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">external</span><span class="o">(</span><span class="s">"test/"</span><span class="o">).</span><span class="na">isDirectory</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>Listing a directory is equally simple:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FileHandle</span><span class="o">[]</span> <span class="n">files</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">local</span><span class="o">(</span><span class="s">"mylocaldir/"</span><span class="o">).</span><span class="na">list</span><span class="o">();</span>
+<span class="k">for</span><span class="o">(</span><span class="nc">FileHandle</span> <span class="nl">file:</span> <span class="n">files</span><span class="o">)</span> <span class="o">{</span>
+   <span class="c1">// do something interesting here</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>WARNING</strong>: If you don’t specify a folder the list will be empty.</p>
+
+<p><strong>Note</strong>: Listing of internal directories is not supported on Desktop. To work around this problem, you can <a href="https://lyze.dev/2021/04/29/libGDX-Internal-Assets-List/">generate a list of files before deployment</a>.</p>
+
+<p>We can also ask for the parent directory of a file or create a FileHandle for a file in a directory (aka “child”).</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FileHandle</span> <span class="n">parent</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"data/graphics/myimage.png"</span><span class="o">).</span><span class="na">parent</span><span class="o">();</span>
+<span class="nc">FileHandle</span> <span class="n">child</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"data/sounds/"</span><span class="o">).</span><span class="na">child</span><span class="o">(</span><span class="s">"myaudiofile.mp3"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">parent</code> would point to <code class="language-plaintext highlighter-rouge">"data/graphics/"</code>, child would point to <code class="language-plaintext highlighter-rouge">data/sounds/myaudiofile.mp3"</code>.</p>
+
+<p>There are many more methods in FileHandle that let you check for specific attributes of a file. Please refer to the Javadocs for detail.</p>
+
+<p><strong>Note</strong>: These functions are mostly unimplemented in the HTML5 back-end at the moment. Try not to rely on them too much if HTML5 will be a target of your application.</p>
+
+<h2 id="error-handling">Error Handling</h2>
+<p>Some operations on FileHandles can fail. We adopted <code class="language-plaintext highlighter-rouge">RuntimeExceptions</code> to signal errors instead of checked Exceptions. Our reasoning goes like this: 90% of the time we will access files that we know exist and are readable (e.g. internal files packaged with our application).</p>
+
+<h2 id="reading-from-a-file">Reading from a File</h2>
+<p>After obtaining a FileHandle, we can either pass it to a class that knows how to load content from the file (e.g. an image), or read it ourselves. The latter is done through any of the input methods in the FileHandle class. The following example illustrates how to load text from an internal file:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FileHandle</span> <span class="n">file</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"myfile.txt"</span><span class="o">);</span>
+<span class="nc">String</span> <span class="n">text</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">readString</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>If you have binary data, you can easily load the file into a byte array:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FileHandle</span> <span class="n">file</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"myblob.bin"</span><span class="o">);</span>
+<span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">readBytes</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>The FileHandle class has many more read methods. Check the <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/files/FileHandle.html">Javadocs</a> for more information.</p>
+
+<h2 id="writing-to-a-file">Writing to a File</h2>
+<p>Similarly to reading files, FileHandle also provides methods to write to a file. Note that only the local, external and absolute file types support writing to a file. Writing a string to a file works as follows:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FileHandle</span> <span class="n">file</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">local</span><span class="o">(</span><span class="s">"myfile.txt"</span><span class="o">);</span>
+<span class="n">file</span><span class="o">.</span><span class="na">writeString</span><span class="o">(</span><span class="s">"My god, it's full of stars"</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>The second parameter of <code class="language-plaintext highlighter-rouge">FileHandle#writeString</code> specifies if the content should be appended to the file. If set to false, the current content of the file will be overwritten.</p>
+
+<p>One can of course also write binary data to a file:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FileHandle</span> <span class="n">file</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">local</span><span class="o">(</span><span class="s">"myblob.bin"</span><span class="o">);</span>
+<span class="n">file</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="k">new</span> <span class="kt">byte</span><span class="o">[]</span> <span class="o">{</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="o">-</span><span class="mi">2</span><span class="o">,</span> <span class="mi">10</span> <span class="o">},</span> <span class="kc">false</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>There are many more methods in FileHandle that facilitate writing in different ways, e.g. using <code class="language-plaintext highlighter-rouge">OutputStream</code>. Again, refer to the Javadocs for details.</p>
+
+<h2 id="deleting-copying-renaming-and-moving-filesdirectories">Deleting, Copying, Renaming and Moving Files/Directories</h2>
+<p>These operations are again only possible for writable file types (local, external, absolute). Note however, that the source for a copying operation can also be a read only FileHandle. A few examples:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FileHandle</span> <span class="n">from</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"myresource.txt"</span><span class="o">);</span>
+<span class="n">from</span><span class="o">.</span><span class="na">copyTo</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">external</span><span class="o">(</span><span class="s">"myexternalcopy.txt"</span><span class="o">));</span>
+
+<span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">external</span><span class="o">(</span><span class="s">"myexternalcopy.txt"</span><span class="o">).</span><span class="na">rename</span><span class="o">(</span><span class="s">"mycopy.txt"</span><span class="o">);</span>
+<span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">external</span><span class="o">(</span><span class="s">"mycopy.txt"</span><span class="o">).</span><span class="na">moveTo</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">local</span><span class="o">(</span><span class="s">"mylocalcopy.txt"</span><span class="o">));</span>
+
+<span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">local</span><span class="o">(</span><span class="s">"mylocalcopy.txt"</span><span class="o">).</span><span class="na">delete</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>Note that source and target can be files or directories.</p>
+
+<p>For more information on available methods, check the <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/files/FileHandle.html">FileHandle Javadocs</a>.</p>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

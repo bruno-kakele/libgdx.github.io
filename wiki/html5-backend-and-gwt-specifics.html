@@ -1,0 +1,700 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>HTML5 Backend and GWT Specifics - libGDX</title>
+
+  <meta name="description" content="Welcome to a place of magic and wonder, the World Wide Web! Even though some folks say this Internet thing is “just a fad,” and we should keep using usenet...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="HTML5 Backend and GWT Specifics">
+<meta property="og:url" content="https://libgdx.com/wiki/html5-backend-and-gwt-specifics">
+
+
+  <meta property="og:description" content="Welcome to a place of magic and wonder, the World Wide Web! Even though some folks say this Internet thing is “just a fad,” and we should keep using usenet...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/html5-backend-and-gwt-specifics">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">HTML5 Backend and GWT Specifics
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/html5-backend-and-gwt-specifics.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/html5-backend-and-gwt-specifics.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <p>Welcome to a place of magic and wonder, the World Wide Web! Even though some folks say this Internet thing is “just a fad,” and we should keep using usenet and gopher, there’s at least one thing the WWW has that those technologies don’t:</p>
+
+<h2 id="libgdx-games">libGDX Games</h2>
+
+<p>That’s right! You can make your very own libGDX games that run in an HTML5-capable web browser, which I assume is some advanced form of Netscape Navigator. This is possible by GWT, or Google Web Toolkit! I know what you’re thinking, Google? The guys who are trying to let people search the Internet with a form? What are they doing with libGDX? I have no idea either. If you want to make your own libGDX game deploy to the web using GWT, well, just make a project in the latest setup jar and make sure to check the <code class="language-plaintext highlighter-rouge">Html</code> checkbox. The rest should be straightforward!</p>
+
+<p><strong>BUT IT SOMETIMES ISN’T, AT FIRST</strong></p>
+
+<p>So there are a few things that are fundamentally different about developing using GWT as opposed to running a desktop project. You’ll want to get familiar with two Gradle tasks in particular; you can launch these tasks from your IDE if you aren’t comfortable on the command line, but command-line Gradle tends to avoid problems when the IDE isn’t working as well as we would like. <code class="language-plaintext highlighter-rouge">gradlew html:superDev</code> will be your main tool during development; it allows for a much-improved debugging experience and allows quickly reloading changes to the Java code. <code class="language-plaintext highlighter-rouge">gradlew html:dist</code> produces a fully-functioning web page that can be uploaded to a static web host (such as <a href="https://itch.io/developers">itch.io</a> or <a href="https://pages.github.com/">GitHub Pages</a>, both free); it also optimizes the web page so the game in it will perform better, which makes <code class="language-plaintext highlighter-rouge">dist</code> take a little longer than <code class="language-plaintext highlighter-rouge">superDev</code>.</p>
+
+<h2 id="superdev">superDev</h2>
+
+<p>superDev allows you to debug your HTML5 application. This is not necessary in most cases: if there are problems in your core game, you can debug the desktop application. But sometimes, there are bugs only appearing when running on HTML5. You can debug the application with the following steps:</p>
+
+<ul>
+  <li>Run the <code class="language-plaintext highlighter-rouge">html:superdev</code> Gradle task. It compiles the game and sets up a local HTTP server. When it is done, it will idle to keep the server running.</li>
+  <li>Your game is available here: <a href="http://localhost:8080/index.html">http://localhost:8080/index.html</a> (current config) or <a href="http://localhost:8080/html/">http://localhost:8080/html/</a> (older Gradle configuration with Jetty plugin) - open the page with <em>Chrome</em> to debug</li>
+  <li>Hit the big reload button and hit compile. The game will recompile and source maps will be set up.</li>
+  <li>After the game restarted, open Chrome’s dev console with F12 and navigate to the sources tab. Hit Ctrl-P and enter the name of the Java file you want to debug. The Java file will open within Chrome’s dev console and you can set a break point. You are able to step through the Java code lines. However, debug variables will be generated JS names but you’ll be able to make sense of it.</li>
+  <li>When you are done, you can stop the Gradle task with Ctrl-C.</li>
+</ul>
+
+<p>If your bug does not show up on Chrome, but only on Firefox or Safari, you are in bad luck. No debugging is available. But you can work with debug logging and, to avoid unreadable stack traces, you can turn off the obfuscation by adding this line to HTML project’s <code class="language-plaintext highlighter-rouge">build.gradle</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gwt {
+  // right below compiler.strict = true
+  compiler.style = org.wisepersist.gradle.plugins.gwt.Style.DETAILED
+}
+</code></pre></div></div>
+
+<h2 id="dist-information">dist Information</h2>
+
+<p>Should be pretty straightforward; the dist is generated in <code class="language-plaintext highlighter-rouge">html/build/dist/</code>. You can delete the sourcemap files if you feel you won’t be debugging the dist; they’re usually a few MB in size and are in <code class="language-plaintext highlighter-rouge">html/build/dist/WEB-INF/deploy/html/symbolMaps</code>.</p>
+
+<h2 id="fullscreen-functionality">Fullscreen Functionality</h2>
+
+<p>Surprisingly, fullscreen functionality actually works on the HTML backend. To enable fullscreen, call the following method from within your core project:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">setFullscreenMode</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getDisplayMode</span><span class="o">());</span>
+</code></pre></div></div>
+
+<p>The user will be prompted to press “ESC” to exit fullscreen. And it even works on mobile. Great! It does have some caveats though. Turns out you can’t activate full screen on iOS. Also, if you choose to use the “Resizable Application” option in the HTML Launcher, you’ll need to rewrite the ResizeListener to the following:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">ResizeListener</span> <span class="kd">implements</span> <span class="nc">ResizeHandler</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onResize</span><span class="o">(</span><span class="nc">ResizeEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">isFullscreen</span><span class="o">())</span> <span class="o">{</span>
+            <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">setFullscreenMode</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getDisplayMode</span><span class="o">());</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">width</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">-</span> <span class="no">PADDING</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">height</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getHeight</span><span class="o">()</span> <span class="o">-</span> <span class="no">PADDING</span><span class="o">;</span>
+            <span class="n">getRootPanel</span><span class="o">().</span><span class="na">setWidth</span><span class="o">(</span><span class="s">""</span> <span class="o">+</span> <span class="n">width</span> <span class="o">+</span> <span class="s">"px"</span><span class="o">);</span>
+            <span class="n">getRootPanel</span><span class="o">().</span><span class="na">setHeight</span><span class="o">(</span><span class="s">""</span> <span class="o">+</span> <span class="n">height</span> <span class="o">+</span> <span class="s">"px"</span><span class="o">);</span>
+            <span class="n">getApplicationListener</span><span class="o">().</span><span class="na">resize</span><span class="o">(</span><span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">);</span>
+            <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">setWindowedMode</span><span class="o">(</span><span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Don’t forget to also set the fullscreen orientation for mobile in the getConfig():</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cfg</span><span class="o">.</span><span class="na">fullscreenOrientation</span> <span class="o">=</span> <span class="nc">GwtGraphics</span><span class="o">.</span><span class="na">OrientationLockType</span><span class="o">.</span><span class="na">LANDSCAPE</span><span class="o">;</span>
+</code></pre></div></div>
+
+<h2 id="resolution-on-mobiles">Resolution on mobiles</h2>
+
+<p>On mobile, if your game is run in an iframe, or if you switch to full screen, you will notice that your game looks pixelated. That is because the reported screen size of mobiles is not the real screen size. You can enable using the real screen size with <code class="language-plaintext highlighter-rouge">config.usePhysicalPixels = true;</code>. This will also affect HDPI and Retina screens on desktop, so maybe you want to use <code class="language-plaintext highlighter-rouge">usePhysicalPixels = GwtApplication.isMobileDevice()</code>. <a href="https://github.com/libgdx/libgdx/pull/5691">Check out this PR</a> for detailed information.</p>
+
+<h2 id="changing-the-load-screen-progress-bar">Changing the Load Screen Progress Bar</h2>
+
+<p>As much as we love libGDX, the default loading progress bar when preparing the HTML game screams “newbie”. Impress your friends and bring honor to your family name by making a custom progress bar! Add the following to your HtmlLauncher class in your HTML project:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="nc">Preloader</span><span class="o">.</span><span class="na">PreloaderCallback</span> <span class="nf">getPreloaderCallback</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="nf">createPreloaderPanel</span><span class="o">(</span><span class="no">GWT</span><span class="o">.</span><span class="na">getHostPageBaseURL</span><span class="o">()</span> <span class="o">+</span> <span class="s">"preloadlogo.png"</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="nd">@Override</span>
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">adjustMeterPanel</span><span class="o">(</span><span class="nc">Panel</span> <span class="n">meterPanel</span><span class="o">,</span> <span class="nc">Style</span> <span class="n">meterStyle</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">meterPanel</span><span class="o">.</span><span class="na">setStyleName</span><span class="o">(</span><span class="s">"gdx-meter"</span><span class="o">);</span>
+    <span class="n">meterPanel</span><span class="o">.</span><span class="na">addStyleName</span><span class="o">(</span><span class="s">"nostripes"</span><span class="o">);</span>
+    <span class="n">meterStyle</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">"backgroundColor"</span><span class="o">,</span> <span class="s">"#ffffff"</span><span class="o">);</span>
+    <span class="n">meterStyle</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">"backgroundImage"</span><span class="o">,</span> <span class="s">"none"</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>“preloadlogo.png” is an image you place in the “webapp” folder in the HTML project for DIST builds. Place the image in your “war” folder as well for your SUPERDEV builds. Adjust your color to fit the theme of your game. Enjoy yourself.</p>
+
+<p class="notice--primary">Please note that you can only use pure GWT facilities to display the loading screen. libGDX APIs will only be available after the preloading is complete.</p>
+
+<h2 id="speeding-up-preload-process">Speeding up preload process</h2>
+
+<p>Speaking of the preloader: The HTML5 preloader is necessary, because usual gdx games rely on all assets being ready to access when needed. It prefetches every file in your asset directory. This may take some time and is not necessary if your game is a game that does not need all assets for presenting the startup screen. Think of all the people out there not having high speed internet connections.</p>
+
+<p>From 1.9.12 on, you can decrease your preload time a lot if you use asset manager to load your assets later. You can override a predefined <code class="language-plaintext highlighter-rouge">AssetFilter</code> with your own AssetFilter on GWT and return <code class="language-plaintext highlighter-rouge">false</code> for all asset files that are not needed before game start. Make sure these files are only loaded via AssetManager, otherwise your game will freeze when using such assets.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class AssetFilter extends DefaultAssetFilter {
+    @Override
+    public boolean preload(String file) {
+        return !file.endsWith(".png") || file.startsWith("data/hud/");
+    }
+}
+</code></pre></div></div>
+
+<p>For compile process to pick up this asset filter instead of your own, add the following configuration to your <code class="language-plaintext highlighter-rouge">GdxDefinition.gwt.xml</code> file:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &lt;set-configuration-property name="gdx.assetfilterclass" value="your.package.AssetFilter"/&gt;
+</code></pre></div></div>
+
+<p>(<a href="https://github.com/MrStahlfelge/SMC-libgdx/commit/b8d595376fe98a0ac55c1cf63f5f18c83c9afdfe">See game source commit using the feature</a>)</p>
+
+<p>Prior 1.9.12, you can use <a href="https://github.com/MrStahlfelge/gdx-backends">an alternative backend</a>.</p>
+
+<h2 id="preventing-keys-from-triggering-scrolling-and-other-browser-functions">Preventing Keys From Triggering Scrolling and Other Browser Functions</h2>
+
+<p>On a normal web page, if you press the down arrow on your keyboard, it will scroll the page up. That’s nice and all, but maybe you don’t want that to happen when players are trying to move the character in your game. To prevent this, you have to set libGDX to prevent the default actions of special keys by catching them:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Gdx</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">setCatchKey</span><span class="o">(</span><span class="nc">Input</span><span class="o">.</span><span class="na">Keys</span><span class="o">.</span><span class="na">SPACE</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h2 id="preventing-right-click-context-menu">Preventing Right Click Context Menu</h2>
+
+<p>Similarly to keyboard keys, the right click context menu can be prevented from interrupting your game. You’ll notice that there are already functions to prevent left click from doing anything unexpected. You just need to add an additional line to apply the fix to right click as well. The following must be added to the script block of your index.html in the “html/webapp” folder (dist) and “html/war” folder (superDev):</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// prevent right click</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">embed-html</span><span class="dl">'</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">contextmenu</span><span class="dl">'</span><span class="p">,</span> <span class="nx">handleMouseDown</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="sound-and-music">Sound and Music</h2>
+
+<p>You will probably face some problems with sounds and music, especially on mobile platforms. It is not recommended to play sounds immediately on startup of the game as browsers probably will block this.</p>
+
+<p>The implementation the official HTML5 backend uses has some other restrictions, too. Pitch will not work and you will experience a lag on playing the sounds the first time. If you want to improve the situation, <a href="https://github.com/libgdx/libgdx/pull/5659">check out this PR</a></p>
+
+<h2 id="differences-between-gwt-and-desktop-java">Differences Between GWT and Desktop Java</h2>
+
+<h3 id="numbers">Numbers</h3>
+
+<ul>
+  <li>When some number is very important and you want to make sure it is treated identically on desktop/Android and GWT, use a <code class="language-plaintext highlighter-rouge">long</code>.</li>
+  <li>When you know a number will never be especially large (specifically, that it won’t encounter numeric overflow by exceeding roughly 2 billion or negative 2 billion), feel free to use an <code class="language-plaintext highlighter-rouge">int</code>.
+    <ul>
+      <li>Math with <code class="language-plaintext highlighter-rouge">int</code>s is much faster than math with <code class="language-plaintext highlighter-rouge">long</code>s on GWT, because any <code class="language-plaintext highlighter-rouge">int</code> is represented by a JavaScript Number and web browsers are used to working with Numbers all the time. On the other hand, any <code class="language-plaintext highlighter-rouge">long</code> is represented by a specific type of JavaScript Object that stores three Numbers to help ensure precision.</li>
+      <li>A JavaScript Number, so an <code class="language-plaintext highlighter-rouge">int</code>, is almost the same as a <code class="language-plaintext highlighter-rouge">double</code> in Java, but it also allows bitwise operations to be used on it.
+        <ul>
+          <li>Because Numbers act like <code class="language-plaintext highlighter-rouge">double</code>s, they don’t overflow, and can go higher than <code class="language-plaintext highlighter-rouge">Integer.MAX_VALUE</code> (2147483647) and lower than <code class="language-plaintext highlighter-rouge">Integer.MIN_VALUE</code> (-2147483648). Using any bitwise operation on them will bring any numbers that got too big back into the normal <code class="language-plaintext highlighter-rouge">int</code> range. If you encounter fishy numeric results that seem way too large for an int, try using this simple trick: <code class="language-plaintext highlighter-rouge">int fishy = Integer.MAX_VALUE * 5; int fixed = (Integer.MAX_VALUE * 5) | 0;</code> On desktop, adding <code class="language-plaintext highlighter-rouge">| 0</code> won’t change anything, but it can correct numbers that got weird on GWT. Or, you can use a <code class="language-plaintext highlighter-rouge">long</code>.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>The problem with <code class="language-plaintext highlighter-rouge">long</code> values on GWT is that they aren’t visible to reflection, so libGDX’s Json class won’t automatically write them or read them. You can work around this with Json’s handy custom serializer behavior, so it isn’t a huge issue.</li>
+  <li>Floats can have more equality check problems than usual. Make sure you make all equality checks for floats by using <code class="language-plaintext highlighter-rouge">MathUtils.isEqual()</code>.</li>
+</ul>
+
+<h3 id="other-known-limitations">Other Known Limitations</h3>
+
+<ul>
+  <li>Some java classes/features that are not supported:
+    <ul>
+      <li>System.nanoTime</li>
+      <li>Java reflection. You must only use libGDX reflection utils, see <a href="/wiki/utils/reflection#gwt">this wiki page</a> for more details.</li>
+      <li>Multithreading is not supported.</li>
+    </ul>
+  </li>
+  <li>Audio:
+    <ul>
+      <li>Sound pitch is not implemented prior 1.9.12. You can use <a href="https://github.com/MrStahlfelge/gdx-backends">an alternative backend</a> which is based on WebAudioAPI and supports it.</li>
+      <li>Your game needs a user interaction (eg. click on a button) before playing any music or sounds. This is a limitation for any games played in a browser.</li>
+    </ul>
+  </li>
+  <li>TiledMaps should be saved with Base64 encoding.</li>
+  <li>Pixmap
+    <ul>
+      <li>Some Pixmap methods are not supported (eg. loading from binary data).</li>
+      <li>Some drawings (eg. lines) are antialiased which is not always wanted. If you need non-antialiased lines, you can <a href="https://github.com/libgdx/libgdx/issues/6019#issuecomment-702916344">draw it pixel by pixel</a> or use FrameBuffer with a ShapeRenderer to achieve it.</li>
+    </ul>
+  </li>
+  <li>WebGL 1.0 is used and has its own limitations compared with OpenGL or GLES, among them:
+    <ul>
+      <li>NPOT (non power of two) textures are not supported with MipMap filters and/or Repeat wrapping.</li>
+      <li>Gdx.graphics.supportsExtension(…) should be called for each extension prior to enabling it in shaders.</li>
+    </ul>
+  </li>
+  <li>Some libGDX extensions are not supported or require additional libraries:
+    <ul>
+      <li>Bullet</li>
+      <li>Freetype requires <a href="https://github.com/intrigus/gdx-freetype-gwt">gdx-freetype-gwt</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="further-reading">Further Reading</h2>
+
+<p><a href="https://web.archive.org/web/20201028180932/https://www.badlogicgames.com/wordpress/?p=3073">The original Super Dev Instructions from Mario</a></p>
+
+<p><a href="https://www.gamefromscratch.com/post/2013/10/07/Speeding-up-GWT-compilation-speeds-in-a-LibGDX-project.aspx">How to speed up GWT compilation</a></p>
+
+<p><a href="/wiki/misc/local-libgdx-package-use-with-gwt">Building libGDX from source and adding new files to gdx.gwt.xml</a></p>
+
+<p><a href="https://www.youtube.com/watch?v=I_85usDvJvQ">HTML5 - GWT Explained on YouTube</a></p>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

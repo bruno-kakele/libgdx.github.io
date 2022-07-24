@@ -1,0 +1,630 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Coordinate systems - libGDX</title>
+
+  <meta name="description" content="When working with libGDX (or any other OpenGL based system), you will have to deal with various coordinate systems. This is because OpenGL abstracts away device dependent units, making it...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Coordinate systems">
+<meta property="og:url" content="https://libgdx.com/wiki/articles/coordinate-systems">
+
+
+  <meta property="og:description" content="When working with libGDX (or any other OpenGL based system), you will have to deal with various coordinate systems. This is because OpenGL abstracts away device dependent units, making it...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/articles/coordinate-systems">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Coordinate systems
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/articles/coordinate-systems.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/articles/coordinate-systems.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <p>When working with libGDX (or any other OpenGL based system), you will have to deal with various <a href="https://en.wikipedia.org/wiki/Coordinate_system">coordinate systems</a>. This is because OpenGL abstracts away device dependent units, making it more convenient to target multiple devices and to focus on game logic. Sometimes you may need to convert between coordinate systems for which libGDX offers various methods.</p>
+
+<p><strong>It is crucial to understand in which coordinate system you are working. Otherwise it can be easy to get confused and to make assumptions which aren’t correct.</strong></p>
+
+<p>On this page the various coordinate systems are listed. It is highly recommended to first get familiar with the <a href="https://en.wikipedia.org/wiki/Cartesian_coordinate_system">Cartesian coordinate system</a>, which is the most widely used coordinate system.</p>
+
+<ul>
+  <li><a href="#touch-coordinates">Touch coordinates</a></li>
+  <li><a href="#screen-or-image-coordinates">Screen or image coordinates</a></li>
+  <li><a href="#pixmap-and-texture-coordinates">Pixmap and texture coordinates</a></li>
+  <li><a href="#normalized-render-coordinates">Normalized render coordinates</a></li>
+  <li><a href="#normalized-texture-UV-coordinates">Normalized texture (UV) coordinates</a></li>
+  <li><a href="#world-coordinates">World coordinates</a></li>
+  <li><a href="#guihud-coordinates">GUI/HUD coordinates</a></li>
+  <li><a href="#game-coordinates">Game coordinates</a></li>
+</ul>
+
+<h2 id="touch-coordinates">Touch coordinates</h2>
+<ul>
+  <li>Units: pixels</li>
+  <li>System: y-down</li>
+  <li>Type: integer, can’t be fractional</li>
+  <li>Range: (0,0) (upper left corner) to (<code class="language-plaintext highlighter-rouge">Gdx.graphics.getWidth()-1</code>, <code class="language-plaintext highlighter-rouge">Gdx.graphics.getHeight()-1</code>) (lower right corner)</li>
+  <li>Usage: touch/mouse coordinates</li>
+  <li>Dependence: device specific</li>
+</ul>
+
+<p>Starts at the upper left <em>pixel</em> of the (application portion of the) physical screen and has the size of the (application portion of the) physical screens width and height in pixels.</p>
+
+<p><img src="/assets/wiki/images/screenpixels.png" alt="images/screenpixels.png" /></p>
+
+<p>Each coordinate is an index in the 2D array of this grid, representing a physical pixel on the screen. Therefore these coordinates are always represented as integers, they can’t be fractional.</p>
+
+<p>This coordinate system is based on the classic representation of the display, which is usually also closest to the device/OS specific implementation. If you’re familiar with canvas graphics or basic image editors, then you are probably already familiar with these coordinates. You might even lean towards using these as your default/favorite, which you shouldn’t.</p>
+
+<p>Whenever working with <a href="/wiki/input/mouse-touch-and-keyboard">mouse or touch</a> coordinates, you’ll be using this coordinate system. You typically want to convert these coordinates as soon as possible to a more convenient coordinate system. E.g. the <code class="language-plaintext highlighter-rouge">camera.unproject</code> or <code class="language-plaintext highlighter-rouge">viewport.unproject</code> method let’s you convert them to world coordinates (see below).</p>
+
+<h2 id="screen-or-image-coordinates">Screen or image coordinates</h2>
+<ul>
+  <li>Units: pixels</li>
+  <li>System: y-up</li>
+  <li>Type: integer, can’t be fractional</li>
+  <li>Range: (0,0) (lower left corner) to (<code class="language-plaintext highlighter-rouge">Gdx.graphics.getWidth()-1</code>, <code class="language-plaintext highlighter-rouge">Gdx.graphics.getHeight()-1</code>) (upper right corner)</li>
+  <li>Usage: viewport, scissors and pixmap</li>
+  <li>Dependence: device/resource/asset specific</li>
+</ul>
+
+<p>This is OpenGL’s counterpart to touch coordinates; that is: it is used to specify (index) a pixel of the (portion of the) physical screen. It is also used as indexer for an image in memory. Likewise, these are integers, they can’t be fractional.</p>
+
+<p>The only difference between touch and screen coordinates is that touch coordinates are y-down, while screen coordinates are y-up. Converting between them is therefore quite easy:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y</span> <span class="o">=</span> <span class="nc">Gdx</span><span class="o">.</span><span class="na">graphics</span><span class="o">.</span><span class="na">getHeight</span><span class="o">()</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">y</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p>You typically use these coordinates to specify which portion of the screen to render onto. For example when calling <a href="https://www.khronos.org/opengles/sdk/1.1/docs/man/glViewport.xml"><code class="language-plaintext highlighter-rouge">glViewport</code></a>, <a href="https://www.khronos.org/opengles/sdk/1.1/docs/man/glScissor.xml"><code class="language-plaintext highlighter-rouge">glScissor</code></a> or manipulating a pixmap (see next). In the majority of use-cases you don’t need this coordinate system a lot, if any, and it should be isolated from your game logic and its coordinate system. The <code class="language-plaintext highlighter-rouge">camera.project</code> and <code class="language-plaintext highlighter-rouge">viewport.project</code> methods can be used to convert world units to screen coordinates.</p>
+
+<h3 id="pixmap-and-texture-coordinates">Pixmap and texture coordinates</h3>
+
+<p>Pixmap coordinates are an exception. Pixmaps are commonly used to upload texture data. For example when loading a PNG image file to a texture, it is first decoded (uncompressed) to a Pixmap, which is the raw pixel data of the image, then it is copied to the GPU for use as texture. The texture can then be used to render to the screen. It is also possible to modify or create a pixmap by code, e.g. before uploading as texture data.</p>
+
+<p>The “problem” with this is that OpenGL expects the texture data to be in image coordinates, which is y-up. However, most image formats store the image data comparable to touch coordinates, which is y-down. libGDX does not translate the image data between the two (which would involve copying the image line by line), instead it simply copies the data as is. This practically causes a Texture loaded from Pixmap to be up-side-down.</p>
+
+<p>To compensate for this up-side-down texture, <code class="language-plaintext highlighter-rouge">SpriteBatch</code> flips the texture (UV) coordinates (see below) on the y axis when rendering. Likewise, fbx-conv has the option to flip texture coordinates on the y axis as well. However, when you use a texture which isn’t loaded from a pixmap, for example a Framebuffer, then this might cause that texture to appear up-side-down.</p>
+
+<h2 id="normalized-render-coordinates">Normalized render coordinates</h2>
+<ul>
+  <li>Units: one</li>
+  <li>System: y-up</li>
+  <li>Type: floating point</li>
+  <li>Range: (-1,-1) (lower left corner) to (+1,+1) (upper right corner)</li>
+  <li>Usage: shaders</li>
+  <li>Dependence: none</li>
+</ul>
+
+<p>The above coordinate systems have one big issue in common: they are device specific. To solve that, OpenGL allows you to use a device independent coordinate system which is automatically mapped to screen coordinates when rendering. This coordinate system is normalized in the range [-1,-1] and [+1,+1] with (0,0) exactly in the center of the screen or framebuffer (the render target).</p>
+
+<p><img src="/assets/wiki/images/normalizedcoordinates.png" alt="images/normalizedcoordinates.png" /></p>
+
+<p>The <em>vertex shader</em> outputs (<code class="language-plaintext highlighter-rouge">gl_Position</code>) its coordinates in this coordinate system. But other than that, you should never have to use this coordinate system in a practical use-case. It is sometimes used in tutorials and such, though, to show the basics.</p>
+
+<p>It might be worth to note that the normalization does not respect the aspect ratio. That is: the scale in the X direction does not have to match the scale in the Y direction. They are both within the range of <code class="language-plaintext highlighter-rouge">-1</code> to <code class="language-plaintext highlighter-rouge">+1</code>, regardless aspect ratio. It is up to the application to decide how to deal with various aspect ratios (see world units, below).</p>
+
+<p>The coordinates are floating point and no longer indexers. The device (GPU) will map these coordinates to the actual screen pixels using <a href="https://en.wikipedia.org/wiki/Rasterisation">rasterisation</a>. A good article (although targeting DirectX it also applies to OpenGL) for more information on that can be found <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/cc627092(v=vs.85).aspx">here</a>.</p>
+
+<h2 id="normalized-texture-uv-coordinates">Normalized texture (UV) coordinates</h2>
+<ul>
+  <li>Units: one</li>
+  <li>System: y-up</li>
+  <li>Type: floating point</li>
+  <li>Range: (0,0) (lower left corner) to (1,1) (upper right corner)</li>
+  <li>Usage: shaders, mesh, texture region, sprite</li>
+  <li>Dependence: none</li>
+</ul>
+
+<p>Likewise to the normalized render coordinates, OpenGL also uses normalized texture coordinates. The only difference is that these ranges from [0,0] to [1,1]. Depending on the specified wrap function, values outside that range will be mapped within that range.</p>
+
+<p><img src="/assets/wiki/images/texturecoordinates.png" alt="images/texturecoordinates.png" /></p>
+
+<p>These coordinates are also called <strong>UV coordinates</strong>. In many use cases you don’t have to deal with them. Typically these values are stored in the mesh or <code class="language-plaintext highlighter-rouge">TextureRegion</code>.</p>
+
+<p>The use of normalized texture coordinates is very important, because it makes them independent of the asset size. Or in other words: it allows you to replace your assets with a scaled down or scaled up version, without having to modify the UV coordinates. An example where this is used are <a href="https://en.wikipedia.org/wiki/Mipmap">mipmaps</a>.</p>
+
+<p>When rendering, the GPU converts the UV coordinates to a <a href="https://en.wikipedia.org/wiki/Texel_(graphics)">texel</a> (texture pixel). This is called “texture sampling” and is based on the <a href="https://en.wikipedia.org/wiki/Texture_filtering">texture filtering</a>.</p>
+
+<h2 id="world-coordinates">World coordinates</h2>
+<ul>
+  <li>Units: application specific, e.g. <a href="https://en.wikipedia.org/wiki/International_System_of_Units">SI Units</a></li>
+  <li>System: application specific, but usually y-up</li>
+  <li>Type: floating point</li>
+  <li>Range: application specific</li>
+  <li>Usage: game logic</li>
+  <li>Dependence: game/application</li>
+</ul>
+
+<p>Typically, your game logic should use a coordinate system which best fits the game logic. It should not depend on device or asset size. For example, a commonly used unit is meters.</p>
+
+<p>The world coordinates are converted, in the vertex shader, to normalized render coordinates. The <a href="https://web.archive.org/web/20200427232345/https://www.badlogicgames.com/wordpress/?p=1550">Camera</a> or <a href="/wiki/graphics/viewports">Viewport</a> is used to define the strategy on how to do that. For example, to maintain aspect ratio, black bars can be added. The camera is used to calculate the view matrix, which translates your world coordinates into coordinates relative to the camera, by taking in consideration the location and rotation of the camera. It also calculates the projection matrix, which converts the world coordinates to the normalized render coordinates in the range [-1,-1] to [+1,+1]. In 2D games, you mostly dont need the distinction between these two matrices and only need the combined transformation matrix instead. You can pass this matrix to the shader, for example, by calling <code class="language-plaintext highlighter-rouge">spriteBatch.setProjectionMatrix(camera.combined);</code></p>
+
+<p><img src="/assets/wiki/images/projection.png" alt="images/projection.png" /></p>
+
+<p>You can have multiple camera’s or viewports and likewise, you can also have multiple world coordinate systems. A typical game has at least two of those, namely:</p>
+
+<h3 id="guihud-coordinates">GUI/HUD coordinates</h3>
+<p>These are buttons, labels and such which are stationary and always visible on the screen. Often they involve rendering text. For example in Super Mario the clock is always visible in the upper right corner of the screen and does not move when mario moves in the game world.</p>
+
+<p>Most commonly <a href="/wiki/graphics/2d/scene2d/scene2d">scene2d</a> is used for the HUD, which means that you’d use a <a href="/wiki/graphics/viewports">Viewport</a> to define the coordinate system. This coordinates system is typically in a range that is close to the device resolution, to give the best results when rendering the font. These coordinates are called <a href="https://xoppa.github.io/blog/pixels/">banana units</a>. This camera is practically never moved or rotated, it sits stationary at a location so that the world coordinate (0, 0) is located at the bottom left corner of the screen.</p>
+
+<h3 id="game-coordinates">Game coordinates</h3>
+<p>This is what suits best for your game and is used to implement game logic. It is good practice to keep the values around one for the best floating point precision. For example, your main character is 1.8 meter in height, the tree is 10 meter in height, etc. If you are making a galactic game where units and distance are very high, you might want to use e.g. kilometers instead.</p>
+
+<p>The camera is used to look into your game world, just like it would when you use a video camera in the real world. The camera can be moved, rotated and scaled to display another portion of the world on the screen.</p>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

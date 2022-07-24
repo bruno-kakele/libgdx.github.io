@@ -1,0 +1,648 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>ModelBuilder, MeshBuilder and MeshPartBuilder - libGDX</title>
+
+  <meta name="description" content="ModelBuilder ModelBuilder (code) is a utility class to create one or more models on code. It allows you to include one or more nodes, each node consisting of one or...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="ModelBuilder, MeshBuilder and MeshPartBuilder">
+<meta property="og:url" content="https://libgdx.com/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">
+
+
+  <meta property="og:description" content="ModelBuilder ModelBuilder (code) is a utility class to create one or more models on code. It allows you to include one or more nodes, each node consisting of one or...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">ModelBuilder, MeshBuilder and MeshPartBuilder
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <h1 id="modelbuilder">ModelBuilder</h1>
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/g3d/utils/ModelBuilder.html">ModelBuilder</a> <a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/graphics/g3d/utils/ModelBuilder.java">(code)</a> is a utility class to create one or more <a href="/wiki/graphics/3d/models">models</a> on code. It allows you to include one or more <a href="/wiki/graphics/3d/models#nodes">nodes</a>, each node consisting of one or more <a href="/wiki/graphics/3d/models#nodepart">parts</a>. It does, however, not support building a node hierarchy (child nodes). Be aware that building a model on code can be a costly operation and might trigger the garbage collector.</p>
+<h2 id="building-one-or-more-models">Building one or more models</h2>
+<p>To start building a model use the <code class="language-plaintext highlighter-rouge">begin()</code> method, after which you must call the <code class="language-plaintext highlighter-rouge">end()</code> when you’re done building the model. The <code class="language-plaintext highlighter-rouge">end()</code> method will return the newly created model. You can build multiple models using the same ModelBuilder, but not at the same time. For example:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ModelBuilder</span> <span class="n">modelBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ModelBuilder</span><span class="o">();</span>
+
+<span class="n">modelBuilder</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+<span class="o">...</span> <span class="c1">//build one or more nodes</span>
+<span class="nc">Model</span> <span class="n">model1</span> <span class="o">=</span> <span class="n">modelBuilder</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+
+<span class="n">modelBuilder</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+<span class="o">...</span> <span class="c1">//build one or more nodes</span>
+<span class="nc">Model</span> <span class="n">model2</span> <span class="o">=</span> <span class="n">modelBuilder</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+</code></pre></div></div>
+<h2 id="managing-resources">Managing resources</h2>
+<p>Keep in mind that models contain one or more meshes and therefore <a href="/wiki/graphics/3d/models#managing-resources">needs to be disposed</a>. A model built via ModelBuilder will always be responsible for disposing all meshes it contains, even if you provide the Mesh yourself. Do not share a Mesh along multiple Models.</p>
+
+<p>A Model built via ModelBuilder will not be made responsible for disposing any textures or any other resources contained in the <a href="/wiki/graphics/3d/material-and-environment">materials</a>. You can, however, use the <code class="language-plaintext highlighter-rouge">manage(disposable)</code> method to make the model responsible for disposing those resources. For example:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ModelBuilder</span> <span class="n">modelBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ModelBuilder</span><span class="o">();</span>
+<span class="n">modelBuilder</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+<span class="nc">Texture</span> <span class="n">texture</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Texture</span><span class="o">(...);</span>
+<span class="n">modelBuilder</span><span class="o">.</span><span class="na">manage</span><span class="o">(</span><span class="n">texture</span><span class="o">);</span>
+<span class="o">...</span> <span class="c1">//build one or more nodes</span>
+<span class="nc">Model</span> <span class="n">model</span> <span class="o">=</span> <span class="n">modelBuilder</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+<span class="o">...</span> <span class="c1">//use the model and when done:</span>
+<span class="n">model</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span> <span class="c1">// this will dispose the texture as well</span>
+</code></pre></div></div>
+<h2 id="creating-nodes">Creating nodes</h2>
+<p>A Model consists of one or more <a href="/wiki/graphics/3d/models#nodes">nodes</a>. To start building a new node inside the model you can use the <code class="language-plaintext highlighter-rouge">node()</code> method. This will add a new node and make it active for building. It will also return the <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/g3d/model/Node.html"><code class="language-plaintext highlighter-rouge">Node</code></a> so you can reference it for later use or for example set its <code class="language-plaintext highlighter-rouge">id</code>.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ModelBuilder</span> <span class="n">modelBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ModelBuilder</span><span class="o">();</span>
+<span class="n">modelBuilder</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+<span class="nc">Node</span> <span class="n">node1</span> <span class="o">=</span> <span class="n">modelBuilder</span><span class="o">.</span><span class="na">node</span><span class="o">();</span>
+<span class="n">node1</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="s">"node1"</span><span class="o">;</span>
+<span class="n">node1</span><span class="o">.</span><span class="na">translation</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span>
+<span class="o">...</span><span class="c1">//build node1</span>
+<span class="nc">Node</span> <span class="n">node2</span> <span class="o">=</span> <span class="n">modelBuilder</span><span class="o">.</span><span class="na">node</span><span class="o">();</span>
+<span class="n">node2</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="s">"node2"</span><span class="o">;</span>
+<span class="o">...</span><span class="c1">//build node2</span>
+<span class="nc">Model</span> <span class="n">model</span> <span class="o">=</span> <span class="n">modelBuilder</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+</code></pre></div></div>
+<p>Note that node id’s should unique within the model. A typical use-case would be:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ModelBuilder</span> <span class="n">modelBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ModelBuilder</span><span class="o">();</span>
+<span class="n">modelBuilder</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+<span class="n">modelBuilder</span><span class="o">.</span><span class="na">node</span><span class="o">().</span><span class="na">id</span> <span class="o">=</span> <span class="s">"node1"</span><span class="o">;</span>
+<span class="o">...</span><span class="c1">//build node1</span>
+<span class="n">modelBuilder</span><span class="o">.</span><span class="na">node</span><span class="o">().</span><span class="na">id</span> <span class="o">=</span> <span class="s">"node2"</span><span class="o">;</span>
+<span class="o">...</span><span class="c1">//build node2</span>
+<span class="nc">Model</span> <span class="n">model</span> <span class="o">=</span> <span class="n">modelBuilder</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+</code></pre></div></div>
+<p>Using the <code class="language-plaintext highlighter-rouge">node()</code> method for the first node is optional. For example, for models consisting of only a single node, you can immediately start creating the node parts without having to call the <code class="language-plaintext highlighter-rouge">node()</code> method.</p>
+
+<p>There can only be one <code class="language-plaintext highlighter-rouge">Node</code> active for building at a time. Calling the <code class="language-plaintext highlighter-rouge">node()</code> method will stop building the previous node (if any) and start building the newly created node. The nodes will only be valid (complete), however, after the Model is completely built (the call to <code class="language-plaintext highlighter-rouge">end()</code> is made).</p>
+
+<h2 id="creating-node-parts">Creating node parts</h2>
+<p>A <code class="language-plaintext highlighter-rouge">Node</code> can contain one or more <a href="/wiki/graphics/3d/models#nodepart">parts</a>. Each part of a node will be rendered at the same location (the <a href="/wiki/graphics/3d/models#node-transformation">node transformation</a>), but can be made up of a different <a href="/wiki/graphics/3d/material-and-environment">material</a> (e.g. shader uniforms) and/or mesh (e.g. shader (vertex) attributes).</p>
+
+<blockquote>
+  <p>A NodePart is the smallest renderable part of a Model. Every visible NodePart implies a render call (or “draw call” if you prefer). Reducing the number of render calls can help to decrease the time it takes to render the model. Therefore it is advised to try to combine multiple parts to a single part where possible.</p>
+</blockquote>
+
+<p>To add a <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/g3d/model/NodePart.html"><code class="language-plaintext highlighter-rouge">NodePart</code></a> to the current node you can use one of the <code class="language-plaintext highlighter-rouge">part(...)</code> methods. A NodePart is basically the combination of a <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/g3d/model/MeshPart.html"><code class="language-plaintext highlighter-rouge">MeshPart</code></a> and <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/g3d/Material.html"><code class="language-plaintext highlighter-rouge">Material</code></a>. You must always supply the material when calling one of the <code class="language-plaintext highlighter-rouge">part(...)</code> methods. For the <code class="language-plaintext highlighter-rouge">MeshPart</code>, however, <code class="language-plaintext highlighter-rouge">ModelBuilder</code> allows you to either specify the (part of the) mesh yourself, or to start building the <code class="language-plaintext highlighter-rouge">MeshPart</code> using a <code class="language-plaintext highlighter-rouge">MeshPartBuilder</code>.</p>
+
+<blockquote>
+  <p>Keep in mind that the <code class="language-plaintext highlighter-rouge">Model</code> will always be made responsible for disposing the <code class="language-plaintext highlighter-rouge">Mesh</code>, regardless the method used to create part.</p>
+</blockquote>
+
+<p>A <code class="language-plaintext highlighter-rouge">MeshPartBuilder</code> is an interface (implemented by <code class="language-plaintext highlighter-rouge">MeshBuilder</code>, see below) which contains various helper methods to create a mesh. If you use the <code class="language-plaintext highlighter-rouge">part(...)</code> method to construct the MeshPart using a MeshPartBuilder, then ModelBuilder will try to combine multiple parts into the same Mesh. This will in most cases reduce the number of Mesh binds. This is only possible if the parts are made up using the same vertex attributes. For example:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ModelBuilder</span> <span class="n">modelBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ModelBuilder</span><span class="o">();</span>
+<span class="n">modelBuilder</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+<span class="nc">MeshPartBuilder</span> <span class="n">meshBuilder</span><span class="o">;</span>
+<span class="n">meshBuilder</span> <span class="o">=</span> <span class="n">modelBuilder</span><span class="o">.</span><span class="na">part</span><span class="o">(</span><span class="s">"part1"</span><span class="o">,</span> <span class="no">GL20</span><span class="o">.</span><span class="na">GL_TRIANGLES</span><span class="o">,</span> <span class="nc">Usage</span><span class="o">.</span><span class="na">Position</span> <span class="o">|</span> <span class="nc">Usage</span><span class="o">.</span><span class="na">Normal</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Material</span><span class="o">());</span>
+<span class="n">meshBuilder</span><span class="o">.</span><span class="na">cone</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
+<span class="nc">Node</span> <span class="n">node</span> <span class="o">=</span> <span class="n">modelBuilder</span><span class="o">.</span><span class="na">node</span><span class="o">();</span>
+<span class="n">node</span><span class="o">.</span><span class="na">translation</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span>
+<span class="n">meshBuilder</span> <span class="o">=</span> <span class="n">modelBuilder</span><span class="o">.</span><span class="na">part</span><span class="o">(</span><span class="s">"part2"</span><span class="o">,</span> <span class="no">GL20</span><span class="o">.</span><span class="na">GL_TRIANGLES</span><span class="o">,</span> <span class="nc">Usage</span><span class="o">.</span><span class="na">Position</span> <span class="o">|</span> <span class="nc">Usage</span><span class="o">.</span><span class="na">Normal</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Material</span><span class="o">());</span>
+<span class="n">meshBuilder</span><span class="o">.</span><span class="na">sphere</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
+<span class="nc">Model</span> <span class="n">model</span> <span class="o">=</span> <span class="n">modelBuilder</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+</code></pre></div></div>
+<p>This will create a model consisting of two nodes. Each node consisting of one part. The Mesh of both parts is shared, so there’s only a single Mesh created for this Model. Note that in this example the vertex attributes are specified using a bit mask, which will cause <code class="language-plaintext highlighter-rouge">ModelBuilder</code> to create default (3D) <code class="language-plaintext highlighter-rouge">VertexAttributes</code>. You could also specify the <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/VertexAttributes.html"><code class="language-plaintext highlighter-rouge">VertexAttributes</code></a> yourself.</p>
+
+<blockquote>
+  <p>Because <code class="language-plaintext highlighter-rouge">ModelBuilder</code> reuses the <code class="language-plaintext highlighter-rouge">MeshPartBuilder</code> instances for multiple parts, you cannot build multiple parts at the same time. Per <code class="language-plaintext highlighter-rouge">ModelBuilder</code> you can only build one <code class="language-plaintext highlighter-rouge">Model</code>, <code class="language-plaintext highlighter-rouge">Node</code> and <code class="language-plaintext highlighter-rouge">MeshPart</code> at any given time. <strong>Calling the <code class="language-plaintext highlighter-rouge">part(...)</code> method will make the previous <code class="language-plaintext highlighter-rouge">MeshPartBuilder</code> invalid.</strong></p>
+</blockquote>
+
+<p>See the MeshPartBuilder section below for more information on how to use the <code class="language-plaintext highlighter-rouge">MeshPartBuilder</code> to create the shape of the part.</p>
+<h1 id="meshbuilder">MeshBuilder</h1>
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/g3d/utils/MeshBuilder.html">MeshBuilder</a> <a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/graphics/g3d/utils/MeshBuilder.java">(code)</a> is a utility class to create one or more <a href="/wiki/graphics/opengl-utils/meshes">meshes</a>, optionally consisting of one or more <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/g3d/model/MeshPart.html">MeshParts</a>. While a <code class="language-plaintext highlighter-rouge">MeshBuilder</code> is typically constructed and maintained by the <code class="language-plaintext highlighter-rouge">ModelBuilder</code> using the <code class="language-plaintext highlighter-rouge">ModelBuilder#part(...)</code> method, it is possible to use <code class="language-plaintext highlighter-rouge">MeshBuilder</code> without using a <code class="language-plaintext highlighter-rouge">ModelBuilder</code>. For this, you can use the <code class="language-plaintext highlighter-rouge">begin(...)</code> method to start building a mesh, after which you must call the <code class="language-plaintext highlighter-rouge">end()</code> method when you’re done building the mesh. The begin methods accepts various arguments to specify the vertex attributes and optionally primitive type (required when not creating mesh part(s)). The <code class="language-plaintext highlighter-rouge">end()</code> method will return the newly created <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/Mesh.html"><code class="language-plaintext highlighter-rouge">Mesh</code></a>. You can build multiple meshes using the same <code class="language-plaintext highlighter-rouge">MeshBuilder</code> instance, but not at the same time:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">MeshBuilder</span> <span class="n">meshBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MeshBuilder</span><span class="o">();</span>
+<span class="n">meshBuilder</span><span class="o">.</span><span class="na">begin</span><span class="o">(</span><span class="nc">Usage</span><span class="o">.</span><span class="na">Position</span> <span class="o">|</span> <span class="nc">Usage</span><span class="o">.</span><span class="na">Normal</span><span class="o">,</span> <span class="no">GL20</span><span class="o">.</span><span class="na">GL_TRIANGLES</span><span class="o">);</span>
+<span class="o">...</span><span class="c1">//build the first mesh</span>
+<span class="nc">Mesh</span> <span class="n">mesh1</span> <span class="o">=</span> <span class="n">meshBuilder</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+
+<span class="n">meshBuilder</span><span class="o">.</span><span class="na">begin</span><span class="o">(</span><span class="nc">Usage</span><span class="o">.</span><span class="na">Position</span> <span class="o">|</span> <span class="nc">Usage</span><span class="o">.</span><span class="na">Normal</span> <span class="o">|</span> <span class="nc">Usage</span><span class="o">.</span><span class="na">ColorPacked</span><span class="o">,</span> <span class="no">GL20</span><span class="o">.</span><span class="na">GL_TRIANGLES</span><span class="o">);</span>
+<span class="o">...</span><span class="c1">//build the second mesh</span>
+<span class="nc">Mesh</span> <span class="n">mesh2</span> <span class="o">=</span> <span class="n">meshBuilder</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Keep in mind that the <code class="language-plaintext highlighter-rouge">Mesh</code> must be disposed when you no longer need it.</p>
+</blockquote>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">part(...)</code> method to create a Mesh consisting of multiple parts. This will create a new <code class="language-plaintext highlighter-rouge">MeshPart</code> and set it active for building.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">MeshBuilder</span> <span class="n">meshBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MeshBuilder</span><span class="o">();</span>
+<span class="n">meshBuilder</span><span class="o">.</span><span class="na">begin</span><span class="o">(</span><span class="nc">Usage</span><span class="o">.</span><span class="na">Position</span> <span class="o">|</span> <span class="nc">Usage</span><span class="o">.</span><span class="na">Normal</span><span class="o">);</span>
+<span class="nc">MeshPart</span> <span class="n">part1</span> <span class="o">=</span> <span class="n">meshBuilder</span><span class="o">.</span><span class="na">part</span><span class="o">(</span><span class="s">"part1"</span><span class="o">,</span> <span class="no">GL20</span><span class="o">.</span><span class="na">GL_TRIANGLES</span><span class="o">);</span>
+<span class="o">...</span> <span class="c1">// build the first part</span>
+<span class="nc">MeshPart</span> <span class="n">part2</span> <span class="o">=</span> <span class="n">meshBuilder</span><span class="o">.</span><span class="na">part</span><span class="o">(</span><span class="s">"part2"</span><span class="o">,</span> <span class="no">GL20</span><span class="o">.</span><span class="na">GL_TRIANGLES</span><span class="o">);</span>
+<span class="o">...</span> <span class="c1">// build the second part</span>
+<span class="nc">Mesh</span> <span class="n">mesh</span> <span class="o">=</span> <span class="n">meshBuilder</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+</code></pre></div></div>
+<p>While the <code class="language-plaintext highlighter-rouge">part(...)</code> method returns the <code class="language-plaintext highlighter-rouge">MeshPart</code> so you can reference it for later use, it will not be valid until the <code class="language-plaintext highlighter-rouge">end()</code> method is called. You can only create one <code class="language-plaintext highlighter-rouge">MeshPart</code> at a time, calling the <code class="language-plaintext highlighter-rouge">part(...)</code> method will stop building the previous part and start building the new part.</p>
+
+<p>All parts of the same <code class="language-plaintext highlighter-rouge">Mesh</code> share the same <code class="language-plaintext highlighter-rouge">VertexAttributes</code>. The primitive type can vary among parts though. For example, the following snippet creates two parts each with a different primitive type, but sharing the same mesh:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">meshBuilder</span><span class="o">.</span><span class="na">begin</span><span class="o">(</span><span class="nc">Usage</span><span class="o">.</span><span class="na">Position</span> <span class="o">|</span> <span class="nc">Usage</span><span class="o">.</span><span class="na">Normal</span><span class="o">);</span>
+<span class="nc">MeshPart</span> <span class="n">part1</span> <span class="o">=</span> <span class="n">meshBuilder</span><span class="o">.</span><span class="na">part</span><span class="o">(</span><span class="s">"part1"</span><span class="o">,</span> <span class="no">GL20</span><span class="o">.</span><span class="na">GL_TRIANGLES</span><span class="o">);</span>
+<span class="o">...</span> <span class="c1">// build the first part</span>
+<span class="nc">MeshPart</span> <span class="n">part2</span> <span class="o">=</span> <span class="n">meshBuilder</span><span class="o">.</span><span class="na">part</span><span class="o">(</span><span class="s">"part2"</span><span class="o">,</span> <span class="no">GL20</span><span class="o">.</span><span class="na">GL_TRIANGLE_STRIP</span><span class="o">);</span>
+<span class="o">...</span> <span class="c1">// build the second part</span>
+<span class="nc">Mesh</span> <span class="n">mesh</span> <span class="o">=</span> <span class="n">meshBuilder</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">MeshBuilder</code> implements <code class="language-plaintext highlighter-rouge">MeshPartBuilder</code>. Creating the actual shape of the (part of the) mesh, is described in the MeshPartBuilder section.</p>
+
+<h1 id="meshpartbuilder">MeshPartBuilder</h1>
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/g3d/utils/MeshPartBuilder.html">MeshPartBuilder</a> (<a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/graphics/g3d/utils/MeshPartBuilder.java">code</a>) is a utility interface which supplies various methods for creating a (part of a) mesh. You can either use <code class="language-plaintext highlighter-rouge">ModelBuilder.part(...)</code> or construct a <code class="language-plaintext highlighter-rouge">MeshBuilder</code> to obtain a <code class="language-plaintext highlighter-rouge">MeshPartBuilder</code>. All methods of the <code class="language-plaintext highlighter-rouge">MeshPartBuilder</code> interface can only be called as long as the <code class="language-plaintext highlighter-rouge">MeshPart</code> is being build (most commonly between the call to the <code class="language-plaintext highlighter-rouge">part(...)</code> method and the call to the next <code class="language-plaintext highlighter-rouge">part(...)</code> or <code class="language-plaintext highlighter-rouge">end()</code> method of either <code class="language-plaintext highlighter-rouge">ModelBuilder</code> or <code class="language-plaintext highlighter-rouge">MeshBuilder</code>).</p>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">getMeshPart()</code> method to obtain the <code class="language-plaintext highlighter-rouge">MeshPart</code> currently being build.
+Use the <code class="language-plaintext highlighter-rouge">getAttributes()</code> method to obtain the <code class="language-plaintext highlighter-rouge">VertexAttributes</code> of the <code class="language-plaintext highlighter-rouge">Mesh</code> being build.</p>
+
+<p>A <code class="language-plaintext highlighter-rouge">VertexAttribute</code> of <code class="language-plaintext highlighter-rouge">Usage.Position</code> (either 2D or 3D) is required. There are no further restriction on the specified vertex attributes. However, most (especially higher level) methods are only implemented for position, normal, color (either packed or unpacked) and texture coordinates attributes. If you use other attributes as well, then a default (commonly zero) value will be used.</p>
+
+<p>Most methods allow multiple signatures to specify the values for the vertex attributes. A little helper class <code class="language-plaintext highlighter-rouge">VertexInfo</code> is used to specify these on a per vertex basis. For example the <code class="language-plaintext highlighter-rouge">rect(...)</code> method accepts a <code class="language-plaintext highlighter-rouge">VertexInfo</code> for each corner, instead of using a method with all possible combinations or arguments for the vertex values of each corner. Be aware that the <code class="language-plaintext highlighter-rouge">VertexInfo</code> keeps track of whether a specific value has been set, therefor you should always use the setXXX methods. Use <code class="language-plaintext highlighter-rouge">null</code> in case you want to unset a value.</p>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">setColor(...)</code> method to specify the default color that will be used when the <code class="language-plaintext highlighter-rouge">VertexAttributes</code> contain a color <code class="language-plaintext highlighter-rouge">VertexAttribute</code>, but no color is set in e.g. the <code class="language-plaintext highlighter-rouge">VertexInfo</code>. For example:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">meshPartBuilder</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">);</span>
+<span class="nc">VertexInfo</span> <span class="n">v1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">VertexInfo</span><span class="o">().</span><span class="na">setPos</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">).</span><span class="na">setNor</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">).</span><span class="na">setCol</span><span class="o">(</span><span class="kc">null</span><span class="o">).</span><span class="na">setUV</span><span class="o">(</span><span class="mf">0.5f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">);</span>
+<span class="nc">VertexInfo</span> <span class="n">v2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">VertexInfo</span><span class="o">().</span><span class="na">setPos</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">).</span><span class="na">setNor</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">).</span><span class="na">setCol</span><span class="o">(</span><span class="kc">null</span><span class="o">).</span><span class="na">setUV</span><span class="o">(</span><span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.0f</span><span class="o">);</span>
+<span class="nc">VertexInfo</span> <span class="n">v3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">VertexInfo</span><span class="o">().</span><span class="na">setPos</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">0</span><span class="o">).</span><span class="na">setNor</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">).</span><span class="na">setCol</span><span class="o">(</span><span class="kc">null</span><span class="o">).</span><span class="na">setUV</span><span class="o">(</span><span class="mf">0.0f</span><span class="o">,</span> <span class="mf">0.5f</span><span class="o">);</span>
+<span class="nc">VertexInfo</span> <span class="n">v4</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">VertexInfo</span><span class="o">().</span><span class="na">setPos</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">0</span><span class="o">).</span><span class="na">setNor</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">).</span><span class="na">setCol</span><span class="o">(</span><span class="kc">null</span><span class="o">).</span><span class="na">setUV</span><span class="o">(</span><span class="mf">0.5f</span><span class="o">,</span> <span class="mf">0.5f</span><span class="o">);</span>
+<span class="n">meshPartBuilder</span><span class="o">.</span><span class="na">rect</span><span class="o">(</span><span class="n">v1</span><span class="o">,</span> <span class="n">v2</span><span class="o">,</span> <span class="n">v3</span><span class="o">,</span> <span class="n">v4</span><span class="o">);</span>
+</code></pre></div></div>
+<p>In this example, because the <code class="language-plaintext highlighter-rouge">VertexInfo</code> has no color set (<code class="language-plaintext highlighter-rouge">setCol(null)</code>), the default will be used which is set to a red color.</p>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">setUVRange</code> to specify the default texture coordinates range that will be used when no texture coordinates are specified. Along with the default color, this is especially useful for simple shapes where only positions are needed and other vertex information can be derived from the shape. For example:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">meshPartBuilder</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="nc">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">);</span>
+<span class="n">meshPartBuilder</span><span class="o">.</span><span class="na">setUVRange</span><span class="o">(</span><span class="mf">0.5f</span><span class="o">,</span> <span class="mi">0</span><span class="n">f</span><span class="o">,</span> <span class="mi">0</span><span class="n">f</span><span class="o">,</span> <span class="mf">0.5f</span><span class="o">);</span>
+<span class="n">meshPartBuilder</span><span class="o">.</span><span class="na">rect</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">1</span><span class="o">);</span> <span class="c1">// the last three arguments specify the normal</span>
+</code></pre></div></div>
+<p>Use the <code class="language-plaintext highlighter-rouge">setVertexTransform(...)</code> method to supply a transformation matrix that should be applied to all vertices following after that call.</p>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

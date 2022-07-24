@@ -1,0 +1,731 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Managing your assets - libGDX</title>
+
+  <meta name="description" content="Why would I want to use the AssetManager AssetManager (code) helps you load and manage your assets. It is the recommended way to load your assets, due to the following...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Managing your assets">
+<meta property="og:url" content="https://libgdx.com/wiki/managing-your-assets">
+
+
+  <meta property="og:description" content="Why would I want to use the AssetManager AssetManager (code) helps you load and manage your assets. It is the recommended way to load your assets, due to the following...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/managing-your-assets">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Managing your assets
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/managing-your-assets.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/managing-your-assets.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <h3 id="why-would-i-want-to-use-the-assetmanager">Why would I want to use the AssetManager</h3>
+
+<p><a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/assets/AssetManager.html">AssetManager</a> <a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/assets/AssetManager.java">(code)</a> helps you load and manage your assets. It is the recommended way to load your assets, due to the following nice behaviors:</p>
+
+<ul>
+  <li>Loading of most resources is done asynchronously, so you can display a reactive loading screen while things load</li>
+  <li>Assets are reference counted. If two assets A and B both depend on another asset C, C won’t be disposed until A and B have been disposed. This also means that if you load an asset multiple times, it will actually be shared and only take up memory once!</li>
+  <li>A single place to store all your assets.</li>
+  <li>Allows to transparently implement things like caches (see FileHandleResolver below)</li>
+</ul>
+
+<p>Still with me? Then read on.</p>
+
+<h3 id="creating-an-assetmanager">Creating an AssetManager</h3>
+
+<p>This part is rather simple:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">AssetManager</span> <span class="n">manager</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AssetManager</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>This sets up a standard AssetManager, with all the loaders libGDX has in store at the moment. Let’s see how the loading mechanism works.</p>
+
+<p><strong>Caution:</strong> don’t make your <code class="language-plaintext highlighter-rouge">AssetManager</code> or any other resources (like <code class="language-plaintext highlighter-rouge">Texture</code>, etc.) <code class="language-plaintext highlighter-rouge">static</code>, unless you properly manage them. E.g. the following code will cause issues:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="nc">AssetManager</span> <span class="n">assets</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AssetManager</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>This will cause problems on Android because the life-cycle of the static variable is not necessarily the same as the life-cycle of your application. Therefore the <code class="language-plaintext highlighter-rouge">AssetManager</code> instance of a previous instance of your application might be used for the next instance, while the resources are no longer valid. This typically would cause black/missing textures or incorrect assets.</p>
+
+<p>On Android, it is even possible for multiple instances of your Activity to be active at the same time, so do not think you’re safe even if you handle life-cycle methods properly! (See <a href="https://stackoverflow.com/questions/4341600/how-to-prevent-multiple-instances-of-an-activity-when-it-is-launched-with-differ">this StackOverflow question</a> for details.)</p>
+
+<h3 id="adding-assets-to-the-queue">Adding Assets to the queue</h3>
+
+<p>To load assets, the AssetManager needs to know how to load a specific type of asset. This functionality is implemented via AssetLoaders. There are two variants, SynchronousAssetLoader and AsynchronousAssetLoader. The former loads everything on the rendering thread, the latter loads parts of the asset on another thread, e.g., the Pixmap needed for a Texture, and then loads the OpenGL dependent part on the rendering thread. The following resources can be loaded out of the box with the AssetManager as constructed above.</p>
+
+<ul>
+  <li>Pixmaps via <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/assets/loaders/PixmapLoader.html">PixmapLoader</a> <a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/assets/loaders/PixmapLoader.java">(code)</a></li>
+  <li>Textures via <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/assets/loaders/TextureLoader.html">TextureLoader</a> <a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/assets/loaders/TextureLoader.java">(code)</a></li>
+  <li>BitmapFonts via <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/assets/loaders/BitmapFontLoader.html">BitmapFontLoader</a> <a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/assets/loaders/BitmapFontLoader.java">(code)</a></li>
+  <li>FreeTypeFonts via <a href="https://github.com/libgdx/libgdx/blob/master/tests/gdx-tests/src/com/badlogic/gdx/tests/extensions/FreeTypeFontLoaderTest.java">FreeTypeFontLoader</a></li>
+  <li>TextureAtlases via <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/assets/loaders/TextureAtlasLoader.html">TextureAtlasLoader</a> <a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/assets/loaders/TextureAtlasLoader.java">(code)</a></li>
+  <li>Music instances via <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/assets/loaders/MusicLoader.html">MusicLoader</a> <a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/assets/loaders/MusicLoader.java">(code)</a></li>
+  <li>Sound instances via <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/assets/loaders/SoundLoader.html">SoundLoader</a> <a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/assets/loaders/SoundLoader.java">(code)</a></li>
+  <li>Skins via <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/assets/loaders/SkinLoader.html">SkinLoader</a> <a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/assets/loaders/SkinLoader.java">(code)</a></li>
+  <li>Particle Effects via <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/assets/loaders/ParticleEffectLoader.html">ParticleEffectLoader</a> <a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/assets/loaders/ParticleEffectLoader.java">(code)</a></li>
+  <li>I18NBundles via <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/assets/loaders/I18NBundleLoader.html">I18NBundleLoader</a> <a href="https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/assets/loaders/I18NBundleLoader.java">(code)</a></li>
+  <li>FreeTypeFontGenerator via FreeTypeFontGeneratorLoader <a href="https://github.com/libgdx/libgdx/blob/master/extensions/gdx-freetype/src/com/badlogic/gdx/graphics/g2d/freetype/FreeTypeFontGeneratorLoader.java">(code)</a></li>
+</ul>
+
+<p>Loading a specific asset is simple:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">manager</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="s">"data/mytexture.png"</span><span class="o">,</span> <span class="nc">Texture</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="n">manager</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="s">"data/myfont.fnt"</span><span class="o">,</span> <span class="nc">BitmapFont</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="n">manager</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="s">"data/mymusic.ogg"</span><span class="o">,</span> <span class="nc">Music</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>These calls will enqueue those assets for loading. The assets will be loaded in the order we called the <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/assets/AssetManager.html#load-java.lang.String-java.lang.Class-">AssetManager.load()</a> method. Some loaders allow you to also pass parameters to them via AssetManager.load(). Say we want to specify a non-default filter and mipmapping setting for loading a texture:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">TextureParameter</span> <span class="n">param</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TextureParameter</span><span class="o">();</span>
+<span class="n">param</span><span class="o">.</span><span class="na">minFilter</span> <span class="o">=</span> <span class="nc">TextureFilter</span><span class="o">.</span><span class="na">Linear</span><span class="o">;</span>
+<span class="n">param</span><span class="o">.</span><span class="na">genMipMaps</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+<span class="n">manager</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="s">"data/mytexture.png"</span><span class="o">,</span> <span class="nc">Texture</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">param</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Look into the loaders mentioned above to find out about their parameters.</p>
+
+<h3 id="actually-loading-the-assets">Actually loading the assets</h3>
+<p>So far we only queued assets to be loaded. The AssetManager does not yet load anything. To kick this off we have to call AssetManager.update() continuously, say in our ApplicationListener.render() method:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">MyAppListener</span> <span class="kd">implements</span> <span class="nc">ApplicationListener</span> <span class="o">{</span>
+
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">render</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">if</span><span class="o">(</span><span class="n">manager</span><span class="o">.</span><span class="na">update</span><span class="o">())</span> <span class="o">{</span>
+         <span class="c1">// we are done loading, let's move to another screen!</span>
+      <span class="o">}</span>
+
+      <span class="c1">// display loading information</span>
+      <span class="kt">float</span> <span class="n">progress</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="na">getProgress</span><span class="o">()</span>
+      <span class="o">...</span> <span class="n">left</span> <span class="n">to</span> <span class="n">the</span> <span class="n">reader</span> <span class="o">...</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>As long as AssetManager.update() returns false you know it’s still loading assets. To poll the concrete state of loading you can use AssetManager.getProgress(), which returns a number between 0 and 1 indicating the percentage of assets loaded so far. There are other methods in AssetManager that give you similar information, like AssetManager.getLoadedAssets() or AssetManager.getQueuedAssets(). <b>You have to call AssetManager.update() to keep loading!</b></p>
+
+<p>If you want to block and make sure all assets are loaded you can call:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">manager</span><span class="o">.</span><span class="na">finishLoading</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>This will block until all the assets that have been queued are actually done loading. Kinda defeats the purpose of asynchronous loading, but sometimes one might need it (e.g., loading the assets needed to display the loading screen itself).</p>
+
+<h3 id="optimize-loading">Optimize loading</h3>
+<p>In order to perform loading as efficiently/fast as possible while trying to keep a certain FPS, AssetManager.update() should be called with parameters.<br /><strong>E.g. AssetManager.update(17)</strong> - In this case the AssetManager blocks for at least 17 milliseconds (only less if all assets are loaded) and loads as many assets as possible, before it returns control back to the render method. Blocking for 16 or 17 milliseconds leads to ~60FPS as 1/60*1000 = 16.66667. Note that it might block for longer, depending on the asset that is being loaded so <strong>don’t</strong> take the desired FPS as guaranteed.</p>
+
+<h3 id="loading-a-ttf-using-the-assethandler">Loading a TTF using the AssetHandler</h3>
+
+<p>Loading a TrueType file via the AssetHandler requires only a little bit extra tweaking. Before we can load a TTF, we need to set the type of loader we’re going to use for FreeType fonts. This is done with the following:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FileHandleResolver</span> <span class="n">resolver</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">InternalFileHandleResolver</span><span class="o">();</span>
+<span class="n">manager</span><span class="o">.</span><span class="na">setLoader</span><span class="o">(</span><span class="nc">FreeTypeFontGenerator</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="k">new</span> <span class="nc">FreeTypeFontGeneratorLoader</span><span class="o">(</span><span class="n">resolver</span><span class="o">));</span>
+<span class="n">manager</span><span class="o">.</span><span class="na">setLoader</span><span class="o">(</span><span class="nc">BitmapFont</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="s">".ttf"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">FreetypeFontLoader</span><span class="o">(</span><span class="n">resolver</span><span class="o">));</span>
+</code></pre></div></div>
+
+<p>Next, we’ll want to create a <code class="language-plaintext highlighter-rouge">FreeTypeFontLoaderParameter</code> that defines 1) our actual font file, and 2) our font size. There are other parameters we can define here, too, when you have time to dig more.</p>
+
+<p>Let’s say we want to create two different fonts: a smaller, sans-serif font that will be used for one type of writing text, and a larger, serif font for titles and other fun things. I’ve decided to use Arial and Georgia for these two fonts, respectively. Here’s how I can load them using the AssetManager:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// First, let's define the params and then load our smaller font</span>
+<span class="nc">FreeTypeFontLoaderParameter</span> <span class="n">mySmallFont</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FreeTypeFontLoaderParameter</span><span class="o">();</span>
+<span class="n">mySmallFont</span><span class="o">.</span><span class="na">fontFileName</span> <span class="o">=</span> <span class="s">"arial.ttf"</span><span class="o">;</span>
+<span class="n">mySmallFont</span><span class="o">.</span><span class="na">fontParameters</span><span class="o">.</span><span class="na">size</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+<span class="n">manager</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="s">"arial.ttf"</span><span class="o">,</span> <span class="nc">BitmapFont</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">mySmallFont</span><span class="o">);</span>
+
+<span class="c1">// Next, let's define the params and then load our bigger font</span>
+<span class="nc">FreeTypeFontLoaderParameter</span> <span class="n">myBigFont</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FreeTypeFontLoaderParameter</span><span class="o">();</span>
+<span class="n">myBigFont</span><span class="o">.</span><span class="na">fontFileName</span> <span class="o">=</span> <span class="s">"georgia.ttf"</span><span class="o">;</span>
+<span class="n">myBigFont</span><span class="o">.</span><span class="na">fontParameters</span><span class="o">.</span><span class="na">size</span> <span class="o">=</span> <span class="mi">20</span><span class="o">;</span>
+<span class="n">manager</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="s">"georgia.ttf"</span><span class="o">,</span> <span class="nc">BitmapFont</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">myBigFont</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Neat! Now we’ve got two different fonts, <code class="language-plaintext highlighter-rouge">mySmallFont</code> and <code class="language-plaintext highlighter-rouge">myBigFont</code>, that we can use to display different text.</p>
+
+<p>We’re not quite done yet. Now that the fonts have been <code class="language-plaintext highlighter-rouge">.load</code>ed, we still need to set them. We can do this like so:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">BitmapFont</span> <span class="n">mySmallFont</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"arial.ttf"</span><span class="o">,</span> <span class="nc">BitmapFont</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="nc">BitmapFont</span> <span class="n">myBigFont</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"georgia.ttf"</span><span class="o">,</span> <span class="nc">BitmapFont</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>The name you give the manager doesn’t have to match the name of the font, like in the above example. If you want to use the same font for different sizes, just make sure the name you give the asset manager when loading the font is unique. For example, here’s how you could load the Arial font in both 10pt and 20pt:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FreeTypeFontLoaderParameter</span> <span class="n">arial10</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FreeTypeFontLoaderParameter</span><span class="o">();</span>
+
+<span class="c1">// This is the file that needs to exist in the assets directory.</span>
+<span class="n">arial10</span><span class="o">.</span><span class="na">fontFileName</span> <span class="o">=</span> <span class="s">"arial.ttf"</span><span class="o">;</span>
+<span class="n">arial10</span><span class="o">.</span><span class="na">fontParameters</span><span class="o">.</span><span class="na">size</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+
+<span class="c1">// There is no file named arial10.ttf. This is just an identifier for the asset manager.</span>
+<span class="c1">// The .ttf extension is important, because it tells the asset manager which loader to use.</span>
+<span class="n">manager</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="s">"arial10.ttf"</span><span class="o">,</span> <span class="nc">BitmapFont</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">arial10</span><span class="o">);</span>
+
+<span class="c1">// Now just change the font size, but use the same font.</span>
+<span class="nc">FreeTypeFontLoaderParameter</span> <span class="n">arial20</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FreeTypeFontLoaderParameter</span><span class="o">();</span>
+<span class="n">arial20</span><span class="o">.</span><span class="na">fontFileName</span> <span class="o">=</span> <span class="s">"arial.ttf"</span><span class="o">;</span>
+<span class="n">arial20</span><span class="o">.</span><span class="na">fontParameters</span><span class="o">.</span><span class="na">size</span> <span class="o">=</span> <span class="mi">20</span><span class="o">;</span>
+
+<span class="c1">// And create a new BitmapFont in 20pt.</span>
+<span class="n">manager</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="s">"arial20.ttf"</span><span class="o">,</span> <span class="nc">BitmapFont</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">arial20</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h3 id="getting-assets">Getting Assets</h3>
+<p>That’s again easy:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Texture</span> <span class="n">tex</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"data/mytexture.png"</span><span class="o">,</span> <span class="nc">Texture</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="nc">BitmapFont</span> <span class="n">font</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"data/myfont.fnt"</span><span class="o">,</span> <span class="nc">BitmapFont</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>This of course assumes that those assets have been successfully loaded. If we want to poll whether a specific asset has been loaded we can do the following:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="o">(</span><span class="n">manager</span><span class="o">.</span><span class="na">isLoaded</span><span class="o">(</span><span class="s">"data/mytexture.png"</span><span class="o">))</span> <span class="o">{</span>
+   <span class="c1">// texture is available, let's fetch it and do something interesting</span>
+   <span class="nc">Texture</span> <span class="n">tex</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"data/mytexture.png"</span><span class="o">,</span> <span class="nc">Texture</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="disposing-assets">Disposing Assets</h3>
+<p>Easy again, and here you can see the real power of the AssetManager:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">manager</span><span class="o">.</span><span class="na">unload</span><span class="o">(</span><span class="s">"data/myfont.fnt"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>If that font references a Texture that you loaded manually before, the texture won’t get destroyed! It will be reference counted, getting one reference from the bitmap font and another from itself. As long as this count is not zero, the texture won’t be disposed.</p>
+
+<ul>
+  <li>Assets managed via the AssetManager shouldn’t be disposed manually, instead, call AssetManager.unload()!</li>
+</ul>
+
+<p>If you want to get rid of all assets at once you can call:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">manager</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>or</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">manager</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>Both will dispose all currently loaded assets and remove any queued and not yet loaded assets. The AssetManager.dispose() method will also kill the AssetManager itself. After a call to this method you should not use the manager anymore.</p>
+
+<p>And that’s pretty much everything there is. Now for the nitty-gritty parts.</p>
+
+<h3 id="i-only-supply-strings-where-does-the-assetmanager-load-the-assets-from">I only supply Strings, where does the AssetManager load the assets from?</h3>
+<p>Every loader has a reference to a FileHandleResolver. That’s a simple interface looking like this:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">FileHandleResolver</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="nc">FileHandle</span> <span class="nf">resolve</span><span class="o">(</span><span class="nc">String</span> <span class="n">file</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>By default, every loader uses an InternalFileHandleResolver. That will return a FileHandle pointing at an internal file (just like Gdx.files.internal(“data/mytexture.png”). You can write your own resolvers! Look into the assets/loaders/resolvers package for more FileHandleResolver implementation. One use case for this would be a caching system, where you check if you have a newer version downloaded to the external storage first, and fall back to the internal storage if it’s not available. The possibilities are endless.</p>
+
+<p>You can set the FileHandleResolver to be used via the second constructor of AssetManager:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">AssetManager</span> <span class="n">manager</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AssetManager</span><span class="o">(</span><span class="k">new</span> <span class="nc">ExternalFileHandleResolver</span><span class="o">());</span>
+</code></pre></div></div>
+
+<p>This will make sure all default loaders listed above will use that loader.</p>
+
+<h3 id="writing-your-own-loaders">Writing your own Loaders</h3>
+<p>I can’t anticipate which other types of resources you want to load, so at some point you might want to write your own loaders. There are two interfaces called SynchronousAssetLoader and AsynchronousAssetLoader you can implement. Use the former if your asset type is fast to load, use the latter if you want your loading screen to be responsive. I suggest basing your loader on the code of one of the loaders listed above. Look into MusicLoader for a simple SynchronousAssetLoader, look into PixmapLoader for a simple AsynchronousAssetLoader. BitmapFontLoader is a good example of an asynchronous loader that also has dependencies that need to be loaded before the actual asset can be loaded (in that case it’s the texture storing the glyphs). Again, you can do pretty much anything with this.</p>
+
+<p>Additionally, the <code class="language-plaintext highlighter-rouge">loadAsync</code> function <em>can</em> be used to load parts of the assets where the loading can be delegated to another thread (this is a requirement for responsive loading screen). The <code class="language-plaintext highlighter-rouge">loadSync</code> function <em>must</em> be used if some parts of the asset needs to be loaded on the main rendering thread. For example, OpenGL API function calls must be invoked on the main rendering thread, therefore any parts of the asset and its loading involving calls to OpenGL must be called in <code class="language-plaintext highlighter-rouge">loadSync</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">loadAsync</code> will be called first and <code class="language-plaintext highlighter-rouge">loadSync</code> afterwards. You can pass information from <code class="language-plaintext highlighter-rouge">loadASync</code> to <code class="language-plaintext highlighter-rouge">loadSync</code> with the aid of your custom asset loader class’ attributes. <strong>Care must be taken to initialize these temporary variables to null between the loading of each separate asset or you might end up loading the same asset multiple times!</strong> Easiest way to achieve this is by setting your temporary variables to null at the beginning of <code class="language-plaintext highlighter-rouge">loadASync</code> implementation. <code class="language-plaintext highlighter-rouge">PixmapLoader</code> class demonstrates a simple way of using the temporary variables correctly, whereas <code class="language-plaintext highlighter-rouge">TextureLoader</code> shows a more complex way to pass information between <code class="language-plaintext highlighter-rouge">loadAsync</code> and <code class="language-plaintext highlighter-rouge">loadSync</code>.</p>
+
+<p>Once you are done writing your loader, tell the AssetManager about it:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">manager</span><span class="o">.</span><span class="na">setLoader</span><span class="o">(</span><span class="nc">MyAssetClass</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="k">new</span> <span class="nc">MyAssetLoader</span><span class="o">(</span><span class="k">new</span> <span class="nc">InternalFileHandleResolver</span><span class="o">()));</span>
+<span class="n">manager</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="s">"data/myasset.mas"</span><span class="o">,</span> <span class="nc">MyAssetClass</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h3 id="resuming-with-a-loading-screen">Resuming with a Loading Screen</h3>
+<p>On Android, your app can be paused and resumed. Managed OpenGL resources like Textures need to be reloaded in that case, which can take a bit of time. If you want to display a loading screen on resume, you can do the following after you created your AssetManager.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Texture</span><span class="o">.</span><span class="na">setAssetManager</span><span class="o">(</span><span class="n">manager</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>In your ApplicationListener.resume() method you can then switch to your loading screen and call AssetManager.update() again until everything is back to normal.</p>
+
+<p>If you don’t set the AssetManager as shown in the last snippet, the usual managed texture mechanism will kick in, so you don’t have to worry about anything.</p>
+
+<p>And this concludes the long awaited article on the AssetManager.</p>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

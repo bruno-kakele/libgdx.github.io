@@ -1,0 +1,928 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Texture packer - libGDX</title>
+
+  <meta name="description" content="TexturePacker Running TexturePacker Directory structure Configuration Settings Texture filter options NinePatches Indexes Packing Automatic packing TextureAtlas TexturePacker In OpenGL, a texture is bound, some drawing is done, another texture is...">
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="libGDX">
+<meta property="og:title" content="Texture packer">
+<meta property="og:url" content="https://libgdx.com/wiki/tools/texture-packer">
+
+
+  <meta property="og:description" content="TexturePacker Running TexturePacker Directory structure Configuration Settings Texture filter options NinePatches Indexes Packing Automatic packing TextureAtlas TexturePacker In OpenGL, a texture is bound, some drawing is done, another texture is...">
+
+
+
+  <meta property="og:image" content="https://libgdx.com/assets/images/logo.png">
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://libgdx.com/wiki/tools/texture-packer">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://libgdx.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="qc0iys9Aweas1z8EhICO-0Ohwh6Iq1GDV6K75e0ToO8" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="libGDX Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url("/assets/css/main2.css") (prefers-color-scheme: dark);
+  </style>
+
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/assets/css/wiki.css">
+  </head>
+
+  <body class="layout--wiki">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/wiki/">
+            <picture>
+              
+                
+                <source
+                  srcset="/assets/brand/logo_dark.svg"
+                  media="(prefers-color-scheme: dark)">
+              
+              <img src="/assets/brand/logo.svg" alt=" ">
+            </picture>
+          </a>
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Back to Main Site</a>
+            </li><li class="masthead__menu-item">
+              <a href="/wiki/">Wiki Home</a>
+            </li></ul>
+        
+        <a href="/wiki/search">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </a>
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <div id="main" role="main">
+  <header>
+    <h1 id="page-title" class="page__title" itemprop="headline">Texture packer
+</h1>
+
+    <div class="header-meta">
+      <a href="https://github.com/libgdx/libgdx.github.io/commits/dev/wiki/tools/texture-packer.md">View revision history</a> • <a href="https://github.com/libgdx/libgdx.github.io/edit/dev/wiki/tools/texture-packer.md">Edit on GitHub</a>
+    </div>
+  </header>
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="page__inner-wrap">
+      <section class="page__content e-content markdown-body" itemprop="text">
+      
+          <ul>
+  <li><a href="#texturepacker">TexturePacker</a>
+    <ul>
+      <li><a href="#running-texturepacker">Running TexturePacker</a></li>
+      <li><a href="#directory-structure">Directory structure</a></li>
+      <li><a href="#configuration">Configuration</a></li>
+      <li><a href="#settings">Settings</a></li>
+      <li><a href="#texture-filter-options">Texture filter options</a></li>
+      <li><a href="#ninepatches">NinePatches</a></li>
+      <li><a href="#image-indexes">Indexes</a></li>
+      <li><a href="#packing">Packing</a></li>
+      <li><a href="#automatic-packing">Automatic packing</a></li>
+    </ul>
+  </li>
+  <li><a href="#textureatlas">TextureAtlas</a></li>
+</ul>
+
+<h1 id="texturepacker">TexturePacker</h1>
+
+<p>In OpenGL, a texture is bound, some drawing is done, another texture is bound, more drawing is done, etc. Binding the texture is relatively expensive, so it is ideal to store many smaller images on a larger image, bind the larger texture once, then draw portions of it many times. libGDX has a <code class="language-plaintext highlighter-rouge">TexturePacker</code> class which is a command line application that packs many smaller images on to larger images. It stores the locations of the smaller images so they are easily referenced by name in your application using the <code class="language-plaintext highlighter-rouge">TextureAtlas</code> class.</p>
+
+<p>TexturePacker uses multiple packing algorithms but the most important is based on <a href="https://web.archive.org/web/20180913014826/http://clb.demon.fi/projects/even-more-rectangle-bin-packing">the maximal rectangles algorithm</a>. It also uses brute force, packing with numerous heuristics at various sizes and then choosing the most efficient result.</p>
+
+<h2 id="running-texturepacker">Running TexturePacker</h2>
+
+<h3 id="guis">GUIs</h3>
+
+<p>If you prefer to pack your textures using a GUI, you can use <a href="https://github.com/crashinvaders/gdx-texture-packer-gui">Texture Packer GUI</a>. If you are using Scene2d Skins, you probably already use <a href="https://github.com/raeleus/skin-composer">Skin Composer</a> and can use its user-friendly interface to add your textures to the Skin’s atlas.</p>
+
+<h3 id="from-source">From source</h3>
+<p>The <code class="language-plaintext highlighter-rouge">TexturePacker</code> class is in the gdx-tools project. It can be run from source via Eclipse:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.badlogic.gdx.tools.texturepacker.TexturePacker</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyPacker</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span> <span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+		<span class="nc">TexturePacker</span><span class="o">.</span><span class="na">process</span><span class="o">(</span><span class="n">inputDir</span><span class="o">,</span> <span class="n">outputDir</span><span class="o">,</span> <span class="n">packFileName</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>If you use gradle and the <code class="language-plaintext highlighter-rouge">TexturePacker</code> class is not found, add gdx-tools to your <a href="/wiki/articles/dependency-management-with-gradle#tools-gradle">build.gradle</a> file.</p>
+
+<p>You can also run <code class="language-plaintext highlighter-rouge">texturePacker</code> as a gradle task if you make the following updates to your gradle files. First, you will need to update your ‘main’ build.gradle:</p>
+
+<div class="language-gradle highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">buildscript</span> <span class="o">{</span>
+  <span class="k">dependencies</span> <span class="o">{</span>
+    <span class="c1">// ... other dependencies trimmed ...</span>
+    <span class="n">classpath</span> <span class="s2">"com.badlogicgames.gdx:gdx-tools:$gdxVersion"</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>If you want to use specific version, just replace the $gdxVersion variable with the version of your choice</p>
+
+<div class="language-gradle highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Store the parameters you want to pass the texturePacker here...</span>
+<span class="n">project</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">texturePacker</span> <span class="o">=</span> <span class="o">[</span> <span class="s2">"android/assets/input/path/"</span><span class="o">,</span> <span class="s2">"android/assets/output/path/"</span><span class="o">,</span> <span class="s2">"atlas_name"</span> <span class="o">]</span>
+
+<span class="c1">// Import the texture packer</span>
+<span class="kn">import</span> <span class="nn">com.badlogic.gdx.tools.texturepacker.TexturePacker</span>
+
+<span class="c1">// Add a new task that packs the textures for you</span>
+<span class="n">task</span> <span class="n">texturePacker</span> <span class="o">{</span>
+  <span class="n">doLast</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">project</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">has</span><span class="o">(</span><span class="s1">'texturePacker'</span><span class="o">))</span> <span class="o">{</span>
+      <span class="n">logger</span><span class="o">.</span><span class="na">info</span> <span class="s2">"Calling TexturePacker: "</span><span class="o">+</span><span class="n">texturePacker</span>
+      <span class="n">TexturePacker</span><span class="o">.</span><span class="na">process</span><span class="o">(</span><span class="n">texturePacker</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">texturePacker</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">texturePacker</span><span class="o">[</span><span class="mi">2</span><span class="o">])</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>In this way, running <code class="language-plaintext highlighter-rouge">./gradlew texturePacker desktop:run</code> will perform the texture packing before the desktop:run task is started. And if the textures have not changed, then all one has to do is omit the texturePacker argument.</p>
+
+<p>TexturePacker can also be run from the <a href="https://libgdx-nightlies.s3.eu-central-1.amazonaws.com/libgdx-runnables/runnable-texturepacker.jar">standalone nightly</a>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// OS X / Linux
+java -cp runnable-texturepacker.jar com.badlogic.gdx.tools.texturepacker.TexturePacker inputDir [outputDir] [packFileName]
+
+// WINDOWS
+java -cp runnable-texturepacker.jar com.badlogic.gdx.tools.texturepacker.TexturePacker inputDir [outputDir] [packFileName]
+</code></pre></div></div>
+
+<p>Note that TexturePacker runs significantly faster with Java 1.7+, especially when packing hundreds of input images.</p>
+
+<h2 id="directory-structure">Directory structure</h2>
+
+<p>TexturePacker can pack all images for an application in one shot. Given a directory, it recursively scans for image files. For each directory of images TexturePacker encounters, it packs the images on to a larger texture, called a page. If the images in a directory don’t fit on the max size of a single page, multiple pages will be used.</p>
+
+<p>Images in the same directory go on the same set of pages. If all images fit on a single page, no subdirectories should be used because with one page the app will only ever perform one texture bind. Otherwise, subdirectories can be used to segregate related images to minimize texture binds. Eg, an application may want to place all the “game” images in a separate directory from the “pause menu” images, since these two sets of images are drawn serially: all the game images are drawn (one bind), then the pause menu is drawn on top (another bind). If the images were in a single directory that resulted in more than one page, each page could contain a mix of game and pause menu images. This would cause multiple texture binds to render the game and pause menu instead of just one each.</p>
+
+<p>Subdirectories are also useful to group images with related texture settings. Settings like runtime memory format (RGBA, RGB, etc) and filtering (nearest, linear, etc) are per texture. Images that need different per texture settings need to go on separate pages, so should be placed in separate subdirectories.</p>
+
+<p>To use subdirectories for organization without TexturePacker outputting a set of pages for each subdirectory, see the <code class="language-plaintext highlighter-rouge">combineSubdirectories</code> setting.</p>
+
+<p>To avoid subdirectory paths being used in image names in the atlas file, see the <code class="language-plaintext highlighter-rouge">flattenPaths</code> setting.</p>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>Each directory may contain a “pack.json” file, which is a JSON representation of the TexturePacker.Settings class. Each subdirectory inherits all the settings from its parent directory. Any settings set in the subdirectory override those set in the parent directory.</p>
+
+<p>Below is a JSON example with every available setting and the default value for each. All settings do not need to be specified, any or all may be omitted. If a setting is not specified for a directory or any parent directory, the default value is used.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+	pot: true,
+	paddingX: 2,
+	paddingY: 2,
+	bleed: true,
+	bleedIterations: 2,
+	edgePadding: true,
+	duplicatePadding: false,
+	rotation: false,
+	minWidth: 16,
+	minHeight: 16,
+	maxWidth: 1024,
+	maxHeight: 1024,
+	square: false,
+	stripWhitespaceX: false,
+	stripWhitespaceY: false,
+	alphaThreshold: 0,
+	filterMin: Nearest,
+	filterMag: Nearest,
+	wrapX: ClampToEdge,
+	wrapY: ClampToEdge,
+	format: RGBA8888,
+	alias: true,
+	outputFormat: png,
+	jpegQuality: 0.9,
+	ignoreBlankImages: true,
+	fast: false,
+	debug: false,
+	combineSubdirectories: false,
+	flattenPaths: false,
+	premultiplyAlpha: false,
+	useIndexes: true,
+	limitMemory: true,
+	grid: false,
+	scale: [ 1 ],
+	scaleSuffix: [ "" ],
+	scaleResampling: [ bicubic ],
+	atlasExtension: .atlas,
+	prettyPrint: true,
+	legacyOutput: true
+}
+</code></pre></div></div>
+
+<p>Note that this is libgdx’s “minimal” JSON format, so double quotes are optional in most cases.</p>
+
+<h2 id="settings">Settings</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><em>Field</em></th>
+      <th style="text-align: left"><em>Description</em></th>
+      <th style="text-align: center"><em>Default</em></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">pot</code></td>
+      <td style="text-align: left">If true, output pages will have power of two dimensions.</td>
+      <td style="text-align: center">true</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">paddingX</code></td>
+      <td style="text-align: left">The number of pixels between packed images on the x-axis.</td>
+      <td style="text-align: center">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">paddingY</code></td>
+      <td style="text-align: left">The number of pixels between packed images on the y-axis.</td>
+      <td style="text-align: center">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">bleed</code></td>
+      <td style="text-align: left">If true, RGB values for transparent pixels are set based on the RGB values of the nearest non-transparent pixels. This prevents filtering artifacts when RGB values are sampled for transparent pixels.</td>
+      <td style="text-align: center">true</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">bleedIterations</code></td>
+      <td style="text-align: left">The amount of bleed iterations that should be performed. Use greater values such as 4 or 8 if you’re having artifacts when downscaling your textures.</td>
+      <td style="text-align: center">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">edgePadding</code></td>
+      <td style="text-align: left">If true, half of the <code class="language-plaintext highlighter-rouge">paddingX</code> and <code class="language-plaintext highlighter-rouge">paddingY</code> will be used around the edges of the packed texture.</td>
+      <td style="text-align: center">true</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">duplicatePadding</code></td>
+      <td style="text-align: left">If true, edge pixels are copied into the padding. <code class="language-plaintext highlighter-rouge">paddingX/Y</code> should be &gt;= 2.</td>
+      <td style="text-align: center">false</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">rotation</code></td>
+      <td style="text-align: left">If true, TexturePacker will attempt more efficient packing by rotating images 90 degrees. Applications must take special care to draw these regions properly.</td>
+      <td style="text-align: center">false</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">minWidth</code></td>
+      <td style="text-align: left">The minimum width of output pages.</td>
+      <td style="text-align: center">16</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">minHeight</code></td>
+      <td style="text-align: left">The minimum height of output pages.</td>
+      <td style="text-align: center">16</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">maxWidth</code></td>
+      <td style="text-align: left">The maximum width of output pages. 1024 is safe for all devices. Extremely old devices may have degraded performance over 512.</td>
+      <td style="text-align: center">1024</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">maxHeight</code></td>
+      <td style="text-align: left">The maximum height of output pages. 1024 is safe for all devices. Extremely old devices may have degraded performance over 512.</td>
+      <td style="text-align: center">1024</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">square</code></td>
+      <td style="text-align: left">If true, output pages are forced to have the same width and height.</td>
+      <td style="text-align: center">false</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">stripWhitespaceX</code></td>
+      <td style="text-align: left">If true, blank pixels on the left and right edges of input images will be removed. Applications must take special care to draw these regions properly.</td>
+      <td style="text-align: center">false</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">stripWhitespaceY</code></td>
+      <td style="text-align: left">If true, blank pixels on the top and bottom edges of input images will be removed. Applications must take special care to draw these regions properly.</td>
+      <td style="text-align: center">false</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">alphaThreshold</code></td>
+      <td style="text-align: left">From 0 to 255. Alpha values below this are treated as zero when whitespace is stripped.</td>
+      <td style="text-align: center">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">filterMin</code></td>
+      <td style="text-align: left">The minification filter for the texture.</td>
+      <td style="text-align: center">Nearest</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">filterMag</code></td>
+      <td style="text-align: left">The magnification filter for the texture.</td>
+      <td style="text-align: center">Nearest</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">wrapX</code></td>
+      <td style="text-align: left">The wrap setting in the x direction for the texture.</td>
+      <td style="text-align: center">ClampToEdge</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">wrapY</code></td>
+      <td style="text-align: left">The wrap setting in the y direction for the texture.</td>
+      <td style="text-align: center">ClampToEdge</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">format</code></td>
+      <td style="text-align: left">The format the texture will use in-memory.</td>
+      <td style="text-align: center">RGBA8888</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">alias</code></td>
+      <td style="text-align: left">If true, two images that are pixel for pixel the same will only be packed once.</td>
+      <td style="text-align: center">true</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">outputFormat</code></td>
+      <td style="text-align: left">The image type for output pages, “png” or “jpg”.</td>
+      <td style="text-align: center">png</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">jpegQuality</code></td>
+      <td style="text-align: left">From 0 to 1. The quality setting if <code class="language-plaintext highlighter-rouge">outputFormat</code> is “jpg”.</td>
+      <td style="text-align: center">0.9</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">ignoreBlankImages</code></td>
+      <td style="text-align: left">If true, texture packer won’t add regions for completely blank images.</td>
+      <td style="text-align: center">true</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">fast</code></td>
+      <td style="text-align: left">If true, the texture packer will not pack as efficiently but will execute much faster.</td>
+      <td style="text-align: center">false</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">debug</code></td>
+      <td style="text-align: left">If true, lines are drawn on the output pages to show the packed image bounds.</td>
+      <td style="text-align: center">false</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">combineSubdirectories</code></td>
+      <td style="text-align: left">If true, the directory containing the settings file and all subdirectories are packed as if they were in the same directory. Any settings files in the subdirectories are ignored.</td>
+      <td style="text-align: center">false</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">flattenPaths</code></td>
+      <td style="text-align: left">If true, subdirectory prefixes are stripped from image file names. Image file names should be unique.</td>
+      <td style="text-align: center">false</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">premultiplyAlpha</code></td>
+      <td style="text-align: left">If true, the RGB will be multiplied by the alpha. See <a href="https://web.archive.org/web/20160311211957/http://blogs.msdn.com/b/shawnhar/archive/2009/11/06/premultiplied-alpha.aspx">here</a> for more information.</td>
+      <td style="text-align: center">false</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">useIndexes</code></td>
+      <td style="text-align: left">If false, image names are used without stripping any image index suffix.</td>
+      <td style="text-align: center">true</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">limitMemory</code></td>
+      <td style="text-align: left">If true, only one image is in memory at any given time, but each image will be read twice. If false, all images are kept in memory during packing but are only read once.</td>
+      <td style="text-align: center">true</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">grid</code></td>
+      <td style="text-align: left">If true, images are packed in a uniform grid, in order.</td>
+      <td style="text-align: center">false</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">scale</code></td>
+      <td style="text-align: left">For each scale, the images are scaled and an entire atlas is output.</td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">[ 1 ]</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">scaleSuffix</code></td>
+      <td style="text-align: left">For each scale, the suffix to use for the output files. If omitted, files for multiple scales will be output with the same name to a subdirectory for each scale.</td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">[ "" ]</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">scaleResampling</code></td>
+      <td style="text-align: left">For each scale, the type of interpolation used for resampling the source to the scaled size. One of <code class="language-plaintext highlighter-rouge">nearest</code>, <code class="language-plaintext highlighter-rouge">bilinear</code> or <code class="language-plaintext highlighter-rouge">bicubic</code>.</td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">[ bicubic ]</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">atlasExtension</code></td>
+      <td style="text-align: left">The file extension to be appended to the atlas filename.</td>
+      <td style="text-align: center">.atlas</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">prettyPrint</code></td>
+      <td style="text-align: left">If true, removes all whitespace except newlines.</td>
+      <td style="text-align: center">true</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">legacyOutput</code></td>
+      <td style="text-align: left">If true, the atlas uses a less efficient output format. Exists for backwards-compatibility reasons.</td>
+      <td style="text-align: center">true</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="texture-filter-options">Texture filter options</h2>
+
+<p>Texture packer use the filters specified in the <a href="https://javadoc.io/doc/com.badlogicgames.gdx/gdx/latest/com/badlogic/gdx/graphics/Texture.TextureFilter.html">Texture.TextureFilter</a> enum. The options for filterMin and filterMag are as following:<br />
+Nearest: no filtering, no mipmaps<br />
+Linear: filtering, no mipmaps<br />
+MipMap &amp; MipMapLinearLinear: filtering, smooth transition between mipmaps<br />
+MipMapNearestNearest: no filtering, sharp switching between mipmaps<br />
+MipMapLinearNearest: filtering, sharp switching between mipmaps<br />
+MipMapNearestLinear: no filtering, smooth transition between mipmaps<br /></p>
+
+<h2 id="ninepatches">NinePatches</h2>
+
+<p>If an image file name ends with “.9” just before the file extension, it is considered a ninepatch. See <a href="/wiki/graphics/2d/ninepatches">ninepatches</a>. The image must have a 1px transparent border. The upper and left edge may optionally have one contiguous line of black pixels which denote the split information, ie what part of the ninepatch will stretch. The bottom and right edge may optionally have one contiguous line of black pixels which denote the padding information, ie how content on top of the NinePatch should be inset. When this image is packed, the 1px border is removed and the split and padding information stored in the pack file. <code class="language-plaintext highlighter-rouge">TextureAtlas</code> allows an instance of NinePatch to created for the region using the split information.</p>
+
+<h2 id="image-indexes">Image indexes</h2>
+
+<p>If an image file name ends with underscore and then a number (eg animation_23.png), the number is considered the “index” and is stored separately. The image name is stored without the underscore and index. <code class="language-plaintext highlighter-rouge">TextureAtlas</code> allows a list of all images with the same name to be retrieved, ordered by index. This makes it easy to pack animations without losing the order of the frames.</p>
+
+<h2 id="packing">Packing</h2>
+
+<p>The TexturePacker class is in <code class="language-plaintext highlighter-rouge">gdx-tools.jar</code>, which is in the extensions directory of the nightlies/releases zip files. You only need TexturePacker as a tool to process your image files for your application, you don’t need it as a dependency to run your application. To run the packer you need both <code class="language-plaintext highlighter-rouge">gdx.jar</code> and <code class="language-plaintext highlighter-rouge">gdx-tools.jar</code>. <strong>Note: gdx.jar must be in the same directory as gdx-tools.jar, for it to run without exceptions</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//*NIX (OS X/Linux)
+java -cp gdx.jar:gdx-tools.jar com.badlogic.gdx.tools.texturepacker.TexturePacker inputDir outputDir packFileName
+
+//WINDOWS
+java -cp gdx.jar;gdx-tools.jar com.badlogic.gdx.tools.texturepacker.TexturePacker inputDir outputDir packFileName
+</code></pre></div></div>
+
+<p>TexturePacker can also be run from the <a href="https://libgdx.badlogicgames.com/nightlies/runnables/">standalone nightly</a> without gdx.jar (i.e. without the rest of libGDX at all), just substitute <code class="language-plaintext highlighter-rouge">runnable-texturepacker.jar</code> for <code class="language-plaintext highlighter-rouge">gdx.jar;gdx-tools.jar</code> in the above.</p>
+
+<p><code class="language-plaintext highlighter-rouge">inputDir</code> is the root directory containing the images. <code class="language-plaintext highlighter-rouge">outputDir</code> is the output directory where the packed images will be placed. <code class="language-plaintext highlighter-rouge">packFileName</code> is the name of the pack file and the prefix used for the output packed image files.</p>
+
+<p>If <code class="language-plaintext highlighter-rouge">outputDir</code> is omitted, files will be placed in a new directory that is a sibling to <code class="language-plaintext highlighter-rouge">inputDir</code> with the suffix “-packed”. If <code class="language-plaintext highlighter-rouge">packFileName</code> is omitted, “pack” is used.</p>
+
+<p>While texture packing is intended to be a fully automated process, there has also been a nice UI contributed by Obli (though slightly out of date): <a href="https://code.google.com/p/libgdx-texturepacker-gui/">TexturePacker GUI</a> (check out <a href="https://github.com/crashinvaders/gdx-texture-packer-gui">its up to date successor</a>). There is also a commercial product at <a href="http://www.codeandweb.com/texturepacker">texturepacker.com</a> which is completely unrelated to libgdx’s texture packer and has a UI, many features and nice documentation.</p>
+
+<h2 id="automatic-packing">Automatic packing</h2>
+
+<p>During development it can be convenient to have the desktop application run TexturePacker before starting the game:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DesktopGame</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span> <span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+		<span class="nc">Settings</span> <span class="n">settings</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Settings</span><span class="o">();</span>
+		<span class="n">settings</span><span class="o">.</span><span class="na">maxWidth</span> <span class="o">=</span> <span class="mi">512</span><span class="o">;</span>
+		<span class="n">settings</span><span class="o">.</span><span class="na">maxHeight</span> <span class="o">=</span> <span class="mi">512</span><span class="o">;</span>
+		<span class="nc">TexturePacker</span><span class="o">.</span><span class="na">process</span><span class="o">(</span><span class="n">settings</span><span class="o">,</span> <span class="s">"../images"</span><span class="o">,</span> <span class="s">"../game-android/assets"</span><span class="o">,</span> <span class="s">"game"</span><span class="o">);</span>
+
+		<span class="k">new</span> <span class="nf">LwjglApplication</span><span class="o">(</span><span class="k">new</span> <span class="nc">Game</span><span class="o">(),</span> <span class="s">"Game"</span><span class="o">,</span> <span class="mi">320</span><span class="o">,</span> <span class="mi">480</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Each time the game is run, all the images are packed. This can be especially convenient when giving a build to an artist, who can then try out new images without even knowing the game is using packed images. If many images are packed, the <code class="language-plaintext highlighter-rouge">fast</code> setting can be useful to avoid waiting.</p>
+
+<p><em>Note: When loading files from the classpath, Eclipse usually will not reflect changes to files that are updated externally. The project with the changed files must be manually refreshed in Eclipse. During development files can be loaded through the filesystem instead, where this is not an issue.</em></p>
+
+<h1 id="textureatlas">TextureAtlas</h1>
+
+<p>The TexturePacker output is a directory of page images and a text file that describes all the images packed on the pages. This shows how to use the images in an application:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">TextureAtlas</span> <span class="n">atlas</span><span class="o">;</span>
+<span class="n">atlas</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TextureAtlas</span><span class="o">(</span><span class="nc">Gdx</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">internal</span><span class="o">(</span><span class="s">"packedimages/pack.atlas"</span><span class="o">));</span>
+<span class="nc">AtlasRegion</span> <span class="n">region</span> <span class="o">=</span> <span class="n">atlas</span><span class="o">.</span><span class="na">findRegion</span><span class="o">(</span><span class="s">"imagename"</span><span class="o">);</span>
+<span class="nc">Sprite</span> <span class="n">sprite</span> <span class="o">=</span> <span class="n">atlas</span><span class="o">.</span><span class="na">createSprite</span><span class="o">(</span><span class="s">"otherimagename"</span><span class="o">);</span>
+<span class="nc">NinePatch</span> <span class="n">patch</span> <span class="o">=</span> <span class="n">atlas</span><span class="o">.</span><span class="na">createPatch</span><span class="o">(</span><span class="s">"patchimagename"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>TextureAtlas reads the pack file and loads all the page images. TextureAtlas.AtlasRegions can be retrieved, which are TextureRegions that provides extra information about the packed image, such as the frame index or any whitespace that was stripped. Sprites and NinePatches can also be created. If whitespace was stripped, the created Sprite will actually be a TextureAtlas.AtlasSprite, which allows the sprite to be used (mostly) as if whitespace was never stripped.</p>
+
+<p>Note that <code class="language-plaintext highlighter-rouge">findRegion</code> is not very fast, so the value returned should be stored rather than calling this method each frame. Also note that createSprite and createNinePatch allocate a new instance.</p>
+
+<p>TextureAtlas holds on to all the page textures, disposing the TextureAtlas will dispose all the page textures.</p>
+
+      
+          <aside class="sidebar__right">
+            <div class="toc">
+              <div class="wiki_toc__menu">
+                <input id="wiki_ac-toc" name="accordion-toc" type="checkbox" />
+                <label for="wiki_ac-toc">Toggle Menu</label>
+
+                
+                <div class="wiki_nav__items">
+                  <h1 id="table-of-contents">Table of Contents</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li><a href="/wiki/start/setup">Setting Up a Dev Environment</a></li>
+  <li><a href="/wiki/start/project-generation">Creating Your First libGDX Project</a></li>
+  <li><a href="/wiki/start/import-and-running">Importing &amp; Running It</a></li>
+  <li><a href="/wiki/start/a-simple-game">A Simple Game</a></li>
+  <li><a href="/wiki/start/simple-game-extended">Extending the Simple Game</a></li>
+  <li><a href="/wiki/start/demos-and-tutorials">Demos &amp; Tutorials</a></li>
+</ul>
+
+<h2 id="developers-guide">Developer’s Guide</h2>
+<details><summary>The Application Framework</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/app/the-application-framework">The Application Framework</a></li>
+      <li><a href="/wiki/app/the-life-cycle">The life-cycle</a></li>
+      <li><a href="/wiki/app/modules-overview">Modules overview</a></li>
+      <li><a href="/wiki/app/starter-classes-and-configuration">Starter classes and configuration</a></li>
+      <li><a href="/wiki/app/querying">Querying</a></li>
+      <li><a href="/wiki/app/logging">Logging</a></li>
+      <li><a href="/wiki/app/threading">Threading</a></li>
+      <li><a href="/wiki/app/interfacing-with-platform-specific-code">Interfacing with platform specific code</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Audio</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/audio/audio">Audio</a></li>
+      <li><a href="/wiki/audio/playing-pcm-audio">Playing PCM audio</a></li>
+      <li><a href="/wiki/audio/recording-pcm-audio">Recording PCM audio</a></li>
+      <li><a href="/wiki/audio/sound-effects">Sound effects</a></li>
+      <li><a href="/wiki/audio/streaming-music">Streaming music</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Deployment</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/deployment/deploying-your-application">Deploying Your Application</a></li>
+      <li><a href="/wiki/deployment/bundling-a-jre">Bundling a JRE</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Extensions</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/extensions/physics/physics">Physics</a>
+        <ul>
+          <li><a href="/wiki/extensions/physics/bullet/bullet-physics">Bullet Physics</a>
+            <ul>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-contact-callbacks">Bullet Wrapper Contact callbacks</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-custom-classes">Bullet Wrapper Custom classes</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-debugging">Bullet Wrapper Debugging</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-setup">Bullet Wrapper Setup</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-models">Bullet Wrapper Using models</a></li>
+              <li><a href="/wiki/extensions/physics/bullet/bullet-wrapper-using-the-wrapper">Bullet Wrapper Using the wrapper</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/extensions/physics/box2d">Box2d</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/extensions/artificial-intelligence">Artificial Intelligence</a></li>
+      <li><a href="/wiki/extensions/gdx-freetype">Gdx freetype</a></li>
+      <li><a href="/wiki/extensions/gdx-pay">gdx pay</a></li>
+      <li><a href="/wiki/extensions/third-party-extension-support">Third Party Extension Support</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/file-handling">File handling</a></p>
+
+<details><summary>Graphics</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/graphics/graphics">Graphics</a></li>
+      <li>2D Graphics
+        <ul>
+          <li>Bitmap Fonts
+            <ul>
+              <li><a href="/wiki/graphics/2d/fonts/bitmap-fonts">Bitmap fonts</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/color-markup-language">Color Markup Language</a></li>
+              <li><a href="/wiki/graphics/2d/fonts/distance-field-fonts">Distance field fonts</a></li>
+            </ul>
+          </li>
+          <li>Scene2d
+            <ul>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d-ui">Scene2d.ui</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/scene2d">Scene2d</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/skin">Skin</a></li>
+              <li><a href="/wiki/graphics/2d/scene2d/table">Table</a></li>
+            </ul>
+          </li>
+          <li><a href="/wiki/graphics/2d/2d-animation">2D Animation</a></li>
+          <li><a href="/wiki/graphics/2d/2d-particleeffects">2D ParticleEffects</a></li>
+          <li><a href="/wiki/graphics/2d/clipping-with-the-use-of-scissorstack">Clipping, with the use of scissorstack</a></li>
+          <li><a href="/wiki/graphics/2d/imgui">ImGui</a></li>
+          <li><a href="/wiki/graphics/2d/masking">Masking</a></li>
+          <li><a href="/wiki/graphics/2d/ninepatches">Ninepatches</a></li>
+          <li><a href="/wiki/graphics/2d/orthographic-camera">Orthographic camera</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-at-runtime">Packing atlases at runtime</a></li>
+          <li><a href="/wiki/graphics/2d/packing-atlases-offline">Packing atlases offline</a></li>
+          <li><a href="/wiki/graphics/2d/pixmaps">Pixmaps</a></li>
+          <li><a href="/wiki/graphics/2d/spritebatch-textureregions-and-sprites">Spritebatch, Textureregions, and Sprites</a></li>
+          <li><a href="/wiki/graphics/2d/texture-compression">Texture Compression</a></li>
+          <li><a href="/wiki/graphics/2d/tile-maps">Tile maps</a></li>
+          <li><a href="/wiki/graphics/2d/using-textureatlases">Using textureatlases</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/3d/3d-graphics">3D Graphics</a>
+        <ul>
+          <li><a href="/wiki/graphics/3d/3d-animations-and-skinning">3D animations and skinning</a></li>
+          <li><a href="/wiki/graphics/3d/3d-particle-effects">3D Particle Effects</a></li>
+          <li><a href="/wiki/graphics/3d/3d-picking">3D Picking</a></li>
+          <li><a href="/wiki/graphics/3d/decals">Decals</a></li>
+          <li><a href="/wiki/graphics/3d/importing-blender-models-in-libgdx">Importing Blender models in LibGDX</a></li>
+          <li><a href="/wiki/graphics/3d/material-and-environment">Material and environment</a></li>
+          <li><a href="/wiki/graphics/3d/modelbatch">ModelBatch</a></li>
+          <li><a href="/wiki/graphics/3d/modelbuilder-meshbuilder-and-meshpartbuilder">ModelBuilder, MeshBuilder and MeshPartBuilder</a></li>
+          <li><a href="/wiki/graphics/3d/modelcache">ModelCache</a></li>
+          <li><a href="/wiki/graphics/3d/models">Models</a></li>
+          <li><a href="/wiki/graphics/3d/quick-start">Quick start</a></li>
+          <li><a href="/wiki/graphics/3d/virtual-reality">Virtual Reality (VR)</a></li>
+        </ul>
+      </li>
+      <li>OpenGL Utility Classes
+        <ul>
+          <li><a href="/wiki/graphics/opengl-utils/frame-buffer-objects">Frame buffer objects</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/meshes">Meshes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/rendering-shapes">Rendering shapes</a></li>
+          <li><a href="/wiki/graphics/opengl-utils/shaders">Shaders</a></li>
+        </ul>
+      </li>
+      <li><a href="/wiki/graphics/clearing-the-screen">Clearing the screen</a></li>
+      <li><a href="/wiki/graphics/continuous-and-non-continuous-rendering">Continuous and Non Continuous Rendering</a></li>
+      <li><a href="/wiki/graphics/integrating-libgdx-and-the-device-camera">Integrating libgdx and the device camera</a></li>
+      <li><a href="/wiki/graphics/opengl-es-support">OpenGL (ES) Support</a></li>
+      <li><a href="/wiki/graphics/profiling">Profiling</a></li>
+      <li><a href="/wiki/graphics/querying-and-configuring-graphics">Querying and Configuring Graphics (monitors, display modes, vsync, display cutouts)</a></li>
+      <li><a href="/wiki/graphics/taking-a-screenshot">Taking a Screenshot</a></li>
+      <li><a href="/wiki/graphics/viewports">Viewports</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/html5-backend-and-gwt-specifics">HTML5 Backend and GWT Specifics</a></p>
+
+<details><summary>Input Handling</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/input/input-handling">Input Handling</a></li>
+      <li><a href="/wiki/input/accelerometer">Accelerometer</a></li>
+      <li><a href="/wiki/input/back-and-menu-key-catching">Back and menu key catching</a></li>
+      <li><a href="/wiki/input/compass">Compass</a></li>
+      <li><a href="/wiki/input/configuration-and-querying">Configuration and Querying</a></li>
+      <li><a href="/wiki/input/controllers">Controllers</a></li>
+      <li><a href="/wiki/input/cursor-visibility-and-catching">Cursor Visibility and Catching</a></li>
+      <li><a href="/wiki/input/event-handling">Event handling</a></li>
+      <li><a href="/wiki/input/gesture-detection">Gesture detection</a></li>
+      <li><a href="/wiki/input/gyroscope">Gyroscope</a></li>
+      <li><a href="/wiki/input/mouse-touch-and-keyboard">Mouse, Touch and Keyboard</a></li>
+      <li><a href="/wiki/input/on-screen-keyboard">On screen keyboard</a></li>
+      <li><a href="/wiki/input/polling">Polling</a></li>
+      <li><a href="/wiki/input/simple-text-input">Simple text input</a></li>
+      <li><a href="/wiki/input/vibrator">Vibrator</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/internationalization-and-localization">Internationalization and Localization</a></p>
+
+<details><summary>Using libGDX With Other JVM Languages</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-other-jvm-languages">Using libGDX With Other JVM Languages</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-clojure">Using libgdx with Clojure</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-kotlin">Using libGDX with Kotlin</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-python">Using libgdx with Python</a></li>
+      <li><a href="/wiki/jvm-langs/using-libgdx-with-scala">Using libgdx with Scala</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/managing-your-assets">Managing your assets</a></p>
+
+<details><summary>Math Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/math-utils/math-utilities">Math Utilities</a></li>
+      <li><a href="/wiki/math-utils/circles-planes-rays-etc">Circles, planes, rays, etc.</a></li>
+      <li><a href="/wiki/math-utils/interpolation">Interpolation</a></li>
+      <li><a href="/wiki/math-utils/path-interface-and-splines">Path interface and Splines</a></li>
+      <li><a href="/wiki/math-utils/vectors-matrices-quaternions">Vectors, matrices, quaternions</a></li>
+    </ul>
+  </div>
+</details>
+
+<p><a href="/wiki/networking">Networking</a></p>
+
+<p><a href="/wiki/preferences">Preferences</a></p>
+
+<details><summary>Third Party Services</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/third-party/admob-in-libgdx">Admob in libgdx</a></li>
+      <li><a href="/wiki/third-party/firebase-in-libgdx">Firebase in libGDX</a></li>
+      <li><a href="/wiki/third-party/google-mobile-ads-in-libgdx">Google Mobile Ads in Libgdx (replaces deprecated AdMob)</a></li>
+      <li><a href="/wiki/third-party/google-play-games-services-in-libgdx">Google Play Games Services in LibGDX</a></li>
+      <li><a href="/wiki/third-party/pollfish-in-libgdx">Pollfish in libgdx</a></li>
+      <li><a href="/wiki/third-party/proguard-dexguard-and-libgdx">ProGuard DexGuard and libGDX</a></li>
+      <li><a href="/wiki/third-party/smaato-in-libgdx">Smaato in libGDX</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Tools</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/tools/2d-particle-editor">2D Particle Editor</a></li>
+      <li><a href="/wiki/graphics/3d/3d-particle-effects">Flame</a></li>
+      <li><a href="/wiki/tools/hiero">Hiero</a></li>
+      <li><a href="/wiki/tools/overlap2d">Overlap2D</a></li>
+      <li><a href="/wiki/tools/skin-composer">Skin Composer</a></li>
+      <li><a href="/wiki/tools/texture-packer">Texture packer</a></li>
+    </ul>
+  </div>
+</details>
+
+<details><summary>Utilities</summary>
+<div>
+    <ul>
+      <li><a href="/wiki/utils/collections">Collections</a></li>
+      <li><a href="/wiki/utils/jnigen">jnigen</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-json">Reading and writing JSON</a></li>
+      <li><a href="/wiki/utils/reading-and-writing-xml">Reading and writing XML</a></li>
+      <li><a href="/wiki/utils/reflection">Reflection</a></li>
+      <li><a href="/wiki/utils/saved-game-serialization">Saved game serialization</a></li>
+    </ul>
+  </div>
+</details>
+
+<h2 id="articles">Articles</h2>
+<ul>
+  <li><a href="/wiki/articles/getting-help">Getting Help</a></li>
+  <li><a href="/wiki/articles/external-tutorials">External Tutorials</a></li>
+  <li><a href="/wiki/articles/coordinate-systems">Coordinate Systems</a></li>
+  <li><a href="/wiki/articles/memory-management">Memory Management</a></li>
+  <li><a href="/wiki/articles/updating-libgdx">Updating Your libGDX Version</a></li>
+  <li><a href="/wiki/articles/dependency-management-with-gradle">Dependency Management with Gradle: Adding Extensions and Third-Party Libraries</a></li>
+  <li><a href="/wiki/articles/improving-workflow-with-gradle">Improving Your Gradle Workflow</a></li>
+  <li><a href="/wiki/articles/maven-integration">Maven Integration</a></li>
+  <li><a href="/wiki/articles/creating-a-separate-assets-project-in-eclipse">Creating Asset Project in Eclipse</a></li>
+  <li><a href="/wiki/articles/java-development-kit-selection">Java Development Kit - Selection</a></li>
+  <li><a href="/wiki/articles/console-support">Console Support?</a></li>
+</ul>
+
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        <div class="copyright_footer">
+          <p style="font-size: 13px;margin-bottom: 0px !important;">
+            <b>© 2022 libGDX</b> • This wiki is a community effort. If you find information out of date or want to add some more in-depth explanations, you are very welcome to do the necessary changes. Before contributing, please take a look at our <a href="/wiki/misc/wiki-style-guide">Wiki Style Guide</a>.
+            <br/>
+            <br/>
+            <b>If you need additional help, check out our community on <a href="/community/discord/">Discord</a>!</b>
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </article>
+</div>
+
+    </div>
+
+    
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>
